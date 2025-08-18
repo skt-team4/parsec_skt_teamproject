@@ -562,9 +562,36 @@ export default function MyPageScreen() {
     try {
       // 항상 기본 페르소나 목록 사용
       const defaultPersonas = [
-        { id: 'min_ho', name: '김민호', age: 17, description: '17세 고등학생', balance: 25000 },
-        { id: 'myeong_bin', name: '김명빈', age: 14, description: '14세 중학생', balance: 50000 },
-        { id: 'tae_hoon', name: '강태훈', age: 12, description: '12세 초등학생', balance: 15000 },
+        { 
+          id: 'min_ho', 
+          name: '김민호', 
+          age: 17, 
+          description: '17세 고등학생 • 한식을 좋아하며 매운 음식도 잘 먹는 활발한 성격', 
+          balance: 25000,
+          preferences: '한식, 패스트푸드, 매운음식',
+          allergies: '없음',
+          personality: '활발하고 도전적인 성격으로 새로운 음식에 대한 호기심이 많음'
+        },
+        { 
+          id: 'myeong_bin', 
+          name: '김명빈', 
+          age: 14, 
+          description: '14세 중학생 • 조용한 카페를 좋아하며 여러 알레르기가 있어 신중한 식습관', 
+          balance: 50000,
+          preferences: '양식, 카페, 단맛',
+          allergies: '견과류, 유제품, 글루텐',
+          personality: '신중하고 섬세한 성격으로 음식 선택에 신중함'
+        },
+        { 
+          id: 'tae_hoon', 
+          name: '강태훈', 
+          age: 12, 
+          description: '12세 초등학생 • 편의점 음식을 좋아하는 단순한 취향의 밝은 아이', 
+          balance: 15000,
+          preferences: '한식, 중식, 단맛',
+          allergies: '갑각류, 계란',
+          personality: '밝고 단순한 성격으로 친숙한 음식을 선호함'
+        },
       ];
       setPersonas(defaultPersonas);
       
@@ -585,9 +612,36 @@ export default function MyPageScreen() {
       console.error('페르소나 불러오기 실패:', error);
       // 오류 시에도 기본 페르소나 설정
       const defaultPersonas = [
-        { id: 'min_ho', name: '김민호', age: 17, description: '17세 고등학생', balance: 25000 },
-        { id: 'myeong_bin', name: '김명빈', age: 14, description: '14세 중학생', balance: 50000 },
-        { id: 'tae_hoon', name: '강태훈', age: 12, description: '12세 초등학생', balance: 15000 },
+        { 
+          id: 'min_ho', 
+          name: '김민호', 
+          age: 17, 
+          description: '17세 고등학생 • 한식을 좋아하며 매운 음식도 잘 먹는 활발한 성격', 
+          balance: 25000,
+          preferences: '한식, 패스트푸드, 매운음식',
+          allergies: '없음',
+          personality: '활발하고 도전적인 성격으로 새로운 음식에 대한 호기심이 많음'
+        },
+        { 
+          id: 'myeong_bin', 
+          name: '김명빈', 
+          age: 14, 
+          description: '14세 중학생 • 조용한 카페를 좋아하며 여러 알레르기가 있어 신중한 식습관', 
+          balance: 50000,
+          preferences: '양식, 카페, 단맛',
+          allergies: '견과류, 유제품, 글루텐',
+          personality: '신중하고 섬세한 성격으로 음식 선택에 신중함'
+        },
+        { 
+          id: 'tae_hoon', 
+          name: '강태훈', 
+          age: 12, 
+          description: '12세 초등학생 • 편의점 음식을 좋아하는 단순한 취향의 밝은 아이', 
+          balance: 15000,
+          preferences: '한식, 중식, 단맛',
+          allergies: '갑각류, 계란',
+          personality: '밝고 단순한 성격으로 친숙한 음식을 선호함'
+        },
       ];
       setPersonas(defaultPersonas);
       setSelectedPersona('min_ho');
@@ -601,10 +655,20 @@ export default function MyPageScreen() {
     let allergies: string[] = [];
     let mealCardBalance = 10000;
     let hasCard = false;
+    let personaName = '';
+    let personaAge = 0;
+    let personaPhone = '';
+    let personaEmail = '';
+    let personaAvatar = '';
     
     switch(personaId) {
       case 'min_ho':
         // 민호 (17세 고등학생) - 급식카드 잔액 25,000원
+        personaName = '김민호';
+        personaAge = 17;
+        personaPhone = '010-1234-5678';
+        personaEmail = 'minho@school.com';
+        personaAvatar = 'https://via.placeholder.com/120x120/4CAF50/FFFFFF?text=MH';
         categories = ['korean', 'fastfood', 'spicy'];
         allergies = [];
         mealCardBalance = 25000;
@@ -612,18 +676,40 @@ export default function MyPageScreen() {
         break;
       case 'myeong_bin':
         // 명빈 (14세 중학생) - 급식카드 잔액 50,000원
+        personaName = '김명빈';
+        personaAge = 14;
+        personaPhone = '010-2345-6789';
+        personaEmail = 'myeongbin@school.com';
+        personaAvatar = 'https://via.placeholder.com/120x120/2196F3/FFFFFF?text=MB';
         categories = ['western', 'cafe', 'sweet'];
-        allergies = ['nuts'];
+        allergies = ['nuts', 'dairy', 'gluten'];
         mealCardBalance = 50000;
         hasCard = true;
         break;
       case 'tae_hoon':
         // 태훈 (12세 초등학생) - 급식카드 잔액 15,000원
+        personaName = '강태훈';
+        personaAge = 12;
+        personaPhone = '010-3456-7890';
+        personaEmail = 'taehoon@school.com';
+        personaAvatar = 'https://via.placeholder.com/120x120/FF9800/FFFFFF?text=TH';
         categories = ['korean', 'chinese', 'sweet'];
         allergies = ['shellfish', 'eggs'];
         mealCardBalance = 15000;
         hasCard = true;
         break;
+    }
+    
+    // 프로필 정보 업데이트
+    if (personaName) {
+      setProfile(prev => ({
+        ...prev,
+        name: personaName,
+        phone: personaPhone,
+        email: personaEmail,
+        avatar: personaAvatar,
+        membershipLevel: personaAge >= 16 ? 'GOLD' : personaAge >= 14 ? 'SILVER' : 'BRONZE',
+      }));
     }
     
     // 카테고리와 알러지 설정 저장
@@ -1367,14 +1453,23 @@ export default function MyPageScreen() {
                     <Text style={styles.personaDescription}>
                       {persona.age}세 • 급식카드 {persona.balance.toLocaleString()}원
                     </Text>
-                    {persona.id === 'min_ho' && (
-                      <Text style={styles.personaDetails}>한식, 패스트푸드, 매운음식 선호</Text>
+                    <Text style={styles.personaDetails}>
+                      {persona.description}
+                    </Text>
+                    {persona.preferences && (
+                      <Text style={styles.personaPreferences}>
+                        💚 선호: {persona.preferences}
+                      </Text>
                     )}
-                    {persona.id === 'myeong_bin' && (
-                      <Text style={styles.personaDetails}>양식, 카페, 단맛 선호 • 견과류 알러지</Text>
+                    {persona.allergies && persona.allergies !== '없음' && (
+                      <Text style={styles.personaAllergies}>
+                        🚫 알러지: {persona.allergies}
+                      </Text>
                     )}
-                    {persona.id === 'tae_hoon' && (
-                      <Text style={styles.personaDetails}>한식, 중식, 단맛 선호 • 갑각류, 계란 알러지</Text>
+                    {persona.personality && (
+                      <Text style={styles.personaPersonality}>
+                        {persona.personality}
+                      </Text>
                     )}
                   </View>
                   {selectedPersona === persona.id && (
@@ -2665,8 +2760,28 @@ const styles = StyleSheet.create({
   },
   personaDetails: {
     fontSize: 12,
-    color: '#999',
+    color: '#666',
+    marginTop: 4,
+    lineHeight: 16,
+  },
+  personaPreferences: {
+    fontSize: 11,
+    color: '#28a745',
+    marginTop: 3,
+    fontWeight: '500',
+  },
+  personaAllergies: {
+    fontSize: 11,
+    color: '#dc3545',
+    marginTop: 2,
+    fontWeight: '500',
+  },
+  personaPersonality: {
+    fontSize: 11,
+    color: '#6c757d',
+    marginTop: 4,
     fontStyle: 'italic',
+    lineHeight: 14,
   },
   personaCheckmark: {
     width: 24,
