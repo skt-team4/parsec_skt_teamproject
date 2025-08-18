@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-NabiYam (나비얌) is a child-focused food recommendation system featuring an AI chatbot that helps children find suitable restaurants and food options. The system consists of a React Native mobile app, Python FastAPI backend with AI capabilities, and multiple deployment options.
+YUM:AI is a child-focused food recommendation system featuring an AI chatbot character named "그르시" (Geursi) that helps children find suitable restaurants and food options. The system consists of a React Native mobile app, Python FastAPI backend with AI capabilities, and multiple deployment options.
 
 ## Architecture
 
@@ -13,7 +13,7 @@ NabiYam (나비얌) is a child-focused food recommendation system featuring an A
 - Built with React Native 0.79.5, Expo SDK 53, TypeScript
 - File-based routing with Expo Router
 - Key screens:
-  - `app/chat.tsx` - Main chat interface with AI assistant
+  - `app/chat.tsx` - Main chat interface with 그르시 (Geursi) AI assistant
   - `app/food-category.tsx` - Food category selection
   - `app/nutrition.tsx` - Nutrition information display
   - `app/food_vision.tsx` - Food image analysis using camera
@@ -21,6 +21,9 @@ NabiYam (나비얌) is a child-focused food recommendation system featuring an A
   - `app/store.tsx` - Store/restaurant details with T-Map integration
   - `app/settings.tsx` - User settings (persona, location, allergies, preferences)
   - `app/(tabs)/_layout.tsx` - Tab navigation layout (5 tabs)
+  - `app/(auth)/login.tsx` - Login screen with Google OAuth integration
+  - `app/(auth)/register.tsx` - User registration
+  - `app/(auth)/welcome.tsx` - Welcome screen
 
 ### Backend - Python FastAPI + AI Models
 **Primary Location**: `public_projects/chatbot_v0/`
@@ -51,12 +54,14 @@ cd public_projects/ljm_skt_teamproject-main/ljm_skt_teamproject-main
 npm install
 
 # Start development server (web on port 19000)
-npx expo start --port 19000 --web
+npm run web       # Always uses port 19000
+# Or use platform-specific scripts:
+start-web.bat     # Windows
+./start-web.sh    # Mac/Linux
 
 # Platform-specific runs
 npm run android    # Android emulator/device
 npm run ios       # iOS simulator
-npm run web       # Web browser
 
 # Code quality
 npm run lint      # ESLint check
@@ -93,7 +98,7 @@ python test_performance.py
 docker-compose up --build
 
 # Specific configurations
-docker-compose -f docker-compose-naviyam.yml up
+docker-compose -f docker-compose-yumai.yml up
 docker-compose -f docker-compose-simple.yml up
 ```
 
@@ -116,6 +121,13 @@ docker-compose -f docker-compose-simple.yml up
 - `POST /v1/chat/completions` - OpenAI-compatible endpoint
 
 ## External Services Configuration
+
+### Google OAuth
+- Client ID: Set in `.env` file (EXPO_PUBLIC_GOOGLE_CLIENT_ID)
+- Redirect URIs: `http://localhost:19000`, `http://localhost:19000/redirect`
+- Configuration: `config/auth.config.ts`
+- Service: `services/googleAuthService.ts`
+- Required: Set up Authorized redirect URIs in Google Cloud Console
 
 ### OpenWeatherMap API
 - API Key: `72cade2afd8d0b233391812e15fda078` (hardcoded)
@@ -168,6 +180,11 @@ npx expo start
 
 ### Environment Variables
 ```bash
+# Frontend (.env)
+EXPO_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id_here
+EXPO_PUBLIC_GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+EXPO_PUBLIC_API_URL=http://localhost:8000
+
 # Backend
 PYTHONPATH=.
 API_HOST=0.0.0.0
@@ -178,10 +195,12 @@ DEVICE=cuda    # or 'cpu' for CPU-only
 
 ### Key File Paths
 - User profiles: `outputs/user_profiles/`
-- Session logs: `outputs/naviyam_chatbot.log`
+- Session logs: `outputs/yumai_chatbot.log`
 - FAISS indexes: `outputs/prebuilt_faiss.faiss`
 - Persona data: `data/personas.json`
 - Restaurant data: `src/data/restaurants_real.json`
+- Google Auth Config: `config/auth.config.ts`
+- Google Auth Service: `services/googleAuthService.ts`
 
 ## Migration Notes
 
@@ -194,6 +213,8 @@ When migrating from `chat_bot` to `chatbot_v0`:
 
 ## Key Features
 
+- **그르시 (Geursi) Character**: AI chatbot character providing friendly food recommendations
+- **Google OAuth Login**: Secure authentication with Google accounts
 - **Persona System**: Three youth personas with different characteristics
   - 김민호 (17세): Low balance, seafood restrictions
   - 김명빈 (14세): Multiple allergies, needs quiet places
@@ -204,3 +225,10 @@ When migrating from `chat_bot` to `chatbot_v0`:
 - **Address Services**: T-Map API for Korean address search and validation
 - **Food Vision**: Camera integration for food image analysis
 - **Learning Data Collection**: Automatic data collection for model improvement
+
+## Service Information
+
+- **Service Name**: YUM:AI
+- **AI Character**: 그르시 (Geursi)
+- **Target Users**: Children and youth
+- **Primary Function**: Food recommendation with dietary considerations
