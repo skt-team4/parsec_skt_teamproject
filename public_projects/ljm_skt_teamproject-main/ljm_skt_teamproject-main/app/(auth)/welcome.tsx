@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import {
   Dimensions,
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -39,15 +40,18 @@ export default function WelcomeScreen() {
         <View style={styles.topSection}>
           {/* 로고/타이틀 영역 */}
           <View style={styles.titleContainer}>
-            <Text style={styles.appTitle}>밥풀레이스</Text>
+            <Text style={styles.appTitle}>YUM:AI</Text>
             <Text style={styles.appSubtitle}>맛있는 식사의 시작</Text>
-            <Text style={styles.welcomeEmoji}>🍽️</Text>
+            <Image 
+              source={require('../../assets/그르시.png')} 
+              style={styles.characterImage}
+              resizeMode="contain"
+            />
           </View>
         </View>
 
         {/* 중간 설명 영역 */}
         <View style={styles.middleSection}>
-          <Text style={styles.descriptionTitle}>나비얌이와 함께</Text>
           <Text style={styles.descriptionText}>
             맞춤형 음식 추천부터{'\n'}
             급식카드 결제 서비스까지{'\n'}
@@ -118,13 +122,23 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     fontWeight: '500',
   },
-  welcomeEmoji: {
-    fontSize: 60,
+  characterImage: {
+    width: 240,
+    height: 240,
     marginTop: 20,
   },
   middleSection: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+    lineHeight: 24,
+    opacity: 0.8,
     alignItems: 'center',
     paddingHorizontal: 20,
   },

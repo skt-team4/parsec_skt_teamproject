@@ -5,6 +5,7 @@ import {
   Alert,
   Dimensions,
   Modal,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -129,7 +130,11 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
       setOwnedItems(userData.ownedItems);
     } catch (error) {
       console.error('❌ 사용자 데이터 로드 실패:', error);
-      Alert.alert('오류', '데이터를 불러오는데 실패했습니다.');
+      if (Platform.OS === 'web') {
+        window.alert('데이터를 불러오는데 실패했습니다.');
+      } else {
+        Alert.alert('오류', '데이터를 불러오는데 실패했습니다.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -168,22 +173,33 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
 
     // 밥풀 부족 체크
     if (ricePul < item.price) {
-      Alert.alert('밥풀 부족', '밥풀이 부족합니다. 게임을 플레이해서 밥풀을 모아보세요!');
+      if (Platform.OS === 'web') {
+        window.alert('밥풀이 부족합니다. 게임을 플레이해서 밥풀을 모아보세요!');
+      } else {
+        Alert.alert('밥풀 부족', '밥풀이 부족합니다. 게임을 플레이해서 밥풀을 모아보세요!');
+      }
       return;
     }
 
-    // 구매 확인 팝업
-    Alert.alert(
-      '아이템 구매',
-      `${item.name}을(를) ${item.price} 밥풀로 구매하시겠습니까?`,
-      [
-        { text: '취소', style: 'cancel' },
-        {
-          text: '구매',
-          onPress: () => executePurchase(item, itemIndex),
-        },
-      ]
-    );
+    // 구매 확인 팝업 (웹 환경 지원)
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm(`${item.name}을(를) ${item.price} 밥풀로 구매하시겠습니까?`);
+      if (confirmed) {
+        executePurchase(item, itemIndex);
+      }
+    } else {
+      Alert.alert(
+        '아이템 구매',
+        `${item.name}을(를) ${item.price} 밥풀로 구매하시겠습니까?`,
+        [
+          { text: '취소', style: 'cancel' },
+          {
+            text: '구매',
+            onPress: () => executePurchase(item, itemIndex),
+          },
+        ]
+      );
+    }
   };
 
   // 실제 구매 실행
@@ -215,15 +231,27 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
         // 구매한 아이템 바로 적용
         onGifChange(itemIndex);
         
-        // 성공 메시지
-        Alert.alert('구매 완료', `${item.name}을(를) 구매했습니다! 🎉`);
+        // 성공 메시지 (웹 환경 지원)
+        if (Platform.OS === 'web') {
+          window.alert(`${item.name}을(를) 구매했습니다! 🎉`);
+        } else {
+          Alert.alert('구매 완료', `${item.name}을(를) 구매했습니다! 🎉`);
+        }
       } else {
         console.log('❌ 구매 실패: 밥풀 부족');
-        Alert.alert('구매 실패', '구매 중 문제가 발생했습니다.');
+        if (Platform.OS === 'web') {
+          window.alert('구매 중 문제가 발생했습니다.');
+        } else {
+          Alert.alert('구매 실패', '구매 중 문제가 발생했습니다.');
+        }
       }
     } catch (error) {
       console.error('💥 구매 오류:', error);
-      Alert.alert('오류', '구매 처리 중 오류가 발생했습니다.');
+      if (Platform.OS === 'web') {
+        window.alert('구매 처리 중 오류가 발생했습니다.');
+      } else {
+        Alert.alert('오류', '구매 처리 중 오류가 발생했습니다.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -270,6 +298,7 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
           isSelected && styles.itemCardSelected,
           isOwned && styles.itemCardOwned,
           isLoading && styles.itemCardDisabled,
+          { cursor: 'pointer' } // 웹에서 클릭 가능하도록 커서 추가
         ]}
         onPress={() => handlePurchase(item, realIndex)}
         disabled={isLoading}

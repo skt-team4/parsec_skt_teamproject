@@ -38,8 +38,18 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="orders" // -> orders.tsx
+        name="food_history" // -> food_history.tsx
         options={{
+          title: '기록',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="orders" // -> orders.tsx (숨김)
+        options={{
+          href: null, // 탭에서 숨기기
           title: '주문',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="bag-outline" size={size} color={color} />

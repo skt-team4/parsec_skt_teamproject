@@ -15,6 +15,7 @@ import {
     View,
 } from 'react-native';
 import authConfig from '../../config/auth.config';
+import GoogleLogo from '../../components/GoogleLogo';
 import googleAuthService from '../../services/googleAuthService';
 import StorageService from '../../utils/storage';
 
@@ -203,7 +204,7 @@ export default function LoginScreen() {
               onPress={handleGoogleLogin}
               disabled={isLoading || isGoogleLoading}
             >
-              <Text style={styles.googleLoginIcon}>🟢</Text>
+              <GoogleLogo size={20} />
               <Text style={styles.googleLoginButtonText}>
                 {isGoogleLoading ? '구글 로그인 중...' : 'Google로 계속하기'}
               </Text>

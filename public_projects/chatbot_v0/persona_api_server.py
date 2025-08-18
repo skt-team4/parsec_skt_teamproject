@@ -211,104 +211,56 @@ def process_with_pipeline(message: str, user_id: str, persona_id: str, weather_i
             'user_allergies': metadata.get('allergies') if metadata else None
         }
         
-        # 파이프라인 실행 (문자열로 전달)
-        # 페르소나 정보를 시스템 프롬프트로 추가
-        persona_prompt = f"""[현재 대화 중인 사용자 정보]
-이름: {persona['name']}
-나이: {persona['age']}세
-급식카드 잔액: {persona['meal_card_info']['balance']:,}원
-좋아하는 음식: {', '.join(persona['preferences']['liked_foods'][:3])}
-싫어하는 음식: {', '.join(persona['preferences']['disliked_foods'][:3])}"""
+        # 간결하고 명확한 시스템 프롬프트 구성
+        system_prompt = f"""당신은 '그르시'입니다. YUM:AI 서비스의 AI 음식 추천 도우미 캐릭터입니다.
+
+[그르시 소개]
+• 이름: 그르시 (YUM:AI의 마스코트)
+• 역할: 청소년들에게 맛있는 음식을 추천해주는 친구
+• 특징: 친근하고 재미있는 음식 전문가
+
+[대화 중인 사용자]
+• 이름: {persona['name']} ({persona['age']}세)
+• 급식카드 잔액: {persona['meal_card_info']['balance']:,}원
+• 좋아하는 음식: {', '.join(persona['preferences']['liked_foods'][:2])}"""
         
-        # 페르소나별 특별 정보 추가
+        # 페르소나별 특별 정보 (간결하게)
         if persona_id == 'myeong_bin':
-            # 김명빈: 알레르기 정보
-            dietary = persona['teen_personalizer_features'].get('dietary_restrictions', ['땅콩', '새우', '게', '조개류'])
-            persona_prompt += f"\n⚠️ 알레르기: {', '.join(dietary)} (이 음식들은 절대 추천하지 마세요!)"
-            persona_prompt += f"\n특별 요구사항: 조용한 곳 선호, 알레르기 안전 중요"
-            # story 필드가 있을 때만 추가
-            if 'story' in persona:
-                persona_prompt += f"\n상황: {persona['story']}"
+            dietary = persona['teen_personalizer_features'].get('dietary_restrictions', ['땅콩', '새우'])
+            system_prompt += f"\n• ⚠️ 알레르기: {', '.join(dietary[:2])}"
         elif persona_id == 'min_ho':
-            # 김민호: 급식카드 잔액 부족, 해산물 못먹음
-            dietary = persona['teen_personalizer_features'].get('dietary_restrictions', ['해산물', '매운음식'])
-            persona_prompt += f"\n못 먹는 음식: {', '.join(dietary)}"
-            persona_prompt += f"\n⚠️ 급식카드 잔액 부족 주의! {persona['meal_card_info'].get('alert_message', '')}"
-            # story 필드가 있을 때만 추가
-            if 'story' in persona:
-                persona_prompt += f"\n상황: {persona['story']}"
+            if persona['meal_card_info']['balance'] < 10000:
+                system_prompt += f"\n• ⚠️ 잔액 부족 (1만원 미만)"
         elif persona_id == 'tae_hoon':
-            # 강태훈: 혼자 식사, 편의점 선호
-            persona_prompt += f"\n선호 장소: 편의점, 패스트푸드"
-            persona_prompt += f"\n특징: 게임하면서 간단히 먹을 수 있는 음식 선호"
-            # story 필드가 있을 때만 추가
-            if 'story' in persona:
-                persona_prompt += f"\n상황: {persona['story']}"
+            system_prompt += f"\n• 선호: 편의점, 간편식"
         
-        # 위치 정보 추가
-        if context.get('location'):
-            location = context['location']
-            persona_prompt += f"\n\n[현재 위치 정보]"
-            if location.get('address'):
-                persona_prompt += f"\n주소: {location['address']}"
-                if location.get('detailAddress'):
-                    persona_prompt += f" {location['detailAddress']}"
-            if location.get('latitude') and location.get('longitude'):
-                persona_prompt += f"\n좌표: 위도 {location['latitude']:.4f}, 경도 {location['longitude']:.4f}"
-        
-        # 날씨 정보 추가
-        if weather:
-            persona_prompt += f"\n\n[현재 날씨 정보]"
-            persona_prompt += f"\n날씨: {weather.get('condition', '맑음')}"
-            persona_prompt += f"\n온도: {weather.get('temperature', 20)}°C"
-        
-        # 사용자 설정 정보 추가 (설정에서 선택한 알레르기 및 선호 카테고리)
+        # 사용자 설정 알레르기 (중요!)
         if context.get('user_allergies'):
-            logger.info(f"알레르기 정보 감지: {context['user_allergies']}")
-            persona_prompt += f"\n\n[사용자 설정 알레르기 정보]"
-            persona_prompt += f"\n⚠️ 알레르기: {', '.join(context['user_allergies'])}"
-            persona_prompt += f"\n(이 음식들은 절대 추천하지 마세요!)"
+            system_prompt += f"\n• ⚠️ 설정된 알레르기: {', '.join(context['user_allergies'])}"
         
-        if context.get('user_preferences'):
-            logger.info(f"선호 카테고리 감지: {context['user_preferences']}")
-            persona_prompt += f"\n\n[사용자 설정 선호 카테고리]"
-            persona_prompt += f"\n선호 음식: {', '.join(context['user_preferences'])}"
-            
-            # 날씨별 추천 음식
-            weather_food_map = {
-                '비': '따뜻한 국물요리, 전, 파전, 막걸리',
-                '눈': '뜨거운 국밥, 우동, 어묵탕, 호빵',
-                '맑음': '시원한 음료, 샐러드, 과일' if weather.get('temperature', 20) > 25 else '일반 메뉴',
-                '흐림': '든든한 한식, 찌개, 볶음요리'
-            }
-            recommended = weather_food_map.get(weather.get('condition', '맑음'), '일반 메뉴')
-            persona_prompt += f"\n날씨에 어울리는 음식: {recommended}"
+        # 날씨 정보 (간단히)
+        if weather:
+            system_prompt += f"\n\n[현재 상황]"
+            system_prompt += f"\n• 날씨: {weather.get('condition', '맑음')}, {weather.get('temperature', 20)}°C"
         
-        # 시스템 프롬프트에 모든 정보를 포함하여 AI가 자연스럽게 답변하도록 함
-        lower_message = message.lower()
+        # 위치 정보 (간단히)
+        if context.get('location') and context['location'].get('address'):
+            system_prompt += f"\n• 위치: {context['location']['address']}"
         
-        # 시스템 프롬프트를 매우 상세하게 구성
-        system_prompt = f"""당신은 '얌이'라는 친근한 AI 음식 추천 도우미입니다.
+        # 대화 규칙 (핵심만)
+        system_prompt += f"""
 
-[현재 대화 중인 사용자 정보]
-이름: {persona['name']}
-나이: {persona['age']}세
-급식카드 잔액: {persona['meal_card_info']['balance']:,}원
-좋아하는 음식: {', '.join(persona['preferences']['liked_foods'][:3])}
-싫어하는 음식: {', '.join(persona['preferences']['disliked_foods'][:3])}
-
-{persona_prompt}
-
-[대화 지침]
-1. 사용자가 이름을 물으면 "{persona['name']}님" 이라고 자연스럽게 대답하세요.
-2. 사용자가 나이를 물으면 "{persona['age']}살" 이라고 대답하세요.
-3. 사용자가 잔액을 물으면 "{persona['meal_card_info']['balance']:,}원" 이라고 정확히 알려주세요.
-4. 사용자가 날씨를 물으면 현재 날씨 정보를 활용하여 답변하세요.
-5. 사용자가 위치를 물으면 현재 위치 정보를 활용하여 답변하세요.
-6. 모든 답변은 자연스럽고 친근하게, 마치 친구와 대화하듯이 하세요.
-7. 페르소나의 특성(나이, 상황, 선호도)에 맞는 톤으로 대화하세요.
-
-사용자 메시지: {message}"""
+[대화 규칙]
+1. 자기소개 질문("넌 누구야?", "너 뭐야?" 등)에는 "나는 그르시야! YUM:AI의 음식 추천 도우미지"라고 답하기
+2. 짧고 친근하게 대답하기 (2-3문장)
+3. 인사는 한 번만, 중복하지 않기
+4. 사용자 메시지를 그대로 반복하지 않기
+5. 음식 추천시 급식카드 잔액 고려
+6. 알레르기 음식은 절대 추천하지 않기"""
+        
+        # 대화 이력 확인 (중복 인사 방지)
+        recent_messages = conv_manager.get_recent_messages(user_id, count=5) if hasattr(conv_manager, 'get_recent_messages') else []
+        is_first_greeting = len(recent_messages) == 0
         
         # AI 모델에 전체 컨텍스트와 함께 메시지 전달
         # 파이프라인에는 사용자 메시지만 전달 (위치 추출용)
@@ -322,7 +274,8 @@ def process_with_pipeline(message: str, user_id: str, persona_id: str, weather_i
                 'balance': persona['meal_card_info']['balance'],
                 'preferred_categories': persona['teen_personalizer_features']['preferred_categories'],
                 'dietary_restrictions': persona['teen_personalizer_features'].get('dietary_restrictions', []),
-                'system_context': system_prompt  # 시스템 프롬프트를 프로필에 포함
+                'system_context': system_prompt,  # 시스템 프롬프트를 프로필에 포함
+                'is_first_greeting': is_first_greeting  # 첫 인사 여부
             },
             user_id=user_id
         )
@@ -341,9 +294,15 @@ def process_with_pipeline(message: str, user_id: str, persona_id: str, weather_i
                     'price': rec.get('price', 0)
                 })
         
+        # 응답 텍스트 정제 (중복 제거)
+        response_text = result.text if hasattr(result, 'text') else str(result)
+        
+        # 응답 안정화: 너무 긴 응답 자르기
+        if len(response_text) > 300:
+            response_text = response_text[:297] + "..."
+        
         # 대화 이력 저장
         conv_manager.add_message(user_id, 'user', message)
-        response_text = result.text if hasattr(result, 'text') else str(result)
         conv_manager.add_message(user_id, 'assistant', response_text)
         
         return {
@@ -360,9 +319,10 @@ def process_with_pipeline(message: str, user_id: str, persona_id: str, weather_i
         
     except Exception as e:
         logger.error(f"파이프라인 처리 오류: {e}")
-        # 에러 시 간단한 응답
+        # 에러 시 간단한 응답 (첫 인사만)
+        greeting = "안녕하세요! " if len(conversation_managers.get(user_id, [])) == 0 else ""
         return {
-            "response": f"안녕하세요! {persona['name']}님, 무엇을 도와드릴까요? 맛있는 음식을 추천해드릴게요!",
+            "response": f"{greeting}무엇을 도와드릴까요? {persona['name']}님께 맛있는 음식을 추천해드릴게요!",
             "recommendations": [],
             "intent": "greeting",
             "confidence": 0.5,

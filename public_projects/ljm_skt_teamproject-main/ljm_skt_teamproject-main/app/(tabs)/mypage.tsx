@@ -1,24 +1,26 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect, useRouter } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import {
   Alert,
   Image,
+  Modal,
   ScrollView,
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import tmapService from '../../services/tmapService';
+import StorageService from '../../utils/storage';
 import {
-  addTestBalance,
   deleteMealCard,
   getTransactionHistory,
   getUserProfile,
-  registerMealCard, // 테스트용
+  registerMealCard,
   type MealCardInfo,
   type RicePulLevel,
   type Transaction
@@ -39,23 +41,49 @@ interface UserProfile {
   };
 }
 
-interface Address {
-  id: number;
+// 주소 및 날씨 관련 인터페이스
+interface AddressInfo {
   address: string;
-  detailAddress: string;
-  isDefault: boolean;
+  latitude?: number;
+  longitude?: number;
+  detailAddress?: string;
+}
+
+interface WeatherInfo {
+  temperature: number;
+  condition: string;
+  description?: string;
+}
+
+interface SearchResult {
+  id: string;
+  name: string;
+  address: string;
+  fullAddress: string;
+  lat: number;
+  lng: number;
 }
 
 export default function MyPageScreen() {
   const router = useRouter();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingCard, setIsEditingCard] = useState(false);
-  const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [currentRicePul, setCurrentRicePul] = useState(0);
   const [currentLevel, setCurrentLevel] = useState<RicePulLevel | null>(null);
   const [mealCardInfo, setMealCardInfo] = useState<MealCardInfo | null>(null);
   const [showRicePulModal, setShowRicePulModal] = useState(false);
   const [transactionHistory, setTransactionHistory] = useState<Transaction[]>([]);
+
+  // 주소 및 날씨 관련 상태
+  const [address, setAddress] = useState<string>('');
+  const [detailAddress, setDetailAddress] = useState<string>('');
+  const [savedAddress, setSavedAddress] = useState<AddressInfo | null>(null);
+  const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
+  const [weather, setWeather] = useState<WeatherInfo | null>(null);
+  const [showAddressModal, setShowAddressModal] = useState<boolean>(false);
 
   const [profile, setProfile] = useState<UserProfile>({
     name: '김철수',
@@ -75,60 +103,259 @@ export default function MyPageScreen() {
   const [tempProfile, setTempProfile] = useState<UserProfile>(profile);
   const [tempCard, setTempCard] = useState(profile.card);
 
-  const [addresses, setAddresses] = useState<Address[]>([
-    {
-      id: 1,
-      address: '서울특별시 강남구 테헤란로 123',
-      detailAddress: '456호',
-      isDefault: true,
-    },
-    {
-      id: 2,
-      address: '서울특별시 종로구 종로 89',
-      detailAddress: '10층',
-      isDefault: false,
-    },
-  ]);
-
-  const [newAddress, setNewAddress] = useState<Omit<Address, 'id'>>({
-    address: '',
-    detailAddress: '',
-    isDefault: false,
-  });
+  // 지역 목록
+  const regions = [
+    '서울특별시', '부산광역시', '대구광역시', '인천광역시',
+    '광주광역시', '대전광역시', '울산광역시', '세종특별자치시',
+    '경기도', '강원도', '충청북도', '충청남도',
+    '전라북도', '전라남도', '경상북도', '경상남도', '제주특별자치도',
+  ];
 
   // 화면이 포커스될 때마다 통합 데이터 로드
   useFocusEffect(
     useCallback(() => {
       loadIntegratedData();
+      loadSavedAddress();
+      loadWeatherInfo();
     }, [])
   );
 
-  // ✅ 수정된 통합 데이터 로드 함수
+  // 저장된 주소 불러오기
+  const loadSavedAddress = async () => {
+    try {
+      const saved = await AsyncStorage.getItem('userAddress');
+      if (saved) {
+        const addressInfo: AddressInfo = JSON.parse(saved);
+        setSavedAddress(addressInfo);
+        setAddress(addressInfo.address);
+        setDetailAddress(addressInfo.detailAddress || '');
+      }
+    } catch (error) {
+      console.error('주소 불러오기 실패:', error);
+    }
+  };
+
+  // 날씨 정보 불러오기
+  const loadWeatherInfo = async (customLat?: number, customLon?: number) => {
+    try {
+      const API_KEY = '72cade2afd8d0b233391812e15fda078';
+      let lat = customLat || 37.5665;
+      let lon = customLon || 126.9780;
+      
+      if (!customLat || !customLon) {
+        const savedLocation = await AsyncStorage.getItem('userLocation');
+        if (savedLocation) {
+          const location = JSON.parse(savedLocation);
+          lat = location.latitude;
+          lon = location.longitude;
+        }
+      }
+      
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=kr`;
+      const response = await fetch(url);
+      
+      if (response.ok) {
+        const data = await response.json();
+        const main = data.weather[0].main.toLowerCase();
+        let condition = '맑음';
+        
+        if (main.includes('rain')) condition = '비';
+        else if (main.includes('snow')) condition = '눈';
+        else if (main.includes('cloud')) condition = '흐림';
+        else if (main.includes('clear')) condition = '맑음';
+        
+        setWeather({
+          temperature: Math.round(data.main.temp),
+          condition: condition,
+          description: data.weather[0].description
+        });
+      }
+    } catch (error) {
+      console.error('날씨 정보 로드 실패:', error);
+    }
+  };
+
+  // 주소 검색
+  const searchAddress = async () => {
+    if (!address.trim()) {
+      Alert.alert('알림', '검색할 주소를 입력해주세요.');
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const result: any = await tmapService.searchAddress(address);
+      if (result.success && result.results && result.results.length > 0) {
+        setSearchResults(result.results);
+        setShowSearchResults(true);
+      } else {
+        Alert.alert('검색 결과 없음', '입력한 주소를 찾을 수 없습니다.');
+      }
+    } catch (error) {
+      console.error('주소 검색 실패:', error);
+      Alert.alert('오류', '주소 검색에 실패했습니다.');
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  // 검색 결과 선택
+  const selectSearchResult = async (result: SearchResult) => {
+    let displayAddress = result.name || '';
+    if (result.address) {
+      const addressParts = result.address.trim().split(' ');
+      const importantParts = addressParts.filter(part => 
+        !part.includes('대한민국') && !part.includes('KR') && part.trim() !== ''
+      );
+      displayAddress = importantParts.join(' ');
+    }
+    
+    const addressInfo: AddressInfo = {
+      address: displayAddress || result.fullAddress,
+      latitude: result.lat,
+      longitude: result.lng,
+      detailAddress: detailAddress.trim(),
+    };
+
+    await AsyncStorage.setItem('userAddress', JSON.stringify(addressInfo));
+    await AsyncStorage.setItem('userLocation', JSON.stringify({ 
+      latitude: result.lat, 
+      longitude: result.lng 
+    }));
+    
+    setSavedAddress(addressInfo);
+    setAddress(displayAddress || result.fullAddress);
+    setShowSearchResults(false);
+    setSearchResults([]);
+    setIsEditingAddress(false);
+    
+    loadWeatherInfo(result.lat, result.lng);
+    Alert.alert('성공', '주소가 설정되었습니다. 날씨 정보가 업데이트되었습니다.');
+  };
+
+  const getCurrentLocation = async () => {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            
+            try {
+              const result: any = await tmapService.reverseGeocode(latitude, longitude);
+              if (result.success) {
+                const addressInfo: AddressInfo = {
+                  address: result.fullAddress || `위도: ${latitude}, 경도: ${longitude}`,
+                  latitude,
+                  longitude,
+                  detailAddress: '',
+                };
+                
+                setAddress(addressInfo.address);
+                setSavedAddress(addressInfo);
+                await AsyncStorage.setItem('userAddress', JSON.stringify(addressInfo));
+                await AsyncStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+                
+                loadWeatherInfo(latitude, longitude);
+                Alert.alert('성공', '현재 위치가 설정되었습니다.');
+                setIsEditingAddress(false);
+              }
+            } catch (error) {
+              const addressInfo: AddressInfo = {
+                address: `서울특별시 (위도: ${latitude.toFixed(4)}, 경도: ${longitude.toFixed(4)})`,
+                latitude,
+                longitude,
+                detailAddress: '',
+              };
+              
+              setAddress(addressInfo.address);
+              setSavedAddress(addressInfo);
+              await AsyncStorage.setItem('userAddress', JSON.stringify(addressInfo));
+              await AsyncStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+              
+              loadWeatherInfo(latitude, longitude);
+              Alert.alert('성공', '현재 위치가 설정되었습니다.');
+              setIsEditingAddress(false);
+            }
+          },
+          (error) => {
+            if (error.code === 1) {
+              Alert.alert('위치 권한', '위치 접근 권한이 필요합니다.');
+            } else {
+              Alert.alert('오류', '현재 위치를 가져올 수 없습니다.');
+            }
+          }
+        );
+      }
+    } catch (error) {
+      Alert.alert('오류', '위치를 가져오는 중 오류가 발생했습니다.');
+    }
+  };
+
+  const clearAddress = () => {
+    Alert.alert(
+      '주소 삭제',
+      '저장된 주소를 삭제하시겠습니까?',
+      [
+        { text: '취소', style: 'cancel' },
+        {
+          text: '삭제',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem('userAddress');
+              setSavedAddress(null);
+              setAddress('');
+              setDetailAddress('');
+              setIsEditingAddress(false);
+            } catch (error) {
+              console.error('주소 삭제 실패:', error);
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  // 통합 데이터 로드 함수
   const loadIntegratedData = async () => {
     try {
-      console.log('📦 MyPage - 통합 데이터 로드 시작');
-      
-      // 사용자 프로필 로드 (밥풀, 레벨, 급식카드 모두 포함)
       const userProfile = await getUserProfile();
       const transactions = await getTransactionHistory(20);
       
-      console.log('📦 통합 프로필 데이터:', userProfile);
+      // 페르소나 데이터 가져오기
+      const personaData = await StorageService.getPersona();
+      let mealCardBalance = userProfile.mealCard?.balance || 0;
+      
+      // 페르소나에 따른 급식카드 잔액 설정
+      if (personaData?.name) {
+        switch(personaData.name) {
+          case '민호':
+            mealCardBalance = 25000;
+            break;
+          case '명빈':
+            mealCardBalance = 5000;
+            break;
+          case '태훈':
+            mealCardBalance = 15000;
+            break;
+          default:
+            mealCardBalance = 10000;
+        }
+      }
       
       setCurrentRicePul(userProfile.ricePul);
       setCurrentLevel(userProfile.level);
-      
-      // ✅ 수정: 단순히 mealCard가 null인지만 체크
-      setMealCardInfo(userProfile.mealCard);
-      
+      setMealCardInfo(userProfile.mealCard ? {
+        ...userProfile.mealCard,
+        balance: mealCardBalance
+      } : null);
       setTransactionHistory(transactions);
       
-      // 기존 프로필 업데이트
       setProfile(prev => ({
         ...prev,
-        name: userProfile.name,
+        name: personaData?.name || userProfile.name,
         points: userProfile.ricePul
       }));
-      
     } catch (error) {
       console.error('❌ 통합 데이터 로드 실패:', error);
     }
@@ -156,22 +383,15 @@ export default function MyPageScreen() {
     setIsEditingCard(true);
   };
 
-  // ✅ 수정된 급식카드 등록 함수
   const handleCardSave = async () => {
     try {
-      // ✅ 실제 registerMealCard 함수 사용
       const newMealCardInfo = await registerMealCard(tempCard.number, 50000);
-      
       setProfile({ ...profile, card: tempCard });
       setMealCardInfo(newMealCardInfo);
       setIsEditingCard(false);
-      
       Alert.alert('등록 완료', '급식카드가 성공적으로 등록되었습니다!');
-      
-      // 데이터 새로고침
       await loadIntegratedData();
     } catch (error) {
-      console.error('급식카드 등록 실패:', error);
       Alert.alert('등록 실패', '급식카드 등록 중 오류가 발생했습니다.');
     }
   };
@@ -181,7 +401,6 @@ export default function MyPageScreen() {
     setIsEditingCard(false);
   };
 
-  // ✅ 수정된 급식카드 삭제 함수
   const handleCardDelete = () => {
     Alert.alert(
       '급식카드 삭제',
@@ -193,43 +412,21 @@ export default function MyPageScreen() {
           style: 'destructive',
           onPress: async () => {
             try {
-              // ✅ 실제 deleteMealCard 함수 사용
               await deleteMealCard();
-              
               setMealCardInfo(null);
               setProfile(prev => ({
                 ...prev,
-                card: {
-                  number: '',
-                  expiryDate: '',
-                  holderName: '',
-                  region: '',
-                }
+                card: { number: '', expiryDate: '', holderName: '', region: '' }
               }));
-              
               Alert.alert('삭제 완료', '급식카드가 삭제되었습니다.');
-              
-              // 데이터 새로고침
               await loadIntegratedData();
             } catch (error) {
-              console.error('급식카드 삭제 실패:', error);
               Alert.alert('삭제 실패', '급식카드 삭제 중 오류가 발생했습니다.');
             }
           }
         }
       ]
     );
-  };
-
-  // ✅ 테스트용 충전 함수 (개발 중에만 사용)
-  const handleTestCharge = async () => {
-    try {
-      await addTestBalance(30000);
-      await loadIntegratedData();
-      Alert.alert('테스트 충전 완료', '30,000원이 충전되었습니다!');
-    } catch (error) {
-      console.error('테스트 충전 실패:', error);
-    }
   };
 
   // 카드 입력 포맷팅 함수들
@@ -246,75 +443,6 @@ export default function MyPageScreen() {
     return numbers;
   };
 
-  const maskCardNumberInput = (value: string) => {
-    const numbers = value.replace(/\D/g, '');
-    if (numbers.length > 8) {
-      const visible = numbers.slice(0, 8);
-      const masked = '*'.repeat(numbers.length - 8);
-      const combined = visible + masked;
-      return combined.replace(/(\d{4})(?=\d)/g, '$1-');
-    }
-    return formatCardNumberInput(numbers);
-  };
-
-  const maskExpiryInput = (value: string) => {
-    const numbers = value.replace(/\D/g, '');
-    if (numbers.length > 2) {
-      const month = numbers.slice(0, 2);
-      const year = '*'.repeat(numbers.length - 2);
-      return month + '/' + year;
-    }
-    return formatExpiryDateInput(numbers);
-  };
-
-  // 지역 목록
-  const regions = [
-    '서울특별시',
-    '부산광역시',
-    '대구광역시',
-    '인천광역시',
-    '광주광역시',
-    '대전광역시',
-    '울산광역시',
-    '세종특별자치시',
-    '경기도',
-    '강원도',
-    '충청북도',
-    '충청남도',
-    '전라북도',
-    '전라남도',
-    '경상북도',
-    '경상남도',
-    '제주특별자치도',
-  ];
-
-  // 주소 관련 함수들
-  const handleAddAddress = () => {
-    if (newAddress.address) {
-      const id = Math.max(...addresses.map((a) => a.id), 0) + 1;
-      setAddresses([...addresses, { ...newAddress, id }]);
-      setNewAddress({
-        address: '',
-        detailAddress: '',
-        isDefault: false,
-      });
-      setIsAddingAddress(false);
-    }
-  };
-
-  const handleDeleteAddress = (id: number) => {
-    setAddresses(addresses.filter((addr) => addr.id !== id));
-  };
-
-  const handleSetDefaultAddress = (id: number) => {
-    setAddresses(
-      addresses.map((addr) => ({
-        ...addr,
-        isDefault: addr.id === id,
-      }))
-    );
-  };
-
   // 레벨 진행률 계산
   const getLevelProgress = () => {
     if (!currentLevel) return 0;
@@ -327,18 +455,7 @@ export default function MyPageScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* 헤더 */}
         <View style={styles.appHeader}>
-          <View>
-            <Text style={styles.appTitle}>마이페이지</Text>
-          </View>
-          {/* ✅ 테스트용 충전 버튼 (개발 중에만 표시) */}
-          {__DEV__ && (
-            <TouchableOpacity
-              style={styles.testButton}
-              onPress={handleTestCharge}
-            >
-              <Text style={styles.testButtonText}>테스트 충전</Text>
-            </TouchableOpacity>
-          )}
+          <Text style={styles.appTitle}>마이페이지</Text>
         </View>
 
         {/* 프로필 배너 */}
@@ -381,7 +498,7 @@ export default function MyPageScreen() {
                   onPress={loadIntegratedData}
                   activeOpacity={0.7}
                 >
-                  <View style={styles.riceIcon} />
+                  <Image source={require('../../assets/rice.png')} style={styles.riceIcon} />
                   <Text style={styles.pointsText}>
                     {currentRicePul.toLocaleString()}밥풀
                   </Text>
@@ -588,112 +705,6 @@ export default function MyPageScreen() {
           </View>
         </View>
 
-        {/* 주소 설정 섹션 */}
-        <View style={styles.contentSection}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>주소 설정</Text>
-            <TouchableOpacity onPress={() => setIsAddingAddress(true)}>
-              <Text style={styles.seeAllText}>+ 새 주소</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.sectionSubtitle}>자주 사용하는 주소를 등록하세요</Text>
-
-          {/* 새 주소 추가 폼 */}
-          {isAddingAddress && (
-            <LinearGradient 
-              colors={['#FFF8E1', '#FFE082']} 
-              style={styles.addAddressCard}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            >
-              <Text style={styles.addAddressTitle}>📍 새 주소 추가</Text>
-              
-              <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>주소</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="예: 서울특별시 강남구 테헤란로 123"
-                  value={newAddress.address}
-                  onChangeText={(text) => setNewAddress({ ...newAddress, address: text })}
-                  multiline
-                />
-              </View>
-              
-              <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>상세주소 (선택)</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="예: 101동 202호, 3층"
-                  value={newAddress.detailAddress}
-                  onChangeText={(text) => setNewAddress({ ...newAddress, detailAddress: text })}
-                />
-              </View>
-
-              <View style={styles.switchRow}>
-                <Text style={styles.switchLabel}>기본 주소로 설정</Text>
-                <Switch
-                  value={newAddress.isDefault}
-                  onValueChange={(value) => setNewAddress({ ...newAddress, isDefault: value })}
-                  trackColor={{ false: '#d1d5db', true: '#FFBF00' }}
-                  thumbColor={newAddress.isDefault ? '#fff' : '#f4f3f4'}
-                />
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity style={styles.addSubmitButton} onPress={handleAddAddress}>
-                  <Text style={styles.addSubmitButtonText}>추가</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.cancelButton}
-                  onPress={() => setIsAddingAddress(false)}
-                >
-                  <Text style={styles.cancelButtonText}>취소</Text>
-                </TouchableOpacity>
-              </View>
-            </LinearGradient>
-          )}
-
-          {/* 주소 목록 */}
-          {addresses.map((address) => (
-            <View key={address.id} style={styles.addressCard}>
-              <View style={styles.addressHeader}>
-                <View style={styles.addressLabelRow}>
-                  {address.isDefault && (
-                    <View style={styles.defaultBadge}>
-                      <Text style={styles.defaultBadgeText}>기본</Text>
-                    </View>
-                  )}
-                </View>
-              </View>
-
-              <Text style={styles.addressText}>
-                {address.address}
-                {address.detailAddress ? ` ${address.detailAddress}` : ''}
-              </Text>
-
-              <View style={styles.addressActions}>
-                {!address.isDefault && (
-                  <TouchableOpacity
-                    style={styles.defaultButton}
-                    onPress={() => handleSetDefaultAddress(address.id)}
-                  >
-                    <Text style={styles.defaultButtonText}>기본 설정</Text>
-                  </TouchableOpacity>
-                )}
-                <TouchableOpacity style={styles.editAddressButton}>
-                  <Text style={styles.editAddressButtonText}>수정</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.deleteButton}
-                  onPress={() => handleDeleteAddress(address.id)}
-                >
-                  <Text style={styles.deleteButtonText}>삭제</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ))}
-        </View>
-
         {/* 밥풀 현황 섹션 */}
         <View style={styles.contentSection}>
           <View style={styles.sectionHeader}>
@@ -706,7 +717,6 @@ export default function MyPageScreen() {
             activeOpacity={0.7}
           >
             <View style={styles.ricePulSummaryContent}>
-              <View style={styles.ricePulIconLarge} />
               <View style={styles.ricePulSummaryInfo}>
                 <Text style={styles.ricePulSummaryAmount}>{currentRicePul.toLocaleString()}</Text>
                 <Text style={styles.ricePulSummaryLabel}>보유 밥풀</Text>
@@ -731,7 +741,7 @@ export default function MyPageScreen() {
               style={styles.settingItem}
               onPress={() => router.push('/settings')}
             >
-              <Text style={styles.settingText}>⚙️ 앱 설정</Text>
+              <Text style={styles.settingText}>⚙️ 프로필 설정</Text>
               <Text style={styles.settingArrow}>→</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.settingItem}>
@@ -749,7 +759,33 @@ export default function MyPageScreen() {
               <Text style={styles.settingArrow}>→</Text>
             </TouchableOpacity>
             <View style={styles.settingDivider} />
-            <TouchableOpacity style={styles.settingItem}>
+            <TouchableOpacity 
+              style={styles.settingItem}
+              onPress={async () => {
+                Alert.alert(
+                  '로그아웃',
+                  '정말 로그아웃 하시겠습니까?',
+                  [
+                    { text: '취소', style: 'cancel' },
+                    {
+                      text: '로그아웃',
+                      style: 'destructive',
+                      onPress: async () => {
+                        try {
+                          // 저장된 데이터 모두 삭제
+                          await StorageService.clearAllData();
+                          // 로그인 화면으로 이동
+                          router.replace('/(auth)/login');
+                        } catch (error) {
+                          console.error('로그아웃 오류:', error);
+                          Alert.alert('오류', '로그아웃 중 문제가 발생했습니다.');
+                        }
+                      }
+                    }
+                  ]
+                );
+              }}
+            >
               <Text style={[styles.settingText, { color: '#FF6B6B' }]}>🚪 로그아웃</Text>
               <Text style={styles.settingArrow}>→</Text>
             </TouchableOpacity>
@@ -760,7 +796,7 @@ export default function MyPageScreen() {
       {/* 밥풀 상세 모달 */}
       {showRicePulModal && (
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
+          <View style={styles.ricePulModalContainer}>
             <View style={styles.modalHeader}>
               <TouchableOpacity 
                 onPress={() => setShowRicePulModal(false)} 
@@ -787,7 +823,7 @@ export default function MyPageScreen() {
               {/* 밥풀 & 레벨 카드 */}
               <View style={styles.ricePulDetailCard}>
                 <View style={styles.ricePulHeader}>
-                  <View style={styles.ricePulIconLarge} />
+                  <Image source={require('../../assets/rice.png')} style={styles.riceIcon} />
                   <View style={styles.ricePulInfo}>
                     <Text style={styles.ricePulAmount}>{currentRicePul.toLocaleString()}</Text>
                     <Text style={styles.ricePulLabel}>보유 밥풀</Text>
@@ -879,9 +915,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafafa',
   },
   appHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     padding: 20,
     paddingBottom: 15,
     backgroundColor: 'white',
@@ -889,20 +922,8 @@ const styles = StyleSheet.create({
   appTitle: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#FFBF00',
+    color: '#020202ff',
     letterSpacing: 0.5,
-  },
-  // ✅ 테스트 버튼 스타일 추가
-  testButton: {
-    backgroundColor: '#FF6B6B',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-  },
-  testButtonText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '600',
   },
   profileBanner: {
     marginHorizontal: 20,
@@ -945,7 +966,27 @@ const styles = StyleSheet.create({
     color: '#555',
     marginBottom: 12,
   },
-  // 레벨 관련 스타일
+  // 주소 및 날씨 관련 스타일 (사용되지 않음, 추후 제거 예정)
+  addressContainer: {
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    marginBottom: 8,
+    alignSelf: 'flex-start',
+    maxWidth: '90%',
+  },
+  addressText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '500',
+    marginBottom: 2,
+  },
+  weatherText: {
+    color: 'white',
+    fontSize: 11,
+    opacity: 0.9,
+  },
   levelContainer: {
     marginBottom: 12,
   },
@@ -981,12 +1022,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   riceIcon: {
-    width: 12,
-    height: 8,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    borderRadius: 6,
-    marginRight: 6,
-    transform: [{ rotate: '15deg' }],
+      width: 16,
+      height: 16, // 밥알 모양에 맞게 비율 조정
+      resizeMode: 'contain',
+      transform: [{ rotate: '30deg' }],
   },
   pointsText: {
     color: 'white',
@@ -1006,7 +1045,105 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
-  // 급식카드 관련 스타일
+  contentSection: {
+    padding: 20,
+    paddingTop: 10,
+    marginBottom: 20,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#333',
+  },
+  sectionSubtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  seeAllText: {
+    fontSize: 14,
+    color: '#FFBF00',
+    fontWeight: '600',
+  },
+  editCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 4,
+  },
+  input: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    marginBottom: 12,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 8,
+  },
+  saveButton: {
+    backgroundColor: '#FFBF00',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    flex: 1,
+  },
+  saveButtonText: {
+    color: '#333',
+    fontWeight: '700',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  cancelButton: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    flex: 1,
+  },
+  cancelButtonText: {
+    color: '#666',
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+  cardInfoCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
   mealCardContainer: {
     padding: 4,
   },
@@ -1020,6 +1157,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
+  },
+  registeredBadge: {
+    backgroundColor: '#dcfce7',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  registeredBadgeText: {
+    color: '#166534',
+    fontSize: 12,
+    fontWeight: '700',
   },
   mealCardBalance: {
     alignItems: 'center',
@@ -1049,11 +1197,6 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 2,
   },
-  cardInfoText: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 2,
-  },
   lastUsedText: {
     fontSize: 12,
     color: '#666',
@@ -1069,7 +1212,6 @@ const styles = StyleSheet.create({
     color: '#856404',
     fontWeight: '600',
   },
-  // 카드 액션 관련 스타일
   cardActions: {
     alignItems: 'center',
     marginTop: 12,
@@ -1090,7 +1232,104 @@ const styles = StyleSheet.create({
     color: '#F44336',
     fontWeight: '600',
   },
-  // 밥풀 상세 카드 스타일
+  noCardContainer: {
+    alignItems: 'center',
+    paddingVertical: 30,
+  },
+  noCardText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#666',
+    textAlign: 'center',
+  },
+  regionGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 12,
+  },
+  regionButton: {
+    backgroundColor: '#f3f4f6',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  regionButtonSelected: {
+    backgroundColor: '#FFBF00',
+    borderColor: '#FFBF00',
+  },
+  regionButtonText: {
+    fontSize: 12,
+    color: '#374151',
+    fontWeight: '500',
+  },
+  regionButtonTextSelected: {
+    color: '#333',
+    fontWeight: '700',
+  },
+  // 주소 표시 카드
+  addressDisplayCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  addressHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  addressTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  weatherBadge: {
+    backgroundColor: '#e3f5ff',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#81d4fa',
+  },
+  weatherBadgeText: {
+    fontSize: 12,
+    color: '#0277bd',
+    fontWeight: '500',
+  },
+  addressDisplayText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+  },
+  detailAddressText: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 4,
+  },
+  noAddressContainer: {
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  noAddressText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#666',
+    marginBottom: 4,
+  },
+  noAddressSubtext: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+  },
+  // 밥풀 카드
   ricePulSummaryCard: {
     backgroundColor: 'white',
     borderRadius: 16,
@@ -1107,7 +1346,6 @@ const styles = StyleSheet.create({
   },
   ricePulSummaryInfo: {
     flex: 1,
-    marginLeft: 12,
   },
   ricePulSummaryAmount: {
     fontSize: 20,
@@ -1135,7 +1373,207 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#6b7280',
   },
-  // 모달 스타일
+  // 설정 카드
+  settingsCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  settingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+  },
+  settingText: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: '500',
+  },
+  settingArrow: {
+    fontSize: 16,
+    color: '#6b7280',
+  },
+  settingDivider: {
+    height: 1,
+    backgroundColor: '#f3f4f6',
+    marginHorizontal: 20,
+  },
+  // 모달 관련 스타일
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  modalCancelText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  modalSaveText: {
+    fontSize: 16,
+    color: '#FF8F00',
+    fontWeight: '600',
+  },
+  modalContent: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  modalDescription: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+    marginVertical: 16,
+    lineHeight: 20,
+  },
+  weatherContainer: {
+    backgroundColor: '#e3f5ff',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#81d4fa',
+  },
+  weatherDisplayText: {
+    fontSize: 14,
+    color: '#0277bd',
+    fontWeight: '500',
+  },
+  savedAddressContainer: {
+    padding: 12,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+    marginVertical: 12,
+  },
+  savedAddressLabel: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 4,
+  },
+  savedAddress: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: '500',
+    marginBottom: 4,
+  },
+  savedDetailAddress: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 12,
+  },
+  inputContainer: {
+    gap: 12,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    backgroundColor: '#fff',
+    minHeight: 44,
+  },
+  button: {
+    flex: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  editButton: {
+    backgroundColor: '#2196F3',
+  },
+  editButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  deleteButton: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#f44336',
+  },
+  deleteButtonText: {
+    color: '#f44336',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  searchButton: {
+    backgroundColor: '#fff3e0',
+    borderWidth: 1,
+    borderColor: '#ff9800',
+  },
+  searchButtonText: {
+    color: '#ff9800',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  locationButton: {
+    backgroundColor: '#e3f2fd',
+    borderWidth: 1,
+    borderColor: '#2196f3',
+  },
+  locationButtonText: {
+    color: '#2196f3',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  searchResultsContainer: {
+    marginTop: 12,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 8,
+    padding: 12,
+    maxHeight: 200,
+  },
+  searchResultsTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  searchResultsList: {
+    maxHeight: 150,
+  },
+  searchResultItem: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: 'white',
+    borderRadius: 6,
+    marginBottom: 6,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  searchResultName: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#333',
+  },
+  searchResultAddress: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 2,
+  },
+  // 밥풀 모달
   modalOverlay: {
     position: 'absolute',
     top: 0,
@@ -1146,22 +1584,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     zIndex: 1000,
   },
-  modalContainer: {
+  ricePulModalContainer: {
     flex: 0.9,
     backgroundColor: '#f8f9fa',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: 'hidden',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e9ecef',
   },
   modalCloseButton: {
     width: 40,
@@ -1180,11 +1608,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-  },
   modalSubtitle: {
     fontSize: 14,
     color: '#666',
@@ -1200,10 +1623,6 @@ const styles = StyleSheet.create({
   },
   modalRefreshButtonText: {
     fontSize: 16,
-  },
-  modalContent: {
-    flex: 1,
-    padding: 20,
   },
   ricePulDetailCard: {
     backgroundColor: 'white',
@@ -1224,16 +1643,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#f3f4f6',
   },
-  ricePulIconLarge: {
-    width: 20,
-    height: 12,
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    marginRight: 12,
-    transform: [{ rotate: '15deg' }],
-    borderWidth: 1,
-    borderColor: '#000000',
-  },
   ricePulInfo: {
     flex: 1,
   },
@@ -1247,7 +1656,6 @@ const styles = StyleSheet.create({
     color: '#666',
     marginTop: 2,
   },
-  // 레벨 상세 정보 스타일
   levelDetailSection: {
     backgroundColor: '#f8f9fa',
     borderRadius: 12,
@@ -1294,7 +1702,6 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 4,
   },
-  // 거래 내역 스타일
   historySection: {
     backgroundColor: 'white',
     borderRadius: 16,
@@ -1368,293 +1775,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6b7280',
     textAlign: 'center',
-  },
-  contentSection: {
-    padding: 20,
-    paddingTop: 10,
-    marginBottom: 20,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-  },
-  sectionSubtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 16,
-    lineHeight: 20,
-  },
-  seeAllText: {
-    fontSize: 14,
-    color: '#FFBF00',
-    fontWeight: '600',
-  },
-  editCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  cardInfoCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  registeredBadge: {
-    backgroundColor: '#dcfce7',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  registeredBadgeText: {
-    color: '#166534',
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  regionGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 12,
-  },
-  regionButton: {
-    backgroundColor: '#f3f4f6',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  regionButtonSelected: {
-    backgroundColor: '#FFBF00',
-    borderColor: '#FFBF00',
-  },
-  regionButtonText: {
-    fontSize: 12,
-    color: '#374151',
-    fontWeight: '500',
-  },
-  regionButtonTextSelected: {
-    color: '#333',
-    fontWeight: '700',
-  },
-  noCardContainer: {
-    alignItems: 'center',
-    paddingVertical: 30,
-  },
-  noCardText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#666',
-    textAlign: 'center',
-  },
-  addAddressCard: {
-    borderRadius: 20,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    marginBottom: 16,
-    padding: 20,
-  },
-  addAddressTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 16,
-  },
-  inputGroup: {
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#374151',
-    marginBottom: 6,
-  },
-  input: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    marginBottom: 12,
-  },
-  switchRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  switchLabel: {
-    fontSize: 16,
-    color: '#374151',
-    fontWeight: '500',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  saveButton: {
-    backgroundColor: '#FFBF00',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 12,
-    flex: 1,
-  },
-  saveButtonText: {
-    color: '#333',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  addSubmitButton: {
-    backgroundColor: '#333',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 12,
-    flex: 1,
-  },
-  addSubmitButtonText: {
-    color: 'white',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  cancelButton: {
-    backgroundColor: '#6b7280',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 12,
-    flex: 1,
-  },
-  cancelButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  addressCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  addressHeader: {
-    marginBottom: 8,
-  },
-  addressLabelRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  defaultBadge: {
-    backgroundColor: '#dcfce7',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  defaultBadgeText: {
-    color: '#166534',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  addressText: {
-    fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  addressActions: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  defaultButton: {
-    backgroundColor: '#f3f4f6',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-  },
-  defaultButtonText: {
-    color: '#374151',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  editAddressButton: {
-    backgroundColor: '#dbeafe',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-  },
-  editAddressButtonText: {
-    color: '#1e40af',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  deleteButton: {
-    backgroundColor: '#fee2e2',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-  },
-  deleteButtonText: {
-    color: '#dc2626',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  settingsCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  settingItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-  },
-  settingText: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '500',
-  },
-  settingArrow: {
-    fontSize: 16,
-    color: '#6b7280',
-  },
-  settingDivider: {
-    height: 1,
-    backgroundColor: '#f3f4f6',
-    marginHorizontal: 20,
   },
 });

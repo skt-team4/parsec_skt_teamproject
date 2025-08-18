@@ -1,7 +1,7 @@
 // hooks/useChatLogic.ts - 캐릭터 상점 연동 버전
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { BackHandler, Keyboard } from 'react-native';
+import { BackHandler, Keyboard, Platform } from 'react-native';
 import { Message, sendChatMessage, getCurrentPersona } from '../services/apiService';
 
 // 기본 export로 변경
@@ -17,8 +17,13 @@ const useChatLogic = () => {
   const [apiError, setApiError] = useState<string | null>(null);
   const [currentPersonaId, setCurrentPersonaId] = useState<string>('');
 
-  // 간단한 키보드 이벤트 리스너 (애니메이션 없이)
+  // 간단한 키보드 이벤트 리스너 (애니메이션 없이, 웹 호환)
   useEffect(() => {
+    // 웹에서는 키보드 이벤트 처리 안 함
+    if (Platform.OS === 'web') {
+      return;
+    }
+    
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       (e) => {
@@ -44,21 +49,25 @@ const useChatLogic = () => {
   // 페르소나 변경 감지 및 대화 초기화
   useEffect(() => {
     const checkPersonaChange = async () => {
-      const savedPersona = await AsyncStorage.getItem('selectedPersona');
-      const currentPersona = getCurrentPersona();
-      
-      if (savedPersona && savedPersona !== currentPersonaId && currentPersonaId !== '') {
-        // 페르소나가 변경되었으면 대화 초기화
-        console.log(`페르소나 변경 감지: ${currentPersonaId} -> ${savedPersona}`);
-        setMessages([]);
-        setCurrentResponse('');
-        setShowResponse(false);
-        setInputText('');
-        setApiError(null);
-      }
-      
-      if (savedPersona) {
-        setCurrentPersonaId(savedPersona);
+      try {
+        const savedPersona = await AsyncStorage.getItem('selectedPersona');
+        const currentPersona = getCurrentPersona();
+        
+        if (savedPersona && savedPersona !== currentPersonaId && currentPersonaId !== '') {
+          // 페르소나가 변경되었으면 대화 초기화
+          console.log(`페르소나 변경 감지: ${currentPersonaId} -> ${savedPersona}`);
+          setMessages([]);
+          setCurrentResponse('');
+          setShowResponse(false);
+          setInputText('');
+          setApiError(null);
+        }
+        
+        if (savedPersona) {
+          setCurrentPersonaId(savedPersona);
+        }
+      } catch (error) {
+        console.error('페르소나 체크 에러:', error);
       }
     };
     
@@ -69,8 +78,12 @@ const useChatLogic = () => {
     return () => clearInterval(interval);
   }, [currentPersonaId]);
 
-  // 안드로이드 뒤로 가기 버튼 처리
+  // 안드로이드 뒤로 가기 버튼 처리 (웹에서는 무시)
   useEffect(() => {
+    if (Platform.OS === 'web') {
+      return;
+    }
+    
     const backAction = () => {
       if (showResponse) {
         handleBackToMenu();
@@ -139,8 +152,10 @@ const useChatLogic = () => {
     setIsLoading(true);
     setApiError(null);
     
-    // 키보드 숨기기
-    Keyboard.dismiss();
+    // 키보드 숨기기 (웹이 아닌 경우만)
+    if (Platform.OS !== 'web') {
+      Keyboard.dismiss();
+    }
     
     // 사용자 메시지를 히스토리에 추가
     const userMessageObj: Message = {

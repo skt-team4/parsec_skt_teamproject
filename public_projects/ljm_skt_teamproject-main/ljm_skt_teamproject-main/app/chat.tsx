@@ -414,7 +414,11 @@ export default function ChatScreen() {
               </Text>
             </View>
 
-            <TouchableOpacity onPress={handleGifClick} activeOpacity={0.8}>
+            <TouchableOpacity 
+              onPress={handleGifClick} 
+              activeOpacity={0.8}
+              style={{ cursor: 'pointer' }} // 웹에서 클릭 가능하도록 커서 추가
+            >
               <Image
                 source={
                   isAnimationEnabled 

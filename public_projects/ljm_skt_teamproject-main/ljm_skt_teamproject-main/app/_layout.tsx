@@ -182,7 +182,7 @@ export default function RootLayout() {
             onPress={() => router.push('/chat')}
           >
             <Image
-              source={require('../assets/그르시.png')}
+              source={require('../assets/그르시_icon.png')}
               style={styles.chatButtonImage}
               resizeMode="contain"
             />

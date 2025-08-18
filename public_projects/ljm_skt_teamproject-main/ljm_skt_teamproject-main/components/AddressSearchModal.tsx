@@ -46,7 +46,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
 
     setIsLoading(true);
     try {
-      const result = await tmapService.searchAddress(searchText);
+      const result: any = await tmapService.searchAddress(searchText);
       
       if (result.success && result.results && result.results.length > 0) {
         const results: AddressSearchResult[] = result.results.map((item: any) => ({

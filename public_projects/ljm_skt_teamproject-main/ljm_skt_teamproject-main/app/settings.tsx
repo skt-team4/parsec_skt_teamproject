@@ -431,8 +431,8 @@ const Settings: React.FC<SettingsProps> = () => {
 
     setIsSearching(true);
     try {
-      const result = await tmapService.searchAddress(address);
-      if (result.success && result.results.length > 0) {
+      const result: any = await tmapService.searchAddress(address);
+      if (result.success && result.results && result.results.length > 0) {
         setSearchResults(result.results);
         setShowSearchResults(true);
       } else {
@@ -507,7 +507,7 @@ const Settings: React.FC<SettingsProps> = () => {
             
             // T-Map 역지오코딩으로 주소 변환
             try {
-              const result = await tmapService.reverseGeocode(latitude, longitude);
+              const result: any = await tmapService.reverseGeocode(latitude, longitude);
               if (result.success) {
                 const addressInfo: AddressInfo = {
                   address: result.fullAddress || `위도: ${latitude}, 경도: ${longitude}`,
@@ -661,6 +661,7 @@ const Settings: React.FC<SettingsProps> = () => {
         <View style={styles.headerContent}>
           <TouchableOpacity 
             onPress={() => {
+              // 화살표 버튼: 채팅 화면으로 돌아가기
               // 모달이나 검색 결과가 열려있으면 먼저 닫기
               if (showSearchResults) {
                 setShowSearchResults(false);
@@ -674,6 +675,7 @@ const Settings: React.FC<SettingsProps> = () => {
               } else if (isEditing) {
                 setIsEditing(false);
               } else {
+                // 채팅 화면으로 돌아가기
                 router.back();
               }
             }} 
@@ -688,14 +690,22 @@ const Settings: React.FC<SettingsProps> = () => {
           
           <TouchableOpacity 
             onPress={() => {
-              // 모든 모달과 편집 상태 초기화 후 뒤로가기
+              // X 버튼: 메인 페이지(탭)로 이동
+              // 모든 모달과 편집 상태 초기화 후 메인으로 이동
               setShowSearchResults(false);
               setSearchResults([]);
               setShowPersonaModal(false);
               setShowCategoryModal(false);
               setShowAllergyModal(false);
               setIsEditing(false);
-              router.back();
+              
+              // 메인 탭 페이지로 이동 - push를 사용하여 안정성 향상
+              // 먼저 현재 스택을 모두 제거하고 메인으로 이동
+              router.push('/(tabs)/');
+              // 약간의 딜레이 후 스택 정리
+              setTimeout(() => {
+                router.dismissAll?.();
+              }, 100);
             }} 
             style={styles.closeButton}
           >

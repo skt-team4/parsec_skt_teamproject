@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국 음식 인식 AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .supported-foods {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .supported-foods h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .food-tag {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+        
+        .upload-area {
+            border: 3px dashed #ff6b6b;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fff5f5;
+        }
+        
+        .upload-area:hover {
+            background: #ffe5e5;
+            border-color: #ff4444;
+        }
+        
+        .upload-area.dragover {
+            background: #ffe5e5;
+            border-color: #ff4444;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        .upload-text {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .upload-hint {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .preview-container {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .preview-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .analyze-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .analyze-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .result-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .result-item:first-child {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border: 2px solid #ff6b6b;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .result-score {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ff6b6b;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            color: #dc3545;
+            padding: 15px;
+            background: #f8d7da;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .server-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .server-btn {
+            padding: 8px 16px;
+            border: 2px solid #ff6b6b;
+            background: white;
+            color: #ff6b6b;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .server-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .server-btn:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍜 한국 음식 인식 AI</h1>
+        <p class="subtitle">떡볶이, 불고기, 김치 등 30종 한국 음식 인식</p>
+        
+        <div class="server-selector">
+            <button class="server-btn" data-port="5000">기존 모델 (서양식)</button>
+            <button class="server-btn active" data-port="5001">한국 음식 모델</button>
+        </div>
+        
+        <div class="supported-foods">
+            <h3>인식 가능한 한국 음식</h3>
+            <div class="food-tags">
+                <span class="food-tag">떡볶이</span>
+                <span class="food-tag">김치</span>
+                <span class="food-tag">불고기</span>
+                <span class="food-tag">비빔밥</span>
+                <span class="food-tag">삼겹살</span>
+                <span class="food-tag">김밥</span>
+                <span class="food-tag">잡채</span>
+                <span class="food-tag">된장찌개</span>
+                <span class="food-tag">김치찌개</span>
+                <span class="food-tag">순두부찌개</span>
+                <span class="food-tag">갈비</span>
+                <span class="food-tag">냉면</span>
+                <span class="food-tag">삼계탕</span>
+                <span class="food-tag">파전</span>
+                <span class="food-tag">호떡</span>
+                <span class="food-tag">붕어빵</span>
+                <span class="food-tag">김치볶음밥</span>
+                <span class="food-tag">제육볶음</span>
+                <span class="food-tag">닭갈비</span>
+                <span class="food-tag">순대</span>
+                <span class="food-tag">떡국</span>
+                <span class="food-tag">칼국수</span>
+                <span class="food-tag">팥빙수</span>
+                <span class="food-tag">전</span>
+                <span class="food-tag">족발</span>
+                <span class="food-tag">보쌈</span>
+                <span class="food-tag">치킨</span>
+                <span class="food-tag">라면</span>
+                <span class="food-tag">만두</span>
+                <span class="food-tag">계란찜</span>
+            </div>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">음식 사진을 선택하거나 드래그하세요</div>
+            <div class="upload-hint">JPG, PNG, GIF (최대 10MB)</div>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+        
+        <div class="preview-container" id="previewContainer">
+            <img id="previewImage" class="preview-image" alt="Preview">
+            <button class="analyze-btn" id="analyzeBtn">🔍 음식 분석하기</button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; color: #666;">AI가 음식을 분석 중입니다...</p>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-title">🎯 분석 결과</div>
+            <div id="resultsList"></div>
+        </div>
+        
+        <div class="error" id="error"></div>
+    </div>
+    
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('previewImage');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const resultsList = document.getElementById('resultsList');
+        const error = document.getElementById('error');
+        
+        let selectedFile = null;
+        let currentPort = 5001;  // 기본값: 한국 음식 모델
+        
+        // 서버 선택 버튼
+        document.querySelectorAll('.server-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentPort = btn.dataset.port;
+                results.style.display = 'none';
+                error.style.display = 'none';
+            });
+        });
+        
+        // 클릭으로 파일 선택
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // 파일 선택 처리
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        });
+        
+        // 드래그 앤 드롭
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleFile(file);
+            }
+        });
+        
+        // 파일 처리
+        function handleFile(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                showError('파일 크기는 10MB 이하여야 합니다.');
+                return;
+            }
+            
+            selectedFile = file;
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'block';
+                results.style.display = 'none';
+                error.style.display = 'none';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // 분석 버튼 클릭
+        analyzeBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            analyzeBtn.disabled = true;
+            loading.style.display = 'block';
+            results.style.display = 'none';
+            error.style.display = 'none';
+            
+            try {
+                const response = await fetch(`http://localhost:${currentPort}/analyze`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayResults(data);
+                
+            } catch (err) {
+                showError('분석 중 오류가 발생했습니다: ' + err.message);
+            } finally {
+                analyzeBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+        
+        // 결과 표시
+        function displayResults(data) {
+            resultsList.innerHTML = '';
+            
+            if (data.predictions && data.predictions.length > 0) {
+                data.predictions.slice(0, 5).forEach((pred, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'result-item';
+                    
+                    // score가 이미 퍼센트 값이므로 그대로 사용
+                    const score = pred.score || pred.confidence || 0;
+                    
+                    // 첫 번째 항목은 강조
+                    if (index === 0) {
+                        item.innerHTML = `
+                            <span class="result-label">🥇 ${pred.label}</span>
+                            <span class="result-score">${score.toFixed(1)}%</span>
+                        `;
+                    } else {
+                        const medal = index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+                        item.innerHTML = `
+                            <span class="result-label">${medal} ${pred.label}</span>
+                            <span class="result-score">${score.toFixed(1)}%</span>
+                        `;
+                    }
+                    
+                    resultsList.appendChild(item);
+                });
+            }
+            
+            results.style.display = 'block';
+        }
+        
+        // 에러 표시
+        function showError(message) {
+            error.textContent = message;
+            error.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

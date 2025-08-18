@@ -1,0 +1,370 @@
+{
+  "dish_id": [
+    2548
+  ],
+  "foodName": [
+    "pasta roquefort"
+  ],
+  "imageId": 1971590,
+  "is_combo": true,
+  "recipe": [
+    {
+      "id": 482,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 100.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 100.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        }
+      },
+      "name": "pasta",
+      "unit": "g",
+      "weight": 100.0
+    },
+    {
+      "id": 347,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 10.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 10.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        }
+      },
+      "name": "butter",
+      "unit": "g",
+      "weight": 10.0
+    },
+    {
+      "id": 133,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 10.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 30.0,
+          "id": 19,
+          "name": "portions",
+          "quantity": 0.3333333333333333,
+          "type": "cooking_measures"
+        }
+      },
+      "name": "roquefort cheese",
+      "unit": "g",
+      "weight": 10.0
+    },
+    {
+      "id": 18,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 10.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 10.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        }
+      },
+      "name": "parmesan cheese",
+      "unit": "g",
+      "weight": 10.0
+    },
+    {
+      "id": 813,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 0.5,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 0.5,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        }
+      },
+      "name": "black pepper",
+      "unit": "g",
+      "weight": 0.5
+    },
+    {
+      "id": 45,
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 1.0,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "preferred": {
+          "grams_conversion": 5.0,
+          "id": 5,
+          "name": "teaspoons",
+          "quantity": 0.2,
+          "type": "cooking_measures"
+        }
+      },
+      "name": "salt",
+      "unit": "g",
+      "weight": 1.0
+    }
+  ],
+  "recipe_per_item": [
+    {
+      "dish_id": 2548,
+      "foodGroups": [
+        {
+          "id": 3,
+          "name": "dairy products"
+        },
+        {
+          "id": 7,
+          "name": "noodles/pasta"
+        }
+      ],
+      "food_item_position": 1,
+      "hasRecipe": true,
+      "levels": {
+        "oil": "medium",
+        "salt": "medium",
+        "sugar": "medium"
+      },
+      "measure": {
+        "metric": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 131.5,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        },
+        "portion": {
+          "grams_conversion": 131.5,
+          "quantity": 1.0,
+          "type": "portions"
+        },
+        "preferred": {
+          "grams_conversion": 1,
+          "id": 1,
+          "name": "grams",
+          "quantity": 131.5,
+          "short": "g",
+          "state": "solid",
+          "type": "weight"
+        }
+      },
+      "name": "pasta roquefort",
+      "recipe": [
+        {
+          "id": 482,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 100.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 100.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            }
+          },
+          "name": "pasta",
+          "unit": "g",
+          "weight": 100.0
+        },
+        {
+          "id": 347,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 10.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 10.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            }
+          },
+          "name": "butter",
+          "unit": "g",
+          "weight": 10.0
+        },
+        {
+          "id": 133,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 10.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 30.0,
+              "id": 19,
+              "name": "portions",
+              "quantity": 0.3333333333333333,
+              "type": "cooking_measures"
+            }
+          },
+          "name": "roquefort cheese",
+          "unit": "g",
+          "weight": 10.0
+        },
+        {
+          "id": 18,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 10.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 10.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            }
+          },
+          "name": "parmesan cheese",
+          "unit": "g",
+          "weight": 10.0
+        },
+        {
+          "id": 813,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 0.5,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 0.5,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            }
+          },
+          "name": "black pepper",
+          "unit": "g",
+          "weight": 0.5
+        },
+        {
+          "id": 45,
+          "measure": {
+            "metric": {
+              "grams_conversion": 1,
+              "id": 1,
+              "name": "grams",
+              "quantity": 1.0,
+              "short": "g",
+              "state": "solid",
+              "type": "weight"
+            },
+            "preferred": {
+              "grams_conversion": 5.0,
+              "id": 5,
+              "name": "teaspoons",
+              "quantity": 0.2,
+              "type": "cooking_measures"
+            }
+          },
+          "name": "salt",
+          "unit": "g",
+          "weight": 1.0
+        }
+      ],
+      "serving_size": 131.5,
+      "unit": "g"
+    }
+  ],
+  "serving_size": 131.5,
+  "source": null
+}

@@ -310,7 +310,7 @@ class AXModel:
                         if ctx['role'] == 'user':
                             context_str.append(f"사용자: {ctx['content']}")
                         elif ctx['role'] == 'assistant':
-                            context_str.append(f"아이얌: {ctx['content']}")
+                            context_str.append(f"그르시: {ctx['content']}")
                         elif ctx['role'] == 'system' and 'system_context' not in str(ctx['content']):
                             # system 역할이지만 system_context가 아닌 경우만 추가
                             continue
@@ -318,7 +318,7 @@ class AXModel:
                     elif ctx.get('user'):
                         context_str.append(f"사용자: {ctx['user']}")
                     elif ctx.get('bot'):
-                        context_str.append(f"아이얌: {ctx['bot']}")
+                        context_str.append(f"그르시: {ctx['bot']}")
             if context_str:
                 context_text = f"대화 맥락:\n{chr(10).join(context_str)}\n"
                 prompt_parts.append(context_text)
@@ -335,7 +335,7 @@ class AXModel:
         # 의도별 프롬프트 생성
         if intent in [IntentType.CHITCHAT, IntentType.GREETING, IntentType.GENERAL_CHAT]:
             # 일반 대화/인사말
-            prompt_parts.append(f"""당신은 아이얌(AIYAM) 친구 챗봇입니다. 10대 청소년과 자연스럽게 대화하세요.
+            prompt_parts.append(f"""당신은 그르시(AIYAM) 친구 챗봇입니다. 10대 청소년과 자연스럽게 대화하세요.
 
 현재 사용자 메시지: "{user_text}"
 
@@ -355,21 +355,21 @@ class AXModel:
 {{"context_type": "general_chat", "sentiment": "긍정적/부정적/중립적"}}
 ```
 
-아이얌:""")
+그르시:""")
         elif intent == IntentType.THANKS:
             # 감사 인사
-            prompt_parts.append(f"""당신은 아이얌(AIYAM) 친구 챗봇입니다. 감사 인사에 자연스럽게 응답하세요.
+            prompt_parts.append(f"""당신은 그르시(AIYAM) 친구 챗봇입니다. 감사 인사에 자연스럽게 응답하세요.
 
 사용자: "{user_text}"
 
-아이얌:""")
+그르시:""")
         elif intent == IntentType.GOODBYE:
             # 작별 인사
-            prompt_parts.append(f"""당신은 아이얌(AIYAM) 친구 챗봇입니다. 작별 인사를 자연스럽게 하세요.
+            prompt_parts.append(f"""당신은 그르시(AIYAM) 친구 챗봇입니다. 작별 인사를 자연스럽게 하세요.
 
 사용자: "{user_text}"
 
-아이얌:""")
+그르시:""")
         else:
             # 음식 추천 관련
             if recommendations:
@@ -377,7 +377,7 @@ class AXModel:
                 categories = list(set([r.get('category', '') for r in recommendations[:3] if r.get('category')]))
                 category_text = ', '.join(categories) if categories else '다양한 음식'
                 
-                prompt_parts.append(f"""당신은 아이얌(AIYAM) 맛집 추천 챗봇입니다. 10대 청소년과 대화하듯 짧고 캐주얼하게 답변하세요.
+                prompt_parts.append(f"""당신은 그르시(AIYAM) 맛집 추천 챗봇입니다. 10대 청소년과 대화하듯 짧고 캐주얼하게 답변하세요.
 
 사용자: "{user_text}"
 
@@ -390,10 +390,10 @@ class AXModel:
 - "아래 추천 리스트 확인해봐" 같은 안내 포함
 - JSON 메타데이터나 코드 절대 포함하지 말 것
 
-아이얌:""")
+그르시:""")
             else:
                 # 추천 결과가 없을 때 (폴백)
-                prompt_parts.append(f"""당신은 아이얌(AIYAM) 맛집 추천 챗봇입니다. 10대 청소년과 대화하듯 짧고 캐주얼하게 답변하세요.
+                prompt_parts.append(f"""당신은 그르시(AIYAM) 맛집 추천 챗봇입니다. 10대 청소년과 대화하듯 짧고 캐주얼하게 답변하세요.
 
 사용자: "{user_text}"
 
@@ -402,7 +402,7 @@ class AXModel:
 - 캐주얼한 반말 사용 (~야, ~지 등)
 - 일반적인 음식 추천 응답
 
-아이얌:""")
+그르시:""")
         
         final_prompt = "\n".join(prompt_parts)
         

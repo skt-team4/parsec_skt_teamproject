@@ -38,6 +38,38 @@ YUM:AI is a child-focused food recommendation system featuring an AI chatbot cha
   - `data/personas.json` - Youth persona profiles (민호, 명빈, 태훈)
   - `outputs/prebuilt_faiss.faiss` - Pre-built vector indexes
 
+### Food Recognition & Nutrition Analysis Service
+**Location**: `public_projects/food_korean/`
+- **Food Recognition Server**: `food_korean/app_korean.py` - Korean food recognition API (port 5001)
+- **Nutrition Analysis Server**: `nutrition_server.py` - Static nutrition database API (port 5002) 
+- **LogMeal Integration Server**: `logmeal_nutrition_server.py` - Real-time LogMeal API integration (port 5003)
+- **Nutrition History Server**: `nutrition_history_server.py` - Nutrition tracking and history API (port 5004)
+- **Dashboard**: `nutrition_dashboard.html` - Web interface for viewing nutrition history
+
+**Food Recognition Technology:**
+- CLIP model (OpenAI clip-vit-base-patch32) for text-image matching
+- Supports 30+ Korean foods and 15+ international foods
+- Uses CLIP's zero-shot learning for food recognition without specific training
+- Korean foods: 떡볶이, 김치, 불고기, 비빔밥, 삼겹살, 김밥, 잡채, etc.
+
+**Real-time Nutrition Analysis (LogMeal Integration):**
+- Direct LogMeal API integration for image-based nutrition analysis
+- Real-time analysis based on actual food portions in images
+- Returns different nutrition values for different images of the same food
+- Comprehensive nutritional information including:
+  - Calories (displayed as integers)
+  - Macronutrients: protein, carbohydrates, fat (displayed to 1 decimal place)
+  - Micronutrients: fiber, sodium, sugar (displayed to 1 decimal place)
+  - Nutrition score (A-E grade)
+  - Daily intake reference percentages
+
+**Nutrition History Tracking:**
+- Automatic saving of all nutrition analyses
+- Web dashboard with statistics and visualizations
+- Filtering by meal type (breakfast, lunch, dinner)
+- Pagination support for large datasets
+- Delete functionality for individual records
+
 ### Database
 **Location**: `database/`
 - Schema: `database/yumai_final_fixed.sql` (PostgreSQL schema)
@@ -92,6 +124,50 @@ python test_chatbot.py
 python test_performance.py
 ```
 
+### Food Recognition & Nutrition Service
+```bash
+cd public_projects/food_korean
+
+# Install dependencies
+pip install fastapi uvicorn pillow torch transformers flask flask-cors requests
+
+# Start all nutrition services (Windows)
+start_nutrition_services.bat
+
+# Start all nutrition services (Mac/Linux)
+chmod +x start_nutrition_services.sh
+./start_nutrition_services.sh
+
+# Or run services individually:
+
+# Terminal 1: Korean food recognition API
+cd food_korean
+python app_korean.py
+# Server runs at http://localhost:5001
+
+# Terminal 2: LogMeal nutrition integration
+python logmeal_nutrition_server.py
+# Server runs at http://localhost:5003
+
+# Terminal 3: Nutrition history tracking
+python nutrition_history_server.py
+# Server runs at http://localhost:5004
+
+# Access the nutrition dashboard
+# Open browser to http://localhost:5004
+
+# Test food recognition API
+curl -X POST http://localhost:5001/analyze \
+  -F "file=@image.jpg"
+
+# Test LogMeal nutrition API
+curl -X POST http://localhost:5003/analyze-nutrition \
+  -F "file=@food.jpg"
+
+# List supported foods
+curl http://localhost:5001/foods
+```
+
 ### Docker Operations
 ```bash
 # Build and run main composition
@@ -119,6 +195,43 @@ docker-compose -f docker-compose-simple.yml up
 - `GET /docs` - Swagger API documentation
 - `GET /metrics` - Performance metrics
 - `POST /v1/chat/completions` - OpenAI-compatible endpoint
+
+### Food Recognition API (Port 5001)
+- `GET /` - HTML interface (if korean.html exists)
+- `POST /analyze` - Analyze food image
+  - Request: multipart/form-data with image file
+  - Response: `{status, predictions[], food_item, confidence}`
+- `GET /health` - API health check with model status
+- `GET /foods` - List supported foods
+  - Response: `{korean_foods[], other_foods[], total}`
+
+### Nutrition Analysis API (Port 5002) - Static Database
+- `GET /nutrition/{food_name}` - Get nutritional information from static database
+  - Request: food name in URL (e.g., /nutrition/떡볶이)
+  - Response: Static nutrition data with calories, macronutrients, vitamins, minerals
+- `GET /health` - Health check endpoint
+
+### LogMeal Nutrition API (Port 5003) - Real-time Analysis
+- `POST /analyze-nutrition` - Analyze nutrition from food image
+  - Request: multipart/form-data with image file
+  - Response: Real-time nutrition data based on actual food portions
+    - `status`: success/error
+    - `foodNames`: detected food items
+    - `nutritional_info`: comprehensive nutrition data
+    - `nutri_score`: nutrition grade (A-E)
+- `GET /health` - Health check with LogMeal API status
+
+### Nutrition History API (Port 5004) - Tracking & Dashboard
+- `POST /api/save-nutrition` - Save nutrition analysis record
+  - Request: JSON with foodName, mealType, calories, nutritionInfo, nutriScore
+  - Response: `{status, recordId, message}`
+- `GET /api/get-history` - Retrieve nutrition history
+  - Query params: userId, limit, offset, dateFrom, dateTo, mealType
+  - Response: paginated records with nutrition details
+- `GET /api/get-statistics` - Get nutrition statistics
+  - Response: total records, average calories, meal distribution, nutri score distribution
+- `DELETE /api/delete-record/{record_id}` - Delete specific record
+- `GET /` - Serve nutrition dashboard HTML interface
 
 ## External Services Configuration
 
