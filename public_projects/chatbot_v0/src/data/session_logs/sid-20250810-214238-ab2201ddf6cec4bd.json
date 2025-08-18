@@ -1,0 +1,54 @@
+{
+  "session_id": "sid-20250810-214238-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T21:42:38.637681",
+  "session_end_time": "2025-08-10T21:42:38.694686",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T21:42:38.683686",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "앗, 미안! 치킨 가게를 못 찾았어... 대신 피자, 햄버거는 어때?",
+        "response_time_ms": 46
+      },
+      "user_feedback": null
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T21:42:38.693686",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "앗, 미안! 부평에서 피자 가게를 못 찾았어... 대신 치킨, 햄버거 어때? 아니면 부천, 계양 지역도 한번 찾아볼까?",
+        "response_time_ms": 8
+      },
+      "user_feedback": null
+    }
+  ],
+  "session_metadata": {}
+}

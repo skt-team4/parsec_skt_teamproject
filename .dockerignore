@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secret data
+secretdata/
+
+# Local development files
+.env

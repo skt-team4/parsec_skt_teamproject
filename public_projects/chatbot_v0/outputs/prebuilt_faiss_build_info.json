@@ -1,0 +1,11 @@
+{
+  "build_time": 12.135438442230225,
+  "model_load_time": 4.993608713150024,
+  "embedding_time": 0.5845329761505127,
+  "total_documents": 39,
+  "index_file": "outputs\\prebuilt_faiss.faiss",
+  "metadata_file": "outputs\\prebuilt_faiss_metadata.json",
+  "source_data": "rag/test_data.json",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "embedding_dimension": 384
+}

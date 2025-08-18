@@ -1,0 +1,98 @@
+# .gcloudignore for NabiYam project
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+.env
+
+# Node.js (Frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+README*
+LICENSE
+docs/
+
+# Tests
+test/
+tests/
+*_test.py
+test_*.py
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.expo/
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+cache/
+*.cache
+
+# Models (large files)
+models/
+*.bin
+*.pt
+*.pth
+*.onnx
+*.h5
+
+# Data files (except essential)
+*.csv
+*.xlsx
+*.xls
+database/
+publicdata/
+record/
+
+# Docker files (not needed for Cloud Build)
+Dockerfile.*
+docker-compose*.yml
+.dockerignore
+
+# Scripts
+*.sh
+*.bat
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Output directories
+outputs/
+output/
+
+# Keep essential files
+!requirements.txt
+!requirements_minimal.txt
+!data/restaurants_optimized.json
+!data/synonyms.json

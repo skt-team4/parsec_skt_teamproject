@@ -1,0 +1,23 @@
+{
+  "user_id": "'",
+  "category_scores": {
+    "치킨": 0.44,
+    "한식": 0.44
+  },
+  "price_preference": {
+    "under_5000": 0.3,
+    "5000_7000": 0.4,
+    "7000_9500": 0.3
+  },
+  "emotion_history": [],
+  "group_size_history": [],
+  "interaction_count": 2,
+  "last_updated": "2025-08-13T15:59:21.466380",
+  "click_history": [],
+  "order_history": [],
+  "school_area": null,
+  "favorite_trends": [],
+  "quest_progress": {},
+  "monthly_budget": 285000,
+  "daily_budget_left": 9500
+}

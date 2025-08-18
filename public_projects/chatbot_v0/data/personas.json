@@ -1,0 +1,286 @@
+{
+  "personas": [
+    {
+      "id": "tae_hoon",
+      "name": "강태훈",
+      "age": 12,
+      "emoji": "🎮",
+      "description": "12세, 저소득 한부모 가정. 혼자 식사가 많고 인스턴트 선호",
+      "story": "엄마가 야간근무를 하셔서 혼자 저녁을 먹는 경우가 많아요. 게임하면서 간단히 먹을 수 있는 음식이 좋아요.",
+      
+      "meal_card_info": {
+        "balance": 50000,
+        "daily_limit": 9500,
+        "days_remaining": 5,
+        "avg_spending": 8000,
+        "warning_threshold": 20000
+      },
+      
+      "nutrition_status": {
+        "current_issues": ["vitamin_deficiency", "excess_sugar", "low_vegetable"],
+        "calories_daily": 1800,
+        "nutrition_scores": {
+          "carbohydrate": 0.9,
+          "protein": 0.5,
+          "fat": 0.7,
+          "vitamin": 0.2,
+          "mineral": 0.3,
+          "fiber": 0.1
+        },
+        "health_risks": ["growth_stunting", "weak_immunity"],
+        "recommended_nutrients": ["vitamin_c", "calcium", "fiber"]
+      },
+      
+      "teen_personalizer_features": {
+        "user_id": "tae_hoon_12",
+        "age_group": "10대",
+        "preferred_categories": ["분식", "패스트푸드", "편의점"],
+        "avoid_categories": ["샐러드", "건강식"],
+        "price_sensitivity": 0.9,
+        "health_consciousness": 0.2,
+        "exploration_tendency": 0.3,
+        "meal_regularity": 0.3,
+        "social_dining_preference": 0.1,
+        "convenience_preference": 0.9,
+        "brand_loyalty": 0.4,
+        "dietary_restrictions": [],
+        "nutrition_awareness": 0.2
+      },
+      
+      "location": {
+        "name": "부천시청",
+        "address": "경기도 부천시 원미구 중동",
+        "district": "부천시",
+        "latitude": 37.5033,
+        "longitude": 126.7660,
+        "nearby_landmarks": ["부천시청", "부천중앙공원", "부천역"],
+        "search_radius_km": 2.0
+      },
+      
+      "preferences": {
+        "liked_foods": ["떡볶이", "라면", "햄버거", "피자", "치킨", "삼각김밥"],
+        "disliked_foods": ["채소", "샐러드", "나물", "쓴맛"],
+        "price_range": [3000, 9500],
+        "meal_times": ["dinner", "late_night"],
+        "keywords": ["간단한", "빠른", "달콤한", "편의점"]
+      },
+      
+      "behavior_patterns": {
+        "typical_queries": [
+          "저녁 뭐 먹지",
+          "빨리 먹을 수 있는 거",
+          "편의점에서 뭐 사먹지",
+          "급식카드 얼마 남았어?"
+        ],
+        "feedback_style": "simple",
+        "interaction_frequency": "high",
+        "nutrition_feedback_response": "resistant"
+      }
+    },
+    
+    {
+      "id": "min_ho",
+      "name": "김민호",
+      "age": 17,
+      "emoji": "📚",
+      "description": "17세, 차상위계층 고등학생. 급식카드 사용, 한식 선호",
+      "story": "학원 끝나고 저녁 먹을 때가 많아요. 급식카드 쓸 수 있는 곳 중에서 맛있는 곳 찾고 있어요.",
+      
+      "meal_card_info": {
+        "balance": 20000,
+        "daily_limit": 9500,
+        "days_remaining": 2,
+        "avg_spending": 9000,
+        "warning_threshold": 10000,
+        "alert_message": "잔액이 부족합니다. 충전이 필요해요."
+      },
+      
+      "nutrition_status": {
+        "current_issues": ["skip_breakfast", "excess_sodium", "excess_caffeine"],
+        "calories_daily": 2200,
+        "nutrition_scores": {
+          "carbohydrate": 0.8,
+          "protein": 0.6,
+          "fat": 0.6,
+          "vitamin": 0.4,
+          "mineral": 0.5,
+          "fiber": 0.3
+        },
+        "health_risks": ["concentration_issues", "irregular_meals"],
+        "recommended_nutrients": ["vitamin_b", "iron", "fiber"]
+      },
+      
+      "teen_personalizer_features": {
+        "user_id": "min_ho_17",
+        "age_group": "10대",
+        "preferred_categories": ["한식", "분식", "치킨"],
+        "avoid_categories": ["일식", "해산물"],
+        "price_sensitivity": 0.8,
+        "health_consciousness": 0.4,
+        "exploration_tendency": 0.5,
+        "meal_regularity": 0.6,
+        "social_dining_preference": 0.5,
+        "convenience_preference": 0.7,
+        "brand_loyalty": 0.6,
+        "dietary_restrictions": ["해산물", "매운음식"],
+        "nutrition_awareness": 0.4
+      },
+      
+      "location": {
+        "name": "건국대학교",
+        "address": "서울특별시 광진구 화양동",
+        "district": "광진구",
+        "latitude": 37.5404,
+        "longitude": 127.0792,
+        "nearby_landmarks": ["건국대학교", "어린이대공원", "건대입구역"],
+        "search_radius_km": 1.5
+      },
+      
+      "preferences": {
+        "liked_foods": ["김치찌개", "불고기", "제육볶음", "떡볶이", "김밥", "치킨"],
+        "disliked_foods": ["회", "초밥", "해물탕", "매운탕", "고추장찌개"],
+        "price_range": [5000, 9500],
+        "meal_times": ["lunch", "dinner"],
+        "keywords": ["한식", "든든한", "급식카드", "학교근처"],
+        "meal_card_usage": {
+          "convenience_store": 0.55,
+          "restaurant": 0.25,
+          "cafe": 0.20
+        }
+      },
+      
+      "behavior_patterns": {
+        "typical_queries": [
+          "급식카드 되는 곳",
+          "김치찌개 맛집",
+          "학교 근처 밥집",
+          "오늘 얼마 썼지?",
+          "잔액 확인"
+        ],
+        "feedback_style": "detailed",
+        "interaction_frequency": "medium",
+        "nutrition_feedback_response": "curious"
+      }
+    },
+    
+    {
+      "id": "myeong_bin",
+      "name": "김명빈",
+      "age": 14,
+      "emoji": "🌱",
+      "description": "14세, 결식아동. 알레르기 있음, 균형잡힌 식사 필요",
+      "story": "엄마가 일하셔서 혼자 밥 먹을 때가 많아요. 알레르기 때문에 조심해야 할 음식이 있어요.",
+      
+      "meal_card_info": {
+        "balance": 100000,
+        "daily_limit": 9500,
+        "days_remaining": 10,
+        "avg_spending": 7500,
+        "warning_threshold": 30000
+      },
+      
+      "nutrition_status": {
+        "current_issues": ["unbalanced_diet", "irregular_meals"],
+        "calories_daily": 1900,
+        "nutrition_scores": {
+          "carbohydrate": 0.6,
+          "protein": 0.5,
+          "fat": 0.5,
+          "vitamin": 0.5,
+          "mineral": 0.5,
+          "fiber": 0.4
+        },
+        "health_risks": ["allergy_reactions", "nutrition_deficiency"],
+        "recommended_nutrients": ["protein", "calcium", "vitamin_d"],
+        "allergy_alert": true
+      },
+      
+      "teen_personalizer_features": {
+        "user_id": "myeong_bin_14",
+        "age_group": "10대",
+        "preferred_categories": ["한식", "죽", "도시락"],
+        "avoid_categories": ["해산물", "견과류"],
+        "price_sensitivity": 0.7,
+        "health_consciousness": 0.7,
+        "exploration_tendency": 0.2,
+        "meal_regularity": 0.8,
+        "social_dining_preference": 0.2,
+        "convenience_preference": 0.6,
+        "brand_loyalty": 0.7,
+        "dietary_restrictions": ["땅콩", "새우", "게", "조개류"],
+        "allergy_severity": "high",
+        "nutrition_awareness": 0.6
+      },
+      
+      "location": {
+        "name": "강남 코엑스",
+        "address": "서울특별시 강남구 삼성동",
+        "district": "강남구",
+        "latitude": 37.5125,
+        "longitude": 127.0588,
+        "nearby_landmarks": ["코엑스", "봉은사", "삼성역"],
+        "search_radius_km": 2.0
+      },
+      
+      "preferences": {
+        "liked_foods": ["닭죽", "소고기죽", "김밥", "제육덮밥", "비빔밥"],
+        "disliked_foods": ["땅콩", "해산물", "향신료강한음식"],
+        "price_range": [5000, 9500],
+        "meal_times": ["lunch", "dinner"],
+        "keywords": ["안전한", "알레르기없는", "영양", "조용한곳"],
+        "special_needs": {
+          "allergy_check": true,
+          "quiet_place": true,
+          "balanced_nutrition": true,
+          "ingredient_transparency": true
+        }
+      },
+      
+      "behavior_patterns": {
+        "typical_queries": [
+          "알레르기 안전한 음식",
+          "땅콩 안 들어간 메뉴",
+          "영양 균형 좋은 도시락",
+          "조용한 식당",
+          "오늘 뭐 먹으면 영양 좋아?"
+        ],
+        "feedback_style": "cautious",
+        "interaction_frequency": "medium",
+        "safety_first": true,
+        "nutrition_feedback_response": "receptive"
+      }
+    }
+  ],
+  
+  "system_config": {
+    "meal_card": {
+      "daily_limit": 9500,
+      "recharge_day": 1,
+      "usage_tracking": true,
+      "balance_alerts": [30000, 20000, 10000]
+    },
+    "nutrition": {
+      "daily_requirements": {
+        "age_10_14": {
+          "calories": 2000,
+          "protein": 50,
+          "carbohydrate": 260,
+          "fat": 65,
+          "fiber": 25
+        },
+        "age_15_18": {
+          "calories": 2400,
+          "protein": 60,
+          "carbohydrate": 310,
+          "fat": 80,
+          "fiber": 30
+        }
+      },
+      "warning_thresholds": {
+        "low": 0.3,
+        "medium": 0.5,
+        "adequate": 0.7
+      }
+    }
+  }
+}

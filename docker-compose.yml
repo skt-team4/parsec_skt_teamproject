@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # AI 서버 (GPU 지원)
+  ai-server-gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai-server
+    image: naviyam-ai-gpu:latest
+    container_name: naviyam-ai-gpu
+    ports:
+      - "8000:8000"
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - DEVICE=cuda
+      - MODEL_NAME=microsoft/DialoGPT-medium
+      - MAX_MEMORY=8GB
+    volumes:
+      - ./cache:/app/cache
+      - ./models:/app/models
+      - ./data:/app/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  # AI 서버 (CPU 전용 - GPU 없을 때)
+  ai-server-cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu-only
+    image: naviyam-ai-cpu:latest
+    container_name: naviyam-ai-cpu
+    ports:
+      - "8001:8000"
+    environment:
+      - DEVICE=cpu
+      - MODEL_NAME=microsoft/DialoGPT-small
+      - MAX_MEMORY=4GB
+    volumes:
+      - ./cache:/app/cache
+      - ./models:/app/models
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - ai-network
+    profiles:
+      - cpu-only
+
+  # ngrok 터널 (선택사항)
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: naviyam-ngrok
+    command:
+      - "http"
+      - "ai-server-gpu:8000"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"  # ngrok 웹 인터페이스
+    networks:
+      - ai-network
+    depends_on:
+      - ai-server-gpu
+    profiles:
+      - with-ngrok
+
+  # 모니터링 (선택사항)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: naviyam-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - ai-network
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: naviyam-grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - ai-network
+    profiles:
+      - monitoring
+
+networks:
+  ai-network:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:

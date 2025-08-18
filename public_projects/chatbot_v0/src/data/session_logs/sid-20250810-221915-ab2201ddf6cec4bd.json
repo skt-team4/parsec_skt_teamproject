@@ -1,0 +1,140 @@
+{
+  "session_id": "sid-20250810-221915-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T22:19:15.101093",
+  "session_end_time": "2025-08-10T22:19:29.369359",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T22:19:24.115820",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1446,
+            "score": 0
+          },
+          {
+            "shop_id": 1615,
+            "score": 1
+          },
+          {
+            "shop_id": 1663,
+            "score": 2
+          },
+          {
+            "shop_id": 1732,
+            "score": 3
+          },
+          {
+            "shop_id": 1509,
+            "score": 4
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1446,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1615,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1663,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1446,
+          1615,
+          1663
+        ],
+        "generated_response": "야, 치킨 먹고 싶구나! 네가 원하는 게 어떤 거인지 말해줄래? 일단 내가 알고 있는 치킨 가게 중에서 추천해줄게~ 혹시 치킨 선생 어때? 후라이드 한 마리 18,000원이야. 맛도 좋고 가격도 괜찮더라~ 아니면 굽네치킨 화성마도점도 있어! 여기 후라이드도 18,000원이래. 또 60계치킨 서판교도 괜찮아! 거기 후라이드도 똑같이 18,000원이야. 이 중에 마음에 드는 곳 있으면 좋겠다~ ㅎㅎ.",
+        "response_time_ms": 9014
+      },
+      "user_feedback": {
+        "selected_shop_id": 1446,
+        "unselected_shop_ids": [
+          1615,
+          1663
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T22:19:29.367359",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1106,
+            "score": 0
+          },
+          {
+            "shop_id": 1381,
+            "score": 1
+          },
+          {
+            "shop_id": 1896,
+            "score": 2
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1106,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1381,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1896,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1106,
+          1381,
+          1896
+        ],
+        "generated_response": "부평에서 피자 먹고 싶다니! 아쉽게도 내가 아는 가게 중에 피자는 없더라구. 대신 근처에 파스타 맛집은 있어! 도로시파스타연정홍대점이 12,000원에 파스타를 팔아. 어때? 피자 대신 파스타도 맛있을 거야~ 야!.",
+        "response_time_ms": 5249
+      },
+      "user_feedback": {
+        "selected_shop_id": 1106,
+        "unselected_shop_ids": [
+          1381,
+          1896
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    }
+  ],
+  "session_metadata": {}
+}

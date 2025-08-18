@@ -1,0 +1,568 @@
+[
+  {
+    "timestamp": "2025-07-14T13:56:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-14T19:05:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 5826,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-14T18:13:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-15T19:53:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-15T17:18:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 8275,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-15T19:25:49.883603",
+    "type": "select",
+    "item": "닭죽",
+    "price": 6661,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-16T19:21:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 8815,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-16T13:38:49.883603",
+    "type": "feedback",
+    "feedback_type": "dislike",
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-16T12:35:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 19,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-17T19:00:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-17T17:15:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 21,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-18T17:16:49.883603",
+    "type": "search",
+    "query": "영양 균형 좋은 도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-18T13:57:49.883603",
+    "type": "view",
+    "category": "한식",
+    "duration": 25,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-18T13:16:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 9095,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-19T18:23:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-19T13:27:49.883603",
+    "type": "search",
+    "query": "영양 균형 좋은 도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-20T11:03:49.883603",
+    "type": "select",
+    "item": "제육덮밥",
+    "price": 7069,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-20T19:02:49.883603",
+    "type": "search",
+    "query": "땅콩 안 들어간 메뉴",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-21T12:53:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 10,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-21T13:02:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 8728,
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-22T13:06:49.883603",
+    "type": "select",
+    "item": "닭죽",
+    "price": 8975,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-22T13:03:49.883603",
+    "type": "feedback",
+    "feedback_type": "dislike",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-23T12:57:49.883603",
+    "type": "search",
+    "query": "땅콩 안 들어간 메뉴",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-23T12:14:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 5843,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-24T13:51:49.883603",
+    "type": "search",
+    "query": "조용한 식당",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-24T13:30:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 23,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-24T17:52:49.883603",
+    "type": "select",
+    "item": "비빔밥",
+    "price": 9133,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-25T11:48:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 7030,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-25T12:18:49.883603",
+    "type": "select",
+    "item": "제육덮밥",
+    "price": 5557,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-26T13:48:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 6526,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-26T19:38:49.883603",
+    "type": "select",
+    "item": "비빔밥",
+    "price": 7730,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-26T19:29:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-27T11:13:49.883603",
+    "type": "feedback",
+    "feedback_type": "dislike",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-27T11:52:49.883603",
+    "type": "search",
+    "query": "땅콩 안 들어간 메뉴",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-27T17:02:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 25,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-28T17:35:49.883603",
+    "type": "view",
+    "category": "한식",
+    "duration": 20,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-28T13:26:49.883603",
+    "type": "search",
+    "query": "땅콩 안 들어간 메뉴",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-28T12:56:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-29T18:42:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 5319,
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-29T11:28:49.883603",
+    "type": "select",
+    "item": "제육덮밥",
+    "price": 5415,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-29T13:53:49.883603",
+    "type": "search",
+    "query": "영양 균형 좋은 도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-30T18:03:49.883603",
+    "type": "search",
+    "query": "알레르기 안전한 음식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-30T11:57:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-30T13:32:49.883603",
+    "type": "search",
+    "query": "조용한 식당",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-31T19:09:49.883603",
+    "type": "select",
+    "item": "닭죽",
+    "price": 6519,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-31T19:03:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-07-31T13:41:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 27,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-01T17:06:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 8616,
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-01T18:19:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-01T18:44:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 12,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-02T17:37:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 15,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-02T19:15:49.883603",
+    "type": "select",
+    "item": "제육덮밥",
+    "price": 8104,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-02T12:48:49.883603",
+    "type": "search",
+    "query": "알레르기 안전한 음식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-03T11:42:49.883603",
+    "type": "select",
+    "item": "김밥",
+    "price": 9061,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-03T17:51:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-03T19:00:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 26,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-04T18:56:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 7506,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-04T11:34:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-05T13:16:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-05T18:59:49.883603",
+    "type": "select",
+    "item": "비빔밥",
+    "price": 9214,
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-06T17:25:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 26,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-06T18:05:49.883603",
+    "type": "search",
+    "query": "조용한 식당",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-06T17:03:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-07T17:11:49.883603",
+    "type": "select",
+    "item": "닭죽",
+    "price": 7518,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-07T18:53:49.883603",
+    "type": "search",
+    "query": "오늘 뭐 먹으면 영양 좋아?",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-07T13:02:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 26,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-08T11:40:49.883603",
+    "type": "view",
+    "category": "죽",
+    "duration": 5,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-08T18:47:49.883603",
+    "type": "search",
+    "query": "땅콩 안 들어간 메뉴",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-08T19:25:49.883603",
+    "type": "view",
+    "category": "한식",
+    "duration": 11,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-09T13:35:49.883603",
+    "type": "view",
+    "category": "한식",
+    "duration": 14,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-09T17:27:49.883603",
+    "type": "search",
+    "query": "알레르기 안전한 음식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-09T19:14:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 23,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-10T12:26:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-10T12:11:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-10T17:30:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-11T17:35:49.883603",
+    "type": "select",
+    "item": "제육덮밥",
+    "price": 7532,
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-11T11:37:49.883603",
+    "type": "view",
+    "category": "도시락",
+    "duration": 10,
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-11T11:15:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 8117,
+    "category": "죽",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-12T17:38:49.883603",
+    "type": "select",
+    "item": "소고기죽",
+    "price": 7935,
+    "category": "한식",
+    "user_id": "myeong_bin_14"
+  },
+  {
+    "timestamp": "2025-08-12T19:46:49.883603",
+    "type": "feedback",
+    "feedback_type": "like",
+    "category": "도시락",
+    "user_id": "myeong_bin_14"
+  }
+]

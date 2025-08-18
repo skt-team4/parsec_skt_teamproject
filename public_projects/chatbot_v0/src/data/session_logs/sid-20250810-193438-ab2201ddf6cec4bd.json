@@ -1,0 +1,150 @@
+{
+  "session_id": "sid-20250810-193438-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T19:34:38.906346",
+  "session_end_time": "2025-08-10T19:35:02.167482",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T19:34:51.609155",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1007,
+            "score": 0
+          },
+          {
+            "shop_id": 1017,
+            "score": 1
+          },
+          {
+            "shop_id": 1025,
+            "score": 2
+          },
+          {
+            "shop_id": 1031,
+            "score": 3
+          },
+          {
+            "shop_id": 1040,
+            "score": 4
+          },
+          {
+            "shop_id": 1045,
+            "score": 5
+          },
+          {
+            "shop_id": 1046,
+            "score": 6
+          },
+          {
+            "shop_id": 1057,
+            "score": 7
+          },
+          {
+            "shop_id": 1063,
+            "score": 8
+          },
+          {
+            "shop_id": 1064,
+            "score": 9
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1007,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1017,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1025,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1007,
+          1017,
+          1025
+        ],
+        "generated_response": "치킨 먹고 싶구나~ 그럼 여기 세 군데 추천할게! 1. 지코바 성복1호점 - 순살소금구이 (16,700원) 2. 치킨아메리카Z 평촌점 - 후라이드 (18,000원) 3. 소문난닭강정병방점 - 후라이드 (18,000원) 어때? 이 중에 마음에 드는 거 있으면 좋겠다! 어떤 게 제일 끌려?.",
+        "response_time_ms": 12702
+      },
+      "user_feedback": {
+        "selected_shop_id": 1007,
+        "unselected_shop_ids": [
+          1017,
+          1025
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T19:35:02.165468",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1066,
+            "score": 0.7540995595129428
+          },
+          {
+            "shop_id": 1094,
+            "score": 1.0364637257321616
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1066,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1094,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1066,
+          1094
+        ],
+        "generated_response": "부평에서 피자 먹고 싶다니! 우리 주변에 딱 맞는 곳이 있어~ 바로 '롸버트치킨 인천삼산점'이야! 여기서 후라이드 치킨도 맛있고, 피자도 같이 즐길 수 있대! 가격은 18,000원이래. 어때? 한번 가보는 거 좋지 않을까? ㅎㅎ.",
+        "response_time_ms": 10553
+      },
+      "user_feedback": {
+        "selected_shop_id": 1066,
+        "unselected_shop_ids": [
+          1094
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    }
+  ],
+  "session_metadata": {}
+}

@@ -1,0 +1,80 @@
+{
+  "session_id": "sid-20250810-190003-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T19:00:03.610933",
+  "session_end_time": "2025-08-10T19:00:03.611938",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T19:00:03.610933",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1007,
+            "score": 0
+          }
+        ],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "원하시는 조건에 맞는 가게를 찾지 못했습니다.",
+        "response_time_ms": 0
+      },
+      "user_feedback": null
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T19:00:03.610933",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1006,
+            "score": 0
+          },
+          {
+            "shop_id": 1009,
+            "score": 1
+          },
+          {
+            "shop_id": 1007,
+            "score": 2
+          },
+          {
+            "shop_id": 1002,
+            "score": 3
+          },
+          {
+            "shop_id": 1001,
+            "score": 4
+          }
+        ],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "원하시는 조건에 맞는 가게를 찾지 못했습니다.",
+        "response_time_ms": 0
+      },
+      "user_feedback": null
+    }
+  ],
+  "session_metadata": {}
+}

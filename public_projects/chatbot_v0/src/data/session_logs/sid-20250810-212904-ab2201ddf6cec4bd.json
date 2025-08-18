@@ -1,0 +1,150 @@
+{
+  "session_id": "sid-20250810-212904-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T21:29:04.643748",
+  "session_end_time": "2025-08-10T21:29:17.822101",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T21:29:12.684969",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1007,
+            "score": 0
+          },
+          {
+            "shop_id": 1017,
+            "score": 1
+          },
+          {
+            "shop_id": 1025,
+            "score": 2
+          },
+          {
+            "shop_id": 1031,
+            "score": 3
+          },
+          {
+            "shop_id": 1040,
+            "score": 4
+          },
+          {
+            "shop_id": 1045,
+            "score": 5
+          },
+          {
+            "shop_id": 1046,
+            "score": 6
+          },
+          {
+            "shop_id": 1057,
+            "score": 7
+          },
+          {
+            "shop_id": 1063,
+            "score": 8
+          },
+          {
+            "shop_id": 1064,
+            "score": 9
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1007,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1017,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1025,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1007,
+          1017,
+          1025
+        ],
+        "generated_response": "치킨 먹고 싶구나~ 여기 몇 군데 추천해줄게! 1. **지코바 성복1호점** - 순살소금구이가 진짜 맛있어! 16,700원이니까 가성비도 좋고, 바삭바삭한 게 최고야~ 2. **치킨아메리카Z 평촌점** - 후라이드 치킨은 언제나 인기 만점이잖아? 가격은 18,000원이야. 부드럽고 바삭해서 누구나 좋아할 거야! 3. **소문난닭강정병방점** - 후라이드도 괜찮아! 역시 18,000원이고, 달콤한 소스가 잘 배어있어서 한 번 먹으면 계속 생각나더라~ 어떤 게 제일 끌려? 야, 꼭 맛있는 거 먹어봐! 🍗.",
+        "response_time_ms": 8041
+      },
+      "user_feedback": {
+        "selected_shop_id": 1007,
+        "unselected_shop_ids": [
+          1017,
+          1025
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T21:29:17.815737",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1066,
+            "score": 0.7540995595129428
+          },
+          {
+            "shop_id": 1094,
+            "score": 1.0364637257321616
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1066,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1094,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1066,
+          1094
+        ],
+        "generated_response": "야, 부평에서 피자 먹고 싶구나! 피자에 관해서는 내가 아는 가게가 없어서 미안해ㅠㅠ, 하지만 혹시 근처에 있는 다른 맛있는 음식점 추천해줄까? 예를 들면, 롸버트치킨 인천삼산점에서 후라이드 치킨도 괜찮을 것 같아! 18,000원이니까 가격도 괜찮잖아~ 아니면 신화로닭발에 가서 오돌뼈도 한번 먹어봐! 10,700원으로 맛있고 배부르게 먹을 수 있을 거야~ 어때, 도움이 됐으면 좋겠다! 😊.",
+        "response_time_ms": 5129
+      },
+      "user_feedback": {
+        "selected_shop_id": 1066,
+        "unselected_shop_ids": [
+          1094
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    }
+  ],
+  "session_metadata": {}
+}

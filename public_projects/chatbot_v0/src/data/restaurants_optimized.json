@@ -1,0 +1,482 @@
+{
+  "metadata": {
+    "source": "sample_data.xlsx",
+    "convertedAt": "2025-07-28T15:10:29.307024",
+    "totalShops": 10,
+    "goodShops": 1,
+    "converter": "Gemini-Claude 협력 개발"
+  },
+  "restaurants": [
+    {
+      "shopId": "백년카츠_관악점",
+      "shopName": "백년카츠 관악점",
+      "category": "일식",
+      "tags": [
+        "일식",
+        "카츠",
+        "관악구"
+      ],
+      "location": {
+        "address": "서울 관악구 봉천로 391 제1싱가동 104호 백년카츠",
+        "coordinates": "0x0000000001010000006473C6115EBC5F40C5DDCA73E1BD4240"
+      },
+      "contact": {
+        "phone": "028899923"
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "20:30",
+        "break": "15:00-16:30"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "돈까스는 백년카츠가 젤 맛있어~",
+      "menus": [
+        {
+          "name": "돈까스",
+          "price": 12000
+        },
+        {
+          "name": "치즈카츠",
+          "price": 13000
+        },
+        {
+          "name": "우동",
+          "price": 8000
+        }
+      ],
+      "metadata": {
+        "originalId": 20,
+        "createdAt": "2023-07-23 17:49:45.069256",
+        "lastUpdated": "2025-07-28T15:10:29.305027"
+      }
+    },
+    {
+      "shopId": "커피플래닛",
+      "shopName": "커피플래닛",
+      "category": "기타/디저트",
+      "tags": [
+        "관악구",
+        "기타/디저트",
+        "커피"
+      ],
+      "location": {
+        "address": "서울 관악구 남부순환로 1508 커피플래닛",
+        "coordinates": "0x000000000101000000A103D5FEC4BA5F401458E95ABABD4240"
+      },
+      "contact": {
+        "phone": "0285803004"
+      },
+      "hours": {
+        "open": "7:00",
+        "close": "0:00",
+        "break": "-"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": false,
+        "isApproved": true
+      },
+      "description": "예약 가능 시간: 평일 13:00~18:00",
+      "menus": [
+        {
+          "name": "아메리카노",
+          "price": 4000
+        },
+        {
+          "name": "카페라떼",
+          "price": 4500
+        },
+        {
+          "name": "케이크",
+          "price": 6000
+        }
+      ],
+      "metadata": {
+        "originalId": 21,
+        "createdAt": "2023-07-24 12:49:30.979689",
+        "lastUpdated": "2025-07-28T15:10:29.305027"
+      }
+    },
+    {
+      "shopId": "청년밥상문간_낙성대점",
+      "shopName": "청년밥상문간 낙성대점",
+      "category": "한식",
+      "tags": [
+        "나눔",
+        "관악구",
+        "급식카드",
+        "밥상",
+        "한식"
+      ],
+      "location": {
+        "address": "서울 관악구 남부순환로244길 26 지하 1층",
+        "coordinates": "0x0000000001010000008292781D9EBD5F4001C731DBECBC4240"
+      },
+      "contact": {
+        "phone": "02-877-6031"
+      },
+      "hours": {
+        "open": "11:30",
+        "close": "14:00",
+        "break": "-"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "*급식카드 유저의 경우, 아이와 함께 방문시 나눔 가능합니다.\n매주 일요일 정기휴무, 공휴일 휴무 \n청년밥상문간 낙성대점은 조충연, 박유선 후원자님께서 장소를 제공해 주셨습니다. 감사드립니다.",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 3354,
+        "createdAt": "2023-12-05 18:19:23.051531",
+        "lastUpdated": "2025-07-28T15:10:29.305027"
+      }
+    },
+    {
+      "shopId": "청년밥상문간_정릉점",
+      "shopName": "청년밥상문간 정릉점",
+      "category": "한식",
+      "tags": [
+        "나눔",
+        "급식카드",
+        "밥상",
+        "성북구",
+        "한식"
+      ],
+      "location": {
+        "address": "서울 성북구 보국문로11길 18-2 2층",
+        "coordinates": "0x000000000101000000688FE61195C05F405C9EF627EFCD4240"
+      },
+      "contact": {
+        "phone": ""
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "20:30",
+        "break": "14:30-17:00"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "*급식카드 유저의 경우, 아이와 함께 방문시 나눔 가능합니다.\n매주 일요일 정기휴무, 공휴일 휴무",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 3355,
+        "createdAt": "2023-12-05 18:20:25.270825",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "청년밥상문간_이대점",
+      "shopName": "청년밥상문간 이대점",
+      "category": "한식",
+      "tags": [
+        "나눔",
+        "급식카드",
+        "밥상",
+        "서대문구",
+        "한식"
+      ],
+      "location": {
+        "address": "서울 서대문구 이화여대길 52-39 지하1층",
+        "coordinates": "0x00000000010100000075235E387DBC5F403A97109F9CC74240"
+      },
+      "contact": {
+        "phone": "02-313-6031"
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "19:30",
+        "break": "16:00-17:00"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "*급식카드 유저의 경우, 아이와 함께 방문시 나눔 가능합니다.\n주말, 공휴일 휴무",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 3356,
+        "createdAt": "2023-12-05 18:22:03.662885",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "라공방_신림점",
+      "shopName": "라공방 신림점",
+      "category": "중식",
+      "tags": [
+        "관악구",
+        "중식"
+      ],
+      "location": {
+        "address": "서울 관악구 신림로 340 1층",
+        "coordinates": "0x000000000101000000E542ACB386BB5F40B6A7E6B20CBE4240"
+      },
+      "contact": {
+        "phone": "02-883-1113"
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "23:00",
+        "break": "-"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "주문금액의 상품권 금액 초과분은 현장에서 결제하실 수 있습니다!",
+      "menus": [
+        {
+          "name": "추천메뉴1",
+          "price": 10000
+        },
+        {
+          "name": "추천메뉴2",
+          "price": 12000
+        }
+      ],
+      "metadata": {
+        "originalId": 3373,
+        "createdAt": "2023-12-15 14:12:29.453128",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "청년밥상문간_슬로우점_혜화점_",
+      "shopName": "청년밥상문간 슬로우점(혜화점)",
+      "category": "한식",
+      "tags": [
+        "밥상",
+        "종로구",
+        "한식"
+      ],
+      "location": {
+        "address": "서울시 종로구 동숭3길 33, 지하1층(동숭동)",
+        "coordinates": "0x000000000101000000C9F3E6EC49C05F4045409E6D92CA4240"
+      },
+      "contact": {
+        "phone": ""
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "20:30",
+        "break": "14:30-17:00"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "오전/오후 두 타임 영업이 이루어집니다^^.",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 3497,
+        "createdAt": "2024-03-12 16:51:06.082568",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "청년밥상문간_안산점",
+      "shopName": "청년밥상문간 안산점",
+      "category": "한식",
+      "tags": [
+        "나눔",
+        "급식카드",
+        "상록구",
+        "밥상",
+        "한식"
+      ],
+      "location": {
+        "address": "경기도 안산시 상록구 샘골로 165 청송빌딩 B1",
+        "coordinates": "0x000000000101000000657525523AB75F4073FCE4F939A64240"
+      },
+      "contact": {
+        "phone": "010-1234-6031"
+      },
+      "hours": {
+        "open": "11:00",
+        "close": "20:00",
+        "break": "14:30-17:00"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "*급식카드 유저의 경우, 아이와 함께 방문시 나눔 가능합니다.\n오전/오후 두 타임 영업이 이루어집니다^^.\n*토요일은 11:00-15:00 까지 영업합니다.",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 4833,
+        "createdAt": "2025-02-10 17:05:31.747224",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "쏙_닭",
+      "shopName": "쏙,닭",
+      "category": "한식/치킨",
+      "tags": [
+        "은평구",
+        "한식/치킨"
+      ],
+      "location": {
+        "address": "서울시 은평구 신사동 3-21, 1층",
+        "coordinates": "0x000000000101000000872B614A6ABA5F4061A335909FCC4240"
+      },
+      "contact": {
+        "phone": "02-356-5674"
+      },
+      "hours": {
+        "open": "16:45",
+        "close": "21:50",
+        "break": "-"
+      },
+      "attributes": {
+        "isGoodShop": false,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "참숯과 참나무장작으로 90분간 굽습니다. \n기름 쏙! 담백힌 쏙,닭입니다. \n부담없이 즐기면 좋겠습니다.",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 4837,
+        "createdAt": "2025-04-05 01:46:49.633022",
+        "lastUpdated": "2025-07-28T15:10:29.306028"
+      }
+    },
+    {
+      "shopId": "본도시락_영등포구청점",
+      "shopName": "본도시락 영등포구청점",
+      "category": "한식",
+      "tags": [
+        "한식",
+        "영등포구"
+      ],
+      "location": {
+        "address": "서울 영등포구 선유로 146 [이앤씨드림타워]1층 103호",
+        "coordinates": "0x0000000001010000008A9F104B14B95F406DA818E76FC34240"
+      },
+      "contact": {
+        "phone": "0226764282"
+      },
+      "hours": {
+        "open": "10:00",
+        "close": "19:00",
+        "break": "-"
+      },
+      "attributes": {
+        "isGoodShop": true,
+        "acceptsMealCard": true,
+        "isApproved": true
+      },
+      "description": "위치는 코스트코 양평점 옆쪽 나무데크쪽으로 오시면 출입문이 보입니다",
+      "menus": [
+        {
+          "name": "불고기정식",
+          "price": 10000
+        },
+        {
+          "name": "김치찌개",
+          "price": 8000
+        },
+        {
+          "name": "된장찌개",
+          "price": 7000
+        }
+      ],
+      "metadata": {
+        "originalId": 4982,
+        "createdAt": "2025-06-11 17:33:20.531102",
+        "lastUpdated": "2025-07-28T15:10:29.307024"
+      }
+    }
+  ]
+}

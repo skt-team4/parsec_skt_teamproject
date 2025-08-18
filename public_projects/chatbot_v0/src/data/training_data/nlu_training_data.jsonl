@@ -1,0 +1,1000 @@
+{"text": "경기도 용인시 근처에 베이커리 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "베이커리", "start": 12, "end": 16}]}
+{"text": "경기도 화성시에서 편의점 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "편의점", "start": 10, "end": 13}]}
+{"text": "카페디저트 땡기는데 경기도 안산시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "안산시", "start": 15, "end": 19}]}
+{"text": "서울특별시 서대문구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "카페", "start": 13, "end": 15}]}
+{"text": "카페디저트 땡기는데 서울특별시 동대문구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 동대문구", "start": 11, "end": 21}, {"type": "location", "value": "동대문구", "start": 17, "end": 21}]}
+{"text": "서울특별시 서대문구 근처에 베이커리 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "베이커리", "start": 15, "end": 19}]}
+{"text": "경기도 평택시 분식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "평택시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 8, "end": 10}]}
+{"text": "경기도 시흥시 근처에 양식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 12, "end": 14}]}
+{"text": "경기도 군포시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "군포시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "한식 땡기는데 경기도 안양시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "안양시", "start": 12, "end": 16}]}
+{"text": "경기도 수원시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 수원시에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 10, "end": 12}]}
+{"text": "경기도 의정부시 피자 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의정부시", "start": 4, "end": 9}, {"type": "food_type", "value": "피자", "start": 9, "end": 11}]}
+{"text": "카페디저트 땡기는데 경기도 남양주시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "남양주시", "start": 15, "end": 20}]}
+{"text": "인천광역시 부평구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 광명시 아시안 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "광명시", "start": 4, "end": 8}]}
+{"text": "서울특별시 강동구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강동구", "start": 0, "end": 9}, {"type": "location", "value": "강동구", "start": 6, "end": 9}, {"type": "location", "value": "강동", "start": 6, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "서울특별시 강남구에서 치킨 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}, {"type": "food_type", "value": "치킨", "start": 12, "end": 14}]}
+{"text": "경기도 의왕시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의왕시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "경기도 시흥시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "한식 땡기는데 경기도 이천시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "이천시", "start": 12, "end": 16}]}
+{"text": "인천광역시 부평구 치킨 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "치킨", "start": 10, "end": 12}]}
+{"text": "한식 땡기는데 경기도 남양주시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "남양주시", "start": 12, "end": 17}]}
+{"text": "인천광역시 서구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 서구", "start": 0, "end": 8}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "서구", "start": 6, "end": 8}, {"type": "food_type", "value": "카페", "start": 11, "end": 13}]}
+{"text": "경기도 김포시 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "김포시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "카페디저트 땡기는데 인천광역시 서구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "인천", "start": 11, "end": 13}, {"type": "location", "value": "인천광역시 서구", "start": 11, "end": 19}, {"type": "location", "value": "인천광역", "start": 11, "end": 15}, {"type": "location", "value": "서구", "start": 17, "end": 19}]}
+{"text": "분식 땡기는데 서울특별시 강남구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강남구", "start": 8, "end": 17}, {"type": "location", "value": "강남구", "start": 14, "end": 17}]}
+{"text": "서울특별시 강남구 근처에 아시안 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}]}
+{"text": "경기도 수원시 근처에 베이커리 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "베이커리", "start": 12, "end": 16}]}
+{"text": "한식 땡기는데 서울특별시 강남구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강남구", "start": 8, "end": 17}, {"type": "location", "value": "강남구", "start": 14, "end": 17}]}
+{"text": "인천광역시 미추홀구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 미추홀구", "start": 0, "end": 10}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "미추홀구", "start": 6, "end": 10}, {"type": "food_type", "value": "일식", "start": 15, "end": 17}]}
+{"text": "경기도 광명시 아시안 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "광명시", "start": 4, "end": 8}]}
+{"text": "한식 땡기는데 경기도 시흥시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "시흥시", "start": 12, "end": 16}]}
+{"text": "인천광역시 강화군 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시", "start": 0, "end": 6}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "food_type", "value": "양식", "start": 10, "end": 12}]}
+{"text": "경기도 김포시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "김포시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "서울특별시 성북구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 수원시 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 8, "end": 10}]}
+{"text": "경기도 수원시에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "카페디저트 땡기는데 서울특별시 서대문구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 서대문구", "start": 11, "end": 21}, {"type": "location", "value": "서대문구", "start": 17, "end": 21}]}
+{"text": "서울특별시 성동구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성동구", "start": 0, "end": 9}, {"type": "location", "value": "성동구", "start": 6, "end": 9}, {"type": "location", "value": "성동", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "경기도 안산시 근처에 양식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안산시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 12, "end": 14}]}
+{"text": "경기도 안양시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안양시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "서울특별시 송파구 근처에 베이커리 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 송파구", "start": 0, "end": 9}, {"type": "location", "value": "송파구", "start": 6, "end": 9}, {"type": "food_type", "value": "베이커리", "start": 14, "end": 18}]}
+{"text": "서울특별시 관악구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 관악구", "start": 0, "end": 9}, {"type": "location", "value": "관악구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "경기도 수원시에서 아시안 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}]}
+{"text": "피자 땡기는데 경기도 안산시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "안산시", "start": 12, "end": 16}]}
+{"text": "경기도 시흥시 근처에 패스트푸드 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "패스트푸드", "start": 12, "end": 17}]}
+{"text": "중식 땡기는데 서울특별시 마포구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 마포구", "start": 8, "end": 17}, {"type": "location", "value": "마포구", "start": 14, "end": 17}]}
+{"text": "서울특별시 강동구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강동구", "start": 0, "end": 9}, {"type": "location", "value": "강동구", "start": 6, "end": 9}, {"type": "location", "value": "강동", "start": 6, "end": 8}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "경기도 고양시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "경기도 안양시에서 치킨 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "치킨", "start": 10, "end": 12}]}
+{"text": "피자 땡기는데 서울특별시 광진구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 광진구", "start": 8, "end": 17}, {"type": "location", "value": "광진구", "start": 14, "end": 17}]}
+{"text": "경기도 시흥시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "서울특별시 마포구에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "중식", "start": 12, "end": 14}]}
+{"text": "한식 땡기는데 서울특별시 마포구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 마포구", "start": 8, "end": 17}, {"type": "location", "value": "마포구", "start": 14, "end": 17}]}
+{"text": "경기도 시흥시에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 시흥시 피자 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "피자", "start": 8, "end": 10}]}
+{"text": "한식 땡기는데 인천광역시 연수구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "인천", "start": 8, "end": 10}, {"type": "location", "value": "인천광역시 연수구", "start": 8, "end": 17}, {"type": "location", "value": "인천광역", "start": 8, "end": 12}, {"type": "location", "value": "연수구", "start": 14, "end": 17}]}
+{"text": "서울특별시 동대문구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동대문구", "start": 0, "end": 10}, {"type": "location", "value": "동대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "일식", "start": 13, "end": 15}]}
+{"text": "경기도 성남시 근처에 치킨 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "치킨", "start": 12, "end": 14}]}
+{"text": "경기도 성남시 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "경기도 수원시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "베이커리 땡기는데 서울특별시 노원구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}, {"type": "location", "value": "서울", "start": 10, "end": 12}, {"type": "location", "value": "서울특별시 노원구", "start": 10, "end": 19}, {"type": "location", "value": "노원구", "start": 16, "end": 19}]}
+{"text": "서울특별시 영등포구 근처에 베이커리 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 영등포구", "start": 0, "end": 10}, {"type": "location", "value": "영등포구", "start": 6, "end": 10}, {"type": "food_type", "value": "베이커리", "start": 15, "end": 19}]}
+{"text": "경기도 성남시에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "중식", "start": 10, "end": 12}]}
+{"text": "패스트푸드 땡기는데 서울특별시 은평구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 은평구", "start": 11, "end": 20}, {"type": "location", "value": "은평구", "start": 17, "end": 20}]}
+{"text": "서울특별시 종로구 패스트푸드 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 종로구", "start": 0, "end": 9}, {"type": "location", "value": "종로구", "start": 6, "end": 9}, {"type": "location", "value": "종로", "start": 6, "end": 8}, {"type": "food_type", "value": "패스트푸드", "start": 10, "end": 15}]}
+{"text": "경기도 화성시 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "서울특별시 도봉구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 도봉구", "start": 0, "end": 9}, {"type": "location", "value": "도봉구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "인천광역시 부평구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 양주시 치킨 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "양주시", "start": 4, "end": 8}, {"type": "food_type", "value": "치킨", "start": 8, "end": 10}]}
+{"text": "경기도 남양주시 근처에 치킨 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "남양주시", "start": 4, "end": 9}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "경기도 하남시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "하남시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "서울특별시 성동구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성동구", "start": 0, "end": 9}, {"type": "location", "value": "성동구", "start": 6, "end": 9}, {"type": "location", "value": "성동", "start": 6, "end": 8}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 여주시에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "중식", "start": 10, "end": 12}]}
+{"text": "경기도 안성시 근처에 치킨 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안성시", "start": 4, "end": 8}, {"type": "food_type", "value": "치킨", "start": 12, "end": 14}]}
+{"text": "서울특별시 강남구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "경기도 성남시 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 8, "end": 10}]}
+{"text": "서울특별시 강남구 근처에 양식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}, {"type": "food_type", "value": "양식", "start": 14, "end": 16}]}
+{"text": "서울특별시 서대문구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "한식", "start": 15, "end": 17}]}
+{"text": "경기도 고양시에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 시흥시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 시흥시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 시흥시에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 10, "end": 12}]}
+{"text": "서울특별시 강서구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강서구", "start": 0, "end": 9}, {"type": "location", "value": "강서구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "경기도 고양시에서 양식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "양식", "start": 10, "end": 12}]}
+{"text": "패스트푸드 땡기는데 서울특별시 종로구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 종로구", "start": 11, "end": 20}, {"type": "location", "value": "종로구", "start": 17, "end": 20}, {"type": "location", "value": "종로", "start": 17, "end": 19}]}
+{"text": "서울특별시 강남구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "경기도 수원시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "피자 땡기는데 경기도 수원시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "수원시", "start": 12, "end": 16}]}
+{"text": "경기도 성남시 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 8, "end": 10}]}
+{"text": "서울특별시 강동구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강동구", "start": 0, "end": 9}, {"type": "location", "value": "강동구", "start": 6, "end": 9}, {"type": "location", "value": "강동", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 14, "end": 16}]}
+{"text": "서울특별시 강서구 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강서구", "start": 0, "end": 9}, {"type": "location", "value": "강서구", "start": 6, "end": 9}, {"type": "food_type", "value": "양식", "start": 10, "end": 12}]}
+{"text": "경기도 오산시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "오산시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "치킨 땡기는데 경기도 안산시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "안산시", "start": 12, "end": 16}]}
+{"text": "경기도 화성시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "경기도 의정부시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의정부시", "start": 4, "end": 9}, {"type": "food_type", "value": "한식", "start": 9, "end": 11}]}
+{"text": "서울특별시 강서구 치킨 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강서구", "start": 0, "end": 9}, {"type": "location", "value": "강서구", "start": 6, "end": 9}, {"type": "food_type", "value": "치킨", "start": 10, "end": 12}]}
+{"text": "중식 땡기는데 서울특별시 노원구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 노원구", "start": 8, "end": 17}, {"type": "location", "value": "노원구", "start": 14, "end": 17}]}
+{"text": "서울특별시 서초구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서초구", "start": 0, "end": 9}, {"type": "location", "value": "서초구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 시흥시에서 아시안 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}]}
+{"text": "서울특별시 중랑구 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중랑구", "start": 0, "end": 9}, {"type": "location", "value": "중랑구", "start": 6, "end": 9}, {"type": "food_type", "value": "분식", "start": 14, "end": 16}]}
+{"text": "패스트푸드 땡기는데 인천광역시 연수구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}, {"type": "location", "value": "인천", "start": 11, "end": 13}, {"type": "location", "value": "인천광역시 연수구", "start": 11, "end": 20}, {"type": "location", "value": "인천광역", "start": 11, "end": 15}, {"type": "location", "value": "연수구", "start": 17, "end": 20}]}
+{"text": "한식 땡기는데 서울특별시 송파구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 송파구", "start": 8, "end": 17}, {"type": "location", "value": "송파구", "start": 14, "end": 17}]}
+{"text": "경기도 평택시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "서울특별시 영등포구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 영등포구", "start": 0, "end": 10}, {"type": "location", "value": "영등포구", "start": 6, "end": 10}, {"type": "food_type", "value": "카페", "start": 15, "end": 17}]}
+{"text": "경기도 시흥시에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "중식", "start": 10, "end": 12}]}
+{"text": "서울특별시 서대문구에서 베이커리 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "베이커리", "start": 13, "end": 17}]}
+{"text": "피자 땡기는데 경기도 고양시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "고양시", "start": 12, "end": 16}]}
+{"text": "일식 땡기는데 서울특별시 구로구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 구로구", "start": 8, "end": 17}, {"type": "location", "value": "구로구", "start": 14, "end": 17}, {"type": "location", "value": "구로", "start": 14, "end": 16}]}
+{"text": "인천광역시 연수구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 연수구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "연수구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 14, "end": 16}]}
+{"text": "경기도 하남시에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "일식", "start": 10, "end": 12}]}
+{"text": "서울특별시 관악구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 관악구", "start": 0, "end": 9}, {"type": "location", "value": "관악구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "중식 땡기는데 경기도 수원시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "수원시", "start": 12, "end": 16}]}
+{"text": "일식 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "화성시", "start": 12, "end": 16}]}
+{"text": "카페디저트 땡기는데 서울특별시 서초구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 서초구", "start": 11, "end": 20}, {"type": "location", "value": "서초구", "start": 17, "end": 20}]}
+{"text": "서울특별시 영등포구 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 영등포구", "start": 0, "end": 10}, {"type": "location", "value": "영등포구", "start": 6, "end": 10}, {"type": "food_type", "value": "일식", "start": 11, "end": 13}]}
+{"text": "경기도 화성시 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 8, "end": 10}]}
+{"text": "서울특별시 성북구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 군포시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "군포시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "양식 땡기는데 경기도 부천시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "부천시", "start": 12, "end": 16}]}
+{"text": "카페디저트 땡기는데 서울특별시 구로구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 구로구", "start": 11, "end": 20}, {"type": "location", "value": "구로구", "start": 17, "end": 20}, {"type": "location", "value": "구로", "start": 17, "end": 19}]}
+{"text": "카페디저트 땡기는데 서울특별시 영등포구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 영등포구", "start": 11, "end": 21}, {"type": "location", "value": "영등포구", "start": 17, "end": 21}]}
+{"text": "카페디저트 땡기는데 서울특별시 양천구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 양천구", "start": 11, "end": 20}, {"type": "location", "value": "양천구", "start": 17, "end": 20}]}
+{"text": "한식 땡기는데 경기도 고양시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "고양시", "start": 12, "end": 16}]}
+{"text": "아시안 땡기는데 인천광역시 부평구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 9, "end": 11}, {"type": "location", "value": "인천광역시 부평구", "start": 9, "end": 18}, {"type": "location", "value": "인천광역", "start": 9, "end": 13}, {"type": "location", "value": "부평구", "start": 15, "end": 18}]}
+{"text": "서울특별시 종로구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 종로구", "start": 0, "end": 9}, {"type": "location", "value": "종로구", "start": 6, "end": 9}, {"type": "location", "value": "종로", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "경기도 양평군 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "서울특별시 구로구에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 구로구", "start": 0, "end": 9}, {"type": "location", "value": "구로구", "start": 6, "end": 9}, {"type": "location", "value": "구로", "start": 6, "end": 8}, {"type": "food_type", "value": "중식", "start": 12, "end": 14}]}
+{"text": "한식 땡기는데 경기도 수원시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "수원시", "start": 12, "end": 16}]}
+{"text": "아시안 땡기는데 인천광역시 미추홀구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 9, "end": 11}, {"type": "location", "value": "인천광역시 미추홀구", "start": 9, "end": 19}, {"type": "location", "value": "인천광역", "start": 9, "end": 13}, {"type": "location", "value": "미추홀구", "start": 15, "end": 19}]}
+{"text": "경기도 성남시 근처에 피자 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "피자", "start": 12, "end": 14}]}
+{"text": "서울특별시 용산구에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 용산구", "start": 0, "end": 9}, {"type": "location", "value": "용산구", "start": 6, "end": 9}, {"type": "food_type", "value": "중식", "start": 12, "end": 14}]}
+{"text": "카페디저트 땡기는데 서울특별시 성동구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 성동구", "start": 11, "end": 20}, {"type": "location", "value": "성동구", "start": 17, "end": 20}, {"type": "location", "value": "성동", "start": 17, "end": 19}]}
+{"text": "경기도 용인시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "경기도 안양시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안양시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "서울특별시 용산구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 용산구", "start": 0, "end": 9}, {"type": "location", "value": "용산구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 14, "end": 16}]}
+{"text": "서울특별시 금천구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 금천구", "start": 0, "end": 9}, {"type": "location", "value": "금천구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "서울특별시 마포구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "경기도 의왕시 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의왕시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 8, "end": 10}]}
+{"text": "경기도 성남시에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 10, "end": 12}]}
+{"text": "경기도 용인시 중식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "중식", "start": 8, "end": 10}]}
+{"text": "경기도 화성시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "경기도 화성시 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 8, "end": 10}]}
+{"text": "경기도 고양시 베이커리 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "베이커리", "start": 8, "end": 12}]}
+{"text": "경기도 이천시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "이천시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "분식 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "화성시", "start": 12, "end": 16}]}
+{"text": "경기도 의정부시 중식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의정부시", "start": 4, "end": 9}, {"type": "food_type", "value": "중식", "start": 9, "end": 11}]}
+{"text": "경기도 시흥시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "양식 땡기는데 서울특별시 강동구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강동구", "start": 8, "end": 17}, {"type": "location", "value": "강동구", "start": 14, "end": 17}, {"type": "location", "value": "강동", "start": 14, "end": 16}]}
+{"text": "경기도 화성시에서 피자 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "피자", "start": 10, "end": 12}]}
+{"text": "경기도 안양시에서 마트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "마트", "start": 10, "end": 12}]}
+{"text": "인천광역시 연수구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 연수구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "연수구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 14, "end": 16}]}
+{"text": "치킨 땡기는데 서울특별시 성북구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 성북구", "start": 8, "end": 17}, {"type": "location", "value": "성북구", "start": 14, "end": 17}]}
+{"text": "서울특별시 송파구 베이커리 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 송파구", "start": 0, "end": 9}, {"type": "location", "value": "송파구", "start": 6, "end": 9}, {"type": "food_type", "value": "베이커리", "start": 10, "end": 14}]}
+{"text": "서울특별시 마포구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "카페디저트 땡기는데 서울특별시 용산구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 용산구", "start": 11, "end": 20}, {"type": "location", "value": "용산구", "start": 17, "end": 20}]}
+{"text": "일식 땡기는데 경기도 수원시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "수원시", "start": 12, "end": 16}]}
+{"text": "경기도 화성시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "경기도 성남시 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 8, "end": 10}]}
+{"text": "경기도 안양시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안양시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "베이커리 땡기는데 인천광역시 계양구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}, {"type": "location", "value": "인천", "start": 10, "end": 12}, {"type": "location", "value": "인천광역시 계양구", "start": 10, "end": 19}, {"type": "location", "value": "인천광역", "start": 10, "end": 14}, {"type": "location", "value": "계양구", "start": 16, "end": 19}]}
+{"text": "서울특별시 영등포구에서 패스트푸드 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 영등포구", "start": 0, "end": 10}, {"type": "location", "value": "영등포구", "start": 6, "end": 10}, {"type": "food_type", "value": "패스트푸드", "start": 13, "end": 18}]}
+{"text": "인천광역시 부평구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 14, "end": 16}]}
+{"text": "경기도 안성시에서 치킨 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "치킨", "start": 10, "end": 12}]}
+{"text": "서울특별시 마포구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "서울특별시 서대문구 아시안 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}]}
+{"text": "서울특별시 중구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중구", "start": 0, "end": 8}, {"type": "location", "value": "중구", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 11, "end": 13}]}
+{"text": "경기도 수원시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "경기도 평택시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "평택시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "한식 땡기는데 서울특별시 강동구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강동구", "start": 8, "end": 17}, {"type": "location", "value": "강동구", "start": 14, "end": 17}, {"type": "location", "value": "강동", "start": 14, "end": 16}]}
+{"text": "서울특별시 마포구 근처에 중식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "중식", "start": 14, "end": 16}]}
+{"text": "서울특별시 성북구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 14, "end": 16}]}
+{"text": "서울특별시 동대문구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동대문구", "start": 0, "end": 10}, {"type": "location", "value": "동대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "일식", "start": 15, "end": 17}]}
+{"text": "경기도 광주시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "광주시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "서울특별시 관악구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 관악구", "start": 0, "end": 9}, {"type": "location", "value": "관악구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "아시안 땡기는데 경기도 평택시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 9, "end": 12}, {"type": "location", "value": "평택시", "start": 13, "end": 17}]}
+{"text": "경기도 부천시 근처에 피자 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "부천시", "start": 4, "end": 8}, {"type": "food_type", "value": "피자", "start": 12, "end": 14}]}
+{"text": "서울특별시 중랑구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중랑구", "start": 0, "end": 9}, {"type": "location", "value": "중랑구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "서울특별시 성북구에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "인천광역시 미추홀구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 미추홀구", "start": 0, "end": 10}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "미추홀구", "start": 6, "end": 10}, {"type": "food_type", "value": "한식", "start": 15, "end": 17}]}
+{"text": "서울특별시 중구 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중구", "start": 0, "end": 8}, {"type": "location", "value": "중구", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 9, "end": 11}]}
+{"text": "경기도 안산시 치킨 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안산시", "start": 4, "end": 8}, {"type": "food_type", "value": "치킨", "start": 8, "end": 10}]}
+{"text": "서울특별시 중랑구 일식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중랑구", "start": 0, "end": 9}, {"type": "location", "value": "중랑구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 10, "end": 12}]}
+{"text": "경기도 의정부시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의정부시", "start": 4, "end": 9}, {"type": "food_type", "value": "카페", "start": 13, "end": 15}]}
+{"text": "서울특별시 성북구 피자 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "피자", "start": 10, "end": 12}]}
+{"text": "경기도 여주시에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "중식", "start": 10, "end": 12}]}
+{"text": "경기도 성남시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 파주시 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "파주시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 8, "end": 10}]}
+{"text": "서울특별시 성동구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성동구", "start": 0, "end": 9}, {"type": "location", "value": "성동구", "start": 6, "end": 9}, {"type": "location", "value": "성동", "start": 6, "end": 8}, {"type": "food_type", "value": "일식", "start": 14, "end": 16}]}
+{"text": "경기도 고양시 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 8, "end": 10}]}
+{"text": "인천광역시 미추홀구 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 미추홀구", "start": 0, "end": 10}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "미추홀구", "start": 6, "end": 10}, {"type": "food_type", "value": "한식", "start": 15, "end": 17}]}
+{"text": "경기도 화성시 근처에 편의점 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "편의점", "start": 12, "end": 15}]}
+{"text": "경기도 안성시 분식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안성시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 8, "end": 10}]}
+{"text": "서울특별시 관악구 근처에 피자 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 관악구", "start": 0, "end": 9}, {"type": "location", "value": "관악구", "start": 6, "end": 9}, {"type": "food_type", "value": "피자", "start": 14, "end": 16}]}
+{"text": "서울특별시 서대문구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서대문구", "start": 0, "end": 10}, {"type": "location", "value": "서대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "카페", "start": 11, "end": 13}]}
+{"text": "경기도 하남시 패스트푸드 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "하남시", "start": 4, "end": 8}, {"type": "food_type", "value": "패스트푸드", "start": 8, "end": 13}]}
+{"text": "한식 땡기는데 서울특별시 서초구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 서초구", "start": 8, "end": 17}, {"type": "location", "value": "서초구", "start": 14, "end": 17}]}
+{"text": "경기도 부천시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "부천시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "서울특별시 광진구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 광진구", "start": 0, "end": 9}, {"type": "location", "value": "광진구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "한식 땡기는데 경기도 광주시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "광주시", "start": 12, "end": 16}]}
+{"text": "한식 땡기는데 경기도 안산시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "안산시", "start": 12, "end": 16}]}
+{"text": "서울특별시 동대문구 피자 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동대문구", "start": 0, "end": 10}, {"type": "location", "value": "동대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "피자", "start": 11, "end": 13}]}
+{"text": "분식 땡기는데 경기도 성남시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "성남시", "start": 12, "end": 16}]}
+{"text": "경기도 구리시에서 치킨 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "치킨", "start": 10, "end": 12}]}
+{"text": "분식 땡기는데 서울특별시 용산구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 용산구", "start": 8, "end": 17}, {"type": "location", "value": "용산구", "start": 14, "end": 17}]}
+{"text": "일식 땡기는데 경기도 파주시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "파주시", "start": 12, "end": 16}]}
+{"text": "경기도 포천시 편의점 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "포천시", "start": 4, "end": 8}, {"type": "food_type", "value": "편의점", "start": 8, "end": 11}]}
+{"text": "한식 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "화성시", "start": 12, "end": 16}]}
+{"text": "경기도 의정부시에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "일식", "start": 11, "end": 13}]}
+{"text": "서울특별시 강남구 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강남구", "start": 0, "end": 9}, {"type": "location", "value": "강남구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 14, "end": 16}]}
+{"text": "인천광역시 미추홀구 아시안 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 미추홀구", "start": 0, "end": 10}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "미추홀구", "start": 6, "end": 10}]}
+{"text": "중식 땡기는데 서울특별시 영등포구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 영등포구", "start": 8, "end": 18}, {"type": "location", "value": "영등포구", "start": 14, "end": 18}]}
+{"text": "경기도 안산시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "안산시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "서울특별시 마포구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 김포시에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "일식", "start": 10, "end": 12}]}
+{"text": "카페디저트 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "화성시", "start": 15, "end": 19}]}
+{"text": "치킨 땡기는데 경기도 부천시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "부천시", "start": 12, "end": 16}]}
+{"text": "서울특별시 마포구 근처에 패스트푸드 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 마포구", "start": 0, "end": 9}, {"type": "location", "value": "마포구", "start": 6, "end": 9}, {"type": "food_type", "value": "패스트푸드", "start": 14, "end": 19}]}
+{"text": "경기도 수원시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "수원시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "경기도 시흥시 근처에 일식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "시흥시", "start": 4, "end": 8}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "베이커리 땡기는데 서울특별시 종로구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}, {"type": "location", "value": "서울", "start": 10, "end": 12}, {"type": "location", "value": "서울특별시 종로구", "start": 10, "end": 19}, {"type": "location", "value": "종로구", "start": 16, "end": 19}, {"type": "location", "value": "종로", "start": 16, "end": 18}]}
+{"text": "서울특별시 용산구 베이커리 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 용산구", "start": 0, "end": 9}, {"type": "location", "value": "용산구", "start": 6, "end": 9}, {"type": "food_type", "value": "베이커리", "start": 10, "end": 14}]}
+{"text": "경기도 용인시에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 10, "end": 12}]}
+{"text": "카페디저트 땡기는데 경기도 성남시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "성남시", "start": 15, "end": 19}]}
+{"text": "인천광역시 연수구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 연수구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "연수구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "경기도 의왕시 양식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "의왕시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 8, "end": 10}]}
+{"text": "인천광역시 미추홀구 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 미추홀구", "start": 0, "end": 10}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "미추홀구", "start": 6, "end": 10}, {"type": "food_type", "value": "한식", "start": 11, "end": 13}]}
+{"text": "한식 땡기는데 인천광역시 남동구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "인천", "start": 8, "end": 10}, {"type": "location", "value": "인천광역시 남동구", "start": 8, "end": 17}, {"type": "location", "value": "인천광역", "start": 8, "end": 12}, {"type": "location", "value": "남동구", "start": 14, "end": 17}, {"type": "location", "value": "남동", "start": 14, "end": 16}]}
+{"text": "경기도 시흥시에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "한식 땡기는데 경기도 안산시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "안산시", "start": 12, "end": 16}]}
+{"text": "아시안 땡기는데 인천광역시 부평구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 9, "end": 11}, {"type": "location", "value": "인천광역시 부평구", "start": 9, "end": 18}, {"type": "location", "value": "인천광역", "start": 9, "end": 13}, {"type": "location", "value": "부평구", "start": 15, "end": 18}]}
+{"text": "경기도 성남시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "성남시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "서울특별시 광진구 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 광진구", "start": 0, "end": 9}, {"type": "location", "value": "광진구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 14, "end": 16}]}
+{"text": "중식 땡기는데 서울특별시 동대문구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 동대문구", "start": 8, "end": 18}, {"type": "location", "value": "동대문구", "start": 14, "end": 18}]}
+{"text": "경기도 의정부시에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "중식", "start": 11, "end": 13}]}
+{"text": "서울특별시 노원구에서 중식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 노원구", "start": 0, "end": 9}, {"type": "location", "value": "노원구", "start": 6, "end": 9}, {"type": "food_type", "value": "중식", "start": 12, "end": 14}]}
+{"text": "인천광역시 계양구 베이커리 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 계양구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "계양구", "start": 6, "end": 9}, {"type": "food_type", "value": "베이커리", "start": 10, "end": 14}]}
+{"text": "경기도 고양시 근처에 아시안 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}]}
+{"text": "인천광역시 서구 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 서구", "start": 0, "end": 8}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "서구", "start": 6, "end": 8}, {"type": "food_type", "value": "한식", "start": 9, "end": 11}]}
+{"text": "서울특별시 서초구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 서초구", "start": 0, "end": 9}, {"type": "location", "value": "서초구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 부천시 근처에 중식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "부천시", "start": 4, "end": 8}, {"type": "food_type", "value": "중식", "start": 12, "end": 14}]}
+{"text": "경기도 고양시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "경기도 용인시 치킨 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "치킨", "start": 8, "end": 10}]}
+{"text": "경기도 안산시에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "서울특별시 강북구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강북구", "start": 0, "end": 9}, {"type": "location", "value": "강북구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "서울특별시 구로구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 구로구", "start": 0, "end": 9}, {"type": "location", "value": "구로구", "start": 6, "end": 9}, {"type": "location", "value": "구로", "start": 6, "end": 8}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "인천광역시 부평구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "일식", "start": 12, "end": 14}]}
+{"text": "경기도 오산시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "오산시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 고양시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "중식 땡기는데 서울특별시 강북구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강북구", "start": 8, "end": 17}, {"type": "location", "value": "강북구", "start": 14, "end": 17}]}
+{"text": "분식 땡기는데 서울특별시 성북구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 성북구", "start": 8, "end": 17}, {"type": "location", "value": "성북구", "start": 14, "end": 17}]}
+{"text": "서울특별시 중구 근처에 패스트푸드 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중구", "start": 0, "end": 8}, {"type": "location", "value": "중구", "start": 6, "end": 8}, {"type": "food_type", "value": "패스트푸드", "start": 13, "end": 18}]}
+{"text": "경기도 오산시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "오산시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 고양시 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 8, "end": 10}]}
+{"text": "경기도 화성시에서 베이커리 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "베이커리", "start": 10, "end": 14}]}
+{"text": "한식 땡기는데 서울특별시 서대문구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 서대문구", "start": 8, "end": 18}, {"type": "location", "value": "서대문구", "start": 14, "end": 18}]}
+{"text": "카페디저트 땡기는데 경기도 용인시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "용인시", "start": 15, "end": 19}]}
+{"text": "경기도 부천시 중식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "부천시", "start": 4, "end": 8}, {"type": "food_type", "value": "중식", "start": 8, "end": 10}]}
+{"text": "베이커리 땡기는데 서울특별시 마포구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}, {"type": "location", "value": "서울", "start": 10, "end": 12}, {"type": "location", "value": "서울특별시 마포구", "start": 10, "end": 19}, {"type": "location", "value": "마포구", "start": 16, "end": 19}]}
+{"text": "서울특별시 구로구 근처에 패스트푸드 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 구로구", "start": 0, "end": 9}, {"type": "location", "value": "구로구", "start": 6, "end": 9}, {"type": "location", "value": "구로", "start": 6, "end": 8}, {"type": "food_type", "value": "패스트푸드", "start": 14, "end": 19}]}
+{"text": "한식 땡기는데 경기도 이천시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "이천시", "start": 12, "end": 16}]}
+{"text": "치킨 땡기는데 인천광역시 부평구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}, {"type": "location", "value": "인천", "start": 8, "end": 10}, {"type": "location", "value": "인천광역시 부평구", "start": 8, "end": 17}, {"type": "location", "value": "인천광역", "start": 8, "end": 12}, {"type": "location", "value": "부평구", "start": 14, "end": 17}]}
+{"text": "서울특별시 성북구 근처에 중식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성북구", "start": 0, "end": 9}, {"type": "location", "value": "성북구", "start": 6, "end": 9}, {"type": "food_type", "value": "중식", "start": 14, "end": 16}]}
+{"text": "서울특별시 동대문구에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동대문구", "start": 0, "end": 10}, {"type": "location", "value": "동대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "일식", "start": 13, "end": 15}]}
+{"text": "서울특별시 성동구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 성동구", "start": 0, "end": 9}, {"type": "location", "value": "성동구", "start": 6, "end": 9}, {"type": "location", "value": "성동", "start": 6, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "인천광역시 부평구 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 부평구", "start": 0, "end": 9}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "부평구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "경기도 화성시에서 분식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "분식", "start": 10, "end": 12}]}
+{"text": "서울특별시 도봉구 근처에 아시안 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 도봉구", "start": 0, "end": 9}, {"type": "location", "value": "도봉구", "start": 6, "end": 9}]}
+{"text": "서울특별시 동대문구 근처에 중식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동대문구", "start": 0, "end": 10}, {"type": "location", "value": "동대문구", "start": 6, "end": 10}, {"type": "food_type", "value": "중식", "start": 15, "end": 17}]}
+{"text": "서울특별시 광진구에서 카페디저트 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 광진구", "start": 0, "end": 9}, {"type": "location", "value": "광진구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "한식 땡기는데 경기도 하남시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "하남시", "start": 12, "end": 16}]}
+{"text": "한식 땡기는데 서울특별시 관악구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 관악구", "start": 8, "end": 17}, {"type": "location", "value": "관악구", "start": 14, "end": 17}]}
+{"text": "서울특별시 강동구 베이커리 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 강동구", "start": 0, "end": 9}, {"type": "location", "value": "강동구", "start": 6, "end": 9}, {"type": "location", "value": "강동", "start": 6, "end": 8}, {"type": "food_type", "value": "베이커리", "start": 10, "end": 14}]}
+{"text": "치킨 땡기는데 경기도 남양주시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "남양주시", "start": 12, "end": 17}]}
+{"text": "한식 땡기는데 서울특별시 동작구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 동작구", "start": 8, "end": 17}, {"type": "location", "value": "동작구", "start": 14, "end": 17}]}
+{"text": "경기도 남양주시 패스트푸드 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "남양주시", "start": 4, "end": 9}, {"type": "food_type", "value": "패스트푸드", "start": 9, "end": 14}]}
+{"text": "경기도 하남시에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "일식", "start": 10, "end": 12}]}
+{"text": "경기도 부천시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "부천시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "경기도 양주시 근처에 분식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "양주시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 12, "end": 14}]}
+{"text": "일식 땡기는데 서울특별시 강북구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 8, "end": 10}, {"type": "location", "value": "서울특별시 강북구", "start": 8, "end": 17}, {"type": "location", "value": "강북구", "start": 14, "end": 17}]}
+{"text": "카페디저트 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 11, "end": 14}, {"type": "location", "value": "화성시", "start": 15, "end": 19}]}
+{"text": "서울특별시 관악구 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 관악구", "start": 0, "end": 9}, {"type": "location", "value": "관악구", "start": 6, "end": 9}, {"type": "food_type", "value": "카페", "start": 10, "end": 12}]}
+{"text": "경기도 용인시 분식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 8, "end": 10}]}
+{"text": "경기도 고양시 근처에 양식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "고양시", "start": 4, "end": 8}, {"type": "food_type", "value": "양식", "start": 12, "end": 14}]}
+{"text": "경기도 파주시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "파주시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "경기도 하남시 분식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "하남시", "start": 4, "end": 8}, {"type": "food_type", "value": "분식", "start": 8, "end": 10}]}
+{"text": "패스트푸드 땡기는데 서울특별시 은평구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 은평구", "start": 11, "end": 20}, {"type": "location", "value": "은평구", "start": 17, "end": 20}]}
+{"text": "경기도 용인시 카페디저트 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 8, "end": 10}]}
+{"text": "카페디저트 땡기는데 서울특별시 동작구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}, {"type": "location", "value": "서울", "start": 11, "end": 13}, {"type": "location", "value": "서울특별시 동작구", "start": 11, "end": 20}, {"type": "location", "value": "동작구", "start": 17, "end": 20}]}
+{"text": "경기도 광주시 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "광주시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 8, "end": 10}]}
+{"text": "한식 땡기는데 인천광역시 서구 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "인천", "start": 8, "end": 10}, {"type": "location", "value": "인천광역시 서구", "start": 8, "end": 16}, {"type": "location", "value": "인천광역", "start": 8, "end": 12}, {"type": "location", "value": "서구", "start": 14, "end": 16}]}
+{"text": "경기도 남양주시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "남양주시", "start": 4, "end": 9}, {"type": "food_type", "value": "한식", "start": 13, "end": 15}]}
+{"text": "서울특별시 중랑구 한식 추천해줘", "intent": "recommend_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 중랑구", "start": 0, "end": 9}, {"type": "location", "value": "중랑구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 10, "end": 12}]}
+{"text": "인천광역시 서구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "인천", "start": 0, "end": 2}, {"type": "location", "value": "인천광역시 서구", "start": 0, "end": 8}, {"type": "location", "value": "인천광역", "start": 0, "end": 4}, {"type": "location", "value": "서구", "start": 6, "end": 8}, {"type": "food_type", "value": "한식", "start": 11, "end": 13}]}
+{"text": "경기도 파주시에서 일식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "food_type", "value": "일식", "start": 10, "end": 12}]}
+{"text": "한식 땡기는데 경기도 화성시 어디 갈까?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}, {"type": "location", "value": "경기도", "start": 8, "end": 11}, {"type": "location", "value": "화성시", "start": 12, "end": 16}]}
+{"text": "서울특별시 동작구에서 한식 어디가 맛있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "서울", "start": 0, "end": 2}, {"type": "location", "value": "서울특별시 동작구", "start": 0, "end": 9}, {"type": "location", "value": "동작구", "start": 6, "end": 9}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 화성시 근처에 한식 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "화성시", "start": 4, "end": 8}, {"type": "food_type", "value": "한식", "start": 12, "end": 14}]}
+{"text": "경기도 용인시 근처에 카페디저트 먹을 만한 곳 있어?", "intent": "search_restaurant", "entities": [{"type": "location", "value": "경기도", "start": 0, "end": 3}, {"type": "location", "value": "용인시", "start": 4, "end": 8}, {"type": "food_type", "value": "카페", "start": 12, "end": 14}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "10000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 0, "end": 6}, {"type": "location", "value": "이하로", "start": 7, "end": 10}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "10000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 0, "end": 6}, {"type": "location", "value": "이하로", "start": 7, "end": 10}]}
+{"text": "9000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "6000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "6000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 5000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 10000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 3, "end": 9}]}
+{"text": "6000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "8000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "6000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "6000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "8000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "8000원으로", "start": 0, "end": 7}, {"type": "price", "value": "8000원", "start": 0, "end": 5}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "10000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "5000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "5000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "5000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "돈이 8000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "8000원", "start": 3, "end": 8}]}
+{"text": "6000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "5000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "5000원으로", "start": 0, "end": 7}, {"type": "price", "value": "5000원", "start": 0, "end": 5}]}
+{"text": "돈이 6000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "6000원", "start": 3, "end": 8}]}
+{"text": "9000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "9000원으로", "start": 0, "end": 7}, {"type": "price", "value": "9000원", "start": 0, "end": 5}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "6000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "10000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 0, "end": 6}, {"type": "location", "value": "이하로", "start": 7, "end": 10}]}
+{"text": "6000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "6000원으로", "start": 0, "end": 7}, {"type": "price", "value": "6000원", "start": 0, "end": 5}]}
+{"text": "7000원으로 먹을만한 곳 추천해줘", "intent": "check_budget", "entities": [{"type": "location", "value": "7000원으로", "start": 0, "end": 7}, {"type": "price", "value": "7000원", "start": 0, "end": 5}]}
+{"text": "10000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "10000원", "start": 0, "end": 6}, {"type": "location", "value": "이하로", "start": 7, "end": 10}]}
+{"text": "10000원으로 뭐 먹을 수 있어?", "intent": "check_budget", "entities": [{"type": "location", "value": "10000원으로", "start": 0, "end": 8}, {"type": "price", "value": "10000원", "start": 0, "end": 6}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "7000원 이하로 먹을 수 있는 곳 알려줘", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 0, "end": 5}, {"type": "location", "value": "이하로", "start": 6, "end": 9}]}
+{"text": "돈이 9000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "9000원", "start": 3, "end": 8}]}
+{"text": "돈이 7000원밖에 없는데 어디 가지?", "intent": "check_budget", "entities": [{"type": "price", "value": "7000원", "start": 3, "end": 8}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "오늘 피자 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 3, "end": 5}]}
+{"text": "치킨 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}]}
+{"text": "프렌차이즈 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "기타 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "피자 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "프렌차이즈 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "오늘 치킨 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "치킨", "start": 3, "end": 5}]}
+{"text": "오늘 아시안 어때?", "intent": "general", "entities": []}
+{"text": "패스트푸드 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "패스트푸드 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "오늘 분식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "분식", "start": 3, "end": 5}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "피자 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "오늘 일식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "일식", "start": 3, "end": 5}]}
+{"text": "일식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "피자 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "한식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "편의점 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "오늘 아시안 어때?", "intent": "general", "entities": []}
+{"text": "중식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "분식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "중식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "분식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "분식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "일식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "중식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "한식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "오늘 패스트푸드 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 3, "end": 8}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "오늘 치킨 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "치킨", "start": 3, "end": 5}]}
+{"text": "편의점 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "양식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "오늘 베이커리 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "베이커리", "start": 3, "end": 7}]}
+{"text": "오늘 한식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "한식", "start": 3, "end": 5}]}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "아시안 먹고 싶어", "intent": "general", "entities": []}
+{"text": "일식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "일식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "피자 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "중식당 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "기타 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "프렌차이즈 먹고 싶어", "intent": "general", "entities": []}
+{"text": "오늘 편의점 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "편의점", "start": 3, "end": 6}]}
+{"text": "분식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "오늘 기타 어때?", "intent": "general", "entities": []}
+{"text": "오늘 프렌차이즈 어때?", "intent": "general", "entities": []}
+{"text": "한식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "오늘 패스트푸드 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 3, "end": 8}]}
+{"text": "일식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "패스트푸드 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "오늘 패스트푸드 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 3, "end": 8}]}
+{"text": "편의점 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "오늘 카페디저트 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "카페", "start": 3, "end": 5}]}
+{"text": "오늘 편의점 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "편의점", "start": 3, "end": 6}]}
+{"text": "아시안 먹고 싶어", "intent": "general", "entities": []}
+{"text": "중식당 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "기타 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "베이커리 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "오늘 중식당 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 3, "end": 5}]}
+{"text": "오늘 아시안 어때?", "intent": "general", "entities": []}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "일식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "오늘 양식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "양식", "start": 3, "end": 5}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "오늘 분식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "분식", "start": 3, "end": 5}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "오늘 기타 어때?", "intent": "general", "entities": []}
+{"text": "피자 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "피자 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "마트 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "치킨 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}]}
+{"text": "오늘 일식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "일식", "start": 3, "end": 5}]}
+{"text": "아시안 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "치킨 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}]}
+{"text": "패스트푸드 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "아시안 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "중식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "편의점 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "분식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "오늘 양식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "양식", "start": 3, "end": 5}]}
+{"text": "편의점 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "정육점 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "중식당 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "피자 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "중식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "오늘 패스트푸드 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 3, "end": 8}]}
+{"text": "프렌차이즈 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "프렌차이즈 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "패스트푸드 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "정육점 먹고 싶어", "intent": "general", "entities": []}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "한식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "정육점 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "아시안 먹고 싶어", "intent": "general", "entities": []}
+{"text": "오늘 분식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "분식", "start": 3, "end": 5}]}
+{"text": "기타 먹고 싶어", "intent": "general", "entities": []}
+{"text": "패스트푸드 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "오늘 기타 어때?", "intent": "general", "entities": []}
+{"text": "일식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "양식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "카페디저트 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "오늘 중식당 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 3, "end": 5}]}
+{"text": "양식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "양식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "한식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "베이커리 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "마트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "양식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "중식당 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "오늘 편의점 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "편의점", "start": 3, "end": 6}]}
+{"text": "베이커리 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "중식당 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "정육점 먹고 싶어", "intent": "general", "entities": []}
+{"text": "패스트푸드 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "마트 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "분식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "베이커리 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "정육점 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "카페디저트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "프렌차이즈 먹고 싶어", "intent": "general", "entities": []}
+{"text": "중식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "오늘 아시안 어때?", "intent": "general", "entities": []}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "기타 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "프렌차이즈 먹고 싶어", "intent": "general", "entities": []}
+{"text": "오늘 프렌차이즈 어때?", "intent": "general", "entities": []}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "한식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "마트 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "오늘 편의점 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "편의점", "start": 3, "end": 6}]}
+{"text": "정육점 먹고 싶어", "intent": "general", "entities": []}
+{"text": "양식 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "피자 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "편의점 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "한식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 0, "end": 2}]}
+{"text": "양식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "분식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "분식", "start": 0, "end": 2}]}
+{"text": "오늘 패스트푸드 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 3, "end": 8}]}
+{"text": "카페디저트 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "카페", "start": 0, "end": 2}]}
+{"text": "오늘 기타 어때?", "intent": "general", "entities": []}
+{"text": "기타 먹고 싶어", "intent": "general", "entities": []}
+{"text": "중식당 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "치킨 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}]}
+{"text": "중식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "마트 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "편의점 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "기타 먹고 싶어", "intent": "general", "entities": []}
+{"text": "오늘 마트 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 3, "end": 5}]}
+{"text": "베이커리 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "피자 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "기타 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "오늘 중식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 3, "end": 5}]}
+{"text": "오늘 베이커리 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "베이커리", "start": 3, "end": 7}]}
+{"text": "일식 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 0, "end": 2}]}
+{"text": "오늘 베이커리 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "베이커리", "start": 3, "end": 7}]}
+{"text": "중식당 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 0, "end": 2}]}
+{"text": "오늘 정육점 어때?", "intent": "general", "entities": []}
+{"text": "패스트푸드 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "패스트푸드 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "정육점 먹고 싶어", "intent": "general", "entities": []}
+{"text": "아시안 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "오늘 마트 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 3, "end": 5}]}
+{"text": "패스트푸드 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 0, "end": 5}]}
+{"text": "아시안 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "오늘 한식 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "한식", "start": 3, "end": 5}]}
+{"text": "오늘 중식당 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "중식", "start": 3, "end": 5}]}
+{"text": "치킨 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "치킨", "start": 0, "end": 2}]}
+{"text": "오늘 아시안 어때?", "intent": "general", "entities": []}
+{"text": "피자 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 0, "end": 2}]}
+{"text": "베이커리 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "오늘 베이커리 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "베이커리", "start": 3, "end": 7}]}
+{"text": "오늘 카페디저트 어때?", "intent": "general", "entities": [{"type": "food_type", "value": "카페", "start": 3, "end": 5}]}
+{"text": "베이커리 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 0, "end": 4}]}
+{"text": "마트 먹고 싶어", "intent": "general", "entities": [{"type": "food_type", "value": "마트", "start": 0, "end": 2}]}
+{"text": "편의점 맛집 알려줘", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "편의점", "start": 0, "end": 3}]}
+{"text": "정육점 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "양식 제일 맛있는 곳 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 0, "end": 2}]}
+{"text": "오늘 기타 어때?", "intent": "general", "entities": []}
+{"text": "정육점 맛집 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "급식카드로 한식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 한식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 한식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "한식", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 피자집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "피자", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 중식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "중식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 한식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "한식", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 한식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 피자집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "피자", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 한식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "한식", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "급식카드로 한식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 중식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "중식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 피자집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "피자", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 중식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "중식", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 피자집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "피자", "start": 13, "end": 15}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "급식카드로 한식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 분식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "분식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 한식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "한식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 피자집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "피자", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 중식집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "중식", "start": 13, "end": 15}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드로 분식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "분식", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 피자 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "급식카드로 치킨 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "급식카드 되는 곳 어디야?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "G드림카드 쓸 수 있는 치킨집 있어?", "intent": "check_payment", "entities": [{"type": "payment_method", "value": "카드", "start": 3, "end": 5}, {"type": "food_type", "value": "치킨", "start": 13, "end": 15}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "급식카드로 중식 먹을 수 있어?", "intent": "check_payment", "entities": [{"type": "location", "value": "급식카드로", "start": 0, "end": 5}, {"type": "payment_method", "value": "급식카드", "start": 0, "end": 4}, {"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "꿈나무카드로 먹을 수 있는 곳 알려줘", "intent": "check_payment", "entities": [{"type": "location", "value": "꿈나무카드로", "start": 0, "end": 6}, {"type": "payment_method", "value": "카드", "start": 3, "end": 5}]}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "있어?", "intent": "search_restaurant", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "땡큐", "intent": "thank", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "고마워", "intent": "thank", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "도움됐어", "intent": "general", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "안녕", "intent": "greet", "entities": []}
+{"text": "ㅎㅇ", "intent": "general", "entities": []}
+{"text": "뭐해?", "intent": "general", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "ㄱㅅ", "intent": "general", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 치킨집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "치킨", "start": 6, "end": 8}]}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "리뷰 좋은 베이커리집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "베이커리", "start": 6, "end": 10}]}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "리뷰 좋은 일식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 6, "end": 8}]}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 패스트푸드집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 6, "end": 11}]}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 패스트푸드집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 6, "end": 11}]}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 피자집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 6, "end": 8}]}
+{"text": "리뷰 좋은 한식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "리뷰 좋은 양식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 6, "end": 8}]}
+{"text": "리뷰 좋은 한식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "한식", "start": 6, "end": 8}]}
+{"text": "리뷰 좋은 양식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "양식", "start": 6, "end": 8}]}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 일식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "일식", "start": 6, "end": 8}]}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 패스트푸드집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "패스트푸드", "start": 6, "end": 11}]}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 프렌차이즈집 어디야?", "intent": "search_restaurant", "entities": []}
+{"text": "리뷰 좋은 중식집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "중식", "start": 6, "end": 8}]}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "평점 높은 곳 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "사람들이 많이 가는 곳 알려줘", "intent": "search_restaurant", "entities": []}
+{"text": "인기 있는 맛집 추천해줘", "intent": "recommend_restaurant", "entities": []}
+{"text": "리뷰 좋은 피자집 어디야?", "intent": "search_restaurant", "entities": [{"type": "food_type", "value": "피자", "start": 6, "end": 8}]}

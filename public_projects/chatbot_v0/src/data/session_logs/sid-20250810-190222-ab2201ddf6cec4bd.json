@@ -1,0 +1,104 @@
+{
+  "session_id": "sid-20250810-190222-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T19:02:22.527989",
+  "session_end_time": "2025-08-10T19:02:22.529517",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T19:02:22.527989",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1007,
+            "score": 0
+          },
+          {
+            "shop_id": 1017,
+            "score": 1
+          },
+          {
+            "shop_id": 1025,
+            "score": 2
+          },
+          {
+            "shop_id": 1031,
+            "score": 3
+          },
+          {
+            "shop_id": 1040,
+            "score": 4
+          },
+          {
+            "shop_id": 1045,
+            "score": 5
+          },
+          {
+            "shop_id": 1046,
+            "score": 6
+          },
+          {
+            "shop_id": 1057,
+            "score": 7
+          },
+          {
+            "shop_id": 1063,
+            "score": 8
+          },
+          {
+            "shop_id": 1064,
+            "score": 9
+          }
+        ],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "원하시는 조건에 맞는 가게를 찾지 못했습니다.",
+        "response_time_ms": 0
+      },
+      "user_feedback": null
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T19:02:22.529517",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1066,
+            "score": 0.7540995595129428
+          },
+          {
+            "shop_id": 1094,
+            "score": 1.0364637257321616
+          }
+        ],
+        "recommendation_scores": [],
+        "displayed_recommendations": [],
+        "generated_response": "원하시는 조건에 맞는 가게를 찾지 못했습니다.",
+        "response_time_ms": 0
+      },
+      "user_feedback": null
+    }
+  ],
+  "session_metadata": {}
+}

@@ -1,0 +1,150 @@
+{
+  "session_id": "sid-20250810-191517-ab2201ddf6cec4bd",
+  "user_id_anonymous": "user-ab2201ddf6cec4bd",
+  "session_start_time": "2025-08-10T19:15:17.166068",
+  "session_end_time": "2025-08-10T19:15:17.168067",
+  "interactions": [
+    {
+      "turn_id": 1,
+      "timestamp": "2025-08-10T19:15:17.167067",
+      "user_input": {
+        "text": "치킨 추천해줘"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "food_type": "치킨"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1007,
+            "score": 0
+          },
+          {
+            "shop_id": 1017,
+            "score": 1
+          },
+          {
+            "shop_id": 1025,
+            "score": 2
+          },
+          {
+            "shop_id": 1031,
+            "score": 3
+          },
+          {
+            "shop_id": 1040,
+            "score": 4
+          },
+          {
+            "shop_id": 1045,
+            "score": 5
+          },
+          {
+            "shop_id": 1046,
+            "score": 6
+          },
+          {
+            "shop_id": 1057,
+            "score": 7
+          },
+          {
+            "shop_id": 1063,
+            "score": 8
+          },
+          {
+            "shop_id": 1064,
+            "score": 9
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1007,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1017,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1025,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1007,
+          1017,
+          1025
+        ],
+        "generated_response": "다음 가게들을 추천해드립니다: 지코바 성복1호점, 치킨아메리카Z 평촌점, 소문난닭강정병방점",
+        "response_time_ms": 0
+      },
+      "user_feedback": {
+        "selected_shop_id": 1007,
+        "unselected_shop_ids": [
+          1017,
+          1025
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2025-08-10T19:15:17.168067",
+      "user_input": {
+        "text": "부평에서 피자 먹고 싶어"
+      },
+      "nlu_output": {
+        "intent": "food_request",
+        "entities": {
+          "location": "부평",
+          "food_type": "피자"
+        },
+        "confidence": 0.8
+      },
+      "system_output": {
+        "rag_candidates": [
+          {
+            "shop_id": 1066,
+            "score": 0.7540995595129428
+          },
+          {
+            "shop_id": 1094,
+            "score": 1.0364637257321616
+          }
+        ],
+        "recommendation_scores": [
+          {
+            "shop_id": 1066,
+            "score": 0.0
+          },
+          {
+            "shop_id": 1094,
+            "score": 0.0
+          }
+        ],
+        "displayed_recommendations": [
+          1066,
+          1094
+        ],
+        "generated_response": "다음 가게들을 추천해드립니다: 신화로닭발, 롸버트치킨 인천삼산점",
+        "response_time_ms": 0
+      },
+      "user_feedback": {
+        "selected_shop_id": 1066,
+        "unselected_shop_ids": [
+          1094
+        ],
+        "selection_reason": "select",
+        "rejection_reason": null,
+        "implicit_signals": {}
+      }
+    }
+  ],
+  "session_metadata": {}
+}

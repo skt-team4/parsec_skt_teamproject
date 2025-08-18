@@ -1,0 +1,92 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python virtual environments
+myenv/
+venv/
+**/venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+.env.local
+**/.env
+**/.env.local
+
+# PyTorch library files
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Cache
+cache/
+.cache/
+
+# Azure
+__azurite_db_*
+__queuestorage__/
+
+# Temporary files
+*.tmp
+temp/
+
+# Large files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# API keys and secrets
+*.key
+*.pem
+*.crt
+
+# Database
+*.db
+*.sqlite
+
+# Node modules (for React Native project)
+node_modules/
+**/node_modules/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Model files (large files)
+*.pkl
+*.pth
+*.bin
+*.h5
+*.safetensors
+*.onnx
+
+# Additional ignore patterns
+AzuriteConfig/
+ngrok.exe
+cloudflared.exe
+test_*.json
+test_*.py
+test_*.html
+nul
+*.bak
+outputs/naviyam_chatbot.log
+outputs/user_profiles/
+outputs/learning_data/
+server.log
+ax_debug.log

@@ -1,0 +1,11 @@
+# Docker 컨테이너용 최소 requirements
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+pydantic>=2.0.0
+accelerate>=0.20.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+python-multipart>=0.0.6

@@ -1,0 +1,30 @@
+{
+  "user_id": "myeong_bin_14",
+  "category_scores": {
+    "도시락": 0.38333333333333336,
+    "한식": 0.36666666666666664,
+    "죽": 0.25,
+    "분식": 0.8442250025889526,
+    "일식": 0.6545360582948718,
+    "양식": 0.5131566381408098,
+    "베이커리": 0.6390646438786757,
+    "중식": 0.40084823973931705,
+    "치킨": 0.14543491563878763
+  },
+  "price_preference": {
+    "under_5000": 0.1,
+    "5000_7000": 0.3,
+    "7000_9500": 0.6
+  },
+  "emotion_history": [],
+  "group_size_history": [],
+  "interaction_count": 81,
+  "last_updated": "2025-08-17T16:34:27.741846",
+  "click_history": [],
+  "order_history": [],
+  "school_area": null,
+  "favorite_trends": [],
+  "quest_progress": {},
+  "monthly_budget": -96119,
+  "daily_budget_left": 9500
+}

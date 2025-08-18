@@ -1,0 +1,61 @@
+{
+  "user_id": "myeong_bin_14",
+  "profile_created": "2025-08-13T23:11:49.883603",
+  "interaction_count": 80,
+  "feature_scores": {
+    "price_sensitivity": 0.7,
+    "health_consciousness": 0.7,
+    "exploration_tendency": 0.2,
+    "meal_regularity": 0.8,
+    "social_dining_preference": 0.2,
+    "convenience_preference": 0.6,
+    "brand_loyalty": 0.7,
+    "nutrition_awareness": 0.6,
+    "time_flexibility": 0.5,
+    "delivery_preference": 0.3,
+    "sustainability_concern": 0.2
+  },
+  "category_scores": {
+    "도시락": 0.38333333333333336,
+    "한식": 0.36666666666666664,
+    "죽": 0.25
+  },
+  "time_patterns": {},
+  "price_patterns": {
+    "avg_spending": 7543.038461538462,
+    "max_spending": 9214,
+    "min_spending": 5319
+  },
+  "nutrition_tracking": {
+    "current_issues": [
+      "unbalanced_diet",
+      "irregular_meals"
+    ],
+    "calories_daily": 1900,
+    "nutrition_scores": {
+      "carbohydrate": 0.6,
+      "protein": 0.5,
+      "fat": 0.5,
+      "vitamin": 0.5,
+      "mineral": 0.5,
+      "fiber": 0.4
+    },
+    "health_risks": [
+      "allergy_reactions",
+      "nutrition_deficiency"
+    ],
+    "recommended_nutrients": [
+      "protein",
+      "calcium",
+      "vitamin_d"
+    ],
+    "allergy_alert": true
+  },
+  "meal_card": {
+    "balance": -96119,
+    "daily_limit": 9500,
+    "days_remaining": 10,
+    "avg_spending": 7500,
+    "warning_threshold": 30000
+  }
+}

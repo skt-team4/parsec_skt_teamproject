@@ -1,0 +1,89 @@
+{
+  "user_id": "user_001",
+  "preferred_categories": [
+    "치킨",
+    "피자"
+  ],
+  "average_budget": null,
+  "favorite_shops": [],
+  "recent_orders": [
+    {
+      "timestamp": "2025-08-10T21:42:38.683686",
+      "intent": "food_request",
+      "food_type": "치킨",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T21:42:38.693686",
+      "intent": "food_request",
+      "food_type": "피자",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T21:46:09.838524",
+      "intent": "food_request",
+      "food_type": "치킨",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T21:46:09.850513",
+      "intent": "food_request",
+      "food_type": "피자",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:00:50.955348",
+      "intent": "food_request",
+      "food_type": "치킨",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:00:50.966329",
+      "intent": "food_request",
+      "food_type": "피자",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:08:23.257444",
+      "intent": "food_request",
+      "food_type": "치킨",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:08:28.741870",
+      "intent": "food_request",
+      "food_type": "피자",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:19:24.116823",
+      "intent": "food_request",
+      "food_type": "치킨",
+      "budget": null,
+      "emotion": "neutral"
+    },
+    {
+      "timestamp": "2025-08-10T22:19:29.368358",
+      "intent": "food_request",
+      "food_type": "피자",
+      "budget": null,
+      "emotion": "neutral"
+    }
+  ],
+  "conversation_style": "friendly",
+  "last_updated": "2025-08-10T22:19:29.368358",
+  "taste_preferences": {},
+  "companion_patterns": [],
+  "location_preferences": [],
+  "good_influence_preference": 0.5,
+  "interaction_count": 2,
+  "data_completeness": 0.25
+}

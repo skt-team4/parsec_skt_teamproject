@@ -1,0 +1,62 @@
+{
+  "user_id": "min_ho_17",
+  "profile_created": "2025-08-13T23:11:49.881603",
+  "interaction_count": 77,
+  "feature_scores": {
+    "price_sensitivity": 0.8,
+    "health_consciousness": 0.4,
+    "exploration_tendency": 0.5,
+    "meal_regularity": 0.6,
+    "social_dining_preference": 0.5,
+    "convenience_preference": 0.7,
+    "brand_loyalty": 0.6,
+    "nutrition_awareness": 0.4,
+    "time_flexibility": 0.5,
+    "delivery_preference": 0.3,
+    "sustainability_concern": 0.2
+  },
+  "category_scores": {
+    "치킨": 0.35714285714285715,
+    "분식": 0.30357142857142855,
+    "한식": 0.3392857142857143
+  },
+  "time_patterns": {},
+  "price_patterns": {
+    "avg_spending": 7208.076923076923,
+    "max_spending": 9472,
+    "min_spending": 5774
+  },
+  "nutrition_tracking": {
+    "current_issues": [
+      "skip_breakfast",
+      "excess_sodium",
+      "excess_caffeine"
+    ],
+    "calories_daily": 2200,
+    "nutrition_scores": {
+      "carbohydrate": 0.8,
+      "protein": 0.6,
+      "fat": 0.6,
+      "vitamin": 0.4,
+      "mineral": 0.5,
+      "fiber": 0.3
+    },
+    "health_risks": [
+      "concentration_issues",
+      "irregular_meals"
+    ],
+    "recommended_nutrients": [
+      "vitamin_b",
+      "iron",
+      "fiber"
+    ]
+  },
+  "meal_card": {
+    "balance": -73705,
+    "daily_limit": 9500,
+    "days_remaining": 2,
+    "avg_spending": 9000,
+    "warning_threshold": 10000,
+    "alert_message": "잔액이 부족합니다. 충전이 필요해요."
+  }
+}

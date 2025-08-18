@@ -1,0 +1,26 @@
+{
+  "user_id": "ㅎㅇ",
+  "category_scores": {
+    "치킨": 0,
+    "": 0.33999999999999997,
+    "분식": 0.33999999999999997,
+    "양식": 0.33999999999999997,
+    "한식": 0.33999999999999997
+  },
+  "price_preference": {
+    "under_5000": 0.3,
+    "5000_7000": 0.4,
+    "7000_9500": 0.3
+  },
+  "emotion_history": [],
+  "group_size_history": [],
+  "interaction_count": 8,
+  "last_updated": "2025-08-13T21:05:28.027369",
+  "click_history": [],
+  "order_history": [],
+  "school_area": null,
+  "favorite_trends": [],
+  "quest_progress": {},
+  "monthly_budget": 285000,
+  "daily_budget_left": 9500
+}

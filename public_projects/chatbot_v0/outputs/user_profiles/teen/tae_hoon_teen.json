@@ -1,0 +1,129 @@
+{
+  "user_id": "tae_hoon",
+  "category_scores": {
+    "치킨": 0.54,
+    "컵라면": 0.42,
+    "삼각김밥": 0.42,
+    "피자": 0.7,
+    "햄버거": 0.42,
+    "떡볶이": 0.7
+  },
+  "price_preference": {
+    "under_5000": 0.3,
+    "5000_7000": 0.4,
+    "7000_9500": 0.3
+  },
+  "emotion_history": [],
+  "group_size_history": [],
+  "interaction_count": 12,
+  "last_updated": "2025-08-14T10:10:52.723993",
+  "click_history": [
+    {
+      "timestamp": "2025-08-14T10:10:52.720478",
+      "shop_id": 1000,
+      "type": "order",
+      "metadata": {
+        "category": "치킨",
+        "timestamp": "2025-08-07T10:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.721483",
+      "shop_id": 1001,
+      "type": "click",
+      "metadata": {
+        "category": "컵라면",
+        "timestamp": "2025-08-08T09:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.721988",
+      "shop_id": 1002,
+      "type": "click",
+      "metadata": {
+        "category": "삼각김밥",
+        "timestamp": "2025-08-09T08:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.721988",
+      "shop_id": 1003,
+      "type": "order",
+      "metadata": {
+        "category": "피자",
+        "timestamp": "2025-08-10T07:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.722993",
+      "shop_id": 1004,
+      "type": "click",
+      "metadata": {
+        "category": "햄버거",
+        "timestamp": "2025-08-11T06:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.723993",
+      "shop_id": 1005,
+      "type": "click",
+      "metadata": {
+        "category": "치킨",
+        "timestamp": "2025-08-12T05:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.723993",
+      "shop_id": 1006,
+      "type": "order",
+      "metadata": {
+        "category": "떡볶이",
+        "timestamp": "2025-08-13T04:10:52.720478",
+        "simulated": true
+      }
+    }
+  ],
+  "order_history": [
+    {
+      "timestamp": "2025-08-14T10:10:52.720478",
+      "shop_id": 1000,
+      "type": "order",
+      "metadata": {
+        "category": "치킨",
+        "timestamp": "2025-08-07T10:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.721988",
+      "shop_id": 1003,
+      "type": "order",
+      "metadata": {
+        "category": "피자",
+        "timestamp": "2025-08-10T07:10:52.720478",
+        "simulated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-14T10:10:52.723993",
+      "shop_id": 1006,
+      "type": "order",
+      "metadata": {
+        "category": "떡볶이",
+        "timestamp": "2025-08-13T04:10:52.720478",
+        "simulated": true
+      }
+    }
+  ],
+  "school_area": "강남고",
+  "favorite_trends": [],
+  "quest_progress": {},
+  "monthly_budget": 285000,
+  "daily_budget_left": 9500
+}
