@@ -169,85 +169,71 @@ export default function FoodVisionScreen() {
       // FormData 생성
       const formData = await createFormDataFromFile(capturedImage || '', base64Image);
       
-      console.log('LogMeal API 호출 시작: http://localhost:5003/analyze-nutrition');
-      
-      // LogMeal 기반 통합 영양 분석 API 호출
-      const response = await fetch('http://localhost:5003/analyze-nutrition', {
+      // Step 1: Korean Food API로 음식명 인식
+      console.log('Korean Food API 호출 시작: http://localhost:5001/analyze');
+      const foodResponse = await fetch('http://localhost:5001/analyze', {
         method: 'POST',
         body: formData,
       });
       
-      console.log('API 응답 상태:', response.status);
+      console.log('음식 인식 API 응답 상태:', foodResponse.status);
       
-      if (!response.ok) {
-        throw new Error(`API 요청 실패: ${response.status}`);
+      if (!foodResponse.ok) {
+        throw new Error(`음식 인식 실패: ${foodResponse.status}`);
       }
       
-      const result = await response.json();
-      console.log('LogMeal 분석 결과:', result);
+      const foodResult = await foodResponse.json();
+      console.log('음식 인식 결과:', foodResult);
       
-      if (result.status === 'success') {
-        // 음식명 설정
-        const foodNames = result.foodNames || [];
-        if (foodNames.length > 0) {
-          setAnalyzedFood(foodNames[0]);
-          
-          // 음식 예측 결과를 포맷팅 (LogMeal 형식에 맞게)
-          const predictions = foodNames.map((name: string, index: number) => ({
-            label: name,
-            score: 90 - (index * 10) // 신뢰도 임시 설정
-          }));
-          setFoodPredictions(predictions);
-        } else {
-          setAnalyzedFood('음식');
-        }
+      // 음식명 설정
+      if (foodResult.status === 'success' && foodResult.predictions && foodResult.predictions.length > 0) {
+        const topFood = foodResult.predictions[0];
+        setAnalyzedFood(topFood.label);
+        setFoodPredictions(foodResult.predictions);
         
-        // LogMeal에서 받은 실제 영양 정보 설정
-        if (result.hasNutritionalInfo && result.nutritional_info) {
-          setNutritionInfo(result.nutritional_info);
-          setEstimatedCalories(result.nutritional_info.calories || 0);
-          
-          console.log('영양 정보:', {
-            calories: result.nutritional_info.calories,
-            nutrients: result.nutritional_info.totalNutrients
-          });
-        } else {
-          console.warn('영양 정보가 없습니다');
-          setEstimatedCalories(0);
-        }
-        
-        setShowMealTypeModal(true);
+        console.log('인식된 음식:', topFood.label);
       } else {
-        throw new Error(result.message || '음식 분석 실패');
+        setAnalyzedFood('음식');
+        setFoodPredictions([]);
       }
-    } catch (error) {
-      console.error('음식 분석 오류:', error);
       
-      // LogMeal API가 실패하면 기존 Korean Food API로 폴백
-      console.log('LogMeal 실패, Korean Food API로 폴백...');
+      // Step 2: LogMeal API로 영양소 분석 (선택적)
       try {
-        const formData = await createFormDataFromFile(capturedImage || '', base64Image);
-        const fallbackResponse = await fetch('http://localhost:5001/analyze', {
+        console.log('LogMeal API 호출 시작: http://localhost:5003/analyze-nutrition');
+        const nutritionFormData = await createFormDataFromFile(capturedImage || '', base64Image);
+        const nutritionResponse = await fetch('http://localhost:5003/analyze-nutrition', {
           method: 'POST',
-          body: formData,
+          body: nutritionFormData,
         });
         
-        if (fallbackResponse.ok) {
-          const fallbackResult = await fallbackResponse.json();
-          if (fallbackResult.status === 'success' && fallbackResult.predictions) {
-            setFoodPredictions(fallbackResult.predictions);
-            const topFood = fallbackResult.predictions[0];
-            setAnalyzedFood(topFood.label);
+        if (nutritionResponse.ok) {
+          const nutritionResult = await nutritionResponse.json();
+          console.log('LogMeal 영양 분석 결과:', nutritionResult);
+          
+          if (nutritionResult.hasNutritionalInfo && nutritionResult.nutritional_info) {
+            setNutritionInfo(nutritionResult.nutritional_info);
+            setEstimatedCalories(nutritionResult.nutritional_info.calories || 0);
             
-            // 기본 영양 정보 설정
-            setEstimatedCalories(250);
-            setShowMealTypeModal(true);
-            return;
+            console.log('영양 정보:', {
+              calories: nutritionResult.nutritional_info.calories,
+              nutrients: nutritionResult.nutritional_info.totalNutrients
+            });
+          } else {
+            console.warn('영양 정보가 없습니다');
+            setEstimatedCalories(250); // 기본값
           }
+        } else {
+          console.warn('영양 분석 실패, 기본값 사용');
+          setEstimatedCalories(250); // 기본값
         }
-      } catch (fallbackError) {
-        console.error('폴백도 실패:', fallbackError);
+      } catch (nutritionError) {
+        console.error('영양 분석 오류:', nutritionError);
+        setEstimatedCalories(250); // 기본값
       }
+      
+      setShowMealTypeModal(true);
+    } catch (error) {
+      console.error('음식 분석 오류:', error);
       
       if (Platform.OS === 'web') {
         window.alert(`오류: ${error instanceof Error ? error.message : '음식을 인식할 수 없습니다.'}`);

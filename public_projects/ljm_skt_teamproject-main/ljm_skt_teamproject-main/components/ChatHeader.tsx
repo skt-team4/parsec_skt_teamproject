@@ -1,5 +1,4 @@
 // components/ChatHeader.tsx
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -10,11 +9,6 @@ import { isSmallScreen, styles } from '../styles/chatStyles';
 export const ChatHeader = () => {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  // 설정 페이지로 이동
-  const navigateToSettings = () => {
-    router.push('/settings');
-  };
 
   return (
     <LinearGradient
@@ -29,17 +23,6 @@ export const ChatHeader = () => {
         </View>
         
         <View style={styles.rightSection}>
-          <TouchableOpacity 
-            style={styles.settingsButton}
-            onPress={navigateToSettings}
-          >
-            <Image
-              source={require('../assets/settings.svg')}
-              style={[styles.settingsIcon, { width: 30, height: 30 }]}
-              contentFit="contain"
-            />
-          </TouchableOpacity>
-          
           <TouchableOpacity onPress={() => router.back()} style={styles.closeButtonContainer}>
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>

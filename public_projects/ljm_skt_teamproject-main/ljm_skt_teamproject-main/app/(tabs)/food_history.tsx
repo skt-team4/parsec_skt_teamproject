@@ -13,6 +13,7 @@ import {
   Modal,
   ScrollView,
   Dimensions,
+  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
@@ -188,35 +189,56 @@ export default function FoodHistoryScreen() {
   };
 
   const deleteItem = async (id: string) => {
-    Alert.alert(
-      '기록 삭제',
-      '이 기록을 삭제하시겠습니까?',
-      [
-        { text: '취소', style: 'cancel' },
-        {
-          text: '삭제',
-          style: 'destructive',
-          onPress: async () => {
-            if (selectedTab === 'local') {
-              const newHistory = foodHistory.filter(item => item.id !== id);
-              setFoodHistory(newHistory);
-              await AsyncStorage.setItem('foodHistory', JSON.stringify(newHistory));
-            } else {
-              try {
-                const response = await fetch(`http://localhost:5004/api/delete-record/${id}`, {
-                  method: 'DELETE'
-                });
-                if (response.ok) {
-                  await loadHistory();
-                }
-              } catch (error) {
-                console.error('삭제 실패:', error);
-              }
-            }
+    // 웹과 모바일에서 모두 작동하도록 수정
+    const confirmDelete = () => {
+      if (Platform.OS === 'web') {
+        return window.confirm('이 기록을 삭제하시겠습니까?');
+      } else {
+        return new Promise<boolean>((resolve) => {
+          Alert.alert(
+            '기록 삭제',
+            '이 기록을 삭제하시겠습니까?',
+            [
+              { text: '취소', style: 'cancel', onPress: () => resolve(false) },
+              { text: '삭제', style: 'destructive', onPress: () => resolve(true) }
+            ]
+          );
+        });
+      }
+    };
+
+    const shouldDelete = Platform.OS === 'web' ? confirmDelete() : await confirmDelete();
+    
+    if (shouldDelete) {
+      try {
+        if (selectedTab === 'local') {
+          const newHistory = foodHistory.filter(item => item.id !== id);
+          setFoodHistory(newHistory);
+          await AsyncStorage.setItem('foodHistory', JSON.stringify(newHistory));
+          // 다시 그룹화
+          groupDataByDate(newHistory);
+        } else {
+          const response = await fetch(`http://localhost:5004/api/delete-record/${id}`, {
+            method: 'DELETE'
+          });
+          if (response.ok) {
+            await loadHistory();
           }
         }
-      ]
-    );
+        
+        // 삭제 성공 메시지
+        if (Platform.OS === 'web') {
+          console.log('기록이 삭제되었습니다.');
+        }
+      } catch (error) {
+        console.error('삭제 실패:', error);
+        if (Platform.OS === 'web') {
+          window.alert('삭제에 실패했습니다.');
+        } else {
+          Alert.alert('오류', '삭제에 실패했습니다.');
+        }
+      }
+    }
   };
 
   const toggleExpanded = (id: string) => {

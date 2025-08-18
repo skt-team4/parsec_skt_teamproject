@@ -25,6 +25,8 @@ import {
   type RicePulLevel,
   type Transaction
 } from '../../utils/ricePulManager';
+import { getPersonas, setCurrentPersona, getCurrentPersona, type Persona } from '../../services/apiService';
+import { Switch, Platform } from 'react-native';
 
 interface UserProfile {
   name: string;
@@ -64,6 +66,52 @@ interface SearchResult {
   lng: number;
 }
 
+// 추천 카테고리 타입 정의
+interface RecommendationCategory {
+  id: string;
+  name: string;
+  emoji: string;
+  description: string;
+}
+
+// 알러지 항목 타입 정의
+interface AllergyItem {
+  id: string;
+  name: string;
+  emoji: string;
+  description: string;
+}
+
+// 사용 가능한 추천 카테고리들
+const AVAILABLE_CATEGORIES: RecommendationCategory[] = [
+  { id: 'korean', name: '한식', emoji: '🍚', description: '김치찌개, 비빔밥, 불고기 등' },
+  { id: 'chinese', name: '중식', emoji: '🥢', description: '짜장면, 탕수육, 마라탕 등' },
+  { id: 'japanese', name: '일식', emoji: '🍣', description: '초밥, 라멘, 돈가스 등' },
+  { id: 'western', name: '양식', emoji: '🍝', description: '파스타, 스테이크, 피자 등' },
+  { id: 'fastfood', name: '패스트푸드', emoji: '🍔', description: '햄버거, 치킨, 피자 등' },
+  { id: 'cafe', name: '카페/디저트', emoji: '☕', description: '커피, 케이크, 브런치 등' },
+  { id: 'healthy', name: '건강식', emoji: '🥗', description: '샐러드, 포케볼, 수프 등' },
+  { id: 'spicy', name: '매운음식', emoji: '🌶️', description: '떡볶이, 매운탕, 마라탕 등' },
+  { id: 'sweet', name: '단맛', emoji: '🍰', description: '케이크, 아이스크림, 과자 등' },
+  { id: 'vegetarian', name: '채식', emoji: '🌱', description: '샐러드, 두부요리, 나물 등' },
+];
+
+// 사용 가능한 알러지 항목들
+const AVAILABLE_ALLERGIES: AllergyItem[] = [
+  { id: 'nuts', name: '견과류', emoji: '🥜', description: '아몬드, 호두, 땅콩, 캐슈넛 등' },
+  { id: 'shellfish', name: '갑각류', emoji: '🦐', description: '새우, 게, 바닷가재 등' },
+  { id: 'eggs', name: '계란', emoji: '🥚', description: '달걀, 메추리알 등' },
+  { id: 'dairy', name: '유제품', emoji: '🥛', description: '우유, 치즈, 버터, 요거트 등' },
+  { id: 'soy', name: '대두', emoji: '🌱', description: '콩, 두부, 된장, 간장 등' },
+  { id: 'wheat', name: '밀/글루텐', emoji: '🌾', description: '밀가루, 빵, 파스타, 라면 등' },
+  { id: 'fish', name: '생선', emoji: '🐟', description: '고등어, 연어, 참치 등' },
+  { id: 'mollusks', name: '조개류', emoji: '🐚', description: '조개, 굴, 전복, 오징어 등' },
+  { id: 'sesame', name: '참깨', emoji: '🍃', description: '참깨, 들깨, 참기름 등' },
+  { id: 'peach', name: '복숭아', emoji: '🍑', description: '복숭아, 자두, 살구 등' },
+  { id: 'tomato', name: '토마토', emoji: '🍅', description: '토마토, 토마토 소스 등' },
+  { id: 'sulfites', name: '아황산염', emoji: '⚗️', description: '와인, 건포도, 가공식품 등' },
+];
+
 export default function MyPageScreen() {
   const router = useRouter();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -84,12 +132,28 @@ export default function MyPageScreen() {
   const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
   const [weather, setWeather] = useState<WeatherInfo | null>(null);
   const [showAddressModal, setShowAddressModal] = useState<boolean>(false);
+  
+  // 추천 카테고리 관련 상태
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showCategoryModal, setShowCategoryModal] = useState<boolean>(false);
+
+  // 알러지 관련 상태
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
+  const [showAllergyModal, setShowAllergyModal] = useState<boolean>(false);
+
+  // 앱 설정 관련 상태
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState<boolean>(true);
+  
+  // 페르소나 관련 상태
+  const [personas, setPersonas] = useState<Persona[]>([]);
+  const [selectedPersona, setSelectedPersona] = useState<string>('');
+  const [showPersonaModal, setShowPersonaModal] = useState<boolean>(false);
 
   const [profile, setProfile] = useState<UserProfile>({
-    name: '김철수',
-    email: 'kimcheolsu@example.com',
+    name: '',
+    email: 'user@example.com',
     phone: '010-1234-5678',
-    avatar: 'https://via.placeholder.com/120x120/FFBF00/FFFFFF?text=김철수',
+    avatar: 'https://via.placeholder.com/120x120/FFBF00/FFFFFF?text=U',
     membershipLevel: 'GOLD',
     points: currentRicePul,
     card: {
@@ -117,6 +181,10 @@ export default function MyPageScreen() {
       loadIntegratedData();
       loadSavedAddress();
       loadWeatherInfo();
+      loadSelectedCategories();
+      loadSelectedAllergies();
+      loadAnimationSettings();
+      loadPersonas();
     }, [])
   );
 
@@ -333,7 +401,7 @@ export default function MyPageScreen() {
             mealCardBalance = 25000;
             break;
           case '명빈':
-            mealCardBalance = 5000;
+            mealCardBalance = 50000;
             break;
           case '태훈':
             mealCardBalance = 15000;
@@ -450,6 +518,306 @@ export default function MyPageScreen() {
     return total > 0 ? (currentLevel.currentExp / total) * 100 : 0;
   };
 
+  // 저장된 추천 카테고리 불러오기
+  const loadSelectedCategories = async () => {
+    try {
+      const saved = await AsyncStorage.getItem('selectedCategories');
+      if (saved) {
+        const categories: string[] = JSON.parse(saved);
+        setSelectedCategories(categories);
+      }
+    } catch (error) {
+      console.error('추천 카테고리 불러오기 실패:', error);
+    }
+  };
+
+  // 저장된 알러지 정보 불러오기
+  const loadSelectedAllergies = async () => {
+    try {
+      const saved = await AsyncStorage.getItem('selectedAllergies');
+      if (saved) {
+        const allergies: string[] = JSON.parse(saved);
+        setSelectedAllergies(allergies);
+      }
+    } catch (error) {
+      console.error('알러지 정보 불러오기 실패:', error);
+    }
+  };
+
+  // 저장된 애니메이션 설정 불러오기
+  const loadAnimationSettings = async () => {
+    try {
+      const saved = await AsyncStorage.getItem('animationEnabled');
+      if (saved !== null) {
+        const enabled: boolean = JSON.parse(saved);
+        setIsAnimationEnabled(enabled);
+      }
+    } catch (error) {
+      console.error('애니메이션 설정 불러오기 실패:', error);
+    }
+  };
+
+  // 페르소나 목록 불러오기
+  const loadPersonas = async () => {
+    try {
+      // 항상 기본 페르소나 목록 사용
+      const defaultPersonas = [
+        { id: 'min_ho', name: '김민호', age: 17, description: '17세 고등학생', balance: 25000 },
+        { id: 'myeong_bin', name: '김명빈', age: 14, description: '14세 중학생', balance: 50000 },
+        { id: 'tae_hoon', name: '강태훈', age: 12, description: '12세 초등학생', balance: 15000 },
+      ];
+      setPersonas(defaultPersonas);
+      
+      // 저장된 페르소나 불러오기
+      const savedPersona = await AsyncStorage.getItem('selectedPersona');
+      if (savedPersona) {
+        setSelectedPersona(savedPersona);
+        setCurrentPersona(savedPersona);
+        // 페르소나에 따른 기본 설정 적용
+        await applyPersonaDefaults(savedPersona);
+      } else {
+        // 기본값으로 민호 설정
+        setSelectedPersona('min_ho');
+        setCurrentPersona('min_ho');
+        await applyPersonaDefaults('min_ho');
+      }
+    } catch (error) {
+      console.error('페르소나 불러오기 실패:', error);
+      // 오류 시에도 기본 페르소나 설정
+      const defaultPersonas = [
+        { id: 'min_ho', name: '김민호', age: 17, description: '17세 고등학생', balance: 25000 },
+        { id: 'myeong_bin', name: '김명빈', age: 14, description: '14세 중학생', balance: 50000 },
+        { id: 'tae_hoon', name: '강태훈', age: 12, description: '12세 초등학생', balance: 15000 },
+      ];
+      setPersonas(defaultPersonas);
+      setSelectedPersona('min_ho');
+      await applyPersonaDefaults('min_ho');
+    }
+  };
+
+  // 페르소나별 기본 설정 적용
+  const applyPersonaDefaults = async (personaId: string) => {
+    let categories: string[] = [];
+    let allergies: string[] = [];
+    let mealCardBalance = 10000;
+    let hasCard = false;
+    
+    switch(personaId) {
+      case 'min_ho':
+        // 민호 (17세 고등학생) - 급식카드 잔액 25,000원
+        categories = ['korean', 'fastfood', 'spicy'];
+        allergies = [];
+        mealCardBalance = 25000;
+        hasCard = true;
+        break;
+      case 'myeong_bin':
+        // 명빈 (14세 중학생) - 급식카드 잔액 50,000원
+        categories = ['western', 'cafe', 'sweet'];
+        allergies = ['nuts'];
+        mealCardBalance = 50000;
+        hasCard = true;
+        break;
+      case 'tae_hoon':
+        // 태훈 (12세 초등학생) - 급식카드 잔액 15,000원
+        categories = ['korean', 'chinese', 'sweet'];
+        allergies = ['shellfish', 'eggs'];
+        mealCardBalance = 15000;
+        hasCard = true;
+        break;
+    }
+    
+    // 카테고리와 알러지 설정 저장
+    setSelectedCategories(categories);
+    setSelectedAllergies(allergies);
+    await AsyncStorage.setItem('selectedCategories', JSON.stringify(categories));
+    await AsyncStorage.setItem('selectedAllergies', JSON.stringify(allergies));
+    
+    // 급식카드 자동 설정
+    if (hasCard) {
+      const cardInfo: MealCardInfo = {
+        cardNumber: `****-****-****-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+        balance: mealCardBalance,
+        lastUsed: new Date().toISOString(),
+      };
+      setMealCardInfo(cardInfo);
+    } else {
+      setMealCardInfo(null);
+    }
+  };
+
+  // 페르소나 선택 저장
+  const saveSelectedPersona = async (personaId: string) => {
+    // 이미 선택된 페르소나면 모달만 닫기
+    if (selectedPersona === personaId) {
+      setShowPersonaModal(false);
+      return;
+    }
+    
+    // 웹 환경에서는 confirm 사용
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm('페르소나를 변경하면 현재 대화 내용이 모두 초기화됩니다. 계속하시겠습니까?');
+      if (confirmed) {
+        try {
+          // 대화 기록 삭제
+          await AsyncStorage.removeItem('chatHistory');
+          await AsyncStorage.removeItem('conversationContext');
+          
+          // 새 페르소나 저장
+          await AsyncStorage.setItem('selectedPersona', personaId);
+          setSelectedPersona(personaId);
+          setCurrentPersona(personaId);
+          
+          // 페르소나별 기본 설정 적용
+          await applyPersonaDefaults(personaId);
+          
+          // 데이터 다시 로드
+          await loadIntegratedData();
+          
+          setShowPersonaModal(false);
+          
+          // 웹에서는 간단한 alert 사용
+          window.alert('새로운 페르소나로 변경되었습니다. 대화가 초기화되었습니다.');
+        } catch (error) {
+          console.error('페르소나 저장 실패:', error);
+          window.alert('페르소나 저장에 실패했습니다.');
+        }
+      }
+    } else {
+      // 네이티브 환경에서는 Alert.alert 사용
+      Alert.alert(
+        '페르소나 변경',
+        '페르소나를 변경하면 현재 대화 내용이 모두 초기화됩니다. 계속하시겠습니까?',
+        [
+          {
+            text: '취소',
+            style: 'cancel',
+          },
+          {
+            text: '변경',
+            style: 'destructive',
+            onPress: async () => {
+              try {
+                // 대화 기록 삭제
+                await AsyncStorage.removeItem('chatHistory');
+                await AsyncStorage.removeItem('conversationContext');
+                
+                // 새 페르소나 저장
+                await AsyncStorage.setItem('selectedPersona', personaId);
+                setSelectedPersona(personaId);
+                setCurrentPersona(personaId);
+                
+                // 페르소나별 기본 설정 적용
+                await applyPersonaDefaults(personaId);
+                
+                // 데이터 다시 로드
+                await loadIntegratedData();
+                
+                setShowPersonaModal(false);
+                
+                Alert.alert(
+                  '페르소나 변경 완료', 
+                  '새로운 페르소나로 변경되었습니다. 대화가 초기화되었습니다.',
+                  [{ text: '확인' }]
+                );
+              } catch (error) {
+                console.error('페르소나 저장 실패:', error);
+                Alert.alert('오류', '페르소나 저장에 실패했습니다.');
+              }
+            },
+          },
+        ],
+      );
+    }
+  };
+
+  // 추천 카테고리 저장
+  const saveSelectedCategories = async (categories: string[]) => {
+    try {
+      await AsyncStorage.setItem('selectedCategories', JSON.stringify(categories));
+      setSelectedCategories(categories);
+    } catch (error) {
+      console.error('추천 카테고리 저장 실패:', error);
+      Alert.alert('오류', '추천 카테고리 저장에 실패했습니다.');
+    }
+  };
+
+  // 알러지 정보 저장
+  const saveSelectedAllergies = async (allergies: string[]) => {
+    try {
+      await AsyncStorage.setItem('selectedAllergies', JSON.stringify(allergies));
+      setSelectedAllergies(allergies);
+    } catch (error) {
+      console.error('알러지 정보 저장 실패:', error);
+      Alert.alert('오류', '알러지 정보 저장에 실패했습니다.');
+    }
+  };
+
+  // 애니메이션 설정 저장
+  const saveAnimationSettings = async (enabled: boolean) => {
+    try {
+      await AsyncStorage.setItem('animationEnabled', JSON.stringify(enabled));
+      setIsAnimationEnabled(enabled);
+    } catch (error) {
+      console.error('애니메이션 설정 저장 실패:', error);
+      Alert.alert('오류', '애니메이션 설정 저장에 실패했습니다.');
+    }
+  };
+
+  // 카테고리 선택/해제 토글
+  const toggleCategory = (categoryId: string) => {
+    setSelectedCategories(prev => {
+      if (prev.includes(categoryId)) {
+        return prev.filter(id => id !== categoryId);
+      } else {
+        return [...prev, categoryId];
+      }
+    });
+  };
+
+  // 알러지 선택/해제 토글
+  const toggleAllergy = (allergyId: string) => {
+    setSelectedAllergies(prev => {
+      if (prev.includes(allergyId)) {
+        return prev.filter(id => id !== allergyId);
+      } else {
+        return [...prev, allergyId];
+      }
+    });
+  };
+
+  // 애니메이션 설정 토글
+  const toggleAnimation = (enabled: boolean) => {
+    saveAnimationSettings(enabled);
+  };
+
+  // 카테고리 모달 닫기 및 저장
+  const closeCategoryModal = () => {
+    setShowCategoryModal(false);
+    saveSelectedCategories(selectedCategories);
+  };
+
+  // 알러지 모달 닫기 및 저장
+  const closeAllergyModal = () => {
+    setShowAllergyModal(false);
+    saveSelectedAllergies(selectedAllergies);
+  };
+
+  // 선택된 카테고리 이름들 가져오기
+  const getSelectedCategoryNames = () => {
+    return selectedCategories
+      .map(id => AVAILABLE_CATEGORIES.find(cat => cat.id === id)?.name)
+      .filter(Boolean)
+      .join(', ');
+  };
+
+  // 선택된 알러지 이름들 가져오기
+  const getSelectedAllergyNames = () => {
+    return selectedAllergies
+      .map(id => AVAILABLE_ALLERGIES.find(allergy => allergy.id === id)?.name)
+      .filter(Boolean)
+      .join(', ');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -512,6 +880,45 @@ export default function MyPageScreen() {
             </View>
           </View>
         </LinearGradient>
+
+        {/* 페르소나 설정 섹션 - 프로필 바로 아래로 이동 */}
+        <View style={styles.contentSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>👤 사용자 프로필</Text>
+          </View>
+          <Text style={styles.sectionSubtitle}>
+            프로필을 선택하면 급식카드, 추천 카테고리, 알러지 정보가 자동으로 설정됩니다.
+          </Text>
+          
+          <View style={styles.cardInfoCard}>
+            <TouchableOpacity 
+              style={styles.cardContentItem}
+              onPress={() => {
+                if (personas.length === 0) {
+                  loadPersonas();
+                }
+                setShowPersonaModal(true);
+              }}
+              activeOpacity={0.7}
+            >
+              <View style={styles.cardContentInfo}>
+                <Text style={styles.cardContentLabel}>현재 프로필</Text>
+                <Text style={styles.cardContentValue}>
+                  {personas.find(p => p.id === selectedPersona)?.name || '선택안함'}
+                </Text>
+                {selectedPersona && personas.find(p => p.id === selectedPersona) && (
+                  <Text style={styles.cardContentDescription}>
+                    {(() => {
+                      const persona = personas.find(p => p.id === selectedPersona);
+                      return persona ? `${persona.age}세 • 급식카드 ${persona.balance.toLocaleString()}원` : '';
+                    })()}
+                  </Text>
+                )}
+              </View>
+              <Text style={styles.cardArrow}>›</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
         {/* 프로필 수정 섹션 */}
         {isEditingProfile && (
@@ -663,7 +1070,7 @@ export default function MyPageScreen() {
                   <Text style={styles.inputLabel}>카드 소유자 이름</Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="예: 김철수"
+                    placeholder="예: 홍길동"
                     value={tempCard.holderName}
                     onChangeText={(text) => setTempCard({ ...tempCard, holderName: text })}
                   />
@@ -708,42 +1115,129 @@ export default function MyPageScreen() {
         {/* 밥풀 현황 섹션 */}
         <View style={styles.contentSection}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>밥풀 현황</Text>
+            <Text style={styles.sectionTitle}>🌾 밥풀 현황</Text>
           </View>
+          <Text style={styles.sectionSubtitle}>밥풀을 모아서 레벨을 올려보세요</Text>
           
-          <TouchableOpacity 
-            style={styles.ricePulSummaryCard}
-            onPress={() => setShowRicePulModal(true)}
-            activeOpacity={0.7}
-          >
-            <View style={styles.ricePulSummaryContent}>
-              <View style={styles.ricePulSummaryInfo}>
-                <Text style={styles.ricePulSummaryAmount}>{currentRicePul.toLocaleString()}</Text>
-                <Text style={styles.ricePulSummaryLabel}>보유 밥풀</Text>
+          <View style={styles.cardInfoCard}>
+            <TouchableOpacity 
+              style={styles.cardContentItem}
+              onPress={() => setShowRicePulModal(true)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.cardContentInfo}>
+                <Text style={styles.ricePulAmount}>{currentRicePul.toLocaleString()}</Text>
+                <Text style={styles.cardContentLabel}>보유 밥풀</Text>
                 {currentLevel && (
-                  <Text style={styles.ricePulLevelText}>
-                    Lv.{currentLevel.level} {currentLevel.title}
+                  <View style={styles.levelInfoContainer}>
+                    <Text style={styles.levelInfoText}>
+                      Lv.{currentLevel.level} {currentLevel.title}
+                    </Text>
+                    <View style={styles.levelProgressMini}>
+                      <View 
+                        style={[styles.levelProgressFillMini, { width: `${getLevelProgress()}%` }]} 
+                      />
+                    </View>
+                  </View>
+                )}
+              </View>
+              <Text style={styles.cardArrow}>→</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+
+        {/* 추천 카테고리 설정 섹션 */}
+        <View style={styles.contentSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>🍽️ 추천 카테고리</Text>
+          </View>
+          <Text style={styles.sectionSubtitle}>
+            선호하는 음식 카테고리를 선택하면 더 정확한 추천을 받을 수 있어요
+          </Text>
+          
+          <View style={styles.cardInfoCard}>
+            <TouchableOpacity 
+              style={styles.cardContentItem}
+              onPress={() => setShowCategoryModal(true)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.cardContentInfo}>
+                <Text style={styles.cardContentLabel}>선호 카테고리</Text>
+                <Text style={styles.cardContentValue}>
+                  {selectedCategories.length > 0 ? `${selectedCategories.length}개 선택됨` : '선택 안함'}
+                </Text>
+                {selectedCategories.length > 0 && (
+                  <Text style={styles.cardContentDescription}>
+                    {getSelectedCategoryNames()}
                   </Text>
                 )}
               </View>
-              <View style={styles.ricePulSummaryArrow}>
-                <Text style={styles.ricePulArrowText}>→</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+              <Text style={styles.cardArrow}>›</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        {/* 설정 섹션 */}
-        <View style={[styles.contentSection, { paddingBottom: 40 }]}>
-          <Text style={styles.sectionTitle}>설정</Text>
-          <View style={styles.settingsCard}>
+        {/* 알러지 설정 섹션 */}
+        <View style={styles.contentSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>⚠️ 알러지 정보</Text>
+          </View>
+          <Text style={styles.sectionSubtitle}>
+            알러지가 있는 식품을 선택하면 해당 식품이 포함된 음식점은 제외하고 추천해드려요
+          </Text>
+          
+          <View style={styles.cardInfoCard}>
             <TouchableOpacity 
-              style={styles.settingItem}
-              onPress={() => router.push('/settings')}
+              style={styles.cardContentItem}
+              onPress={() => setShowAllergyModal(true)}
+              activeOpacity={0.7}
             >
-              <Text style={styles.settingText}>⚙️ 프로필 설정</Text>
-              <Text style={styles.settingArrow}>→</Text>
+              <View style={styles.cardContentInfo}>
+                <Text style={styles.cardContentLabel}>알러지 항목</Text>
+                <Text style={[styles.cardContentValue, selectedAllergies.length > 0 && styles.allergyWarningText]}>
+                  {selectedAllergies.length > 0 ? `${selectedAllergies.length}개 항목 설정됨` : '설정 안함'}
+                </Text>
+                {selectedAllergies.length > 0 && (
+                  <Text style={[styles.cardContentDescription, styles.allergyDescriptionText]}>
+                    {getSelectedAllergyNames()}
+                  </Text>
+                )}
+              </View>
+              <Text style={styles.cardArrow}>›</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* 앱 설정 섹션 */}
+        <View style={styles.contentSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>⚙️ 앱 설정</Text>
+          </View>
+          
+          <View style={styles.cardInfoCard}>
+            <View style={styles.settingItemWithSwitch}>
+              <View style={styles.settingInfo}>
+                <Text style={styles.cardContentLabel}>애니메이션 효과</Text>
+                <Text style={styles.cardContentDescription}>
+                  앱 내 애니메이션 효과를 활성화합니다
+                </Text>
+              </View>
+              <Switch
+                value={isAnimationEnabled}
+                onValueChange={toggleAnimation}
+                trackColor={{ false: '#e0e0e0', true: '#FFD54F' }}
+                thumbColor={isAnimationEnabled ? '#FF8F00' : '#9e9e9e'}
+                ios_backgroundColor="#e0e0e0"
+              />
+            </View>
+          </View>
+        </View>
+
+        {/* 기타 설정 섹션 */}
+        <View style={[styles.contentSection, { paddingBottom: 40 }]}>
+          <Text style={styles.sectionTitle}>기타</Text>
+          <View style={styles.settingsCard}>
             <TouchableOpacity style={styles.settingItem}>
               <Text style={styles.settingText}>🔔 알림 설정</Text>
               <Text style={styles.settingArrow}>→</Text>
@@ -762,28 +1256,63 @@ export default function MyPageScreen() {
             <TouchableOpacity 
               style={styles.settingItem}
               onPress={async () => {
-                Alert.alert(
-                  '로그아웃',
-                  '정말 로그아웃 하시겠습니까?',
-                  [
-                    { text: '취소', style: 'cancel' },
-                    {
-                      text: '로그아웃',
-                      style: 'destructive',
-                      onPress: async () => {
-                        try {
-                          // 저장된 데이터 모두 삭제
-                          await StorageService.clearAllData();
-                          // 로그인 화면으로 이동
-                          router.replace('/(auth)/login');
-                        } catch (error) {
-                          console.error('로그아웃 오류:', error);
-                          Alert.alert('오류', '로그아웃 중 문제가 발생했습니다.');
+                if (Platform.OS === 'web') {
+                  const confirmed = window.confirm('정말 로그아웃 하시겠습니까?\n모든 데이터가 초기화됩니다.');
+                  if (confirmed) {
+                    try {
+                      console.log('🚪 로그아웃 시작...');
+                      
+                      // AsyncStorage의 모든 데이터 삭제
+                      const allKeys = await AsyncStorage.getAllKeys();
+                      console.log('삭제할 데이터 키:', allKeys);
+                      await AsyncStorage.multiRemove(allKeys);
+                      
+                      // StorageService로도 추가 삭제
+                      await StorageService.clearAllData();
+                      
+                      console.log('✅ 모든 데이터 삭제 완료');
+                      
+                      // 시작 화면(welcome)으로 이동
+                      router.replace('/(auth)/welcome');
+                    } catch (error) {
+                      console.error('로그아웃 오류:', error);
+                      window.alert('로그아웃 중 문제가 발생했습니다.');
+                    }
+                  }
+                } else {
+                  Alert.alert(
+                    '로그아웃',
+                    '정말 로그아웃 하시겠습니까?\n모든 데이터가 초기화됩니다.',
+                    [
+                      { text: '취소', style: 'cancel' },
+                      {
+                        text: '로그아웃',
+                        style: 'destructive',
+                        onPress: async () => {
+                          try {
+                            console.log('🚪 로그아웃 시작...');
+                            
+                            // AsyncStorage의 모든 데이터 삭제
+                            const allKeys = await AsyncStorage.getAllKeys();
+                            console.log('삭제할 데이터 키:', allKeys);
+                            await AsyncStorage.multiRemove(allKeys);
+                            
+                            // StorageService로도 추가 삭제
+                            await StorageService.clearAllData();
+                            
+                            console.log('✅ 모든 데이터 삭제 완료');
+                            
+                            // 시작 화면(welcome)으로 이동
+                            router.replace('/(auth)/welcome');
+                          } catch (error) {
+                            console.error('로그아웃 오류:', error);
+                            Alert.alert('오류', '로그아웃 중 문제가 발생했습니다.');
+                          }
                         }
                       }
-                    }
-                  ]
-                );
+                    ]
+                  );
+                }
               }}
             >
               <Text style={[styles.settingText, { color: '#FF6B6B' }]}>🚪 로그아웃</Text>
@@ -792,6 +1321,197 @@ export default function MyPageScreen() {
           </View>
         </View>
       </ScrollView>
+
+      {/* 페르소나 선택 모달 */}
+      <Modal
+        visible={showPersonaModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowPersonaModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.ricePulModalContainer, { flex: 0.6 }]}>
+            <View style={styles.modalHeader}>
+              <TouchableOpacity 
+                onPress={() => setShowPersonaModal(false)} 
+                style={styles.modalCloseButton}
+              >
+                <Text style={styles.modalCloseButtonText}>✕</Text>
+              </TouchableOpacity>
+              
+              <View style={styles.modalTitleContainer}>
+                <Text style={styles.modalTitle}>프로필 선택</Text>
+                <Text style={styles.modalSubtitle}>사용할 프로필을 선택하세요</Text>
+              </View>
+              
+              <View style={{ width: 40 }} />
+            </View>
+
+            <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
+              {personas.map((persona) => (
+                <TouchableOpacity
+                  key={persona.id}
+                  style={[
+                    styles.personaItem,
+                    selectedPersona === persona.id && styles.personaItemSelected
+                  ]}
+                  onPress={() => saveSelectedPersona(persona.id)}
+                >
+                  <View style={styles.personaInfo}>
+                    <Text style={[
+                      styles.personaName,
+                      selectedPersona === persona.id && styles.personaNameSelected
+                    ]}>
+                      {persona.name}
+                    </Text>
+                    <Text style={styles.personaDescription}>
+                      {persona.age}세 • 급식카드 {persona.balance.toLocaleString()}원
+                    </Text>
+                    {persona.id === 'min_ho' && (
+                      <Text style={styles.personaDetails}>한식, 패스트푸드, 매운음식 선호</Text>
+                    )}
+                    {persona.id === 'myeong_bin' && (
+                      <Text style={styles.personaDetails}>양식, 카페, 단맛 선호 • 견과류 알러지</Text>
+                    )}
+                    {persona.id === 'tae_hoon' && (
+                      <Text style={styles.personaDetails}>한식, 중식, 단맛 선호 • 갑각류, 계란 알러지</Text>
+                    )}
+                  </View>
+                  {selectedPersona === persona.id && (
+                    <View style={styles.personaCheckmark}>
+                      <Text style={styles.personaCheckmarkText}>✓</Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 추천 카테고리 선택 모달 */}
+      <Modal
+        visible={showCategoryModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeCategoryModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.ricePulModalContainer, { flex: 0.8 }]}>
+            <View style={styles.modalHeader}>
+              <TouchableOpacity 
+                onPress={closeCategoryModal} 
+                style={styles.modalCloseButton}
+              >
+                <Text style={styles.modalCloseButtonText}>✕</Text>
+              </TouchableOpacity>
+              
+              <View style={styles.modalTitleContainer}>
+                <Text style={styles.modalTitle}>선호 카테고리</Text>
+                <Text style={styles.modalSubtitle}>좋아하는 음식 종류를 선택하세요</Text>
+              </View>
+              
+              <TouchableOpacity 
+                onPress={closeCategoryModal} 
+                style={styles.modalSaveButton}
+              >
+                <Text style={styles.modalSaveText}>저장</Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
+              <View style={styles.categoryGrid}>
+                {AVAILABLE_CATEGORIES.map((category) => (
+                  <TouchableOpacity
+                    key={category.id}
+                    style={[
+                      styles.categoryItemCard,
+                      selectedCategories.includes(category.id) && styles.categoryItemCardSelected
+                    ]}
+                    onPress={() => toggleCategory(category.id)}
+                  >
+                    <Text style={styles.categoryEmoji}>{category.emoji}</Text>
+                    <Text style={[
+                      styles.categoryName,
+                      selectedCategories.includes(category.id) && styles.categoryNameSelected
+                    ]}>
+                      {category.name}
+                    </Text>
+                    <Text style={styles.categoryDescription}>{category.description}</Text>
+                    {selectedCategories.includes(category.id) && (
+                      <View style={styles.categoryCheckIcon}>
+                        <Text style={styles.categoryCheckText}>✓</Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 알러지 정보 선택 모달 */}
+      <Modal
+        visible={showAllergyModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeAllergyModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.ricePulModalContainer, { flex: 0.8 }]}>
+            <View style={styles.modalHeader}>
+              <TouchableOpacity 
+                onPress={closeAllergyModal} 
+                style={styles.modalCloseButton}
+              >
+                <Text style={styles.modalCloseButtonText}>✕</Text>
+              </TouchableOpacity>
+              
+              <View style={styles.modalTitleContainer}>
+                <Text style={styles.modalTitle}>알러지 정보</Text>
+                <Text style={styles.modalSubtitle}>알러지가 있는 식품을 선택하세요</Text>
+              </View>
+              
+              <TouchableOpacity 
+                onPress={closeAllergyModal} 
+                style={styles.modalSaveButton}
+              >
+                <Text style={styles.modalSaveText}>저장</Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
+              <View style={styles.categoryGrid}>
+                {AVAILABLE_ALLERGIES.map((allergy) => (
+                  <TouchableOpacity
+                    key={allergy.id}
+                    style={[
+                      styles.allergyItemCard,
+                      selectedAllergies.includes(allergy.id) && styles.allergyItemCardSelected
+                    ]}
+                    onPress={() => toggleAllergy(allergy.id)}
+                  >
+                    <Text style={styles.allergyEmoji}>{allergy.emoji}</Text>
+                    <Text style={[
+                      styles.allergyName,
+                      selectedAllergies.includes(allergy.id) && styles.allergyNameSelected
+                    ]}>
+                      {allergy.name}
+                    </Text>
+                    <Text style={styles.allergyDescription}>{allergy.description}</Text>
+                    {selectedAllergies.includes(allergy.id) && (
+                      <View style={styles.allergyCheckIcon}>
+                        <Text style={styles.allergyCheckText}>✓</Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
 
       {/* 밥풀 상세 모달 */}
       {showRicePulModal && (
@@ -1775,5 +2495,302 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6b7280',
     textAlign: 'center',
+  },
+  // 카드 공통 스타일
+  cardContentItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+  },
+  cardContentInfo: {
+    flex: 1,
+  },
+  cardContentLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  cardContentValue: {
+    fontSize: 14,
+    color: '#FF8F00',
+    fontWeight: '500',
+    marginBottom: 4,
+  },
+  cardContentDescription: {
+    fontSize: 13,
+    color: '#666',
+    lineHeight: 18,
+  },
+  cardArrow: {
+    fontSize: 20,
+    color: '#9e9e9e',
+  },
+  ricePulAmount: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#FFBF00',
+    marginBottom: 4,
+  },
+  levelInfoContainer: {
+    marginTop: 8,
+  },
+  levelInfoText: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 4,
+  },
+  levelProgressMini: {
+    width: 120,
+    height: 4,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 2,
+  },
+  levelProgressFillMini: {
+    height: '100%',
+    backgroundColor: '#FFBF00',
+    borderRadius: 2,
+  },
+  allergyWarningText: {
+    color: '#f44336',
+    fontWeight: '600',
+  },
+  allergyDescriptionText: {
+    color: '#c62828',
+  },
+  settingItemWithSwitch: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+  },
+  // 추천 카테고리 관련 스타일
+  categorySettingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  categoryInfo: {
+    flex: 1,
+  },
+  categoryCount: {
+    fontSize: 14,
+    color: '#FF8F00',
+    fontWeight: '500',
+    marginTop: 2,
+  },
+  selectedCategoriesContainer: {
+    backgroundColor: '#fff3e0',
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#ffcc02',
+  },
+  selectedCategoriesText: {
+    fontSize: 14,
+    color: '#e65100',
+    lineHeight: 20,
+  },
+  // 알러지 관련 스타일
+  allergyWarning: {
+    color: '#f44336',
+    fontWeight: '600',
+  },
+  selectedAllergiesContainer: {
+    backgroundColor: '#ffebee',
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#f44336',
+  },
+  selectedAllergiesText: {
+    fontSize: 14,
+    color: '#c62828',
+    lineHeight: 20,
+    fontWeight: '500',
+  },
+  // 설정 항목 스타일
+  settingInfo: {
+    flex: 1,
+    marginRight: 16,
+  },
+  settingLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  settingDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
+  },
+  // 페르소나 모달 스타일
+  personaItem: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 2,
+    borderColor: '#f0f0f0',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  personaItemSelected: {
+    borderColor: '#FFB000',
+    backgroundColor: '#fff8e1',
+  },
+  personaInfo: {
+    flex: 1,
+  },
+  personaName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  personaNameSelected: {
+    color: '#FF8F00',
+  },
+  personaDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+  },
+  personaDetails: {
+    fontSize: 12,
+    color: '#999',
+    fontStyle: 'italic',
+  },
+  personaCheckmark: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#FFB000',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  personaCheckmarkText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  // 카테고리 모달 스타일
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    padding: 16,
+  },
+  categoryItemCard: {
+    width: '47%',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#f0f0f0',
+    position: 'relative',
+  },
+  categoryItemCardSelected: {
+    borderColor: '#FFB000',
+    backgroundColor: '#fff8e1',
+  },
+  categoryEmoji: {
+    fontSize: 32,
+    marginBottom: 8,
+  },
+  categoryName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  categoryNameSelected: {
+    color: '#FF8F00',
+  },
+  categoryDescription: {
+    fontSize: 11,
+    color: '#999',
+    textAlign: 'center',
+  },
+  categoryCheckIcon: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#FFB000',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryCheckText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  // 알러지 모달 스타일
+  allergyItemCard: {
+    width: '47%',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#f0f0f0',
+    position: 'relative',
+  },
+  allergyItemCardSelected: {
+    borderColor: '#f44336',
+    backgroundColor: '#ffebee',
+  },
+  allergyEmoji: {
+    fontSize: 32,
+    marginBottom: 8,
+  },
+  allergyName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  allergyNameSelected: {
+    color: '#c62828',
+  },
+  allergyDescription: {
+    fontSize: 11,
+    color: '#999',
+    textAlign: 'center',
+  },
+  allergyCheckIcon: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#f44336',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  allergyCheckText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  modalSaveButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  modalSaveText: {
+    fontSize: 16,
+    color: '#FF8F00',
+    fontWeight: '600',
   },
 });

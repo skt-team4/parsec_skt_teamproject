@@ -1,11 +1,312 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Notifications from 'expo-notifications';
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
+import React, { useEffect, useState } from 'react';
+import { Alert, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+// Local Notification 설정
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function HomeScreen() {
   const router = useRouter();
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
+  useEffect(() => {
+    // 웹 환경에서는 3초 후 자동으로 알림 권한 요청 및 테스트 알림
+    const webNotificationTimer = setTimeout(async () => {
+      if (Platform.OS === 'web' && 'Notification' in window) {
+        console.log('🌐 웹 환경 감지 - 알림 권한 확인');
+        
+        // 알림 권한이 없으면 요청
+        if (Notification.permission === 'default') {
+          const permission = await Notification.requestPermission();
+          if (permission === 'granted') {
+            console.log('✅ 알림 권한 승인됨');
+            // 권한 승인 후 환영 알림 표시
+            setTimeout(() => {
+              new Notification('🍚 밥풀레이스에 오신 것을 환영합니다!', {
+                body: '오늘도 맛있는 하루 되세요! 알림 아이콘을 클릭해서 설정을 변경할 수 있습니다.',
+                icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+                tag: 'welcome-notification'
+              });
+            }, 1000);
+            setNotificationsEnabled(true);
+          }
+        } else if (Notification.permission === 'granted') {
+          // 이미 권한이 있으면 환영 알림만 표시
+          new Notification('🍚 밥풀레이스', {
+            body: '환영합니다! 오늘의 추천 메뉴를 확인해보세요.',
+            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+            tag: 'welcome-notification'
+          });
+          setNotificationsEnabled(true);
+        }
+      }
+    }, 3000);
+    
+    initializeLocalNotifications();
+    
+    // 알림 리스너 설정
+    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
+      console.log('📱 로컬 알림 수신:', notification);
+      setHasUnreadNotifications(true);
+    });
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('👆 알림 탭됨:', response);
+      handleNotificationResponse(response);
+    });
+
+    return () => {
+      clearTimeout(webNotificationTimer);
+      if (notificationListener) {
+        Notifications.removeNotificationSubscription(notificationListener);
+      }
+      if (responseListener) {
+        Notifications.removeNotificationSubscription(responseListener);
+      }
+    };
+  }, []);
+
+  const initializeLocalNotifications = async () => {
+    try {
+      console.log('🔔 로컬 알림 초기화 시작...');
+      
+      // 알림 권한 요청
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      
+      if (finalStatus !== 'granted') {
+        console.log('❌ 알림 권한이 거부되었습니다.');
+        Alert.alert(
+          '알림 권한', 
+          '식사 리마인더를 받으려면 설정에서 알림 권한을 허용해주세요.',
+          [
+            { text: '나중에', style: 'cancel' },
+            { text: '확인', style: 'default' }
+          ]
+        );
+        return;
+      }
+
+      console.log('✅ 알림 권한 승인됨');
+      await setupMealReminders();
+      setNotificationsEnabled(true);
+      
+    } catch (error) {
+      console.error('❌ 로컬 알림 초기화 실패:', error);
+      setNotificationsEnabled(false);
+    }
+  };
+
+  const setupMealReminders = async () => {
+    try {
+      // 기존 스케줄된 알림 취소
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      console.log('🗑️ 기존 알림 취소됨');
+
+      // 저녁 알림 (20시) - 원래 코드와 동일하게
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: '🍽️ 밥풀레이스',
+          body: '오늘 잘 드셨나요? 식사 기록을 남겨보세요!',
+          data: { type: 'daily_check' },
+          sound: true,
+        },
+        trigger: {
+          hour: 20,
+          minute: 0,
+          repeats: true,
+        },
+      });
+
+      console.log('📅 저녁 알림이 설정되었습니다!');
+      
+    } catch (error) {
+      console.error('❌ 알림 설정 오류:', error);
+    }
+  };
+
+  const handleNotificationResponse = (response: any) => {
+    try {
+      const notificationType = response.notification.request.content.data?.type;
+      console.log('🎯 알림 응답 처리:', notificationType);
+      
+      if (notificationType === 'daily_check') {
+        console.log('🍽️ 저녁 알림 탭 - 영양소 리포트로 이동');
+        // router.push('/nutrition'); // 필요시 활성화
+      }
+      
+      setHasUnreadNotifications(false);
+    } catch (error) {
+      console.error('알림 응답 처리 오류:', error);
+    }
+  };
+
+  const handleNotificationIconPress = () => {
+    console.log('🔔 알림 아이콘 클릭됨!');
+    setHasUnreadNotifications(false);
+    
+    // 웹 환경에서는 window.confirm 사용
+    if (Platform.OS === 'web') {
+      if (!notificationsEnabled) {
+        const result = window.confirm('저녁 식사 리마인더 알림이 비활성화되어 있습니다. 설정하시겠어요?');
+        if (result) {
+          initializeLocalNotifications();
+        }
+      } else {
+        const options = [
+          '1. 테스트 알림 보내기',
+          '2. 알림 끄기',
+          '3. 취소'
+        ].join('\n');
+        
+        const choice = window.prompt(`밥풀레이스 알림 설정\n\n${options}\n\n번호를 입력하세요:`);
+        
+        if (choice === '1') {
+          sendTestNotification();
+        } else if (choice === '2') {
+          turnOffNotifications();
+        }
+      }
+    } else {
+      // 네이티브 환경에서는 Alert.alert 사용
+      if (!notificationsEnabled) {
+        Alert.alert(
+          '🔔 알림 설정',
+          '저녁 식사 리마인더 알림이 비활성화되어 있습니다. 설정하시겠어요?',
+          [
+            { text: '취소', style: 'cancel' },
+            { text: '설정하기', onPress: () => initializeLocalNotifications() }
+          ]
+        );
+      } else {
+        Alert.alert(
+          '🔔 저녁 알림 설정',
+          '밥풀레이스에서 식사 기록 알림을 보내드려요!',
+          [
+            { text: '알림 끄기', onPress: () => turnOffNotifications(), style: 'destructive' },
+            { text: '테스트 알림', onPress: () => sendTestNotification() },
+            { text: '확인', style: 'default' }
+          ]
+        );
+      }
+    }
+  };
+
+  const turnOffNotifications = async () => {
+    try {
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      console.log('🔕 모든 알림이 취소됨');
+      setNotificationsEnabled(false);
+      
+      if (Platform.OS === 'web') {
+        window.alert('저녁 알림이 해제되었습니다.');
+      } else {
+        Alert.alert('알림 해제', '저녁 알림이 해제되었습니다.');
+      }
+    } catch (error) {
+      console.error('알림 해제 오류:', error);
+      if (Platform.OS === 'web') {
+        window.alert('알림 해제 중 문제가 발생했습니다.');
+      } else {
+        Alert.alert('오류', '알림 해제 중 문제가 발생했습니다.');
+      }
+    }
+  };
+
+  const sendTestNotification = async () => {
+    try {
+      console.log('🧪 테스트 알림 전송 시작...');
+      
+      if (Platform.OS === 'web') {
+        // 웹에서는 브라우저 Notification API 사용
+        if ('Notification' in window) {
+          // 권한 확인
+          if (Notification.permission === 'default') {
+            const permission = await Notification.requestPermission();
+            if (permission !== 'granted') {
+              window.alert('알림 권한이 거부되었습니다. 브라우저 설정에서 알림을 허용해주세요.');
+              return;
+            }
+          } else if (Notification.permission === 'denied') {
+            window.alert('알림 권한이 거부되었습니다. 브라우저 설정에서 알림을 허용해주세요.');
+            return;
+          }
+          
+          // 알림 생성
+          setTimeout(() => {
+            const notification = new Notification('🧪 밥풀레이스 테스트 알림', {
+              body: '알림이 정상적으로 작동합니다! 오늘도 맛있는 하루 되세요 🍽️',
+              icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+              badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+              tag: 'test-notification',
+              requireInteraction: false
+            });
+            
+            notification.onclick = () => {
+              window.focus();
+              notification.close();
+              console.log('알림 클릭됨');
+            };
+          }, 2000);
+          
+          window.alert('테스트 알림이 2초 후 표시됩니다!');
+        } else {
+          window.alert('이 브라우저는 알림을 지원하지 않습니다.');
+        }
+      } else {
+        // 네이티브 환경에서는 expo-notifications 사용
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: '🧪 테스트 알림',
+            body: '로컬 알림이 정상적으로 작동합니다!',
+            data: { type: 'test' },
+          },
+          trigger: { seconds: 2 },
+        });
+        Alert.alert('테스트 알림', '2초 후 테스트 알림이 도착합니다!');
+      }
+      
+      console.log('🧪 테스트 알림 전송 완료');
+    } catch (error) {
+      console.error('테스트 알림 오류:', error);
+      if (Platform.OS === 'web') {
+        window.alert('테스트 알림 설정 중 오류가 발생했습니다.');
+      } else {
+        Alert.alert('오류', '테스트 알림 전송에 실패했습니다.');
+      }
+    }
+  };
+
+  // 가맹점 지도 열기 함수
+  const openStoreMap = async () => {
+    try {
+      // 여기에 실제 HTML 지도 파일의 URL을 넣으세요
+      const mapUrl = 'http://192.168.68.62:5500/tmap_folium_map.html'; // 실제 지도 URL로 변경 필요
+      
+      console.log('🗺️ 가맹점 지도 열기:', mapUrl);
+      await WebBrowser.openBrowserAsync(mapUrl);
+    } catch (error) {
+      console.error('❌ 지도 열기 실패:', error);
+      Alert.alert('오류', '지도를 열 수 없습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -16,6 +317,31 @@ export default function HomeScreen() {
             <Text style={styles.appTitle}>밥풀레이스</Text>
             <Text style={styles.appSubtitle}>오늘도 맛있는 하루 되세요!</Text>
           </View>
+          
+          {/* 알림 아이콘 */}
+          <TouchableOpacity 
+            style={styles.notificationContainer}
+            onPress={() => {
+              console.log('🔔 알림 버튼 클릭됨!');
+              handleNotificationIconPress();
+            }}
+            activeOpacity={0.7}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <View style={[
+              styles.notificationIcon,
+              !notificationsEnabled && styles.notificationIconDisabled
+            ]}>
+              <Text style={styles.notificationEmoji}>
+                {notificationsEnabled ? '🔔' : '🔕'}
+              </Text>
+              {hasUnreadNotifications && notificationsEnabled && (
+                <View style={styles.notificationBadge}>
+                  <View style={styles.notificationDot} />
+                </View>
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
 
         {/* 메인 배너 */}
@@ -29,7 +355,11 @@ export default function HomeScreen() {
             <View style={styles.bannerTextContainer}>
               <Text style={styles.bannerSubtext}>🍽️ 맛있는 식사의 시작</Text>
               <Text style={styles.bannerTitle}>서울시 강남구{'\n'}급식카드 결제 서비스 OPEN</Text>
-              <TouchableOpacity style={styles.bannerButton}>
+              <TouchableOpacity 
+                style={styles.bannerButton}
+                onPress={openStoreMap}
+                activeOpacity={0.7}
+              >
                 <Text style={styles.bannerButtonText}>가맹점 찾아보기</Text>
               </TouchableOpacity>
             </View>
@@ -72,8 +402,6 @@ export default function HomeScreen() {
               </View>
             </View>
           </LinearGradient>
-
-          {/* 추가 캠페인 카드들 */}
         </View>
 
         {/* 인기 메뉴 섹션 */}
@@ -129,26 +457,87 @@ const styles = StyleSheet.create({
     color: '#666',
     marginTop: 2,
   },
-  profileContainer: {
+  
+  // 알림 상태 배너 스타일
+  notificationStatusBanner: {
+    flexDirection: 'row',
+    backgroundColor: '#d4edda',
+    borderColor: '#c3e6cb',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 16,
+    margin: 20,
+    marginBottom: 10,
+    alignItems: 'flex-start',
+  },
+  statusIcon: {
+    fontSize: 20,
+    marginRight: 12,
+    marginTop: 2,
+  },
+  statusTextContainer: {
+    flex: 1,
+  },
+  statusTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#155724',
+    marginBottom: 4,
+  },
+  statusText: {
+    fontSize: 14,
+    color: '#155724',
+    lineHeight: 20,
+  },
+  
+  // 알림 아이콘 스타일
+  notificationContainer: {
+    position: 'relative',
+  },
+  notificationIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#f8f9fa',
+    alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
-  profileIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: '#FFBF00',
+  notificationIconDisabled: {
+    backgroundColor: '#e9ecef',
+    opacity: 0.6,
+  },
+  notificationEmoji: {
+    fontSize: 20,
+    color: '#666',
+  },
+  notificationBadge: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: '#FF6B6B',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  notificationDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'white',
   },
 
   // 배너 스타일
   bannerSection: { 
     marginHorizontal: 20,
     marginTop: 10,
-    marginBottom: 30, // 배너와 캠페인 사이 간격 추가
+    marginBottom: 30,
     borderRadius: 20,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -193,23 +582,12 @@ const styles = StyleSheet.create({
   bannerImageContainer: {
     marginLeft: 16,
   },
-  bannerDecoration: {
-    width: 80,
-    height: 80,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bannerEmoji: {
-    fontSize: 40,
-  },
 
   // 섹션 공통 스타일
   contentSection: { 
     padding: 20,
     paddingTop: 10,
-    marginBottom: 20, // 섹션 간 간격 추가
+    marginBottom: 20,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -228,10 +606,52 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     lineHeight: 20,
   },
-  seeAllText: {
+
+  // 식사 체크 스타일
+  mealCheckContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  mealCheckItem: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 16,
+    marginHorizontal: 4,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  mealEmoji: {
+    fontSize: 24,
+    marginBottom: 8,
+  },
+  mealText: {
     fontSize: 14,
-    color: '#FFBF00',
     fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  mealStatus: {
+    backgroundColor: '#f8f9fa',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  mealStatusCompleted: {
+    backgroundColor: '#dcfce7',
+  },
+  mealStatusText: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '500',
+  },
+  mealStatusCompletedText: {
+    color: '#166534',
   },
 
   // 캠페인 카드 스타일
@@ -243,7 +663,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    marginBottom: 10, // 캠페인 카드와 다음 섹션 사이 간격
+    marginBottom: 10,
   },
   campaignContent: {
     padding: 24,
@@ -268,11 +688,6 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 4,
   },
-  campaignSubtitle: { 
-    fontSize: 16, 
-    color: '#555', 
-    marginBottom: 16,
-  },
   campaignTagContainer: { 
     backgroundColor: 'rgba(0,0,0,0.7)', 
     paddingVertical: 8, 
@@ -286,17 +701,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
   },
-  campaignButton: {
-    backgroundColor: '#333',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
+  campaignDetails: {
+    marginBottom: 16,
   },
-  campaignButtonText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
+  campaignDetailText: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 4,
+    lineHeight: 18,
   },
   campaignImageContainer: {
     position: 'absolute',
@@ -313,77 +725,6 @@ const styles = StyleSheet.create({
   },
   campaignImageEmoji: {
     fontSize: 50,
-  },
-  campaignDetails: {
-    marginBottom: 16,
-  },
-  campaignDetailText: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 4,
-    lineHeight: 18,
-  },
-
-  // 추가 캠페인 스타일
-  additionalCampaigns: {
-    marginTop: 16,
-  },
-  smallCampaignCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 16,
-    marginRight: 12,
-    width: 160,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    position: 'relative',
-  },
-  smallCampaignBadge: {
-    backgroundColor: '#FF6B6B',
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-    marginBottom: 8,
-  },
-  smallCampaignBadgeText: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  smallCampaignEmoji: {
-    fontSize: 32,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  smallCampaignTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 4,
-    textAlign: 'center',
-  },
-  smallCampaignDesc: {
-    fontSize: 12,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 12,
-    lineHeight: 16,
-  },
-  smallCampaignPeriod: {
-    backgroundColor: '#f8f9fa',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    alignSelf: 'center',
-  },
-  smallCampaignPeriodText: {
-    fontSize: 11,
-    color: '#666',
-    fontWeight: '500',
   },
 
   // 인기 메뉴 스타일
