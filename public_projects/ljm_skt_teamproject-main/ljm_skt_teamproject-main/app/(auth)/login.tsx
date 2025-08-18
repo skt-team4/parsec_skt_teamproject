@@ -1,7 +1,7 @@
-import * as AuthSession from 'expo-auth-session';
 import { useRouter } from 'expo-router';
+import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Alert,
     KeyboardAvoidingView,
@@ -14,6 +14,8 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import authConfig from '../../config/auth.config';
+import googleAuthService from '../../services/googleAuthService';
 import StorageService from '../../utils/storage';
 
 // WebBrowser 설정 (구글 로그인용)
@@ -26,18 +28,18 @@ export default function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
-  // 구글 OAuth 설정
-  const discovery = AuthSession.useAutoDiscovery('https://accounts.google.com');
-  const [request, response, promptAsync] = AuthSession.useAuthRequest(
-    {
-      clientId: 'YOUR_GOOGLE_CLIENT_ID', // 실제 클라이언트 ID로 교체 필요
-      scopes: ['openid', 'profile', 'email'],
-      redirectUri: AuthSession.makeRedirectUri({
-        scheme: 'your-app-scheme', // 실제 앱 스킴으로 교체 필요
-      }),
-    },
-    discovery
-  );
+  // Google OAuth 설정 - authConfig 사용
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: authConfig.googleClientId,
+    scopes: ['openid', 'profile', 'email'],
+    redirectUri: authConfig.redirectUri,
+  });
+
+  // 디버깅을 위해 redirect URI 출력
+  useEffect(() => {
+    console.log('Current Redirect URI:', authConfig.redirectUri);
+    console.log('Environment:', process.env.EXPO_PUBLIC_ENV || 'development');
+  }, []);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -76,79 +78,56 @@ export default function LoginScreen() {
     }
   };
 
-  // 구글 로그인 응답 처리
-  React.useEffect(() => {
+  // Google 로그인 응답 처리
+  useEffect(() => {
+    if (response) {
+      handleGoogleResponse();
+    }
+  }, [response]);
+
+  // Google 로그인 응답 처리
+  const handleGoogleResponse = async () => {
     if (response?.type === 'success') {
-      handleGoogleLoginSuccess(response.authentication?.accessToken);
+      setIsGoogleLoading(true);
+      const result = await googleAuthService.handleGoogleLogin(response);
+      
+      if (result.success && result.user) {
+        console.log('✅ Google 로그인 성공:', result.user.name);
+        
+        // StorageService에 사용자 정보 저장
+        const userToken = 'google_token_' + Date.now();
+        const userId = result.user.id;
+        
+        await StorageService.setAuthData(userToken, userId);
+        await StorageService.initializeUserData();
+        
+        // 홈 화면으로 이동
+        router.replace('/(tabs)');
+      } else {
+        Alert.alert('로그인 실패', result.error || '구글 로그인에 실패했습니다.');
+      }
+      setIsGoogleLoading(false);
     } else if (response?.type === 'error') {
       setIsGoogleLoading(false);
       Alert.alert('구글 로그인 실패', '로그인 중 오류가 발생했습니다.');
     } else if (response?.type === 'cancel') {
       setIsGoogleLoading(false);
     }
-  }, [response]);
-
-  // 구글 로그인 성공 처리
-  const handleGoogleLoginSuccess = async (accessToken?: string) => {
-    if (!accessToken) {
-      setIsGoogleLoading(false);
-      Alert.alert('오류', '구글 액세스 토큰을 받을 수 없습니다.');
-      return;
-    }
-
-    try {
-      // 구글 API로 사용자 정보 가져오기
-      const userInfoResponse = await fetch(
-        `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${accessToken}`
-      );
-      const userInfo = await userInfoResponse.json();
-
-      console.log('구글 사용자 정보:', userInfo);
-
-      if (userInfo.email) {
-        // 구글 로그인 성공 처리
-        const userToken = 'google_token_' + Date.now();
-        const userId = 'google_' + userInfo.id;
-        
-        await StorageService.setAuthData(userToken, userId);
-        await StorageService.initializeUserData();
-        
-        console.log('✅ 구글 로그인 성공:', userInfo.name);
-        router.replace('/(tabs)');
-      } else {
-        throw new Error('사용자 정보를 가져올 수 없습니다.');
-      }
-    } catch (error) {
-      console.error('구글 로그인 처리 실패:', error);
-      Alert.alert('오류', '구글 로그인 처리 중 문제가 발생했습니다.');
-    } finally {
-      setIsGoogleLoading(false);
-    }
   };
 
-  // 구글 로그인 시작 (개발용 임시 버전)
+  // Google 로그인 시작
   const handleGoogleLogin = async () => {
-    setIsGoogleLoading(true);
-    
-    try {
-      // TODO: 실제 구글 OAuth 구현
-      // 임시로 가짜 구글 로그인
-      await new Promise(resolve => setTimeout(resolve, 2000)); // 2초 대기
-      
-      const userToken = 'google_token_' + Date.now();
-      const userId = 'google_user_' + Math.random().toString(36).substr(2, 9);
-      
-      await StorageService.setAuthData(userToken, userId);
-      await StorageService.initializeUserData();
-      
-      console.log('✅ 구글 로그인 성공 (임시)');
-      router.replace('/(tabs)');
-      
-    } catch (error) {
-      console.error('구글 로그인 실패:', error);
-      Alert.alert('오류', '구글 로그인 중 문제가 발생했습니다.');
-    } finally {
-      setIsGoogleLoading(false);
+    if (request) {
+      setIsGoogleLoading(true);
+      try {
+        await promptAsync();
+      } catch (error) {
+        console.error('Google 로그인 오류:', error);
+        Alert.alert('오류', 'Google 로그인을 시작할 수 없습니다.');
+        setIsGoogleLoading(false);
+      }
+    } else {
+      Alert.alert('오류', 'Google 로그인 설정을 불러올 수 없습니다.');
     }
   };
 
