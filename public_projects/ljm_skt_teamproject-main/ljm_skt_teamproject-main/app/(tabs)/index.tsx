@@ -334,11 +334,18 @@ export default function HomeScreen() {
   // 가맹점 지도 열기 함수
   const openStoreMap = async () => {
     try {
-      // T-Map 가맹점 지도 서버 URL
-      const mapUrl = 'http://localhost:5005/';
+      // 지도 서버 URL (5006 포트에서 실행)
+      const mapUrl = 'http://localhost:5006/';
       
-      console.log('🗺️ 가맹점 지도 열기:', mapUrl);
-      await WebBrowser.openBrowserAsync(mapUrl);
+      if (Platform.OS === 'web') {
+        // 웹에서는 새 창으로 열기
+        window.open(mapUrl, '_blank', 'width=1200,height=800');
+        console.log('🗺️ 가맹점 지도 열기 (웹):', mapUrl);
+      } else {
+        // 모바일에서는 WebBrowser 사용
+        console.log('🗺️ 가맹점 지도 열기 (모바일):', mapUrl);
+        await WebBrowser.openBrowserAsync(mapUrl);
+      }
     } catch (error) {
       console.error('❌ 지도 열기 실패:', error);
       Alert.alert('오류', '지도를 열 수 없습니다. 잠시 후 다시 시도해주세요.');

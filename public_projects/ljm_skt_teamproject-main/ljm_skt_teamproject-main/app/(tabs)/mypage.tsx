@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect, useRouter } from 'expo-router';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   Alert,
   Image,
@@ -20,11 +20,15 @@ import {
   deleteMealCard,
   getTransactionHistory,
   getUserProfile,
+  refreshUserProfile,
+  clearProfileCache,
   registerMealCard,
+  awardRicePul,
   type MealCardInfo,
   type RicePulLevel,
   type Transaction
 } from '../../utils/ricePulManager';
+import { testSetRicePul, testLoadRicePul, debugAllStorage } from '../../utils/testRicePul';
 import { getPersonas, setCurrentPersona, getCurrentPersona, type Persona } from '../../services/apiService';
 import { Switch, Platform } from 'react-native';
 
@@ -121,6 +125,7 @@ export default function MyPageScreen() {
   const [mealCardInfo, setMealCardInfo] = useState<MealCardInfo | null>(null);
   const [showRicePulModal, setShowRicePulModal] = useState(false);
   const [transactionHistory, setTransactionHistory] = useState<Transaction[]>([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // 주소 및 날씨 관련 상태
   const [address, setAddress] = useState<string>('');
@@ -175,9 +180,16 @@ export default function MyPageScreen() {
     '전라북도', '전라남도', '경상북도', '경상남도', '제주특별자치도',
   ];
 
+  // currentRicePul 상태 변경 감지
+  useEffect(() => {
+    console.log('📱 [MyPage] currentRicePul 상태 변경됨:', currentRicePul);
+  }, [currentRicePul]);
+
   // 화면이 포커스될 때마다 통합 데이터 로드
   useFocusEffect(
     useCallback(() => {
+      console.log('📱 마이페이지 포커스 - 캐시 무효화 후 데이터 새로고침');
+      clearProfileCache(); // 캐시 무효화
       loadIntegratedData();
       loadSavedAddress();
       loadWeatherInfo();
@@ -387,11 +399,18 @@ export default function MyPageScreen() {
   // 통합 데이터 로드 함수
   const loadIntegratedData = async () => {
     try {
-      const userProfile = await getUserProfile();
+      setIsRefreshing(true);
+      console.log('📱 [MyPage] loadIntegratedData 시작');
+      
+      // 캐시를 무시하고 강제로 새로고침
+      const userProfile = await refreshUserProfile();
+      console.log('📱 [MyPage] userProfile 로드:', userProfile);
+      console.log('📱 [MyPage] userProfile.ricePul:', userProfile.ricePul);
+      
       const transactions = await getTransactionHistory(20);
       
-      // 페르소나 데이터 가져오기
-      const personaData = await StorageService.getPersona();
+      // 페르소나 데이터 가져오기 (getCurrentPersona 사용)
+      const personaData = await getCurrentPersona();
       let mealCardBalance = userProfile.mealCard?.balance || 0;
       
       // 페르소나에 따른 급식카드 잔액 설정
@@ -411,6 +430,7 @@ export default function MyPageScreen() {
         }
       }
       
+      console.log('📱 [MyPage] setCurrentRicePul 호출:', userProfile.ricePul);
       setCurrentRicePul(userProfile.ricePul);
       setCurrentLevel(userProfile.level);
       setMealCardInfo(userProfile.mealCard ? {
@@ -418,14 +438,19 @@ export default function MyPageScreen() {
         balance: mealCardBalance
       } : null);
       setTransactionHistory(transactions);
+      console.log('📱 [MyPage] State 업데이트 완료');
       
       setProfile(prev => ({
         ...prev,
         name: personaData?.name || userProfile.name,
         points: userProfile.ricePul
       }));
+      
+      console.log('📊 데이터 새로고침 완료, 밥풀:', userProfile.ricePul);
     } catch (error) {
       console.error('❌ 통합 데이터 로드 실패:', error);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -912,7 +937,7 @@ export default function MyPageScreen() {
           <Text style={styles.appTitle}>마이페이지</Text>
         </View>
 
-        {/* 프로필 배너 */}
+        {/* 프로필 배너 + 페르소나 통합 */}
         <LinearGradient 
           colors={['#FFBF00', '#FDD046']} 
           style={styles.profileBanner}
@@ -924,7 +949,35 @@ export default function MyPageScreen() {
               <Image source={{ uri: profile.avatar }} style={styles.profileAvatar} />
               <View style={styles.profileInfo}>
                 <Text style={styles.profileName}>{profile.name}</Text>
-                <Text style={styles.profilePhone}>{profile.phone}</Text>
+                
+                {/* 페르소나 정보 */}
+                <TouchableOpacity 
+                  style={styles.personaSelector}
+                  onPress={() => {
+                    if (personas.length === 0) {
+                      loadPersonas();
+                    }
+                    setShowPersonaModal(true);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.personaLabel}>프로필:</Text>
+                  <Text style={styles.personaName}>
+                    {personas.find(p => p.id === selectedPersona)?.name || '선택안함'}
+                  </Text>
+                  <Text style={styles.personaArrow}>›</Text>
+                </TouchableOpacity>
+                
+                {selectedPersona && personas.find(p => p.id === selectedPersona) && (
+                  <View style={styles.personaDetails}>
+                    <Text style={styles.personaDetailText}>
+                      {(() => {
+                        const persona = personas.find(p => p.id === selectedPersona);
+                        return persona ? `${persona.age}세 • 급식카드 ${persona.balance.toLocaleString()}원` : '';
+                      })()}
+                    </Text>
+                  </View>
+                )}
                 
                 {/* 레벨 정보 */}
                 {currentLevel && (
@@ -945,18 +998,6 @@ export default function MyPageScreen() {
                     </Text>
                   </View>
                 )}
-                
-                {/* 밥풀 정보 */}
-                <TouchableOpacity 
-                  style={styles.pointsContainer}
-                  onPress={loadIntegratedData}
-                  activeOpacity={0.7}
-                >
-                  <Image source={require('../../assets/rice.png')} style={styles.riceIcon} />
-                  <Text style={styles.pointsText}>
-                    {currentRicePul.toLocaleString()}밥풀
-                  </Text>
-                </TouchableOpacity>
               </View>
               {!isEditingProfile && (
                 <TouchableOpacity style={styles.editProfileButton} onPress={handleProfileEdit}>
@@ -967,44 +1008,6 @@ export default function MyPageScreen() {
           </View>
         </LinearGradient>
 
-        {/* 페르소나 설정 섹션 - 프로필 바로 아래로 이동 */}
-        <View style={styles.contentSection}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>👤 사용자 프로필</Text>
-          </View>
-          <Text style={styles.sectionSubtitle}>
-            프로필을 선택하면 급식카드, 추천 카테고리, 알러지 정보가 자동으로 설정됩니다.
-          </Text>
-          
-          <View style={styles.cardInfoCard}>
-            <TouchableOpacity 
-              style={styles.cardContentItem}
-              onPress={() => {
-                if (personas.length === 0) {
-                  loadPersonas();
-                }
-                setShowPersonaModal(true);
-              }}
-              activeOpacity={0.7}
-            >
-              <View style={styles.cardContentInfo}>
-                <Text style={styles.cardContentLabel}>현재 프로필</Text>
-                <Text style={styles.cardContentValue}>
-                  {personas.find(p => p.id === selectedPersona)?.name || '선택안함'}
-                </Text>
-                {selectedPersona && personas.find(p => p.id === selectedPersona) && (
-                  <Text style={styles.cardContentDescription}>
-                    {(() => {
-                      const persona = personas.find(p => p.id === selectedPersona);
-                      return persona ? `${persona.age}세 • 급식카드 ${persona.balance.toLocaleString()}원` : '';
-                    })()}
-                  </Text>
-                )}
-              </View>
-              <Text style={styles.cardArrow}>›</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
         {/* 프로필 수정 섹션 */}
         {isEditingProfile && (
@@ -1624,14 +1627,6 @@ export default function MyPageScreen() {
                 <Text style={styles.modalTitle}>밥풀 & 레벨 현황</Text>
                 <Text style={styles.modalSubtitle}>나의 밥풀과 레벨 정보</Text>
               </View>
-              
-              <TouchableOpacity 
-                style={styles.modalRefreshButton}
-                onPress={loadIntegratedData}
-                activeOpacity={0.7}
-              >
-                <Text style={styles.modalRefreshButtonText}>🔄</Text>
-              </TouchableOpacity>
             </View>
 
             <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
@@ -1716,6 +1711,91 @@ export default function MyPageScreen() {
                   </View>
                 )}
               </View>
+              
+              {/* 디버그 섹션 (개발용) */}
+              <View style={{ 
+                padding: 20, 
+                backgroundColor: '#f0f0f0', 
+                marginTop: 20,
+                borderRadius: 10 
+              }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>
+                  🐛 디버그 도구 (개발용)
+                </Text>
+                
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#4CAF50',
+                    padding: 10,
+                    borderRadius: 5,
+                    marginBottom: 10
+                  }}
+                  onPress={async () => {
+                    console.log('🔧 테스트: 밥풀 100개 설정');
+                    await testSetRicePul(100);
+                    await loadIntegratedData();
+                  }}
+                >
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    밥풀 100개로 설정
+                  </Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#2196F3',
+                    padding: 10,
+                    borderRadius: 5,
+                    marginBottom: 10
+                  }}
+                  onPress={async () => {
+                    console.log('🔧 밥풀 지급 테스트');
+                    await awardRicePul(50, '디버그 테스트');
+                    await loadIntegratedData();
+                  }}
+                >
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    awardRicePul로 50개 지급
+                  </Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#FF9800',
+                    padding: 10,
+                    borderRadius: 5,
+                    marginBottom: 10
+                  }}
+                  onPress={async () => {
+                    console.log('🔍 스토리지 디버깅');
+                    await debugAllStorage();
+                    const result = await testLoadRicePul();
+                    console.log('로드 결과:', result);
+                    Alert.alert('디버그', `ricePul: ${result?.ricePul}, profileRicePul: ${result?.profileRicePul}`);
+                  }}
+                >
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    스토리지 상태 확인
+                  </Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#9C27B0',
+                    padding: 10,
+                    borderRadius: 5
+                  }}
+                  onPress={async () => {
+                    console.log('🔄 캐시 무효화 및 새로고침');
+                    clearProfileCache();
+                    await loadIntegratedData();
+                  }}
+                >
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    캐시 무효화 & 새로고침
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </ScrollView>
           </View>
         </View>
@@ -1780,6 +1860,42 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
     marginBottom: 12,
+  },
+  personaSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  personaLabel: {
+    fontSize: 14,
+    color: '#444',
+    fontWeight: '600',
+    marginRight: 8,
+  },
+  personaName: {
+    fontSize: 14,
+    color: '#222',
+    fontWeight: '700',
+    flex: 1,
+  },
+  personaArrow: {
+    fontSize: 18,
+    color: '#666',
+    marginLeft: 4,
+  },
+  personaDetails: {
+    marginTop: 4,
+    paddingVertical: 4,
+  },
+  personaDetailText: {
+    fontSize: 13,
+    color: '#555',
+    fontStyle: 'italic',
   },
   // 주소 및 날씨 관련 스타일 (사용되지 않음, 추후 제거 예정)
   addressContainer: {

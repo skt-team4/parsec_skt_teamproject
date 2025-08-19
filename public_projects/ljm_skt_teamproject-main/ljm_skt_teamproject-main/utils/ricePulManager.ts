@@ -66,9 +66,15 @@ const LEVEL_CONFIG = [
 // 밥풀 획득
 export const awardRicePul = async (amount: number, reason: string, category?: string): Promise<{ levelUp: boolean, newLevel?: RicePulLevel }> => {
   try {
-    const profile = await getUserProfile();
+    console.log(`🎯 밥풀 지급 시작: ${amount}개 (${reason})`);
+    
+    // 캐시를 무시하고 최신 프로필 가져오기
+    const profile = await getUserProfile(true);
+    console.log(`현재 밥풀: ${profile.ricePul}`);
+    
     const newRicePul = profile.ricePul + amount;
     const newTotalEarned = profile.totalEarnedRicePul + amount;
+    console.log(`새로운 밥풀: ${newRicePul}`);
     
     // 레벨 체크
     const levelResult = await checkAndUpdateLevel(newTotalEarned);
@@ -81,7 +87,11 @@ export const awardRicePul = async (amount: number, reason: string, category?: st
       level: levelResult.newLevel || profile.level
     };
     
+    // 먼저 개별 키에 저장
     await AsyncStorage.setItem(RICE_PUL_KEY, newRicePul.toString());
+    console.log(`💾 RICE_PUL_KEY에 저장: ${newRicePul}`);
+    
+    // 전체 프로필 저장
     await saveUserProfile(updatedProfile);
     
     // 거래 기록 추가
@@ -94,7 +104,10 @@ export const awardRicePul = async (amount: number, reason: string, category?: st
       category: category as any
     });
     
-    console.log(`밥풀 ${amount}개 획득! (사유: ${reason})`);
+    console.log(`✅ 밥풀 ${amount}개 획득 완료! 최종 밥풀: ${newRicePul}`);
+    
+    // 캐시 무효화하여 다른 컴포넌트에서도 즉시 반영되도록
+    clearProfileCache();
     
     return {
       levelUp: levelResult.levelUp,
@@ -109,7 +122,8 @@ export const awardRicePul = async (amount: number, reason: string, category?: st
 // 밥풀 사용
 export const spendRicePul = async (amount: number, reason: string, category?: string): Promise<boolean> => {
   try {
-    const profile = await getUserProfile();
+    // 캐시를 무시하고 최신 프로필 가져오기
+    const profile = await getUserProfile(true);
     
     if (profile.ricePul < amount) {
       console.log('밥풀이 부족합니다!');
@@ -139,6 +153,10 @@ export const spendRicePul = async (amount: number, reason: string, category?: st
     });
     
     console.log(`밥풀 ${amount}개 사용! (사유: ${reason})`);
+    
+    // 캐시 무효화하여 다른 컴포넌트에서도 즉시 반영되도록
+    clearProfileCache();
+    
     return true;
   } catch (error) {
     console.error('밥풀 사용 실패:', error);
@@ -365,17 +383,22 @@ export const getUserProfile = async (forceRefresh: boolean = false): Promise<Use
     // 캐시가 유효하고 강제 새로고침이 아닌 경우 캐시 반환
     const now = Date.now();
     if (!forceRefresh && profileCache && (now - cacheTimestamp) < CACHE_DURATION) {
+      console.log('📦 캐시에서 프로필 반환, ricePul:', profileCache.ricePul);
       return profileCache;
     }
 
+    console.log('🔄 프로필 새로 로드 중...');
     const profileJson = await AsyncStorage.getItem(USER_PROFILE_KEY);
     if (profileJson) {
       const profile = JSON.parse(profileJson);
       
-      // 프로필에서 누락된 필드들을 최신 데이터로 보완
-      profile.ricePul = await getRicePul();
+      // 프로필에서 누락된 필드들을 최신 데이터로 보완 - 항상 최신값 사용
+      const latestRicePul = await getRicePul();
+      profile.ricePul = latestRicePul;
       profile.level = await getRicePulLevel();
       profile.mealCard = await getMealCardInfo();
+      
+      console.log('✅ 프로필 로드 완료, ricePul:', latestRicePul);
       
       // 🔥 이름이 "나비얌 사용자"면 "사용자"로 변경 (한 번만)
       let shouldSave = false;
@@ -448,13 +471,21 @@ export const getUserProfile = async (forceRefresh: boolean = false): Promise<Use
 // 사용자 프로필 저장 (캐시 업데이트 포함)
 const saveUserProfile = async (profile: UserProfile): Promise<void> => {
   try {
+    // 개별 필드도 업데이트
+    await AsyncStorage.setItem(RICE_PUL_KEY, profile.ricePul.toString());
+    await AsyncStorage.setItem(RICE_PUL_LEVEL_KEY, JSON.stringify(profile.level));
+    if (profile.mealCard) {
+      await AsyncStorage.setItem(MEAL_CARD_BALANCE_KEY, JSON.stringify(profile.mealCard));
+    }
+    
+    // 전체 프로필 저장
     await AsyncStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profile));
     
     // 🔥 저장할 때마다 캐시 업데이트
     profileCache = profile;
     cacheTimestamp = Date.now();
     
-    console.log('💾 프로필 저장 및 캐시 업데이트 완료');
+    console.log('💾 프로필 저장 및 캐시 업데이트 완료, ricePul:', profile.ricePul);
   } catch (error) {
     console.error('사용자 프로필 저장 실패:', error);
   }

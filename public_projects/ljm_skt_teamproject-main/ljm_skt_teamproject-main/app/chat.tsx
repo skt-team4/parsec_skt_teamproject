@@ -20,7 +20,7 @@ import { ChatInput } from '../components/ChatInput';
 import { SpeechBubble } from '../components/SpeechBubble';
 import useChatLogic from '../hooks/useChatLogic'; // 기본 import로 변경
 import { isSmallScreen, SCREEN_HEIGHT, styles } from '../styles/chatStyles';
-import { awardRicePul } from '../utils/ricePulManager'; // 밥풀 매니저 import
+import { awardRicePul, clearProfileCache } from '../utils/ricePulManager'; // 밥풀 매니저 import
 import { 
   loadCurrentAnimation, 
   getAnimationSource, 

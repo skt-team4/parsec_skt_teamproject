@@ -7,7 +7,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isSmallScreen, styles } from '../styles/chatStyles';
-import { getUserProfile, refreshUserProfile, awardRicePul } from '../utils/ricePulManager';
+import { getUserProfile, refreshUserProfile, awardRicePul, clearProfileCache } from '../utils/ricePulManager';
+import { debugRicePulStorage, checkStorageSync } from '../utils/debugRicePul';
 
 export const ChatHeader = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ export const ChatHeader = () => {
   // 밥풀 정보 로드
   const loadRicePul = async () => {
     try {
-      const profile = await getUserProfile();
+      const profile = await refreshUserProfile();
       setRicePul(profile.ricePul);
     } catch (error) {
       console.error('밥풀 정보 로드 실패:', error);
@@ -63,12 +64,25 @@ export const ChatHeader = () => {
     runClickAnimation();
     
     try {
+      // 디버깅: 지급 전 상태 확인
+      console.log('📝 === 밥풀 지급 시작 ===');
+      await debugRicePulStorage();
+      
       // 밥풀 50개 지급
-      await awardRicePul(50, '밥풀 클릭 보너스');
+      const result = await awardRicePul(50, '밥풀 클릭 보너스');
       setLastClickTime(now);
       
-      // 즉시 UI 업데이트
-      const profile = await getUserProfile();
+      // 디버깅: 지급 후 상태 확인
+      console.log('📝 === 밥풀 지급 후 ===');
+      await debugRicePulStorage();
+      await checkStorageSync();
+      
+      // 캐시 무효화 후 새로 로드
+      clearProfileCache();
+      
+      // 즉시 UI 업데이트 (캐시 무시하고 강제 새로고침)
+      const profile = await refreshUserProfile();
+      console.log('🍚 헤더 UI 업데이트, 새 밥풀:', profile.ricePul);
       setRicePul(profile.ricePul);
       
       // 성공 메시지

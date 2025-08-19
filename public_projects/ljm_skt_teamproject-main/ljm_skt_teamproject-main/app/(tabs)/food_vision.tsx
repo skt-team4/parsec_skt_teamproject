@@ -234,7 +234,8 @@ export default function FoodVisionScreen() {
         setEstimatedCalories(250); // 기본값
       }
       
-      setShowMealTypeModal(true);
+      // 날짜/시간 선택 모달을 표시하지 않고 바로 분석 결과만 표시
+      // setShowMealTypeModal(true);  // 주석 처리
     } catch (error) {
       console.error('음식 분석 오류:', error);
       
