@@ -1,0 +1,122 @@
+{
+  "session_id": "mobile_user_20250819",
+  "user_id": "mobile_user",
+  "start_time": "2025-08-19T14:08:30.918095",
+  "end_time": "2025-08-19T16:13:15.069602",
+  "data_points_count": 8,
+  "status": "completed",
+  "data_points": [
+    {
+      "timestamp": "2025-08-19T14:08:30.918034",
+      "user_id": "mobile_user",
+      "data_type": "nlu_features",
+      "features": {
+        "intent": "CHITCHAT",
+        "confidence": 0.8,
+        "entities": {
+          "food_type": null,
+          "budget": null,
+          "location": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-19T14:08:33.883932",
+      "user_id": "mobile_user",
+      "data_type": "interaction",
+      "interaction": {
+        "user_input": ",",
+        "intent": "CHITCHAT",
+        "response_text": "긍정적 ```.",
+        "recommendations": [],
+        "session_id": "sid-20250819-140830-d7a4d3a840860828",
+        "turn_id": 1,
+        "processing_time": 2.973664
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:19:35.166817",
+      "user_id": "mobile_user",
+      "data_type": "nlu_features",
+      "features": {
+        "intent": "CHITCHAT",
+        "confidence": 0.8,
+        "entities": {
+          "food_type": null,
+          "budget": null,
+          "location": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:19:46.598595",
+      "user_id": "mobile_user",
+      "data_type": "interaction",
+      "interaction": {
+        "user_input": "DK",
+        "intent": "CHITCHAT",
+        "response_text": "",
+        "recommendations": [],
+        "session_id": "sid-20250819-151935-d7a4d3a840860828",
+        "turn_id": 2,
+        "processing_time": 11.433617
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:20:38.786498",
+      "user_id": "mobile_user",
+      "data_type": "nlu_features",
+      "features": {
+        "intent": "CHITCHAT",
+        "confidence": 0.8,
+        "entities": {
+          "food_type": null,
+          "budget": null,
+          "location": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:20:54.541323",
+      "user_id": "mobile_user",
+      "data_type": "interaction",
+      "interaction": {
+        "user_input": ".",
+        "intent": "CHITCHAT",
+        "response_text": "",
+        "recommendations": [],
+        "session_id": "sid-20250819-152038-d7a4d3a840860828",
+        "turn_id": 3,
+        "processing_time": 15.754996
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:20:59.763354",
+      "user_id": "mobile_user",
+      "data_type": "nlu_features",
+      "features": {
+        "intent": "CHITCHAT",
+        "confidence": 0.8,
+        "entities": {
+          "food_type": null,
+          "budget": null,
+          "location": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-19T15:21:04.501840",
+      "user_id": "mobile_user",
+      "data_type": "interaction",
+      "interaction": {
+        "user_input": "H",
+        "intent": "CHITCHAT",
+        "response_text": "마무리 문구 추가.",
+        "recommendations": [],
+        "session_id": "sid-20250819-152059-d7a4d3a840860828",
+        "turn_id": 4,
+        "processing_time": 4.738684
+      }
+    }
+  ]
+}
