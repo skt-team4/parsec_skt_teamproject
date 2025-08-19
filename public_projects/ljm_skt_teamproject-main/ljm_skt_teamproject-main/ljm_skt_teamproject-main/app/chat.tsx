@@ -21,15 +21,24 @@ import { SpeechBubble } from '../components/SpeechBubble';
 import useChatLogic from '../hooks/useChatLogic'; // 기본 import로 변경
 import { isSmallScreen, SCREEN_HEIGHT, styles } from '../styles/chatStyles';
 import { awardRicePul } from '../utils/ricePulManager'; // 밥풀 매니저 import
-import { 
-  loadCurrentAnimation, 
-  getAnimationSource, 
-  ALL_ANIMATIONS,
-  getDebugMode,
-  setDebugMode,
-  unlockAllAnimationsForTesting 
-} from '../utils/animationManager'; // 애니메이션 매니저 import
 
+// GIF 애니메이션 배열
+const gifAnimations = [
+  require('../assets/Hi.gif'),
+  require('../assets/Sad.gif'),
+  require('../assets/Dance.gif'),
+  require('../assets/Jump.gif'),
+  require('../assets/Sunglass.gif'),
+];
+
+// 정적 이미지 배열 (애니메이션 비활성화 시 사용)
+const staticImages = [
+  require('../assets/Hi_static.png'),
+  require('../assets/Sad_static.png'),
+  require('../assets/Dance_static.png'), 
+  require('../assets/Jump_static.png'),
+  require('../assets/Sunglass_static.png'),
+];
 
 // Expo Router 옵션
 export const options = {
@@ -47,14 +56,9 @@ export default function ChatScreen() {
   
   // 애니메이션 설정 상태
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
-  const [currentAnimationId, setCurrentAnimationId] = useState('Hi');
-  const [currentAnimationSource, setCurrentAnimationSource] = useState(ALL_ANIMATIONS['Hi']);
   
   // 상점 모달 상태
   const [showShopModal, setShowShopModal] = useState(false);
-  
-  // 디버그 모드
-  const [debugMode, setDebugModeState] = useState(false);
   
   // 애니메이션 값들 (초기 로딩용)
   const [animValues] = useState([
@@ -93,11 +97,20 @@ export default function ChatScreen() {
   useFocusEffect(
     useCallback(() => {
       loadAnimationSettings();
-      loadSelectedAnimation();
-      loadDebugMode();
     }, [])
   );
 
+  // 애니메이션 설정 불러오기 및 실시간 감지
+  useEffect(() => {
+    loadAnimationSettings();
+    
+    // 설정 변경을 실시간으로 감지하는 인터벌 설정
+    const interval = setInterval(() => {
+      loadAnimationSettings();
+    }, 1000); // 1초마다 체크
+
+    return () => clearInterval(interval);
+  }, []);
 
   const loadAnimationSettings = async () => {
     try {
@@ -112,43 +125,28 @@ export default function ChatScreen() {
       console.error('애니메이션 설정 불러오기 실패:', error);
     }
   };
-  
-  // 선택된 애니메이션 로드
-  const loadSelectedAnimation = async () => {
-    try {
-      const animationId = await loadCurrentAnimation();
-      console.log('🎬 현재 선택된 애니메이션:', animationId);
-      setCurrentAnimationId(animationId);
-      setCurrentAnimationSource(getAnimationSource(animationId));
-    } catch (error) {
-      console.error('선택된 애니메이션 로드 실패:', error);
-    }
-  };
-  
-  // 디버그 모드 로드
-  const loadDebugMode = async () => {
-    try {
-      const debug = await getDebugMode();
-      setDebugModeState(debug);
-      console.log('🐛 디버그 모드:', debug ? 'ON' : 'OFF');
-    } catch (error) {
-      console.error('디버그 모드 로드 실패:', error);
-    }
-  };
 
   // GIF 클릭 핸들러 - 상점 모달 열기
   const handleGifClick = () => {
-    console.log('GIF 클릭됨, 현재 애니메이션:', currentAnimationId);
+    console.log('GIF 클릭됨, 현재 인덱스:', currentGifIndex);
     setShowShopModal(true);
   };
-  
-  // 상점에서 애니메이션 변경 시
-  const handleAnimationChange = async (animationId: string) => {
-    console.log(`[애니메이션 변경] ${currentAnimationId} -> ${animationId}`);
-    setCurrentAnimationId(animationId);
-    setCurrentAnimationSource(getAnimationSource(animationId));
-  };
 
+  // GIF 변경 시 콘솔 로그 추가 (디버깅용)
+  const handleGifChangeWithLog = (newIndex: number) => {
+    console.log(`[Chat] GIF 변경 요청: ${currentGifIndex} -> ${newIndex}`);
+    console.log(`[Chat] gifAnimations 배열 길이: ${gifAnimations.length}`);
+    console.log(`[Chat] 요청된 인덱스 ${newIndex}의 GIF:`, gifAnimations[newIndex] ? '존재' : 'undefined');
+    
+    // 인덱스가 유효한지 확인
+    if (newIndex >= 0 && newIndex < gifAnimations.length && gifAnimations[newIndex]) {
+      handleGifChange(newIndex);
+    } else {
+      console.error(`[Chat] 유효하지 않은 GIF 인덱스: ${newIndex}`);
+      // 기본값으로 0번 인덱스 사용
+      handleGifChange(0);
+    }
+  };
 
   // 애니메이션 설정 로드 (컴포넌트 마운트 시)
   useEffect(() => {
@@ -166,6 +164,7 @@ export default function ChatScreen() {
   // currentGifIndex 변경 감지 (디버깅용)
   useEffect(() => {
     console.log(`[Chat] currentGifIndex 변경됨: ${currentGifIndex}`);
+    console.log(`[Chat] 현재 표시될 GIF:`, gifAnimations[currentGifIndex]);
   }, [currentGifIndex]);
 
   // 메시지 전송시 밥풀 보상
@@ -420,36 +419,17 @@ export default function ChatScreen() {
               activeOpacity={0.8}
               style={{ cursor: 'pointer' }} // 웹에서 클릭 가능하도록 커서 추가
             >
-              {isAnimationEnabled ? (
-                <Image
-                  source={currentAnimationSource}
-                  style={dynamicStyles.characterGif}
-                  contentFit="contain"
-                  transition={1000}
-                />
-              ) : null}
+              <Image
+                source={
+                  isAnimationEnabled 
+                    ? (gifAnimations[currentGifIndex] || gifAnimations[0])
+                    : (staticImages[currentGifIndex] || staticImages[0])
+                }
+                style={dynamicStyles.characterGif}
+                contentFit="contain"
+                transition={isAnimationEnabled ? 1000 : 0}
+              />
             </TouchableOpacity>
-            
-            {/* 디버그 버튼 (웹에서만) */}
-            {debugMode && (
-              <View style={{ marginTop: 20, alignItems: 'center' }}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#FF69B4',
-                    padding: 10,
-                    borderRadius: 20,
-                  }}
-                  onPress={async () => {
-                    await unlockAllAnimationsForTesting();
-                    alert('🔓 모든 애니메이션 잠금 해제!');
-                  }}
-                >
-                  <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                    🐛 모두 잠금해제 (디버그)
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
           </View>
         </ScrollView>
       </View>
@@ -467,12 +447,9 @@ export default function ChatScreen() {
       {/* 캐릭터 상점 모달 */}
       <CharacterShopModal
         visible={showShopModal}
-        onClose={() => {
-          setShowShopModal(false);
-          loadSelectedAnimation(); // 닫을 때 선택된 애니메이션 다시 로드
-        }}
+        onClose={() => setShowShopModal(false)}
         currentGifIndex={currentGifIndex}
-        onGifChange={handleAnimationChange} // 새로운 핸들러 사용
+        onGifChange={handleGifChangeWithLog} // 디버깅용 래퍼 함수 사용
         isAnimationEnabled={isAnimationEnabled}
       />
     </View>

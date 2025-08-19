@@ -123,7 +123,9 @@ export default function NutritionScreen() {
         nutrition.carbs += nutrients.CHOCDF?.quantity || 0;
         nutrition.fat += nutrients.FAT?.quantity || 0;
         nutrition.fiber += nutrients.FIBTG?.quantity || 0;
-        nutrition.sodium += nutrients.NA?.quantity || 0;
+        // 나트륨 단위 체크 (g이면 mg로 변환)
+        const sodiumValue = nutrients.NA?.quantity || 0;
+        nutrition.sodium += sodiumValue < 10 ? sodiumValue * 1000 : sodiumValue;
         nutrition.sugar += nutrients.SUGAR?.quantity || 0;
       }
       
@@ -172,6 +174,11 @@ export default function NutritionScreen() {
           nutrition.protein += nutrients.PROCNT?.quantity || 0;
           nutrition.carbs += nutrients.CHOCDF?.quantity || 0;
           nutrition.fat += nutrients.FAT?.quantity || 0;
+          nutrition.fiber += nutrients.FIBTG?.quantity || 0;
+          // 나트륨 단위 체크 (g이면 mg로 변환)
+          const sodiumValue = nutrients.NA?.quantity || 0;
+          nutrition.sodium += sodiumValue < 10 ? sodiumValue * 1000 : sodiumValue;
+          nutrition.sugar += nutrients.SUGAR?.quantity || 0;
         }
         
         if (item.mealType) {
@@ -222,6 +229,11 @@ export default function NutritionScreen() {
           nutrition.protein += nutrients.PROCNT?.quantity || 0;
           nutrition.carbs += nutrients.CHOCDF?.quantity || 0;
           nutrition.fat += nutrients.FAT?.quantity || 0;
+          nutrition.fiber += nutrients.FIBTG?.quantity || 0;
+          // 나트륨 단위 체크 (g이면 mg로 변환)
+          const sodiumValue = nutrients.NA?.quantity || 0;
+          nutrition.sodium += sodiumValue < 10 ? sodiumValue * 1000 : sodiumValue;
+          nutrition.sugar += nutrients.SUGAR?.quantity || 0;
         }
       });
 

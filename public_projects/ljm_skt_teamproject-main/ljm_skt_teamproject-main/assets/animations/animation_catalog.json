@@ -1,0 +1,372 @@
+{
+  "actions": {
+    "Hi": {
+      "name": "인사",
+      "price": 0,
+      "description": "기본 인사 동작",
+      "unlocked": true
+    },
+    "Sad": {
+      "name": "슬픔",
+      "price": 50,
+      "description": "슬픈 표정",
+      "unlocked": false
+    },
+    "Dance": {
+      "name": "춤",
+      "price": 100,
+      "description": "신나는 춤 동작",
+      "unlocked": false
+    },
+    "Jump": {
+      "name": "점프",
+      "price": 80,
+      "description": "활기찬 점프",
+      "unlocked": false
+    },
+    "Think": {
+      "name": "생각",
+      "price": 60,
+      "description": "고민하는 모습",
+      "unlocked": false
+    },
+    "Being": {
+      "name": "존재",
+      "price": 120,
+      "description": "특별한 상태",
+      "unlocked": false
+    },
+    "Hello_fri": {
+      "name": "친구인사",
+      "price": 150,
+      "description": "친근한 인사",
+      "unlocked": false
+    },
+    "Gunchim": {
+      "name": "군침",
+      "price": 200,
+      "description": "배고픈 모습",
+      "unlocked": false
+    },
+    "Sunglass": {
+      "name": "선글라스",
+      "price": 180,
+      "description": "쿨한 모습",
+      "unlocked": false
+    }
+  },
+  "ingredients": {
+    "계란말이": {
+      "name": "계란말이",
+      "price": 30,
+      "description": "부드러운 계란말이",
+      "unlocked": false
+    },
+    "김": {
+      "name": "김",
+      "price": 20,
+      "description": "바삭한 김",
+      "unlocked": false
+    },
+    "명란": {
+      "name": "명란",
+      "price": 80,
+      "description": "짭짤한 명란",
+      "unlocked": false
+    },
+    "베이컨": {
+      "name": "베이컨",
+      "price": 70,
+      "description": "고소한 베이컨",
+      "unlocked": false
+    },
+    "연어": {
+      "name": "연어",
+      "price": 100,
+      "description": "신선한 연어",
+      "unlocked": false
+    },
+    "후라이": {
+      "name": "후라이",
+      "price": 50,
+      "description": "바삭한 후라이",
+      "unlocked": false
+    },
+    "매우편중": {
+      "name": "매우편중",
+      "price": 150,
+      "description": "극도로 편중된 식사",
+      "unlocked": false
+    },
+    "편중식사": {
+      "name": "편중식사",
+      "price": 120,
+      "description": "편중된 식사",
+      "unlocked": false
+    }
+  },
+  "combos": {
+    "Being_매우편중": {
+      "action": "Being",
+      "ingredient": "매우편중",
+      "file": "Being_매우편중.gif",
+      "unlocked": false
+    },
+    "Being_편중식사": {
+      "action": "Being",
+      "ingredient": "편중식사",
+      "file": "Being_편중식사.gif",
+      "unlocked": false
+    },
+    "Dance_계란말이": {
+      "action": "Dance",
+      "ingredient": "계란말이",
+      "file": "Dance_계란말이.gif",
+      "unlocked": false
+    },
+    "Dance_김": {
+      "action": "Dance",
+      "ingredient": "김",
+      "file": "Dance_김.gif",
+      "unlocked": false
+    },
+    "Dance_명란": {
+      "action": "Dance",
+      "ingredient": "명란",
+      "file": "Dance_명란.gif",
+      "unlocked": false
+    },
+    "Dance_베이컨": {
+      "action": "Dance",
+      "ingredient": "베이컨",
+      "file": "Dance_베이컨.gif",
+      "unlocked": false
+    },
+    "Dance_연어": {
+      "action": "Dance",
+      "ingredient": "연어",
+      "file": "Dance_연어.gif",
+      "unlocked": false
+    },
+    "Dance_후라이": {
+      "action": "Dance",
+      "ingredient": "후라이",
+      "file": "Dance_후라이.gif",
+      "unlocked": false
+    },
+    "Hi_계란말이": {
+      "action": "Hi",
+      "ingredient": "계란말이",
+      "file": "Hi_계란말이.gif",
+      "unlocked": false
+    },
+    "Hi_김": {
+      "action": "Hi",
+      "ingredient": "김",
+      "file": "Hi_김.gif",
+      "unlocked": false
+    },
+    "Hi_매우편중": {
+      "action": "Hi",
+      "ingredient": "매우편중",
+      "file": "Hi_매우편중.gif",
+      "unlocked": false
+    },
+    "Hi_명란": {
+      "action": "Hi",
+      "ingredient": "명란",
+      "file": "Hi_명란.gif",
+      "unlocked": false
+    },
+    "Hi_베이컨": {
+      "action": "Hi",
+      "ingredient": "베이컨",
+      "file": "Hi_베이컨.gif",
+      "unlocked": false
+    },
+    "Hi_연어": {
+      "action": "Hi",
+      "ingredient": "연어",
+      "file": "Hi_연어.gif",
+      "unlocked": false
+    },
+    "Hi_편중식사": {
+      "action": "Hi",
+      "ingredient": "편중식사",
+      "file": "Hi_편중식사.gif",
+      "unlocked": false
+    },
+    "Hi_후라이": {
+      "action": "Hi",
+      "ingredient": "후라이",
+      "file": "Hi_후라이.gif",
+      "unlocked": false
+    },
+    "Jump_계란말이": {
+      "action": "Jump",
+      "ingredient": "계란말이",
+      "file": "Jump_계란말이.gif",
+      "unlocked": false
+    },
+    "Jump_김": {
+      "action": "Jump",
+      "ingredient": "김",
+      "file": "Jump_김.gif",
+      "unlocked": false
+    },
+    "Jump_명란": {
+      "action": "Jump",
+      "ingredient": "명란",
+      "file": "Jump_명란.gif",
+      "unlocked": false
+    },
+    "Jump_베이컨": {
+      "action": "Jump",
+      "ingredient": "베이컨",
+      "file": "Jump_베이컨.gif",
+      "unlocked": false
+    },
+    "Jump_연어": {
+      "action": "Jump",
+      "ingredient": "연어",
+      "file": "Jump_연어.gif",
+      "unlocked": false
+    },
+    "Jump_후라이": {
+      "action": "Jump",
+      "ingredient": "후라이",
+      "file": "Jump_후라이.gif",
+      "unlocked": false
+    },
+    "Sad_계란말이": {
+      "action": "Sad",
+      "ingredient": "계란말이",
+      "file": "Sad_계란말이.gif",
+      "unlocked": false
+    },
+    "Sad_김": {
+      "action": "Sad",
+      "ingredient": "김",
+      "file": "Sad_김.gif",
+      "unlocked": false
+    },
+    "Sad_매우편중": {
+      "action": "Sad",
+      "ingredient": "매우편중",
+      "file": "Sad_매우편중.gif",
+      "unlocked": false
+    },
+    "Sad_명란": {
+      "action": "Sad",
+      "ingredient": "명란",
+      "file": "Sad_명란.gif",
+      "unlocked": false
+    },
+    "Sad_베이컨": {
+      "action": "Sad",
+      "ingredient": "베이컨",
+      "file": "Sad_베이컨.gif",
+      "unlocked": false
+    },
+    "Sad_연어": {
+      "action": "Sad",
+      "ingredient": "연어",
+      "file": "Sad_연어.gif",
+      "unlocked": false
+    },
+    "Sad_편중식사": {
+      "action": "Sad",
+      "ingredient": "편중식사",
+      "file": "Sad_편중식사.gif",
+      "unlocked": false
+    },
+    "Sad_후라이": {
+      "action": "Sad",
+      "ingredient": "후라이",
+      "file": "Sad_후라이.gif",
+      "unlocked": false
+    },
+    "Think_계란말이": {
+      "action": "Think",
+      "ingredient": "계란말이",
+      "file": "Think_계란말이.gif",
+      "unlocked": false
+    },
+    "Think_김": {
+      "action": "Think",
+      "ingredient": "김",
+      "file": "Think_김.gif",
+      "unlocked": false
+    },
+    "Think_매우편중": {
+      "action": "Think",
+      "ingredient": "매우편중",
+      "file": "Think_매우편중.gif",
+      "unlocked": false
+    },
+    "Think_명란": {
+      "action": "Think",
+      "ingredient": "명란",
+      "file": "Think_명란.gif",
+      "unlocked": false
+    },
+    "Think_베이컨": {
+      "action": "Think",
+      "ingredient": "베이컨",
+      "file": "Think_베이컨.gif",
+      "unlocked": false
+    },
+    "Think_연어": {
+      "action": "Think",
+      "ingredient": "연어",
+      "file": "Think_연어.gif",
+      "unlocked": false
+    },
+    "Think_편중식사": {
+      "action": "Think",
+      "ingredient": "편중식사",
+      "file": "Think_편중식사.gif",
+      "unlocked": false
+    },
+    "Think_후라이": {
+      "action": "Think",
+      "ingredient": "후라이",
+      "file": "Think_후라이.gif",
+      "unlocked": false
+    }
+  },
+  "specials": {
+    "basic_pack": {
+      "name": "기본 팩",
+      "items": [
+        "Hi",
+        "normal"
+      ],
+      "price": 0,
+      "description": "기본 애니메이션 세트",
+      "unlocked": true
+    },
+    "food_lover_pack": {
+      "name": "음식 애호가 팩",
+      "items": [
+        "Dance_김",
+        "Dance_계란말이",
+        "Jump_베이컨"
+      ],
+      "price": 200,
+      "description": "음식과 함께 춤추기",
+      "discount": 20
+    },
+    "premium_pack": {
+      "name": "프리미엄 팩",
+      "items": [
+        "Sunglass",
+        "연어",
+        "명란"
+      ],
+      "price": 300,
+      "description": "고급 애니메이션 세트",
+      "discount": 30
+    }
+  }
+}

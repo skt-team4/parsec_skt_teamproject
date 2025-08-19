@@ -1,0 +1,131 @@
+{
+  "basic_actions": [
+    "Dance",
+    "Gunchim",
+    "Hi",
+    "Jump",
+    "Sad",
+    "Sunglass"
+  ],
+  "ingredients": [
+    "연어",
+    "편중식사",
+    "계란말이",
+    "후라이",
+    "fri",
+    "김",
+    "베이컨",
+    "명란",
+    "매우편중",
+    "normal"
+  ],
+  "combos": {
+    "Being": [
+      "매우편중",
+      "편중식사"
+    ],
+    "Dance": [
+      "연어",
+      "계란말이",
+      "후라이",
+      "김",
+      "베이컨",
+      "명란"
+    ],
+    "Hello": [
+      "fri"
+    ],
+    "Hi": [
+      "연어",
+      "편중식사",
+      "계란말이",
+      "후라이",
+      "김",
+      "베이컨",
+      "명란",
+      "매우편중",
+      "normal"
+    ],
+    "Jump": [
+      "연어",
+      "계란말이",
+      "후라이",
+      "김",
+      "베이컨",
+      "명란"
+    ],
+    "Sad": [
+      "연어",
+      "편중식사",
+      "계란말이",
+      "후라이",
+      "김",
+      "베이컨",
+      "명란",
+      "매우편중",
+      "normal"
+    ],
+    "Think": [
+      "연어",
+      "편중식사",
+      "계란말이",
+      "후라이",
+      "김",
+      "베이컨",
+      "명란",
+      "매우편중",
+      "normal"
+    ]
+  },
+  "all_files": [
+    "Being_매우편중.gif",
+    "Being_편중식사.gif",
+    "Dance.gif",
+    "Dance_계란말이.gif",
+    "Dance_김.gif",
+    "Dance_명란.gif",
+    "Dance_베이컨.gif",
+    "Dance_연어.gif",
+    "Dance_후라이.gif",
+    "Gunchim.gif",
+    "Hello_fri.gif",
+    "Hello_fri_2.gif",
+    "Hi.gif",
+    "Hi_normal.gif",
+    "Hi_계란말이.gif",
+    "Hi_김.gif",
+    "Hi_매우편중.gif",
+    "Hi_명란.gif",
+    "Hi_베이컨.gif",
+    "Hi_연어.gif",
+    "Hi_편중식사.gif",
+    "Hi_후라이.gif",
+    "Jump.gif",
+    "Jump_계란말이.gif",
+    "Jump_김.gif",
+    "Jump_명란.gif",
+    "Jump_베이컨.gif",
+    "Jump_연어.gif",
+    "Jump_후라이.gif",
+    "Sad.gif",
+    "Sad_normal.gif",
+    "Sad_계란말이.gif",
+    "Sad_김.gif",
+    "Sad_매우편중.gif",
+    "Sad_명란.gif",
+    "Sad_베이컨.gif",
+    "Sad_연어.gif",
+    "Sad_편중식사.gif",
+    "Sad_후라이.gif",
+    "Sunglass.gif",
+    "Think_normal.gif",
+    "Think_계란말이.gif",
+    "Think_김.gif",
+    "Think_매우편중.gif",
+    "Think_명란.gif",
+    "Think_베이컨.gif",
+    "Think_연어.gif",
+    "Think_편중식사.gif",
+    "Think_후라이.gif"
+  ]
+}

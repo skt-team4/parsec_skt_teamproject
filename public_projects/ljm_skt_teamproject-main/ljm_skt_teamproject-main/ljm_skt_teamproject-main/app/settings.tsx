@@ -18,7 +18,6 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getPersonas, setCurrentPersona, getCurrentPersona, type Persona } from '../services/apiService';
 import tmapService from '../services/tmapService';
-import { getDebugMode, setDebugMode } from '../utils/animationManager';
 
 interface SettingsProps {
   // 필요한 props 타입 정의
@@ -123,7 +122,6 @@ const Settings: React.FC<SettingsProps> = () => {
 
   // 앱 설정 관련 상태
   const [isAnimationEnabled, setIsAnimationEnabled] = useState<boolean>(true);
-  const [isDebugMode, setIsDebugMode] = useState<boolean>(false);
   
   // 페르소나 관련 상태
   const [personas, setPersonas] = useState<Persona[]>([]);
@@ -136,7 +134,6 @@ const Settings: React.FC<SettingsProps> = () => {
     loadSelectedCategories();
     loadSelectedAllergies();
     loadAnimationSettings();
-    loadDebugSettings();
     loadPersonas();
     loadWeatherInfo();
   }, []);
@@ -241,17 +238,6 @@ const Settings: React.FC<SettingsProps> = () => {
       }
     } catch (error) {
       console.error('애니메이션 설정 불러오기 실패:', error);
-    }
-  };
-
-  // 저장된 디버그 설정 불러오기
-  const loadDebugSettings = async () => {
-    try {
-      const debug = await getDebugMode();
-      setIsDebugMode(debug);
-      console.log('🐛 디버그 모드 설정 로드:', debug ? 'ON' : 'OFF');
-    } catch (error) {
-      console.error('디버그 설정 불러오기 실패:', error);
     }
   };
 
@@ -397,18 +383,6 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   };
 
-  // 디버그 설정 저장
-  const saveDebugSettings = async (enabled: boolean) => {
-    try {
-      await setDebugMode(enabled);
-      setIsDebugMode(enabled);
-      console.log(`🐛 디버그 모드 설정 저장: ${enabled ? 'ON' : 'OFF'}`);
-    } catch (error) {
-      console.error('디버그 설정 저장 실패:', error);
-      Alert.alert('오류', '디버그 설정 저장에 실패했습니다.');
-    }
-  };
-
   // 카테고리 선택/해제 토글
   const toggleCategory = (categoryId: string) => {
     setSelectedCategories(prev => {
@@ -434,11 +408,6 @@ const Settings: React.FC<SettingsProps> = () => {
   // 애니메이션 설정 토글
   const toggleAnimation = (enabled: boolean) => {
     saveAnimationSettings(enabled);
-  };
-
-  // 디버그 모드 토글
-  const toggleDebugMode = (enabled: boolean) => {
-    saveDebugSettings(enabled);
   };
 
   // 카테고리 모달 닫기 및 저장
@@ -994,22 +963,6 @@ const Settings: React.FC<SettingsProps> = () => {
               onValueChange={toggleAnimation}
               trackColor={{ false: '#e0e0e0', true: '#FFD54F' }}
               thumbColor={isAnimationEnabled ? '#FF8F00' : '#9e9e9e'}
-              ios_backgroundColor="#e0e0e0"
-            />
-          </View>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingInfo}>
-              <Text style={styles.settingLabel}>디버그 모드</Text>
-              <Text style={styles.settingDescription}>
-                개발자 도구와 테스트 기능을 활성화합니다
-              </Text>
-            </View>
-            <Switch
-              value={isDebugMode}
-              onValueChange={toggleDebugMode}
-              trackColor={{ false: '#e0e0e0', true: '#FF69B4' }}
-              thumbColor={isDebugMode ? '#FF1493' : '#9e9e9e'}
               ios_backgroundColor="#e0e0e0"
             />
           </View>

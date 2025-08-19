@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import { awardRicePul } from '../../utils/ricePulManager';
 import DatePickerField from '../../components/DatePickerField';
-import { getAPIUrl } from '../../config/api.config';
 
 interface FoodData {
   id: string;
@@ -61,6 +60,7 @@ export default function FoodVisionScreen() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showMealTypeModal, setShowMealTypeModal] = useState(false);
   const [analyzedFood, setAnalyzedFood] = useState<string>('');
+  const [selectedFoodIndex, setSelectedFoodIndex] = useState<number>(0);
   const [foodPredictions, setFoodPredictions] = useState<FoodPrediction[]>([]);
   const [estimatedCalories, setEstimatedCalories] = useState<number>(0);
   const [nutritionInfo, setNutritionInfo] = useState<NutritionInfo | null>(null);
@@ -171,9 +171,8 @@ export default function FoodVisionScreen() {
       const formData = await createFormDataFromFile(capturedImage || '', base64Image);
       
       // Step 1: Korean Food API로 음식명 인식
-      const foodApiUrl = `${getAPIUrl('FOOD_RECOGNITION')}/analyze`;
-      console.log('Korean Food API 호출 시작:', foodApiUrl);
-      const foodResponse = await fetch(foodApiUrl, {
+      console.log('Korean Food API 호출 시작: http://localhost:5001/analyze');
+      const foodResponse = await fetch('http://localhost:5001/analyze', {
         method: 'POST',
         body: formData,
       });
@@ -201,10 +200,9 @@ export default function FoodVisionScreen() {
       
       // Step 2: LogMeal API로 영양소 분석 (선택적)
       try {
-        const nutritionApiUrl = `${getAPIUrl('NUTRITION')}/analyze-nutrition`;
-        console.log('LogMeal API 호출 시작:', nutritionApiUrl);
+        console.log('LogMeal API 호출 시작: http://localhost:5003/analyze-nutrition');
         const nutritionFormData = await createFormDataFromFile(capturedImage || '', base64Image);
-        const nutritionResponse = await fetch(nutritionApiUrl, {
+        const nutritionResponse = await fetch('http://localhost:5003/analyze-nutrition', {
           method: 'POST',
           body: nutritionFormData,
         });
@@ -275,7 +273,7 @@ export default function FoodVisionScreen() {
       
       // 영양소 분석 기록 서버에도 저장
       try {
-        const historyResponse = await fetch(`${getAPIUrl('NUTRITION_HISTORY')}/api/save-nutrition`, {
+        const historyResponse = await fetch('http://localhost:5004/api/save-nutrition', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -409,197 +407,155 @@ export default function FoodVisionScreen() {
   if (capturedImage) {
     return (
       <View style={styles.container}>
-        <ScrollView 
-          style={styles.scrollContainer} 
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: analyzedFood ? 100 : 20 }}
-        >
-          <Image source={{ uri: capturedImage }} style={styles.capturedImage} />
-          
-          {isAnalyzing ? (
-            <View style={styles.analyzingContainer}>
-              <ActivityIndicator size="large" color="#FF6B6B" />
-              <Text style={styles.analyzingText}>🍳 음식을 분석하는 중...</Text>
-              <Text style={styles.analyzingSubtext}>잠시만 기다려주세요</Text>
-            </View>
-          ) : analyzedFood ? (
-            <View style={styles.resultContainer}>
+        <Image source={{ uri: capturedImage }} style={styles.capturedImage} />
+        
+        {isAnalyzing ? (
+          <View style={styles.analyzingContainer}>
+            <ActivityIndicator size="large" color="#007AFF" />
+            <Text style={styles.analyzingText}>음식을 분석하는 중...</Text>
+          </View>
+        ) : analyzedFood ? (
+          <>
+            <ScrollView style={styles.resultScrollView}>
+              <View style={styles.resultContainer}>
               {/* 음식 후보 선택 섹션 */}
-              {foodPredictions.length > 0 && (
-                <View style={styles.candidatesSection}>
-                  <Text style={styles.candidatesTitle}>🍽️ 음식을 선택해주세요</Text>
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.candidatesScroll}>
-                    {foodPredictions.map((pred, index) => (
-                      <TouchableOpacity
-                        key={index}
-                        style={[
-                          styles.candidateButton,
-                          analyzedFood === pred.label && styles.candidateButtonActive
-                        ]}
-                        onPress={() => {
-                          setAnalyzedFood(pred.label);
-                          // 영양 정보 재분석이 필요한 경우 여기에 추가
-                        }}
-                      >
-                        <Text style={[
-                          styles.candidateNumber,
-                          analyzedFood === pred.label && styles.candidateTextActive
-                        ]}>#{index + 1}</Text>
-                        <Text style={[
-                          styles.candidateName,
-                          analyzedFood === pred.label && styles.candidateTextActive
-                        ]}>{pred.label}</Text>
-                        <Text style={[
-                          styles.candidateScore,
-                          analyzedFood === pred.label && styles.candidateTextActive
-                        ]}>{(pred.score).toFixed(0)}%</Text>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                </View>
-              )}
+              <View style={styles.foodSelectionSection}>
+                <Text style={styles.resultTitle}>음식을 선택하세요</Text>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.foodCandidatesScroll}>
+                  {foodPredictions.map((pred, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      style={[
+                        styles.foodCandidate,
+                        selectedFoodIndex === index && styles.foodCandidateSelected
+                      ]}
+                      onPress={() => {
+                        setSelectedFoodIndex(index);
+                        setAnalyzedFood(pred.label);
+                      }}
+                    >
+                      <Text style={[
+                        styles.foodCandidateName,
+                        selectedFoodIndex === index && styles.foodCandidateNameSelected
+                      ]}>
+                        {pred.label}
+                      </Text>
+                      <Text style={[
+                        styles.foodCandidateScore,
+                        selectedFoodIndex === index && styles.foodCandidateScoreSelected
+                      ]}>
+                        {(pred.score).toFixed(0)}%
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
 
-              {/* 선택된 음식 정보 카드 */}
-              <View style={styles.selectedFoodCard}>
+              {/* 선택된 음식 정보 */}
+              <View style={styles.selectedFoodInfo}>
                 <Text style={styles.selectedFoodLabel}>선택된 음식</Text>
-                <Text style={styles.selectedFoodName}>{analyzedFood}</Text>
-                <View style={styles.calorieContainer}>
+                <Text style={styles.foodName}>{analyzedFood}</Text>
+                <View style={styles.calorieBox}>
                   <Text style={styles.calorieIcon}>🔥</Text>
-                  <Text style={styles.calorieText}>{Math.round(estimatedCalories)} kcal</Text>
+                  <Text style={styles.calories}>{Math.round(estimatedCalories)} kcal</Text>
                 </View>
               </View>
             
-              {/* 영양 점수 표시 */}
-              {nutritionInfo?.nutri_score && (
-                <View style={styles.nutriScoreCard}>
-                  <Text style={styles.nutriScoreTitle}>영양 등급</Text>
-                  <View style={styles.nutriScoreGrades}>
-                    {['A', 'B', 'C', 'D', 'E'].map((grade) => (
-                      <View
-                        key={grade}
-                        style={[
-                          styles.nutriGrade,
-                          nutritionInfo.nutri_score.category === grade && styles.nutriGradeActive,
-                          {
-                            backgroundColor: 
-                              grade === 'A' ? '#28a745' :
-                              grade === 'B' ? '#6f42c1' :
-                              grade === 'C' ? '#fd7e14' :
-                              grade === 'D' ? '#dc3545' : '#6c757d',
-                            opacity: nutritionInfo.nutri_score.category === grade ? 1 : 0.3
-                          }
-                        ]}
-                      >
-                        <Text style={[
-                          styles.nutriGradeText,
-                          nutritionInfo.nutri_score.category === grade && styles.nutriGradeTextActive
-                        ]}>{grade}</Text>
-                      </View>
-                    ))}
-                  </View>
-                </View>
-              )}
+            {/* 영양 점수 표시 */}
+            {nutritionInfo?.nutri_score && (
+              <View style={styles.nutriScoreContainer}>
+                <Text style={styles.nutriScoreLabel}>영양 등급: </Text>
+                <Text style={[styles.nutriScore, { 
+                  backgroundColor: nutritionInfo.nutri_score.category === 'A' ? '#28a745' :
+                                  nutritionInfo.nutri_score.category === 'B' ? '#6f42c1' :
+                                  nutritionInfo.nutri_score.category === 'C' ? '#fd7e14' :
+                                  nutritionInfo.nutri_score.category === 'D' ? '#dc3545' : '#6c757d'
+                }]}>
+                  {nutritionInfo.nutri_score.category}
+                </Text>
+              </View>
+            )}
             
-              {/* 주요 영양소 정보 표시 */}
-              {nutritionInfo && (
-                <View style={styles.nutritionCard}>
-                  <Text style={styles.nutritionTitle}>📊 영양 성분</Text>
-                  <View style={styles.nutritionGrid}>
-                    {nutritionInfo.totalNutrients?.PROCNT && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>💪</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>단백질</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.PROCNT.quantity.toFixed(1)}g
-                        </Text>
-                      </View>
-                    )}
-                    {nutritionInfo.totalNutrients?.CHOCDF && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>🌾</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>탄수화물</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.CHOCDF.quantity.toFixed(1)}g
-                        </Text>
-                      </View>
-                    )}
-                    {nutritionInfo.totalNutrients?.FAT && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>🧈</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>지방</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.FAT.quantity.toFixed(1)}g
-                        </Text>
-                      </View>
-                    )}
-                    {nutritionInfo.totalNutrients?.FIBTG && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>🥬</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>식이섬유</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.FIBTG.quantity.toFixed(1)}g
-                        </Text>
-                      </View>
-                    )}
-                    {nutritionInfo.totalNutrients?.NA && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>🧂</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>나트륨</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.NA.quantity < 10 
-                            ? (nutritionInfo.totalNutrients.NA.quantity * 1000).toFixed(0)
-                            : nutritionInfo.totalNutrients.NA.quantity.toFixed(0)}mg
-                        </Text>
-                      </View>
-                    )}
-                    {nutritionInfo.totalNutrients?.SUGAR && (
-                      <View style={styles.nutritionItem}>
-                        <View style={styles.nutritionIconContainer}>
-                          <Text style={styles.nutritionIcon}>🍯</Text>
-                        </View>
-                        <Text style={styles.nutritionLabel}>당류</Text>
-                        <Text style={styles.nutritionValue}>
-                          {nutritionInfo.totalNutrients.SUGAR.quantity.toFixed(1)}g
-                        </Text>
-                      </View>
-                    )}
-                  </View>
+            {/* 주요 영양소 정보 표시 */}
+            {nutritionInfo && (
+              <View style={styles.nutritionContainer}>
+                <Text style={styles.nutritionTitle}>주요 영양소 정보</Text>
+                <View style={styles.nutritionGrid}>
+                  {nutritionInfo.totalNutrients.PROCNT && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>단백질</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.PROCNT.quantity.toFixed(1)}g
+                      </Text>
+                    </View>
+                  )}
+                  {nutritionInfo.totalNutrients.CHOCDF && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>탄수화물</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.CHOCDF.quantity.toFixed(1)}g
+                      </Text>
+                    </View>
+                  )}
+                  {nutritionInfo.totalNutrients.FAT && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>지방</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.FAT.quantity.toFixed(1)}g
+                      </Text>
+                    </View>
+                  )}
+                  {nutritionInfo.totalNutrients.FIBTG && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>식이섬유</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.FIBTG.quantity.toFixed(1)}g
+                      </Text>
+                    </View>
+                  )}
+                  {nutritionInfo.totalNutrients.NA && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>나트륨</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.NA.quantity.toFixed(0)}mg
+                      </Text>
+                    </View>
+                  )}
+                  {nutritionInfo.totalNutrients.SUGAR && (
+                    <View style={styles.nutritionItem}>
+                      <Text style={styles.nutritionLabel}>당류</Text>
+                      <Text style={styles.nutritionValue}>
+                        {nutritionInfo.totalNutrients.SUGAR.quantity.toFixed(1)}g
+                      </Text>
+                    </View>
+                  )}
                 </View>
-              )}
+              </View>
+            )}
             
+              </View>
+            </ScrollView>
+            
+            {/* 하단 고정 버튼 영역 */}
+            <View style={styles.fixedBottomButtons}>
+              <TouchableOpacity 
+                style={styles.primarySaveButton}
+                onPress={() => setShowMealTypeModal(true)}
+              >
+                <Ionicons name="checkmark-circle" size={24} color="white" />
+                <Text style={styles.primarySaveButtonText}>저장하기</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity 
+                style={styles.secondaryRetakeButton} 
+                onPress={resetCamera}
+              >
+                <Ionicons name="camera-outline" size={22} color="#666" />
+                <Text style={styles.secondaryRetakeButtonText}>다시 촬영</Text>
+              </TouchableOpacity>
             </View>
-          ) : null}
-        </ScrollView>
-
-        {/* 하단 고정 버튼 영역 */}
-        {analyzedFood && (
-          <View style={styles.fixedBottomContainer}>
-            <TouchableOpacity 
-              style={styles.saveButton} 
-              onPress={() => setShowMealTypeModal(true)}
-            >
-              <Ionicons name="save" size={20} color="white" />
-              <Text style={styles.saveButtonText}>저장하기</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.retakeButton} 
-              onPress={resetCamera}
-            >
-              <Ionicons name="camera" size={20} color="white" />
-              <Text style={styles.retakeButtonText}>다시 촬영</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+          </>
+        ) : null}
 
         {/* 식사 시간 선택 모달 */}
         <Modal
@@ -820,123 +776,145 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-  scrollContainer: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
   capturedImage: {
     width: '100%',
-    height: 300,
+    height: '40%',
     resizeMode: 'cover',
   },
+  resultScrollView: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginBottom: 80, // 버튼 영역 공간 확보
+  },
   analyzingContainer: {
-    padding: 40,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 20,
-    borderRadius: 15,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   analyzingText: {
     fontSize: 18,
     color: '#333',
     marginTop: 16,
-    fontWeight: '600',
-  },
-  analyzingSubtext: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 8,
   },
   resultContainer: {
+    backgroundColor: 'white',
     padding: 20,
-    backgroundColor: '#f8f9fa',
   },
-  candidatesSection: {
+  foodSelectionSection: {
     marginBottom: 20,
   },
-  candidatesTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
+  foodCandidatesScroll: {
+    marginTop: 12,
+    maxHeight: 80,
   },
-  candidatesScroll: {
-    flexDirection: 'row',
-    paddingVertical: 5,
-  },
-  candidateButton: {
-    backgroundColor: 'white',
+  foodCandidate: {
+    backgroundColor: '#f5f5f5',
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 20,
+    paddingVertical: 10,
     marginRight: 10,
+    borderRadius: 20,
     borderWidth: 2,
-    borderColor: '#e0e0e0',
-    minWidth: 100,
+    borderColor: 'transparent',
     alignItems: 'center',
+    minWidth: 80,
   },
-  candidateButtonActive: {
-    backgroundColor: '#FF6B6B',
-    borderColor: '#FF6B6B',
+  foodCandidateSelected: {
+    backgroundColor: '#007AFF',
+    borderColor: '#007AFF',
   },
-  candidateNumber: {
-    fontSize: 12,
-    color: '#999',
-    marginBottom: 4,
-  },
-  candidateName: {
+  foodCandidateName: {
     fontSize: 14,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 2,
   },
-  candidateScore: {
-    fontSize: 12,
-    color: '#666',
-  },
-  candidateTextActive: {
+  foodCandidateNameSelected: {
     color: 'white',
   },
-  selectedFoodCard: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 15,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+  foodCandidateScore: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 2,
+  },
+  foodCandidateScoreSelected: {
+    color: 'rgba(255,255,255,0.9)',
+  },
+  selectedFoodInfo: {
+    backgroundColor: '#f8f9fa',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 16,
   },
   selectedFoodLabel: {
     fontSize: 12,
-    color: '#999',
+    color: '#666',
     marginBottom: 8,
   },
-  selectedFoodName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
-  },
-  calorieContainer: {
+  calorieBox: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#fff3cd',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginTop: 8,
+    alignSelf: 'flex-start',
   },
   calorieIcon: {
-    fontSize: 20,
-    marginRight: 8,
+    fontSize: 16,
+    marginRight: 6,
   },
-  calorieText: {
-    fontSize: 18,
+  fixedBottomButtons: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingBottom: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  primarySaveButton: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#007AFF',
+    paddingVertical: 14,
+    borderRadius: 12,
+  },
+  primarySaveButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '700',
+    marginLeft: 8,
+  },
+  secondaryRetakeButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  secondaryRetakeButtonText: {
+    color: '#666',
+    fontSize: 14,
     fontWeight: '600',
-    color: '#FF6B6B',
+    marginLeft: 6,
   },
   resultTitle: {
     fontSize: 18,
@@ -944,14 +922,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   foodName: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   calories: {
-    fontSize: 16,
-    color: '#007AFF',
+    fontSize: 18,
+    color: '#856404',
     fontWeight: '600',
   },
   otherPredictions: {
@@ -972,143 +950,27 @@ const styles = StyleSheet.create({
     color: '#333',
     marginVertical: 2,
   },
-  nutriScoreCard: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 15,
-    marginBottom: 15,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  nutriScoreTitle: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
-    fontWeight: '600',
-  },
-  nutriScoreGrades: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  nutriGrade: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  nutriGradeActive: {
-    transform: [{ scale: 1.2 }],
-  },
-  nutriGradeText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  nutriGradeTextActive: {
-    fontSize: 24,
-  },
-  nutritionCard: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 15,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  nutritionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 15,
-  },
-  nutritionGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  nutritionItem: {
-    width: '48%',
-    backgroundColor: '#f8f9fa',
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  nutritionIconContainer: {
-    marginBottom: 5,
-  },
-  nutritionIcon: {
-    fontSize: 24,
-  },
-  nutritionLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 4,
-  },
-  nutritionValue: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  fixedBottomContainer: {
+  bottomControls: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 30,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    padding: 20,
-    backgroundColor: 'white',
-    borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
-    elevation: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  saveButton: {
-    flex: 1,
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#28a745',
-    paddingVertical: 15,
-    borderRadius: 10,
-    marginRight: 10,
-  },
-  saveButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
   },
   retakeButton: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#007AFF',
-    paddingVertical: 15,
-    borderRadius: 10,
-  },
-  retakeButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
+    backgroundColor: '#6c757d',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    opacity: 0.9,
   },
   controlButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
-    marginLeft: 8,
+    marginLeft: 6,
   },
   modalOverlay: {
     flex: 1,

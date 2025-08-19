@@ -33,59 +33,22 @@ export default function HomeScreen() {
           if (permission === 'granted') {
             console.log('✅ 알림 권한 승인됨');
             // 권한 승인 후 환영 알림 표시
-            setTimeout(async () => {
-              try {
-                if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-                  const registration = await navigator.serviceWorker.ready;
-                  await registration.showNotification('🍚 밥풀레이스에 오신 것을 환영합니다!', {
-                    body: '오늘도 맛있는 하루 되세요! 알림 아이콘을 클릭해서 설정을 변경할 수 있습니다.',
-                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
-                    tag: 'welcome-notification'
-                  });
-                } else if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-                  // Fallback for development environment
-                  try {
-                    new Notification('🍚 밥풀레이스에 오신 것을 환영합니다!', {
-                      body: '오늘도 맛있는 하루 되세요! 알림 아이콘을 클릭해서 설정을 변경할 수 있습니다.',
-                      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
-                      tag: 'welcome-notification'
-                    });
-                  } catch (e) {
-                    console.log('알림 표시 실패 - Service Worker 없음');
-                  }
-                }
-              } catch (error) {
-                console.log('알림 표시 중 오류:', error);
-              }
+            setTimeout(() => {
+              new Notification('🍚 밥풀레이스에 오신 것을 환영합니다!', {
+                body: '오늘도 맛있는 하루 되세요! 알림 아이콘을 클릭해서 설정을 변경할 수 있습니다.',
+                icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+                tag: 'welcome-notification'
+              });
             }, 1000);
             setNotificationsEnabled(true);
           }
         } else if (Notification.permission === 'granted') {
           // 이미 권한이 있으면 환영 알림만 표시
-          try {
-            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-              navigator.serviceWorker.ready.then((registration) => {
-                registration.showNotification('🍚 밥풀레이스', {
-                  body: '환영합니다! 오늘의 추천 메뉴를 확인해보세요.',
-                  icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
-                  tag: 'welcome-notification'
-                });
-              });
-            } else {
-              // Fallback for development
-              try {
-                new Notification('🍚 밥풀레이스', {
-                  body: '환영합니다! 오늘의 추천 메뉴를 확인해보세요.',
-                  icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
-                  tag: 'welcome-notification'
-                });
-              } catch (e) {
-                console.log('알림 표시 실패');
-              }
-            }
-          } catch (error) {
-            console.log('알림 오류:', error);
-          }
+          new Notification('🍚 밥풀레이스', {
+            body: '환영합니다! 오늘의 추천 메뉴를 확인해보세요.',
+            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🍚</text></svg>',
+            tag: 'welcome-notification'
+          });
           setNotificationsEnabled(true);
         }
       }
@@ -334,8 +297,8 @@ export default function HomeScreen() {
   // 가맹점 지도 열기 함수
   const openStoreMap = async () => {
     try {
-      // T-Map 가맹점 지도 서버 URL
-      const mapUrl = 'http://localhost:5005/';
+      // 여기에 실제 HTML 지도 파일의 URL을 넣으세요
+      const mapUrl = 'http://192.168.68.62:5500/tmap_folium_map.html'; // 실제 지도 URL로 변경 필요
       
       console.log('🗺️ 가맹점 지도 열기:', mapUrl);
       await WebBrowser.openBrowserAsync(mapUrl);
@@ -428,8 +391,8 @@ export default function HomeScreen() {
                 <Text style={styles.campaignTag}>📍 서울시 강남구 내 매장 전용</Text>
               </View>
               <View style={styles.campaignDetails}>
-                <Text style={styles.campaignDetailText}>• 참여 기간: 8월 26일 ~ 8월 27일</Text>
-                <Text style={styles.campaignDetailText}>• 혜택: 10% 할인 쿠폰 발행 </Text>
+                <Text style={styles.campaignDetailText}>• 참여 기간: 12월 1일 ~ 12월 31일</Text>
+                <Text style={styles.campaignDetailText}>• 혜택: 도시락 구매 시 10% 할인</Text>
                 <Text style={styles.campaignDetailText}>• 대상: 급식카드 소지자 누구나</Text>
               </View>
             </View>
@@ -441,23 +404,23 @@ export default function HomeScreen() {
           </LinearGradient>
         </View>
 
-        {/* 인기 식당 섹션 */}
+        {/* 인기 메뉴 섹션 */}
         <View style={[styles.contentSection, { paddingBottom: 40 }]}>
-          <Text style={styles.sectionTitle}>오늘의 인기 식당</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.popularRestaurants}>
+          <Text style={styles.sectionTitle}>오늘의 인기 메뉴</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.popularMenus}>
             {[
-              { name: '맘스터치', rating: '4.8', image: '🍔' },
-              { name: '본죽&비빔밥', rating: '4.7', image: '🍲' },
-              { name: '파스타팩토리', rating: '4.6', image: '🍝' },
-              { name: '피자헛', rating: '4.9', image: '🍕' },
-            ].map((restaurant, index) => (
-              <TouchableOpacity key={index} style={styles.popularRestaurantItem}>
-                <View style={styles.popularRestaurantImage}>
-                  <Text style={styles.popularRestaurantEmoji}>{restaurant.image}</Text>
+              { name: '치킨버거', rating: '4.8', image: '🍔' },
+              { name: '김치찌개', rating: '4.7', image: '🍲' },
+              { name: '파스타', rating: '4.6', image: '🍝' },
+              { name: '피자', rating: '4.9', image: '🍕' },
+            ].map((menu, index) => (
+              <TouchableOpacity key={index} style={styles.popularMenuItem}>
+                <View style={styles.popularMenuImage}>
+                  <Text style={styles.popularMenuEmoji}>{menu.image}</Text>
                 </View>
-                <Text style={styles.popularRestaurantName}>{restaurant.name}</Text>
+                <Text style={styles.popularMenuName}>{menu.name}</Text>
                 <View style={styles.ratingContainer}>
-                  <Text style={styles.ratingText}>⭐ {restaurant.rating}</Text>
+                  <Text style={styles.ratingText}>⭐ {menu.rating}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -764,11 +727,11 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
 
-  // 인기 식당 스타일
-  popularRestaurants: {
+  // 인기 메뉴 스타일
+  popularMenus: {
     marginTop: 12,
   },
-  popularRestaurantItem: {
+  popularMenuItem: {
     backgroundColor: 'white',
     borderRadius: 16,
     padding: 16,
@@ -781,7 +744,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     width: 120,
   },
-  popularRestaurantImage: {
+  popularMenuImage: {
     width: 60,
     height: 60,
     backgroundColor: '#f8f9fa',
@@ -790,10 +753,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 12,
   },
-  popularRestaurantEmoji: {
+  popularMenuEmoji: {
     fontSize: 30,
   },
-  popularRestaurantName: {
+  popularMenuName: {
     fontSize: 14,
     fontWeight: '600',
     color: '#333',

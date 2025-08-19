@@ -53,11 +53,9 @@ export default function WelcomeScreen() {
         {/* 중간 설명 영역 */}
         <View style={styles.middleSection}>
           <Text style={styles.descriptionText}>
-            {'\n'}
-            {'\n'}
-            {/* 맞춤형 음식 추천부터{'\n'}
+            맞춤형 음식 추천부터{'\n'}
             급식카드 결제 서비스까지{'\n'}
-            모든 식사 고민을 해결해보세요 */}
+            모든 식사 고민을 해결해보세요
           </Text>
         </View>
 
@@ -104,7 +102,6 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop:100,
   },
   titleContainer: {
     alignItems: 'center',
@@ -135,7 +132,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 30,
   },
   descriptionText: {
     fontSize: 16,
@@ -145,7 +141,6 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 20,
   },
   descriptionTitle: {
     fontSize: 24,
@@ -153,6 +148,13 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 16,
     textAlign: 'center',
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+    lineHeight: 24,
+    opacity: 0.8,
   },
   bottomSection: {
     flex: 1,

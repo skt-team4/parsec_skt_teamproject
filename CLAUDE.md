@@ -27,8 +27,8 @@ YUM:AI is a child-focused food recommendation system featuring an AI chatbot cha
 
 ### Backend - Python FastAPI + AI Models
 **Primary Location**: `public_projects/chatbot_v0/`
-- **Main Server**: `persona_api_server.py` - Persona-based API (port 8080)
-- **Alternative Server**: `src/api/server.py` - Standard API (port 8000)
+- **Main Server**: `persona_api_server.py` - Persona-based API (port 8000)
+- **Alternative Server**: `src/api/server.py` - Standard API (port 8080)
 - Core modules:
   - `src/inference/integrated_pipeline.py` - Main AI pipeline
   - `models/ax_encoder_base/` - A.X Encoder model files
