@@ -1201,7 +1201,7 @@ export default function MyPageScreen() {
         {/* 밥풀 현황 섹션 */}
         <View style={styles.contentSection}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>🌾 밥풀 현황</Text>
+            <Text style={styles.sectionTitle}> 밥풀 현황</Text>
           </View>
           <Text style={styles.sectionSubtitle}>밥풀을 모아서 레벨을 올려보세요</Text>
           

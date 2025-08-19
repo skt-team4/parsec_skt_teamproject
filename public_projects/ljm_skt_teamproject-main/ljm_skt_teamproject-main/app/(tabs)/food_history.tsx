@@ -553,7 +553,7 @@ export default function FoodHistoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>📸 음식 분석 기록</Text>
+        <Text style={styles.headerTitle}>음식 분석 기록</Text>
         <Text style={styles.headerSubtitle}>촬영한 음식과 영양 정보를 확인하세요</Text>
       </View>
 
@@ -619,14 +619,14 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 20,
-    paddingTop: 16,
+    paddingTop: 40,
     paddingBottom: 12,
     backgroundColor: '#fff',
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#FFBF00',
     marginBottom: 4,
   },
   headerSubtitle: {
@@ -651,7 +651,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   activeTab: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FFBF00',
   },
   tabText: {
     fontSize: 14,
@@ -721,7 +721,7 @@ const styles = StyleSheet.create({
   },
   calories: {
     fontSize: 16,
-    color: '#007AFF',
+    color: '#FFBF00',
     fontWeight: '600',
     marginBottom: 8,
   },

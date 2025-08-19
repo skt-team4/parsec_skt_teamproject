@@ -150,7 +150,7 @@ export default function LoginScreen() {
             
             <View style={styles.titleContainer}>
               <Text style={styles.title}>로그인</Text>
-              <Text style={styles.subtitle}>다시 만나서 반가워요! 🦋</Text>
+              <Text style={styles.subtitle}>다시 만나서 반가워요!</Text>
             </View>
           </View>
 

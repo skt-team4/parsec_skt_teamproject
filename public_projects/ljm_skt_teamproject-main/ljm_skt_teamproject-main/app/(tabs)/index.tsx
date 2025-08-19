@@ -298,7 +298,7 @@ export default function HomeScreen() {
   const openStoreMap = async () => {
     try {
       // 여기에 실제 HTML 지도 파일의 URL을 넣으세요
-      const mapUrl = 'http://192.168.68.62:5500/tmap_folium_map.html'; // 실제 지도 URL로 변경 필요
+      const mapUrl = 'http://192.168.68.71:5500/tmap_folium_map.html'; // 실제 지도 URL로 변경 필요
       
       console.log('🗺️ 가맹점 지도 열기:', mapUrl);
       await WebBrowser.openBrowserAsync(mapUrl);
@@ -391,8 +391,8 @@ export default function HomeScreen() {
                 <Text style={styles.campaignTag}>📍 서울시 강남구 내 매장 전용</Text>
               </View>
               <View style={styles.campaignDetails}>
-                <Text style={styles.campaignDetailText}>• 참여 기간: 12월 1일 ~ 12월 31일</Text>
-                <Text style={styles.campaignDetailText}>• 혜택: 도시락 구매 시 10% 할인</Text>
+                <Text style={styles.campaignDetailText}>• 참여 기간: 8월 26일 ~ 8월 27일</Text>
+                <Text style={styles.campaignDetailText}>• 혜택: 10% 할인 쿠폰 발행 </Text>
                 <Text style={styles.campaignDetailText}>• 대상: 급식카드 소지자 누구나</Text>
               </View>
             </View>
@@ -404,23 +404,23 @@ export default function HomeScreen() {
           </LinearGradient>
         </View>
 
-        {/* 인기 메뉴 섹션 */}
+        {/* 인기 식당 섹션 */}
         <View style={[styles.contentSection, { paddingBottom: 40 }]}>
-          <Text style={styles.sectionTitle}>오늘의 인기 메뉴</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.popularMenus}>
+          <Text style={styles.sectionTitle}>오늘의 인기 식당</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.popularRestaurants}>
             {[
-              { name: '치킨버거', rating: '4.8', image: '🍔' },
-              { name: '김치찌개', rating: '4.7', image: '🍲' },
-              { name: '파스타', rating: '4.6', image: '🍝' },
-              { name: '피자', rating: '4.9', image: '🍕' },
-            ].map((menu, index) => (
-              <TouchableOpacity key={index} style={styles.popularMenuItem}>
-                <View style={styles.popularMenuImage}>
-                  <Text style={styles.popularMenuEmoji}>{menu.image}</Text>
+              { name: '맘스터치', rating: '4.8', image: '🍔' },
+              { name: '본죽&비빔밥', rating: '4.7', image: '🍲' },
+              { name: '파스타팩토리', rating: '4.6', image: '🍝' },
+              { name: '피자헛', rating: '4.9', image: '🍕' },
+            ].map((restaurant, index) => (
+              <TouchableOpacity key={index} style={styles.popularRestaurantItem}>
+                <View style={styles.popularRestaurantImage}>
+                  <Text style={styles.popularRestaurantEmoji}>{restaurant.image}</Text>
                 </View>
-                <Text style={styles.popularMenuName}>{menu.name}</Text>
+                <Text style={styles.popularRestaurantName}>{restaurant.name}</Text>
                 <View style={styles.ratingContainer}>
-                  <Text style={styles.ratingText}>⭐ {menu.rating}</Text>
+                  <Text style={styles.ratingText}>⭐ {restaurant.rating}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -727,11 +727,11 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
 
-  // 인기 메뉴 스타일
-  popularMenus: {
+  // 인기 식당 스타일
+  popularRestaurants: {
     marginTop: 12,
   },
-  popularMenuItem: {
+  popularRestaurantItem: {
     backgroundColor: 'white',
     borderRadius: 16,
     padding: 16,
@@ -744,7 +744,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     width: 120,
   },
-  popularMenuImage: {
+  popularRestaurantImage: {
     width: 60,
     height: 60,
     backgroundColor: '#f8f9fa',
@@ -753,10 +753,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 12,
   },
-  popularMenuEmoji: {
+  popularRestaurantEmoji: {
     fontSize: 30,
   },
-  popularMenuName: {
+  popularRestaurantName: {
     fontSize: 14,
     fontWeight: '600',
     color: '#333',

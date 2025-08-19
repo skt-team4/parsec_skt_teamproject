@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop:100,
   },
   titleContainer: {
     alignItems: 'center',
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    paddingBottom: 30,
   },
   descriptionText: {
     fontSize: 16,
@@ -141,6 +143,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     alignItems: 'center',
     paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   descriptionTitle: {
     fontSize: 24,
@@ -148,13 +151,6 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 16,
     textAlign: 'center',
-  },
-  descriptionText: {
-    fontSize: 16,
-    color: '#333',
-    textAlign: 'center',
-    lineHeight: 24,
-    opacity: 0.8,
   },
   bottomSection: {
     flex: 1,

@@ -595,14 +595,14 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 24,
-    paddingTop: 16,
+    paddingTop: 40,
     paddingBottom: 24,
     backgroundColor: '#fff',
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#FFBF00',
     marginBottom: 4,
   },
   headerSubtitle: {

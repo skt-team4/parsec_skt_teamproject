@@ -47,6 +47,10 @@ export const ChatHeader = () => {
         </View>
         
         <View style={styles.centerSection}>
+          {/* 빈 공간 */}
+        </View>
+        
+        <View style={styles.rightSection}>
           <TouchableOpacity 
             onPress={loadRicePul}
             style={styles.ricePulContainer}
@@ -55,9 +59,7 @@ export const ChatHeader = () => {
             <Text style={styles.ricePulIcon}>🍚</Text>
             <Text style={styles.ricePulText}>{ricePul.toLocaleString()}</Text>
           </TouchableOpacity>
-        </View>
-        
-        <View style={styles.rightSection}>
+          
           <TouchableOpacity onPress={() => router.back()} style={styles.closeButtonContainer}>
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>
