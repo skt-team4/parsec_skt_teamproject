@@ -205,17 +205,31 @@ export const generateDailyNutritionReport = async (date?: Date): Promise<DailyNu
       totals.sugar! += mealData.sugar || 0;
     });
 
-    // 균형 점수 계산
-    const score = calculateNutritionBalance(totals);
-    const level = getNutritionBalanceLevel(score);
-    const issues = analyzeNutritionIssues(totals);
+    // 아침, 점심, 저녁 모두 기록했는지 확인
+    const hasAllMeals = meals.breakfast && meals.lunch && meals.dinner;
+    console.log(`🍽️ [DEBUG] 3끼 기록 여부: 아침=${!!meals.breakfast}, 점심=${!!meals.lunch}, 저녁=${!!meals.dinner}`);
 
-    console.log(`🥗 [DEBUG] 영양 균형 계산 완료:`);
-    console.log(`  - 총 칼로리: ${totals.calories}`);
-    console.log(`  - 단백질: ${totals.protein}g, 탄수화물: ${totals.carbohydrates}g, 지방: ${totals.fat}g`);
-    console.log(`  - 균형 점수: ${score}점`);
-    console.log(`  - 균형 레벨: ${level}`);
-    console.log(`  - 문제점: ${issues.join(', ')}`);
+    let score = 100;  // 기본값
+    let level: 'good' | 'warning' | 'critical' = 'good';  // 기본값
+    let issues: string[] = [];
+
+    // 3끼를 모두 기록했을 때만 균형 점수 계산
+    if (hasAllMeals) {
+      score = calculateNutritionBalance(totals);
+      level = getNutritionBalanceLevel(score);
+      issues = analyzeNutritionIssues(totals);
+      
+      console.log(`🥗 [DEBUG] 3끼 모두 기록됨 - 영양 균형 계산 완료:`);
+      console.log(`  - 총 칼로리: ${totals.calories}`);
+      console.log(`  - 단백질: ${totals.protein}g, 탄수화물: ${totals.carbohydrates}g, 지방: ${totals.fat}g`);
+      console.log(`  - 균형 점수: ${score}점`);
+      console.log(`  - 균형 레벨: ${level}`);
+      console.log(`  - 문제점: ${issues.join(', ')}`);
+    } else {
+      // 3끼를 모두 기록하지 않았을 때는 기본값 유지
+      console.log(`⏳ [DEBUG] 3끼 모두 기록되지 않음 - 균형 점수 계산 건너뜀`);
+      issues = ['아침, 점심, 저녁을 모두 기록해주세요'];
+    }
 
     return {
       date: dateStr,
@@ -236,8 +250,8 @@ export const generateDailyNutritionReport = async (date?: Date): Promise<DailyNu
       meals: {},
       totals: { calories: 0 },
       balance: {
-        score: 50,
-        level: 'warning',
+        score: 100,
+        level: 'good',
         issues: ['영양 데이터를 불러올 수 없습니다'],
       },
     };
@@ -247,7 +261,19 @@ export const generateDailyNutritionReport = async (date?: Date): Promise<DailyNu
 // 캐릭터 애니메이션 결정
 export const getCharacterAnimationByNutrition = async (): Promise<string> => {
   const report = await generateDailyNutritionReport();
-  console.log(`🎭 [DEBUG] 캐릭터 애니메이션 결정 - 레벨: ${report.balance.level}, 점수: ${report.balance.score}`);
+  
+  // 3끼를 모두 기록했는지 확인
+  const hasAllMeals = report.meals.breakfast && report.meals.lunch && report.meals.dinner;
+  
+  if (!hasAllMeals) {
+    // 3끼를 모두 기록하지 않았으면 기본 애니메이션 유지
+    const currentAnimation = await AsyncStorage.getItem('selected_animation');
+    console.log(`🎭 [DEBUG] 3끼 미완성 - 기본 애니메이션 유지: ${currentAnimation || 'Hi_normal'}`);
+    return currentAnimation || 'Hi_normal';
+  }
+  
+  // 3끼를 모두 기록했을 때만 영양 상태에 따른 애니메이션 변경
+  console.log(`🎭 [DEBUG] 3끼 완성 - 애니메이션 결정 - 레벨: ${report.balance.level}, 점수: ${report.balance.score}`);
   
   switch (report.balance.level) {
     case 'critical':
@@ -258,7 +284,7 @@ export const getCharacterAnimationByNutrition = async (): Promise<string> => {
       return 'Being_매우편중'; // 1단계: 약간 불균형
     case 'good':
     default:
-      // 기본 애니메이션 유지 (AsyncStorage에서 읽기)
+      // 균형잡힌 식사 - 기본 애니메이션 유지
       const currentAnimation = await AsyncStorage.getItem('selected_animation');
       console.log(`🎭 [DEBUG] Good 레벨 - 기본 애니메이션 유지: ${currentAnimation || 'Hi_normal'}`);
       return currentAnimation || 'Hi_normal';

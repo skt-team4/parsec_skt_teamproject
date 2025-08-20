@@ -145,23 +145,34 @@ export default function ChatScreen() {
       const nutritionReport = await generateDailyNutritionReport();
       console.log('🥗 오늘의 영양 상태:', nutritionReport.balance);
       
-      // 영양 상태가 좋지 않으면 특별 애니메이션 적용
-      if (nutritionReport.balance.level !== 'good') {
-        const nutritionAnimation = await getCharacterAnimationByNutrition();
-        console.log('⚠️ 영양 불균형 감지! 애니메이션 변경:', nutritionAnimation);
-        setCurrentAnimationId(nutritionAnimation);
-        setCurrentAnimationSource(getAnimationSource(nutritionAnimation));
-        
-        // 사용자에게 알림
-        if (nutritionReport.balance.level === 'critical') {
-          console.log('🚨 심각한 영양 불균형! 균형잡힌 식사가 필요해요.');
-        } else if (nutritionReport.balance.level === 'warning') {
-          console.log('⚠️ 영양 균형에 주의가 필요해요.');
+      // 3끼를 모두 기록했는지 확인
+      const hasAllMeals = nutritionReport.meals.breakfast && nutritionReport.meals.lunch && nutritionReport.meals.dinner;
+      
+      if (hasAllMeals) {
+        // 3끼를 모두 기록했을 때만 영양 상태 체크
+        if (nutritionReport.balance.level !== 'good') {
+          const nutritionAnimation = await getCharacterAnimationByNutrition();
+          console.log('⚠️ 3끼 완성 + 영양 불균형 감지! 애니메이션 변경:', nutritionAnimation);
+          setCurrentAnimationId(nutritionAnimation);
+          setCurrentAnimationSource(getAnimationSource(nutritionAnimation));
+          
+          // 사용자에게 알림
+          if (nutritionReport.balance.level === 'critical') {
+            console.log('🚨 심각한 영양 불균형! 균형잡힌 식사가 필요해요.');
+          } else if (nutritionReport.balance.level === 'warning') {
+            console.log('⚠️ 영양 균형에 주의가 필요해요.');
+          }
+        } else {
+          // 영양 상태가 좋으면 일반 애니메이션 로드
+          const animationId = await loadCurrentAnimation();
+          console.log('✅ 3끼 완성 + 균형잡힌 식사! 기본 애니메이션 유지:', animationId);
+          setCurrentAnimationId(animationId);
+          setCurrentAnimationSource(getAnimationSource(animationId));
         }
       } else {
-        // 영양 상태가 좋으면 일반 애니메이션 로드
+        // 3끼를 모두 기록하지 않았으면 일반 애니메이션 로드
         const animationId = await loadCurrentAnimation();
-        console.log('🎬 현재 선택된 애니메이션:', animationId);
+        console.log('⏳ 3끼 미완성 - 기본 애니메이션 사용:', animationId);
         setCurrentAnimationId(animationId);
         setCurrentAnimationSource(getAnimationSource(animationId));
       }

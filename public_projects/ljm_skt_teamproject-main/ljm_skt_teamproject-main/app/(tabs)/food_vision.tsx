@@ -274,6 +274,12 @@ export default function FoodVisionScreen() {
         foodHistory.splice(100);
       }
       await AsyncStorage.setItem('foodHistory', JSON.stringify(foodHistory));
+      console.log('📊 [DEBUG] foodHistory 저장 완료:', {
+        foodName: foodData.foodName,
+        date: foodData.date,
+        calories: foodData.calories,
+        hasNutritionData: !!foodData.nutritionData
+      });
       
       // 영양 분석기용 데이터 저장
       const nutritionHistoryData = {

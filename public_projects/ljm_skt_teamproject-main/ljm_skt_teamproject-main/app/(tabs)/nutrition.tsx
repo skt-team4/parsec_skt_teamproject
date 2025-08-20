@@ -100,10 +100,17 @@ export default function NutritionScreen() {
 
   const calculateDailyNutrition = (history: FoodData[]) => {
     const today = selectedDate.toISOString().split('T')[0];
+    console.log('📊 [DEBUG] 영양소 리포트 날짜:', today);
+    console.log('📊 [DEBUG] 전체 히스토리 개수:', history.length);
+    
     const todayData = history.filter(item => {
       const itemDate = item.date || item.timestamp?.split('T')[0];
       return itemDate === today;
     });
+    console.log('📊 [DEBUG] 오늘 데이터 개수:', todayData.length);
+    if (todayData.length > 0) {
+      console.log('📊 [DEBUG] 첫 번째 데이터:', todayData[0]);
+    }
 
     const nutrition: DailyNutrition = {
       date: today,
@@ -122,10 +129,22 @@ export default function NutritionScreen() {
     };
 
     todayData.forEach(item => {
+      console.log('📊 [DEBUG] 처리 중인 아이템:', {
+        foodName: item.foodName,
+        calories: item.calories,
+        hasNutritionData: !!item.nutritionData,
+        hasTotalNutrients: !!item.nutritionData?.totalNutrients
+      });
+      
       nutrition.calories += item.calories || 0;
       
       if (item.nutritionData?.totalNutrients) {
         const nutrients = item.nutritionData.totalNutrients;
+        console.log('📊 [DEBUG] 영양소 데이터:', {
+          protein: nutrients.PROCNT?.quantity,
+          carbs: nutrients.CHOCDF?.quantity,
+          fat: nutrients.FAT?.quantity
+        });
         nutrition.protein += nutrients.PROCNT?.quantity || 0;
         nutrition.carbs += nutrients.CHOCDF?.quantity || 0;
         nutrition.fat += nutrients.FAT?.quantity || 0;
@@ -411,28 +430,53 @@ export default function NutritionScreen() {
               <View style={styles.chartCard}>
                 <Text style={styles.chartTitle}>⚖️ 영양 균형 상태</Text>
                 <View style={styles.balanceContainer}>
-                  <View style={[styles.balanceScore, { 
-                    backgroundColor: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
-                                   nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
-                  }]}>
-                    <Text style={styles.balanceScoreText}>{nutritionReport.balance.score}점</Text>
-                  </View>
-                  <View style={styles.balanceDetails}>
-                    <Text style={[styles.balanceLevel, {
-                      color: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
-                             nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
-                    }]}>
-                      {nutritionReport.balance.level === 'good' ? '✅ 균형잡힌 식사' :
-                       nutritionReport.balance.level === 'warning' ? '⚠️ 영양 불균형 주의' : '🚨 심각한 영양 불균형'}
-                    </Text>
-                    {nutritionReport.balance.issues.length > 0 && (
-                      <View style={styles.issuesList}>
-                        {nutritionReport.balance.issues.slice(0, 3).map((issue, index) => (
-                          <Text key={index} style={styles.issueText}>• {issue}</Text>
-                        ))}
+                  {/* 3끼를 모두 기록했는지 확인 */}
+                  {nutritionReport.meals.breakfast && nutritionReport.meals.lunch && nutritionReport.meals.dinner ? (
+                    <>
+                      <View style={[styles.balanceScore, { 
+                        backgroundColor: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
+                                       nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
+                      }]}>
+                        <Text style={styles.balanceScoreText}>{nutritionReport.balance.score}점</Text>
                       </View>
-                    )}
-                  </View>
+                      <View style={styles.balanceDetails}>
+                        <Text style={[styles.balanceLevel, {
+                          color: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
+                                 nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
+                        }]}>
+                          {nutritionReport.balance.level === 'good' ? '✅ 균형잡힌 식사' :
+                           nutritionReport.balance.level === 'warning' ? '⚠️ 영양 불균형 주의' : '🚨 심각한 영양 불균형'}
+                        </Text>
+                        {nutritionReport.balance.issues.length > 0 && (
+                          <View style={styles.issuesList}>
+                            {nutritionReport.balance.issues.slice(0, 3).map((issue, index) => (
+                              <Text key={index} style={styles.issueText}>• {issue}</Text>
+                            ))}
+                          </View>
+                        )}
+                      </View>
+                    </>
+                  ) : (
+                    <View style={styles.balanceDetails}>
+                      <Text style={[styles.balanceLevel, { color: '#999' }]}>
+                        ⏳ 균형 점수 계산 대기중
+                      </Text>
+                      <Text style={styles.issueText}>
+                        아침, 점심, 저녁을 모두 기록하면{'\n'}영양 균형 점수가 계산됩니다
+                      </Text>
+                      <View style={styles.mealStatusContainer}>
+                        <Text style={styles.mealStatusText}>
+                          {nutritionReport.meals.breakfast ? '✅' : '⭕'} 아침
+                        </Text>
+                        <Text style={styles.mealStatusText}>
+                          {nutritionReport.meals.lunch ? '✅' : '⭕'} 점심
+                        </Text>
+                        <Text style={styles.mealStatusText}>
+                          {nutritionReport.meals.dinner ? '✅' : '⭕'} 저녁
+                        </Text>
+                      </View>
+                    </View>
+                  )}
                 </View>
               </View>
             )}
@@ -910,5 +954,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     marginBottom: 2,
+  },
+  mealStatusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+  },
+  mealStatusText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#666',
   },
 });

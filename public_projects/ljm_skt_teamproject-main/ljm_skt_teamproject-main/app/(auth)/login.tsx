@@ -15,7 +15,7 @@ import {
     View,
 } from 'react-native';
 import authConfig from '../../config/auth.config';
-import GoogleLogo from '../../components/GoogleLogo';
+// import GoogleLogo from '../../components/GoogleLogo'; // 제거
 import googleAuthService from '../../services/googleAuthService';
 import StorageService from '../../utils/storage';
 
@@ -198,16 +198,42 @@ export default function LoginScreen() {
               <View style={styles.dividerLine} />
             </View>
 
-            {/* 구글 로그인 버튼 */}
+            {/* 구글 로그인 버튼 - 완전 새로운 디자인 */}
             <TouchableOpacity
-              style={[styles.googleLoginButton, isGoogleLoading && styles.loginButtonDisabled]}
+              style={[
+                styles.googleButton, 
+                isGoogleLoading && styles.googleButtonLoading
+              ]}
               onPress={handleGoogleLogin}
               disabled={isLoading || isGoogleLoading}
+              activeOpacity={0.7}
             >
-              <GoogleLogo size={20} />
-              <Text style={styles.googleLoginButtonText}>
-                {isGoogleLoading ? '구글 로그인 중...' : 'Google로 계속하기'}
-              </Text>
+              {!isGoogleLoading ? (
+                <>
+                  {/* Google 색상 바 */}
+                  <View style={styles.googleColorBar}>
+                    <View style={[styles.colorStripe, { backgroundColor: '#4285F4' }]} />
+                    <View style={[styles.colorStripe, { backgroundColor: '#DB4437' }]} />
+                    <View style={[styles.colorStripe, { backgroundColor: '#F4B400' }]} />
+                    <View style={[styles.colorStripe, { backgroundColor: '#0F9D58' }]} />
+                  </View>
+                  
+                  {/* 버튼 콘텐츠 */}
+                  <View style={styles.googleContent}>
+                    <Text style={styles.googleIcon}>G</Text>
+                    <Text style={styles.googleText}>Google 계정으로 로그인</Text>
+                  </View>
+                </>
+              ) : (
+                <View style={styles.googleLoadingContainer}>
+                  <View style={styles.loadingDots}>
+                    <View style={[styles.dot, styles.dot1]} />
+                    <View style={[styles.dot, styles.dot2]} />
+                    <View style={[styles.dot, styles.dot3]} />
+                  </View>
+                  <Text style={styles.loadingText}>연결 중...</Text>
+                </View>
+              )}
             </TouchableOpacity>
           </View>
 
@@ -328,30 +354,75 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  googleLoginButton: {
-    backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: '#4285F4',
-    borderRadius: 12,
-    paddingVertical: 16,
-    alignItems: 'center',
+  googleButton: {
     marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowRadius: 3,
+    elevation: 2,
   },
-  googleLoginIcon: {
+  googleButtonLoading: {
+    backgroundColor: '#f8f9fa',
+  },
+  googleColorBar: {
+    height: 3,
+    flexDirection: 'row',
+  },
+  colorStripe: {
+    flex: 1,
+  },
+  googleContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+  },
+  googleIcon: {
     fontSize: 20,
-    marginRight: 12,
-  },
-  googleLoginButtonText: {
-    color: '#4285F4',
-    fontSize: 16,
     fontWeight: 'bold',
+    marginRight: 12,
+    fontFamily: Platform.OS === 'ios' ? 'Arial' : 'sans-serif',
+    color: '#4285F4',
+  },
+  googleText: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#3c4043',
+  },
+  googleLoadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 17,
+  },
+  loadingDots: {
+    flexDirection: 'row',
+    marginRight: 10,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#4285F4',
+    marginHorizontal: 3,
+  },
+  dot1: {
+    opacity: 0.3,
+  },
+  dot2: {
+    opacity: 0.6,
+  },
+  dot3: {
+    opacity: 1,
+  },
+  loadingText: {
+    fontSize: 14,
+    color: '#5f6368',
   },
   dividerContainer: {
     flexDirection: 'row',
