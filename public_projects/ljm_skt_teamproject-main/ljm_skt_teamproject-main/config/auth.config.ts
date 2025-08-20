@@ -2,10 +2,15 @@ import { Platform } from 'react-native';
 import { makeRedirectUri } from 'expo-auth-session';
 
 // 환경별 설정
-// 항상 포트 19000을 사용하도록 강제
+// ngrok URL 또는 localhost 사용
 const getDevRedirectUri = () => {
+  // ngrok URL이 설정되어 있으면 사용
+  if (process.env.EXPO_PUBLIC_APP_URL) {
+    return `${process.env.EXPO_PUBLIC_APP_URL}/redirect`;
+  }
+  
   if (Platform.OS === 'web') {
-    return 'http://localhost:19000/redirect';
+    return 'http://localhost:19001/redirect';
   }
   return makeRedirectUri({
     scheme: undefined,

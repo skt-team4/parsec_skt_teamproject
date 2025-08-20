@@ -1,0 +1,25 @@
+tunnel: yumai-app
+credentials-file: C:\Users\[username]\.cloudflared\[tunnel-id].json
+
+ingress:
+  # 웹 앱
+  - hostname: yumai.yourdomain.com
+    service: http://localhost:19001
+    originRequest:
+      noTLSVerify: true
+      
+  # API 서비스들
+  - hostname: api.yumai.yourdomain.com
+    path: /chat
+    service: http://localhost:8000
+    
+  - hostname: api.yumai.yourdomain.com
+    path: /analyze
+    service: http://localhost:5001
+    
+  - hostname: api.yumai.yourdomain.com
+    path: /nutrition
+    service: http://localhost:5003
+    
+  # 404 핸들러
+  - service: http_status:404

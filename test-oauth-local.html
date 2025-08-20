@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OAuth Test - Localhost</title>
+</head>
+<body>
+    <h1>Google OAuth Test - Localhost</h1>
+    <button onclick="testOAuth()">Test with Localhost Redirect</button>
+    <br><br>
+    <button onclick="testOAuthNgrok()">Test with Ngrok Redirect</button>
+    
+    <script>
+        const clientId = '571027176154-0dglrtrcc3uo32i8df1g14e5g8hehd0k.apps.googleusercontent.com';
+        
+        function testOAuth() {
+            const redirectUri = 'http://localhost:19001/redirect';
+            const scope = 'openid profile email';
+            
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                `client_id=${clientId}&` +
+                `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+                `response_type=token&` +
+                `scope=${encodeURIComponent(scope)}`;
+            
+            console.log('OAuth URL (localhost):', authUrl);
+            alert('Redirect URI: ' + redirectUri);
+            window.location.href = authUrl;
+        }
+        
+        function testOAuthNgrok() {
+            const redirectUri = 'https://maximum-shiner-implicitly.ngrok-free.app/redirect';
+            const scope = 'openid profile email';
+            
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                `client_id=${clientId}&` +
+                `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+                `response_type=token&` +
+                `scope=${encodeURIComponent(scope)}`;
+            
+            console.log('OAuth URL (ngrok):', authUrl);
+            alert('Redirect URI: ' + redirectUri);
+            window.location.href = authUrl;
+        }
+    </script>
+</body>
+</html>

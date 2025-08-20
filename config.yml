@@ -1,0 +1,6 @@
+tunnel: yumai
+credentials-file: C:\Users\%USERNAME%\.cloudflared\e37bf6f7-ca0f-4477-a323-f645cd092436.json
+
+ingress:
+  # 메인 웹 앱
+  - service: http://localhost:19001
