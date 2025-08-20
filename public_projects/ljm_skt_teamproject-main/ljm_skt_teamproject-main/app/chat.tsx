@@ -9,9 +9,12 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
+  StyleSheet as RNStyleSheet,
+  Platform
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { wp, hp, fp, spacing } from '../utils/responsive';
 
 // 분리된 파일들 import
 import CharacterShopModal from '../components/CharacterShopModal'; // 상점 모달 import
@@ -61,6 +64,14 @@ export default function ChatScreen() {
   // 디버그 모드
   const [debugMode, setDebugModeState] = useState(false);
   
+  // 영양 상태 데이터
+  const [nutritionData, setNutritionData] = useState<{
+    score: number;
+    level: 'good' | 'warning' | 'critical';
+    meals: { breakfast: boolean; lunch: boolean; dinner: boolean };
+    issues: string[];
+  } | null>(null);
+  
   // 애니메이션 값들 (초기 로딩용)
   const [animValues] = useState([
     new Animated.Value(0),
@@ -100,6 +111,7 @@ export default function ChatScreen() {
       loadAnimationSettings();
       loadSelectedAnimation();
       loadDebugMode();
+      loadNutritionStatus();
     }, [])
   );
 
@@ -114,6 +126,7 @@ export default function ChatScreen() {
     const handleFoodRecorded = () => {
       console.log('🍽️ 음식 기록 이벤트 수신 - 영양 상태 재검사');
       recheckNutritionStatus();
+      loadNutritionStatus(); // 영양 상태 데이터도 업데이트
     };
 
     globalEventEmitter.on(EVENTS.FOOD_RECORDED, handleFoodRecorded);
@@ -138,12 +151,43 @@ export default function ChatScreen() {
     }
   };
   
+  // 영양 상태 로드
+  const loadNutritionStatus = async () => {
+    try {
+      const nutritionReport = await generateDailyNutritionReport();
+      setNutritionData({
+        score: nutritionReport.balance.score,
+        level: nutritionReport.balance.level,
+        meals: {
+          breakfast: !!nutritionReport.meals.breakfast,
+          lunch: !!nutritionReport.meals.lunch,
+          dinner: !!nutritionReport.meals.dinner
+        },
+        issues: nutritionReport.balance.issues
+      });
+    } catch (error) {
+      console.error('영양 상태 로드 실패:', error);
+    }
+  };
+  
   // 선택된 애니메이션 로드 (영양 상태 체크 포함)
   const loadSelectedAnimation = async () => {
     try {
       // 먼저 영양 상태 체크
       const nutritionReport = await generateDailyNutritionReport();
       console.log('🥗 오늘의 영양 상태:', nutritionReport.balance);
+      
+      // 영양 상태 데이터 업데이트
+      setNutritionData({
+        score: nutritionReport.balance.score,
+        level: nutritionReport.balance.level,
+        meals: {
+          breakfast: !!nutritionReport.meals.breakfast,
+          lunch: !!nutritionReport.meals.lunch,
+          dinner: !!nutritionReport.meals.dinner
+        },
+        issues: nutritionReport.balance.issues
+      });
       
       // 3끼를 모두 기록했는지 확인
       const hasAllMeals = nutritionReport.meals.breakfast && nutritionReport.meals.lunch && nutritionReport.meals.dinner;
@@ -383,6 +427,76 @@ export default function ChatScreen() {
       height: isSmallScreen ? 300 : 350,
     },
   };
+  
+  // 영양 상태바 스타일
+  const nutritionStyles = RNStyleSheet.create({
+    container: {
+      backgroundColor: 'transparent',
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.xs,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexWrap: 'nowrap',
+    },
+    mealSection: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: Platform.select({ web: 4, default: 2 }),
+      flexShrink: 0,
+    },
+    mealIcon: {
+      fontSize: fp(12),
+    },
+    mealComplete: {
+      color: '#4CAF50',
+    },
+    mealLabel: {
+      fontSize: fp(10),
+      color: '#666',
+      marginRight: Platform.select({ web: 6, default: 4 }),
+    },
+    progressSection: {
+      flex: 1,
+      marginHorizontal: spacing.sm,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: Platform.select({ web: 6, default: 4 }),
+      minWidth: wp(20),
+    },
+    progressBarBg: {
+      flex: 1,
+      height: hp(0.8),
+      minHeight: 6,
+      backgroundColor: '#f0f0f0',
+      borderRadius: 3,
+      overflow: 'hidden',
+    },
+    progressBarFill: {
+      height: '100%',
+      borderRadius: 3,
+    },
+    statusLabel: {
+      fontSize: fp(10),
+      fontWeight: '600',
+      flexShrink: 0,
+    },
+    scoreSection: {
+      alignItems: 'center',
+      flexShrink: 0,
+    },
+    scoreValue: {
+      fontSize: fp(13),
+      fontWeight: 'bold',
+    },
+    waitingText: {
+      fontSize: fp(10),
+      color: '#999',
+      fontStyle: 'italic',
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -390,6 +504,85 @@ export default function ChatScreen() {
       
       {/* 헤더 컴포넌트 */}
       <ChatHeader />
+      
+      {/* 영양 균형 상태바 */}
+      {nutritionData && (
+        <View style={nutritionStyles.container}>
+          <View style={nutritionStyles.row}>
+            {/* 식사 기록 상태 (왼쪽) */}
+            <View style={nutritionStyles.mealSection}>
+              <Text style={[
+                nutritionStyles.mealIcon,
+                nutritionData.meals.breakfast && nutritionStyles.mealComplete
+              ]}>
+                {nutritionData.meals.breakfast ? '✅' : '⭕'}
+              </Text>
+              <Text style={nutritionStyles.mealLabel}>아침</Text>
+              
+              <Text style={[
+                nutritionStyles.mealIcon,
+                nutritionData.meals.lunch && nutritionStyles.mealComplete
+              ]}>
+                {nutritionData.meals.lunch ? '✅' : '⭕'}
+              </Text>
+              <Text style={nutritionStyles.mealLabel}>점심</Text>
+              
+              <Text style={[
+                nutritionStyles.mealIcon,
+                nutritionData.meals.dinner && nutritionStyles.mealComplete
+              ]}>
+                {nutritionData.meals.dinner ? '✅' : '⭕'}
+              </Text>
+              <Text style={nutritionStyles.mealLabel}>저녁</Text>
+            </View>
+            
+            {/* 영양 균형 프로그레스 바 (중앙) */}
+            {nutritionData.meals.breakfast && nutritionData.meals.lunch && nutritionData.meals.dinner ? (
+              <View style={nutritionStyles.progressSection}>
+                <View style={nutritionStyles.progressBarBg}>
+                  <View 
+                    style={[
+                      nutritionStyles.progressBarFill,
+                      {
+                        width: `${nutritionData.score}%`,
+                        backgroundColor: nutritionData.level === 'good' ? '#4CAF50' : 
+                                       nutritionData.level === 'warning' ? '#FF9800' : '#F44336'
+                      }
+                    ]}
+                  />
+                </View>
+                <Text style={[
+                  nutritionStyles.statusLabel,
+                  { color: nutritionData.level === 'good' ? '#4CAF50' : 
+                           nutritionData.level === 'warning' ? '#FF9800' : '#F44336' }
+                ]}>
+                  {nutritionData.level === 'good' ? '균형' :
+                   nutritionData.level === 'warning' ? '주의' : '위험'}
+                </Text>
+              </View>
+            ) : (
+              <View style={nutritionStyles.progressSection}>
+                <Text style={nutritionStyles.waitingText}>
+                  3끼 기록 대기중
+                </Text>
+              </View>
+            )}
+            
+            {/* 점수 (오른쪽) */}
+            {nutritionData.meals.breakfast && nutritionData.meals.lunch && nutritionData.meals.dinner && (
+              <View style={nutritionStyles.scoreSection}>
+                <Text style={[
+                  nutritionStyles.scoreValue,
+                  { color: nutritionData.level === 'good' ? '#4CAF50' : 
+                           nutritionData.level === 'warning' ? '#FF9800' : '#F44336' }
+                ]}>
+                  {nutritionData.score}점
+                </Text>
+              </View>
+            )}
+          </View>
+        </View>
+      )}
 
       {/* 메인 컨텐츠 */}
       <View style={styles.mainContainer}>
