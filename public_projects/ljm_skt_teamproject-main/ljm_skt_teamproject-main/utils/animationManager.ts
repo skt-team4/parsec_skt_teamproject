@@ -46,6 +46,27 @@ export const ALL_ANIMATIONS: Record<string, any> = {
   'Sad_후라이': require('../assets/Sad_후라이.gif'),
   'Sad_매우편중': require('../assets/Sad_매우편중.gif'),
   'Sad_편중식사': require('../assets/Sad_편중식사.gif'),
+  
+  // Think 조합
+  'Think_normal': require('../assets/Think_normal.gif'),
+  'Think_계란말이': require('../assets/Think_계란말이.gif'),
+  'Think_김': require('../assets/Think_김.gif'),
+  'Think_명란': require('../assets/Think_명란.gif'),
+  'Think_베이컨': require('../assets/Think_베이컨.gif'),
+  'Think_연어': require('../assets/Think_연어.gif'),
+  'Think_후라이': require('../assets/Think_후라이.gif'),
+  'Think_매우편중': require('../assets/Think_매우편중.gif'),
+  'Think_편중식사': require('../assets/Think_편중식사.gif'),
+  
+  // 영양 상태별 Being 애니메이션
+  'Being_매우편중': require('../assets/Being_매우편중.gif'),
+  'Being_편중식사': require('../assets/Being_편중식사.gif'),
+  
+  // 기타
+  'Hi_normal': require('../assets/Hi_normal.gif'),
+  'Sad_normal': require('../assets/Sad_normal.gif'),
+  'Hello_fri': require('../assets/Hello_fri.gif'),
+  'Hello_fri_2': require('../assets/Hello_fri_2.gif'),
 };
 
 // 현재 선택된 애니메이션 로드
@@ -73,7 +94,14 @@ export const saveCurrentAnimation = async (animationId: string): Promise<boolean
 
 // 애니메이션 GIF 가져오기
 export const getAnimationSource = (animationId: string) => {
-  return ALL_ANIMATIONS[animationId] || ALL_ANIMATIONS['Hi'];
+  const source = ALL_ANIMATIONS[animationId];
+  if (source) {
+    console.log(`✅ [getAnimationSource] 애니메이션 소스 찾음: ${animationId}`);
+    return source;
+  } else {
+    console.log(`❌ [getAnimationSource] 애니메이션 소스 없음: ${animationId}, 기본값(Hi) 사용`);
+    return ALL_ANIMATIONS['Hi'];
+  }
 };
 
 // 디버그 모드 설정

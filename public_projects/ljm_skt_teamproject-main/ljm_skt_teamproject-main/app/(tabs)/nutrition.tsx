@@ -13,6 +13,11 @@ import {
 import { BarChart, LineChart, PieChart } from 'react-native-chart-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+import { 
+  generateDailyNutritionReport, 
+  type DailyNutritionReport,
+  getNutritionBalanceLevel 
+} from '../../utils/nutritionAnalyzer';
 
 const { width } = Dimensions.get('window');
 
@@ -64,9 +69,11 @@ export default function NutritionScreen() {
   const [dailyData, setDailyData] = useState<DailyNutrition | null>(null);
   const [weeklyData, setWeeklyData] = useState<DailyNutrition[]>([]);
   const [monthlyData, setMonthlyData] = useState<DailyNutrition[]>([]);
+  const [nutritionReport, setNutritionReport] = useState<DailyNutritionReport | null>(null);
 
   useEffect(() => {
     loadNutritionData();
+    loadNutritionReport();
   }, [selectedDate, selectedTab]);
 
   const loadNutritionData = async () => {
@@ -135,6 +142,16 @@ export default function NutritionScreen() {
     });
 
     setDailyData(nutrition);
+  };
+
+  const loadNutritionReport = async () => {
+    try {
+      const report = await generateDailyNutritionReport(selectedDate);
+      setNutritionReport(report);
+      console.log('🥗 영양 리포트 로드:', report.balance);
+    } catch (error) {
+      console.error('영양 리포트 로드 실패:', error);
+    }
   };
 
   const calculateWeeklyNutrition = (history: FoodData[]) => {
@@ -246,6 +263,7 @@ export default function NutritionScreen() {
   const onRefresh = async () => {
     setRefreshing(true);
     await loadNutritionData();
+    await loadNutritionReport();
     setRefreshing(false);
   };
 
@@ -388,6 +406,37 @@ export default function NutritionScreen() {
       >
         {selectedTab === 'daily' && dailyData && (
           <View>
+            {/* 영양 균형 상태 */}
+            {nutritionReport && (
+              <View style={styles.chartCard}>
+                <Text style={styles.chartTitle}>⚖️ 영양 균형 상태</Text>
+                <View style={styles.balanceContainer}>
+                  <View style={[styles.balanceScore, { 
+                    backgroundColor: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
+                                   nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
+                  }]}>
+                    <Text style={styles.balanceScoreText}>{nutritionReport.balance.score}점</Text>
+                  </View>
+                  <View style={styles.balanceDetails}>
+                    <Text style={[styles.balanceLevel, {
+                      color: nutritionReport.balance.level === 'good' ? '#4CAF50' : 
+                             nutritionReport.balance.level === 'warning' ? '#FF9800' : '#F44336'
+                    }]}>
+                      {nutritionReport.balance.level === 'good' ? '✅ 균형잡힌 식사' :
+                       nutritionReport.balance.level === 'warning' ? '⚠️ 영양 불균형 주의' : '🚨 심각한 영양 불균형'}
+                    </Text>
+                    {nutritionReport.balance.issues.length > 0 && (
+                      <View style={styles.issuesList}>
+                        {nutritionReport.balance.issues.slice(0, 3).map((issue, index) => (
+                          <Text key={index} style={styles.issueText}>• {issue}</Text>
+                        ))}
+                      </View>
+                    )}
+                  </View>
+                </View>
+              </View>
+            )}
+
             {/* 오늘의 칼로리 */}
             <View style={styles.chartCard}>
               <Text style={styles.chartTitle}>🔥 오늘의 칼로리</Text>
@@ -827,5 +876,39 @@ const styles = StyleSheet.create({
     color: '#999',
     marginTop: 8,
     textAlign: 'center',
+  },
+  balanceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  balanceScore: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  balanceScoreText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  balanceDetails: {
+    flex: 1,
+  },
+  balanceLevel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  issuesList: {
+    marginTop: 4,
+  },
+  issueText: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 2,
   },
 });

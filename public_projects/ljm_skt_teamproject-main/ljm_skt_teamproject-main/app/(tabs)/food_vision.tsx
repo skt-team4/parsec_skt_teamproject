@@ -18,6 +18,7 @@ import {
 import { awardRicePul } from '../../utils/ricePulManager';
 import DatePickerField from '../../components/DatePickerField';
 import { getAPIUrl } from '../../config/api.config';
+import { globalEventEmitter, EVENTS } from '../../utils/eventEmitter';
 
 interface FoodData {
   id: string;
@@ -274,6 +275,34 @@ export default function FoodVisionScreen() {
       }
       await AsyncStorage.setItem('foodHistory', JSON.stringify(foodHistory));
       
+      // 영양 분석기용 데이터 저장
+      const nutritionHistoryData = {
+        id: foodData.id,
+        date: foodData.date,
+        foodName: foodData.foodName,
+        mealType: foodData.mealType,
+        calories: foodData.calories || 0,
+        nutritionInfo: nutritionInfo ? {
+          protein: nutritionInfo.totalNutrients?.PROCNT?.quantity || 0,
+          carbohydrates: nutritionInfo.totalNutrients?.CHOCDF?.quantity || 0,
+          fat: nutritionInfo.totalNutrients?.FAT?.quantity || 0,
+          fiber: nutritionInfo.totalNutrients?.FIBTG?.quantity || 0,
+          sodium: nutritionInfo.totalNutrients?.NA?.quantity || 0,
+          sugar: nutritionInfo.totalNutrients?.SUGAR?.quantity || 0,
+        } : undefined,
+        timestamp: foodData.timestamp,
+      };
+      
+      // 영양 분석 히스토리에도 저장
+      const existingNutritionData = await AsyncStorage.getItem('nutrition_history');
+      const nutritionHistory = existingNutritionData ? JSON.parse(existingNutritionData) : [];
+      nutritionHistory.unshift(nutritionHistoryData);
+      if (nutritionHistory.length > 100) {
+        nutritionHistory.splice(100);
+      }
+      await AsyncStorage.setItem('nutrition_history', JSON.stringify(nutritionHistory));
+      console.log('영양 분석용 데이터 저장 완료:', nutritionHistoryData.foodName);
+      
       // 영양소 분석 기록 서버에도 저장
       try {
         const historyResponse = await fetch(`${getAPIUrl('NUTRITION_HISTORY')}/api/save-nutrition`, {
@@ -305,6 +334,13 @@ export default function FoodVisionScreen() {
       if (ricePulResult.levelUp && ricePulResult.newLevel) {
         alertMessage += `\n\n🎉 레벨업! ${ricePulResult.newLevel.title}이(가) 되었습니다!`;
       }
+      
+      // 음식 기록 이벤트 발생 (채팅 화면에 영양 상태 재검사 요청)
+      globalEventEmitter.emit(EVENTS.FOOD_RECORDED, {
+        foodName: analyzedFood,
+        mealType,
+        calories: estimatedCalories
+      });
       
       Alert.alert(
         '저장 완료!',

@@ -29,6 +29,11 @@ import {
   setDebugMode,
   unlockAllAnimationsForTesting 
 } from '../utils/animationManager'; // 애니메이션 매니저 import
+import { 
+  generateDailyNutritionReport, 
+  getCharacterAnimationByNutrition 
+} from '../utils/nutritionAnalyzer'; // 영양 분석 import
+import { globalEventEmitter, EVENTS } from '../utils/eventEmitter'; // 이벤트 시스템 import
 
 
 // Expo Router 옵션
@@ -98,6 +103,26 @@ export default function ChatScreen() {
     }, [])
   );
 
+  // 영양 상태 강제 재검사 함수 (외부에서 호출 가능)
+  const recheckNutritionStatus = useCallback(async () => {
+    console.log('🔄 영양 상태 강제 재검사 시작...');
+    await loadSelectedAnimation();
+  }, []);
+
+  // 음식 기록 이벤트 리스너 등록
+  useEffect(() => {
+    const handleFoodRecorded = () => {
+      console.log('🍽️ 음식 기록 이벤트 수신 - 영양 상태 재검사');
+      recheckNutritionStatus();
+    };
+
+    globalEventEmitter.on(EVENTS.FOOD_RECORDED, handleFoodRecorded);
+
+    return () => {
+      globalEventEmitter.off(EVENTS.FOOD_RECORDED, handleFoodRecorded);
+    };
+  }, [recheckNutritionStatus]);
+
 
   const loadAnimationSettings = async () => {
     try {
@@ -113,15 +138,39 @@ export default function ChatScreen() {
     }
   };
   
-  // 선택된 애니메이션 로드
+  // 선택된 애니메이션 로드 (영양 상태 체크 포함)
   const loadSelectedAnimation = async () => {
     try {
-      const animationId = await loadCurrentAnimation();
-      console.log('🎬 현재 선택된 애니메이션:', animationId);
-      setCurrentAnimationId(animationId);
-      setCurrentAnimationSource(getAnimationSource(animationId));
+      // 먼저 영양 상태 체크
+      const nutritionReport = await generateDailyNutritionReport();
+      console.log('🥗 오늘의 영양 상태:', nutritionReport.balance);
+      
+      // 영양 상태가 좋지 않으면 특별 애니메이션 적용
+      if (nutritionReport.balance.level !== 'good') {
+        const nutritionAnimation = await getCharacterAnimationByNutrition();
+        console.log('⚠️ 영양 불균형 감지! 애니메이션 변경:', nutritionAnimation);
+        setCurrentAnimationId(nutritionAnimation);
+        setCurrentAnimationSource(getAnimationSource(nutritionAnimation));
+        
+        // 사용자에게 알림
+        if (nutritionReport.balance.level === 'critical') {
+          console.log('🚨 심각한 영양 불균형! 균형잡힌 식사가 필요해요.');
+        } else if (nutritionReport.balance.level === 'warning') {
+          console.log('⚠️ 영양 균형에 주의가 필요해요.');
+        }
+      } else {
+        // 영양 상태가 좋으면 일반 애니메이션 로드
+        const animationId = await loadCurrentAnimation();
+        console.log('🎬 현재 선택된 애니메이션:', animationId);
+        setCurrentAnimationId(animationId);
+        setCurrentAnimationSource(getAnimationSource(animationId));
+      }
     } catch (error) {
       console.error('선택된 애니메이션 로드 실패:', error);
+      // 에러 시 기본 애니메이션 사용
+      const animationId = await loadCurrentAnimation();
+      setCurrentAnimationId(animationId);
+      setCurrentAnimationSource(getAnimationSource(animationId));
     }
   };
   
