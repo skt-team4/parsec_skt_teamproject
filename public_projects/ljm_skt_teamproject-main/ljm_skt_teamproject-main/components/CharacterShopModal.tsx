@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Image as RNImage,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRicePul, spendRicePul } from '../utils/ricePulManager';
@@ -594,7 +595,10 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
                 {isUnlocked ? (
                   <Text style={styles.ownedText}>보유중 ✓</Text>
                 ) : (
-                  <Text style={styles.itemPrice}>🌾 {action.price}</Text>
+                  <View style={styles.priceRow}>
+                    <RNImage source={require('../assets/rice.png')} style={styles.riceIcon} />
+                    <Text style={styles.itemPrice}>{action.price}</Text>
+                  </View>
                 )}
               </View>
             </View>
@@ -634,7 +638,10 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
                 {isUnlocked ? (
                   <Text style={styles.ownedText}>보유중 ✓</Text>
                 ) : (
-                  <Text style={styles.itemPrice}>🌾 {ingredient.price}</Text>
+                  <View style={styles.priceRow}>
+                    <RNImage source={require('../assets/rice.png')} style={styles.riceIcon} />
+                    <Text style={styles.itemPrice}>{ingredient.price}</Text>
+                  </View>
                 )}
               </View>
             </View>
@@ -702,9 +709,13 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
               onPress={() => purchaseCombo(selectedAction, selectedIngredient)}
               disabled={isLoading}
             >
-              <Text style={styles.comboPurchaseText}>
-                조합 구매 (🌾 {calculateComboPrice(selectedAction, selectedIngredient)})
-              </Text>
+              <View style={styles.comboPurchaseContent}>
+                <Text style={styles.comboPurchaseText}>조합 구매</Text>
+                <View style={styles.priceRow}>
+                  <RNImage source={require('../assets/rice.png')} style={styles.riceIconSmall} />
+                  <Text style={styles.comboPurchasePrice}>{calculateComboPrice(selectedAction, selectedIngredient)}</Text>
+                </View>
+              </View>
             </TouchableOpacity>
           )}
         </View>
@@ -755,8 +766,14 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
             ))}
           </View>
           <View style={styles.packPriceContainer}>
-            <Text style={styles.packOriginalPrice}>🌾 {pack.originalPrice}</Text>
-            <Text style={styles.packPrice}>🌾 {pack.price}</Text>
+            <View style={styles.priceRow}>
+              <RNImage source={require('../assets/rice.png')} style={styles.riceIcon} />
+              <Text style={styles.packOriginalPrice}>{pack.originalPrice}</Text>
+            </View>
+            <View style={styles.priceRow}>
+              <RNImage source={require('../assets/rice.png')} style={styles.riceIconLarge} />
+              <Text style={styles.packPrice}>{pack.price}</Text>
+            </View>
           </View>
         </TouchableOpacity>
       ))}
@@ -780,7 +797,10 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
           </View>
 
           <View style={styles.coinDisplay}>
-            <Text style={styles.coinText}>🌾 {userCoins} 밥풀</Text>
+            <View style={styles.coinRow}>
+              <RNImage source={require('../assets/rice.png')} style={styles.riceIconLarge} />
+              <Text style={styles.coinText}>{userCoins} 밥풀</Text>
+            </View>
           </View>
 
           {renderTabs()}
@@ -1153,17 +1173,53 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 15,
   },
   packOriginalPrice: {
     fontSize: 16,
     color: '#999999',
     textDecorationLine: 'line-through',
-    marginRight: 15,
   },
   packPrice: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FF8C00',
+  },
+  riceIcon: {
+    width: 16,
+    height: 16,
+    marginRight: 4,
+    resizeMode: 'contain',
+  },
+  riceIconSmall: {
+    width: 14,
+    height: 14,
+    marginRight: 3,
+    resizeMode: 'contain',
+  },
+  riceIconLarge: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+    resizeMode: 'contain',
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  coinRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  comboPurchaseContent: {
+    alignItems: 'center',
+  },
+  comboPurchasePrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginLeft: 2,
   },
   loadingContainer: {
     flex: 1,

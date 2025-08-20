@@ -1831,10 +1831,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   riceIcon: {
-      width: 16,
-      height: 16, // 밥알 모양에 맞게 비율 조정
+      width: 28,
+      height: 28, // 밥알 모양에 맞게 비율 조정
       resizeMode: 'contain',
-      transform: [{ rotate: '30deg' }],
+      marginRight: 8,
   },
   pointsText: {
     color: 'white',
