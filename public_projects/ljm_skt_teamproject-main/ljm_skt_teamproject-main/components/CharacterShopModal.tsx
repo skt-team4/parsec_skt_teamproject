@@ -115,17 +115,23 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
     }
   };
 
-  // Save unlocked items
-  const saveShopData = async () => {
+  // Save unlocked items - 명시적으로 데이터 전달
+  const saveShopData = async (newActions?: string[], newIngredients?: string[], newCombos?: string[]) => {
     try {
+      const dataToSave = {
+        actions: newActions || unlockedActions,
+        ingredients: newIngredients || unlockedIngredients,
+        combos: newCombos || unlockedCombos,
+      };
+      
       await Promise.all([
-        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_ACTIONS, JSON.stringify(unlockedActions)),
-        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_INGREDIENTS, JSON.stringify(unlockedIngredients)),
-        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_COMBOS, JSON.stringify(unlockedCombos)),
+        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_ACTIONS, JSON.stringify(dataToSave.actions)),
+        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_INGREDIENTS, JSON.stringify(dataToSave.ingredients)),
+        AsyncStorage.setItem(STORAGE_KEYS.UNLOCKED_COMBOS, JSON.stringify(dataToSave.combos)),
       ]);
       
       if (debugMode) {
-        console.log('✅ Shop data saved successfully');
+        console.log('✅ Shop data saved successfully:', dataToSave);
       }
     } catch (error) {
       console.error('Error saving shop data:', error);
@@ -196,7 +202,8 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
         setUnlockedActions(newUnlockedActions);
         setUserCoins(userCoins - action.price);
         
-        await saveShopData();
+        // 새로운 데이터를 명시적으로 전달
+        await saveShopData(newUnlockedActions, undefined, undefined);
         
         showSuccess(`${action.name} 동작을 구매했습니다!`);
         
@@ -240,7 +247,8 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
         setUnlockedIngredients(newUnlockedIngredients);
         setUserCoins(userCoins - ingredient.price);
         
-        await saveShopData();
+        // 새로운 데이터를 명시적으로 전달
+        await saveShopData(undefined, newUnlockedIngredients, undefined);
         
         showSuccess(`${ingredient.name} 재료를 구매했습니다!`);
         
@@ -293,7 +301,8 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
         setUnlockedCombos(newUnlockedCombos);
         setUserCoins(userCoins - comboPrice);
         
-        await saveShopData();
+        // 새로운 데이터를 명시적으로 전달
+        await saveShopData(undefined, undefined, newUnlockedCombos);
         
         showSuccess(SUCCESS_MESSAGES.COMBO_UNLOCKED);
       } else {
@@ -338,11 +347,15 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
           }
         });
 
-        setUnlockedActions([...unlockedActions, ...newActions]);
-        setUnlockedIngredients([...unlockedIngredients, ...newIngredients]);
+        const updatedActions = [...unlockedActions, ...newActions];
+        const updatedIngredients = [...unlockedIngredients, ...newIngredients];
+        
+        setUnlockedActions(updatedActions);
+        setUnlockedIngredients(updatedIngredients);
         setUserCoins(userCoins - pack.price);
         
-        await saveShopData();
+        // 새로운 데이터를 명시적으로 전달
+        await saveShopData(updatedActions, updatedIngredients, unlockedCombos);
         
         showSuccess(`${pack.name} 패키지를 구매했습니다! ${pack.discount} 코인 절약!`);
       } else {
@@ -686,7 +699,14 @@ const CharacterShopModal: React.FC<CharacterShopModalProps> = ({
                 ]}
                 onPress={() => setSelectedIngredient(ingredientId)}
               >
-                <Text style={styles.selectorEmoji}>{INGREDIENTS[ingredientId]?.emoji}</Text>
+                {INGREDIENTS[ingredientId]?.preview ? (
+                  <RNImage 
+                    source={INGREDIENTS[ingredientId].preview} 
+                    style={styles.selectorImage}
+                  />
+                ) : (
+                  <Text style={styles.selectorEmoji}>{INGREDIENTS[ingredientId]?.emoji}</Text>
+                )}
                 <Text style={styles.selectorName}>{INGREDIENTS[ingredientId]?.name}</Text>
               </TouchableOpacity>
             ))}
@@ -1072,6 +1092,12 @@ const styles = StyleSheet.create({
   },
   selectorEmoji: {
     fontSize: 24,
+    marginBottom: 4,
+  },
+  selectorImage: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
     marginBottom: 4,
   },
   selectorName: {

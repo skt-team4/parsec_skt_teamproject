@@ -1,13 +1,14 @@
 // services/apiService.ts
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_ENDPOINTS, WEATHER_API_KEY } from '../config/api.config';
 
 export type MealCategory = 'distance' | 'cost' | 'preference' | 'allergy';
 
 // OpenWeatherMap API로 날씨 정보 가져오기
 async function getWeatherInfo(latitude?: number, longitude?: number) {
   try {
-    // 하드코딩된 무료 API 키 (백엔드와 동일)
-    const API_KEY = '72cade2afd8d0b233391812e15fda078';
+    // API 키 사용
+    const API_KEY = WEATHER_API_KEY;
     
     // 위치 정보가 없으면 저장된 위치 또는 서울 기본값 사용
     let lat = latitude || 37.5665;
@@ -87,14 +88,8 @@ export type Message = {
   category?: string;
 };
 
-// 페르소나 기반 로컬 챗봇 API 설정
+// 페르소나 기반 챗봇 API 설정
 const API_CONFIG = {
-  local: {
-    baseUrl: 'http://localhost:8000/chat', // 표준 API 서버
-    personasUrl: 'http://localhost:8000/personas', // 페르소나 목록 API
-    // 모바일 기기에서 테스트할 경우 localhost 대신 컴퓨터의 IP 주소 사용:
-    // baseUrl: 'http://192.168.x.x:8000/chat',
-  },
   defaultPersona: 'min_ho', // 기본 페르소나: 김민호 (17세)
   timeout: parseInt(process.env.EXPO_PUBLIC_API_TIMEOUT || '30000'), // 30초 (첫 요청 시 모델 로딩)
 };
@@ -179,7 +174,7 @@ export async function sendChatMessage(message: string, category?: MealCategory):
       console.log('추가 설정 로드 오류:', error);
     }
 
-    const response = await fetch(API_CONFIG.local.baseUrl, {
+    const response = await fetch(API_ENDPOINTS.chat(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -235,7 +230,7 @@ export async function sendChatMessage(message: string, category?: MealCategory):
     if (error instanceof Error && error.name === 'AbortError') {
       // 헬스체크로 로딩 상태 확인
       try {
-        const healthResponse = await fetch('http://localhost:8080/health');
+        const healthResponse = await fetch(API_ENDPOINTS.health());
         if (healthResponse.ok) {
           const health = await healthResponse.json();
           if (health.model_loading && health.model_loading.status === 'loading') {
@@ -294,7 +289,7 @@ export async function getPersonas(): Promise<Persona[]> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
     
-    const response = await fetch(API_CONFIG.local.personasUrl, {
+    const response = await fetch(API_ENDPOINTS.personas(), {
       signal: controller.signal
     });
     

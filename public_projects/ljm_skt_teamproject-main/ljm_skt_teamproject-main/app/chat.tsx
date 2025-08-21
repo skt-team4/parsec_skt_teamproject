@@ -129,10 +129,22 @@ export default function ChatScreen() {
       loadNutritionStatus(); // 영양 상태 데이터도 업데이트
     };
 
+    const handleRicePulUpdated = (data: any) => {
+      console.log('💰 밥풀 업데이트 이벤트 수신:', data);
+      // 캐시를 초기화하여 ChatHeader가 새로운 값을 가져오도록 함
+      clearProfileCache();
+      // 강제 리렌더링을 위해 작은 지연 후 상태 업데이트
+      setTimeout(() => {
+        setShowShopModal(prev => prev); // 상태를 트리거하여 리렌더링
+      }, 100);
+    };
+
     globalEventEmitter.on(EVENTS.FOOD_RECORDED, handleFoodRecorded);
+    globalEventEmitter.on(EVENTS.RICE_PUL_UPDATED, handleRicePulUpdated);
 
     return () => {
       globalEventEmitter.off(EVENTS.FOOD_RECORDED, handleFoodRecorded);
+      globalEventEmitter.off(EVENTS.RICE_PUL_UPDATED, handleRicePulUpdated);
     };
   }, [recheckNutritionStatus]);
 

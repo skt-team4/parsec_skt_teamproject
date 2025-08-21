@@ -1,25 +1,44 @@
-tunnel: yumai-app
-credentials-file: C:\Users\[username]\.cloudflared\[tunnel-id].json
+url: http://localhost:19000
+tunnel: yumai-tunnel
+credentials-file: C:\lsj\skt_team\lsj_skt_teamproject_2\.cloudflared\cert.pem
 
 ingress:
-  # 웹 앱
-  - hostname: yumai.yourdomain.com
-    service: http://localhost:19001
+  # 메인 웹 앱
+  - hostname: yumai.lsjproject.com
+    service: http://localhost:19000
+    originRequest:
+      noTLSVerify: true
+  
+  # API 서비스들
+  - hostname: yumai-api.lsjproject.com
+    path: /chat/*
+    service: http://localhost:8000
     originRequest:
       noTLSVerify: true
       
-  # API 서비스들
-  - hostname: api.yumai.yourdomain.com
-    path: /chat
+  - hostname: yumai-api.lsjproject.com
+    path: /personas/*
     service: http://localhost:8000
-    
-  - hostname: api.yumai.yourdomain.com
-    path: /analyze
+    originRequest:
+      noTLSVerify: true
+      
+  - hostname: yumai-api.lsjproject.com
+    path: /food/*
     service: http://localhost:5001
-    
-  - hostname: api.yumai.yourdomain.com
-    path: /nutrition
+    originRequest:
+      noTLSVerify: true
+      
+  - hostname: yumai-api.lsjproject.com
+    path: /nutrition/*
     service: http://localhost:5003
-    
-  # 404 핸들러
+    originRequest:
+      noTLSVerify: true
+      
+  - hostname: yumai-api.lsjproject.com
+    path: /history/*
+    service: http://localhost:5004
+    originRequest:
+      noTLSVerify: true
+  
+  # 404 catch-all
   - service: http_status:404

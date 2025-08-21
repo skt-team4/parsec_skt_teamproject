@@ -1,0 +1,53 @@
+# Cloudflare Tunnel Configuration for YUM:AI
+tunnel: yumai-tunnel
+credentials-file: C:\Users\008\.cloudflared\yumai-tunnel.json
+
+ingress:
+  # Expo 웹 앱 (메인 도메인)
+  - hostname: yumai.example.com
+    service: http://localhost:19000
+    
+  # API 프록시 서버
+  - hostname: api.yumai.example.com
+    service: http://localhost:19001
+    
+  # 각 백엔드 서비스 직접 라우팅 (선택적)
+  - hostname: yumai.example.com
+    path: /api/5001/*
+    service: http://localhost:5001
+    
+  - hostname: yumai.example.com
+    path: /api/5002/*
+    service: http://localhost:5002
+    
+  - hostname: yumai.example.com
+    path: /api/5003/*
+    service: http://localhost:5003
+    
+  - hostname: yumai.example.com
+    path: /api/5004/*
+    service: http://localhost:5004
+    
+  - hostname: yumai.example.com
+    path: /api/5007/*
+    service: http://localhost:5007
+    
+  - hostname: yumai.example.com
+    path: /api/8000/*
+    service: http://localhost:8000
+    
+  - hostname: yumai.example.com
+    path: /api/8080/*
+    service: http://localhost:8080
+    
+  # 404 catch-all rule (필수)
+  - service: http_status:404
+
+# 추가 설정
+originRequest:
+  # 모든 헤더 전달
+  noTLSVerify: false
+  # 연결 시간 초과
+  connectTimeout: 30s
+  # WebSocket 지원
+  httpHostHeader: localhost

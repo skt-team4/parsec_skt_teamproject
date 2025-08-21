@@ -5,6 +5,8 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect, useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { API_ENDPOINTS } from '../../config/api.config';
+import { getMapUrl } from '../../config/runtime.config';
 
 // Local Notification 설정
 Notifications.setNotificationHandler({
@@ -20,6 +22,25 @@ export default function HomeScreen() {
   const router = useRouter();
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [selectedRankingPeriod, setSelectedRankingPeriod] = useState('weekly'); // 'weekly' or 'monthly'
+
+  // 더미 랭킹 데이터
+  const rankingData = {
+    weekly: [
+      { rank: 1, name: '김밥풀이', meals: 18, badge: '🏆', score: 95 },
+      { rank: 2, name: '박든든', meals: 16, badge: '🥈', score: 88 },
+      { rank: 3, name: '이맛나', meals: 15, badge: '🥉', score: 85 },
+      { rank: 4, name: '정건강', meals: 14, badge: '🌟', score: 82 },
+      { rank: 5, name: '최영양', meals: 13, badge: '⭐', score: 79 },
+    ],
+    monthly: [
+      { rank: 1, name: '김밥풀이', meals: 78, badge: '🏆', score: 98 },
+      { rank: 2, name: '이맛나', meals: 72, badge: '🥈', score: 91 },
+      { rank: 3, name: '박든든', meals: 69, badge: '🥉', score: 89 },
+      { rank: 4, name: '정건강', meals: 65, badge: '🌟', score: 86 },
+      { rank: 5, name: '최영양', meals: 62, badge: '⭐', score: 83 },
+    ]
+  };
 
   useEffect(() => {
     // 웹 환경에서는 3초 후 자동으로 알림 권한 요청 및 테스트 알림
@@ -334,13 +355,13 @@ export default function HomeScreen() {
   // 가맹점 지도 열기 함수
   const openStoreMap = async () => {
     try {
-      // 지도 서버 URL (5006 포트에서 실행)
-      const mapUrl = 'http://localhost:5006/';
+      // 지도 HTML 파일을 직접 열기
+      const mapUrl = '/maps/tmap_folium_map.html';
       
       if (Platform.OS === 'web') {
         // 웹에서는 새 창으로 열기
         window.open(mapUrl, '_blank', 'width=1200,height=800');
-        console.log('🗺️ 가맹점 지도 열기 (웹):', mapUrl);
+        console.log('🗺️ 가맹점 지도 열기 (웹) - 파일 직접:', mapUrl);
       } else {
         // 모바일에서는 WebBrowser 사용
         console.log('🗺️ 가맹점 지도 열기 (모바일):', mapUrl);
@@ -351,6 +372,17 @@ export default function HomeScreen() {
       Alert.alert('오류', '지도를 열 수 없습니다. 잠시 후 다시 시도해주세요.');
     }
   };
+
+  const getRankBadgeColor = (rank: number) => {
+    switch (rank) {
+      case 1: return '#FFD700'; // 금색
+      case 2: return '#C0C0C0'; // 은색
+      case 3: return '#CD7F32'; // 동색
+      default: return '#f8f9fa'; // 기본색
+    }
+  };
+
+  const currentRankingData = rankingData[selectedRankingPeriod];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -412,40 +444,93 @@ export default function HomeScreen() {
           </View>
         </LinearGradient>
 
-        {/* 캠페인 섹션 */}
+        {/* 밥풀 순위 섹션 */}
         <View style={styles.contentSection}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>진행중인 캠페인</Text>
+            <Text style={styles.sectionTitle}>🏆 밥풀 순위</Text>
           </View>
-          <Text style={styles.sectionSubtitle}>캠페인 참여하고 따뜻한 혜택 받아가세요</Text>
+          <Text style={styles.sectionSubtitle}>꾸준한 식사 기록으로 건강한 습관을 만들어보세요</Text>
           
-          {/* 메인 캠페인 카드 */}
-          <LinearGradient 
-            colors={['#FFF8E1', '#FFE082']} 
-            style={styles.campaignCard}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-          >
-            <View style={styles.campaignContent}>
-              <View style={styles.campaignBadge}>
-                <Text style={styles.campaignBadgeText}>HOT</Text>
+          {/* 기간 선택 탭 */}
+          <View style={styles.periodTabContainer}>
+            <TouchableOpacity 
+              style={[
+                styles.periodTab,
+                selectedRankingPeriod === 'weekly' && styles.periodTabActive
+              ]}
+              onPress={() => setSelectedRankingPeriod('weekly')}
+              activeOpacity={0.7}
+            >
+              <Text style={[
+                styles.periodTabText,
+                selectedRankingPeriod === 'weekly' && styles.periodTabTextActive
+              ]}>주간</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={[
+                styles.periodTab,
+                selectedRankingPeriod === 'monthly' && styles.periodTabActive
+              ]}
+              onPress={() => setSelectedRankingPeriod('monthly')}
+              activeOpacity={0.7}
+            >
+              <Text style={[
+                styles.periodTabText,
+                selectedRankingPeriod === 'monthly' && styles.periodTabTextActive
+              ]}>월간</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* 순위 리스트 */}
+          <View style={styles.rankingContainer}>
+            {currentRankingData.map((user, index) => (
+              <View key={index} style={[
+                styles.rankingItem,
+                index === currentRankingData.length - 1 && { borderBottomWidth: 0 }
+              ]}>
+                <View style={styles.rankingLeft}>
+                  <View style={[
+                    styles.rankBadge,
+                    { backgroundColor: getRankBadgeColor(user.rank) }
+                  ]}>
+                    <Text style={styles.rankBadgeText}>{user.badge}</Text>
+                  </View>
+                  <View style={styles.userInfo}>
+                    <Text style={styles.userName}>{user.name}</Text>
+                    <Text style={styles.userMeals}>
+                      {selectedRankingPeriod === 'weekly' ? '이번 주' : '이번 달'} {user.meals}끼
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.rankingRight}>
+                  <View style={styles.scoreContainer}>
+                    <Text style={styles.scoreText}>{user.score}점</Text>
+                  </View>
+                  <Text style={styles.rankText}>#{user.rank}</Text>
+                </View>
               </View>
-              <Text style={styles.campaignTitle}>마음 한 숟갈</Text>
-              <View style={styles.campaignTagContainer}>
-                <Text style={styles.campaignTag}>📍 서울시 강남구 내 매장 전용</Text>
+            ))}
+          </View>
+
+          {/* 내 순위 카드 */}
+          <View style={styles.myRankCard}>
+            <View style={styles.myRankHeader}>
+              <Text style={styles.myRankTitle}>내 순위</Text>
+              <Text style={styles.myRankBadge}>🔥</Text>
+            </View>
+            <View style={styles.myRankContent}>
+              <View style={styles.myRankInfo}>
+                <Text style={styles.myRankPosition}>#12</Text>
+                <Text style={styles.myRankMeals}>
+                  {selectedRankingPeriod === 'weekly' ? '이번 주' : '이번 달'} 9끼
+                </Text>
               </View>
-              <View style={styles.campaignDetails}>
-                <Text style={styles.campaignDetailText}>• 참여 기간: 8월 26일 ~ 8월 27일</Text>
-                <Text style={styles.campaignDetailText}>• 혜택: 10% 할인 쿠폰 발행 </Text>
-                <Text style={styles.campaignDetailText}>• 대상: 급식카드 소지자 누구나</Text>
+              <View style={styles.myRankScore}>
+                <Text style={styles.myScoreText}>64점</Text>
+                <Text style={styles.myRankMessage}>조금만 더 화이팅! 💪</Text>
               </View>
             </View>
-            <View style={styles.campaignImageContainer}>
-              <View style={styles.campaignImage}>
-                <Text style={styles.campaignImageEmoji}>🍱</Text>
-              </View>
-            </View>
-          </LinearGradient>
+          </View>
         </View>
 
         {/* 인기 식당 섹션 */}
@@ -502,38 +587,6 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   
-  // 알림 상태 배너 스타일
-  notificationStatusBanner: {
-    flexDirection: 'row',
-    backgroundColor: '#d4edda',
-    borderColor: '#c3e6cb',
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 16,
-    margin: 20,
-    marginBottom: 10,
-    alignItems: 'flex-start',
-  },
-  statusIcon: {
-    fontSize: 20,
-    marginRight: 12,
-    marginTop: 2,
-  },
-  statusTextContainer: {
-    flex: 1,
-  },
-  statusTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#155724',
-    marginBottom: 4,
-  },
-  statusText: {
-    fontSize: 14,
-    color: '#155724',
-    lineHeight: 20,
-  },
-  
   // 알림 아이콘 스타일
   notificationContainer: {
     position: 'relative',
@@ -541,14 +594,11 @@ const styles = StyleSheet.create({
   notificationIcon: {
     width: 44,
     height: 44,
-    borderRadius: 22,
-    backgroundColor: '#f8f9fa',
+    borderRadius: 23,
+    borderColor: 'white',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
     elevation: 3,
   },
   notificationIconDisabled: {
@@ -651,124 +701,166 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
-  // 식사 체크 스타일
-  mealCheckContainer: {
+  // 밥풀 순위 스타일
+  periodTabContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 12,
+    padding: 4,
+    marginBottom: 20,
   },
-  mealCheckItem: {
+  periodTab: {
     flex: 1,
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 16,
-    marginHorizontal: 4,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
     alignItems: 'center',
+  },
+  periodTabActive: {
+    backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 2,
   },
-  mealEmoji: {
-    fontSize: 24,
-    marginBottom: 8,
-  },
-  mealText: {
+  periodTabText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  mealStatus: {
-    backgroundColor: '#f8f9fa',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  mealStatusCompleted: {
-    backgroundColor: '#dcfce7',
-  },
-  mealStatusText: {
-    fontSize: 12,
     color: '#666',
-    fontWeight: '500',
   },
-  mealStatusCompletedText: {
-    color: '#166534',
+  periodTabTextActive: {
+    color: '#FFBF00',
   },
-
-  // 캠페인 카드 스타일
-  campaignCard: { 
-    borderRadius: 20, 
-    overflow: 'hidden',
+  
+  rankingContainer: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    paddingVertical: 8,
+    marginBottom: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 4,
-    marginBottom: 10,
+    elevation: 3,
   },
-  campaignContent: {
-    padding: 24,
+  rankingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f8f9fa',
+  },
+  rankingLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
     flex: 1,
   },
-  campaignBadge: {
-    backgroundColor: '#FF6B6B',
+  rankBadge: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  rankBadgeText: {
+    fontSize: 20,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 2,
+  },
+  userMeals: {
+    fontSize: 13,
+    color: '#666',
+  },
+  rankingRight: {
+    alignItems: 'flex-end',
+  },
+  scoreContainer: {
+    backgroundColor: '#f8f9fa',
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 12,
-    alignSelf: 'flex-start',
+    borderRadius: 8,
+    marginBottom: 4,
+  },
+  scoreText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FFBF00',
+  },
+  rankText: {
+    fontSize: 12,
+    color: '#999',
+    fontWeight: '500',
+  },
+
+  // 내 순위 카드 스타일
+  myRankCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+    borderWidth: 2,
+    borderColor: '#FFBF00',
+  },
+  myRankHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
   },
-  campaignBadgeText: {
-    color: 'white',
-    fontSize: 12,
+  myRankTitle: {
+    fontSize: 16,
     fontWeight: '700',
+    color: '#333',
   },
-  campaignTitle: { 
-    fontSize: 24, 
-    fontWeight: '700', 
+  myRankBadge: {
+    fontSize: 20,
+  },
+  myRankContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  myRankInfo: {
+    flex: 1,
+  },
+  myRankPosition: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#FFBF00',
+    marginBottom: 4,
+  },
+  myRankMeals: {
+    fontSize: 14,
+    color: '#666',
+  },
+  myRankScore: {
+    alignItems: 'flex-end',
+  },
+  myScoreText: {
+    fontSize: 18,
+    fontWeight: '700',
     color: '#333',
     marginBottom: 4,
   },
-  campaignTagContainer: { 
-    backgroundColor: 'rgba(0,0,0,0.7)', 
-    paddingVertical: 8, 
-    paddingHorizontal: 12, 
-    borderRadius: 16, 
-    alignSelf: 'flex-start',
-    marginBottom: 16,
-  },
-  campaignTag: { 
-    color: 'white', 
+  myRankMessage: {
     fontSize: 12,
-    fontWeight: '500',
-  },
-  campaignDetails: {
-    marginBottom: 16,
-  },
-  campaignDetailText: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 4,
-    lineHeight: 18,
-  },
-  campaignImageContainer: {
-    position: 'absolute',
-    right: 20,
-    top: 20,
-  },
-  campaignImage: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  campaignImageEmoji: {
-    fontSize: 50,
+    color: '#FFBF00',
+    fontWeight: '600',
   },
 
   // 인기 식당 스타일

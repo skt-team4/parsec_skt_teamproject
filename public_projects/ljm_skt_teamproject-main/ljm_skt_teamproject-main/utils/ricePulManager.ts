@@ -1,5 +1,6 @@
 // utils/ricePulManager.ts - 통합 밥풀 & 급식카드 관리 시스템
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { globalEventEmitter, EVENTS } from './eventEmitter';
 
 // Storage Keys
 const RICE_PUL_KEY = 'user_rice_pul';
@@ -109,6 +110,13 @@ export const awardRicePul = async (amount: number, reason: string, category?: st
     // 캐시 무효화하여 다른 컴포넌트에서도 즉시 반영되도록
     clearProfileCache();
     
+    // 이벤트 발생하여 모든 컴포넌트에 알림
+    globalEventEmitter.emit(EVENTS.RICE_PUL_UPDATED, { 
+      ricePul: newRicePul, 
+      totalEarned: newTotalEarned,
+      profile: updatedProfile
+    });
+    
     return {
       levelUp: levelResult.levelUp,
       newLevel: levelResult.newLevel
@@ -156,6 +164,13 @@ export const spendRicePul = async (amount: number, reason: string, category?: st
     
     // 캐시 무효화하여 다른 컴포넌트에서도 즉시 반영되도록
     clearProfileCache();
+    
+    // 이벤트 발생하여 모든 컴포넌트에 알림
+    globalEventEmitter.emit(EVENTS.RICE_PUL_UPDATED, { 
+      ricePul: newRicePul, 
+      totalSpent: newTotalSpent,
+      profile: updatedProfile
+    });
     
     return true;
   } catch (error) {

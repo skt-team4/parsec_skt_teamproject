@@ -104,7 +104,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '부드러운 계란말이',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🥚'
+    emoji: '🥚',
+    preview: require('../assets/TOPPING/계란말이.png')
   },
   '김': {
     id: '김',
@@ -113,7 +114,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '바삭한 김',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🍙'
+    emoji: '🍙',
+    preview: require('../assets/TOPPING/김.png')
   },
   '명란': {
     id: '명란',
@@ -122,7 +124,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '짭짤한 명란',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🐟'
+    emoji: '🐟',
+    preview: require('../assets/TOPPING/명란.png')
   },
   '베이컨': {
     id: '베이컨',
@@ -131,7 +134,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '고소한 베이컨',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🥓'
+    emoji: '🥓',
+    preview: require('../assets/TOPPING/베이컨.png')
   },
   '연어': {
     id: '연어',
@@ -140,7 +144,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '신선한 연어',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🍣'
+    emoji: '🍣',
+    preview: require('../assets/TOPPING/연어.png')
   },
   '후라이': {
     id: '후라이',
@@ -149,25 +154,8 @@ export const INGREDIENTS: Record<string, AnimationItem> = {
     description: '바삭한 후라이',
     unlocked: false,
     category: 'ingredient',
-    emoji: '🍳'
-  },
-  '매우편중': {
-    id: '매우편중',
-    name: '매우편중',
-    price: 150,
-    description: '극도로 편중된 식사',
-    unlocked: false,
-    category: 'ingredient',
-    emoji: '🍔'
-  },
-  '편중식사': {
-    id: '편중식사',
-    name: '편중식사',
-    price: 120,
-    description: '편중된 식사',
-    unlocked: false,
-    category: 'ingredient',
-    emoji: '🍕'
+    emoji: '🍳',
+    preview: require('../assets/TOPPING/후라이.png')
   }
 };
 

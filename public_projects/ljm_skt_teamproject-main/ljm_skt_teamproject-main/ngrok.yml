@@ -1,0 +1,15 @@
+version: "2"
+authtoken: YOUR_NGROK_AUTH_TOKEN
+
+tunnels:
+  # Expo 웹 서버
+  expo:
+    proto: http
+    addr: 19000
+    subdomain: yumai-app
+    
+  # 프록시 서버 (모든 백엔드 서비스 라우팅)
+  proxy:
+    proto: http
+    addr: 19001
+    subdomain: yumai-api

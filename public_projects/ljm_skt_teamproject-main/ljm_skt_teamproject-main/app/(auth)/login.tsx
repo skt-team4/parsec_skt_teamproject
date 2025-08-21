@@ -163,6 +163,7 @@ export default function LoginScreen() {
                 value={email}
                 onChangeText={setEmail}
                 placeholder="이메일을 입력해주세요"
+                placeholderTextColor="#999999"
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -176,6 +177,7 @@ export default function LoginScreen() {
                 value={password}
                 onChangeText={setPassword}
                 placeholder="비밀번호를 입력해주세요"
+                placeholderTextColor="#999999"
                 secureTextEntry
               />
             </View>

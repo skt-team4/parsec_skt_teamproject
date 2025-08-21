@@ -16,8 +16,8 @@ import {
   ScrollView,
 } from 'react-native';
 import { awardRicePul } from '../../utils/ricePulManager';
-import DatePickerField from '../../components/DatePickerField';
-import { getAPIUrl } from '../../config/api.config';
+import { API_ENDPOINTS } from '../../config/api.config';
+import { getRuntimeApiUrl } from '../../config/runtime.config';
 import { globalEventEmitter, EVENTS } from '../../utils/eventEmitter';
 
 interface FoodData {
@@ -172,7 +172,7 @@ export default function FoodVisionScreen() {
       const formData = await createFormDataFromFile(capturedImage || '', base64Image);
       
       // Step 1: Korean Food API로 음식명 인식
-      const foodApiUrl = `${getAPIUrl('FOOD_RECOGNITION')}/analyze`;
+      const foodApiUrl = getRuntimeApiUrl(5001, '/analyze');
       console.log('Korean Food API 호출 시작:', foodApiUrl);
       const foodResponse = await fetch(foodApiUrl, {
         method: 'POST',
@@ -202,7 +202,7 @@ export default function FoodVisionScreen() {
       
       // Step 2: LogMeal API로 영양소 분석 (선택적)
       try {
-        const nutritionApiUrl = `${getAPIUrl('NUTRITION')}/analyze-nutrition`;
+        const nutritionApiUrl = getRuntimeApiUrl(5003, '/analyze-nutrition');
         console.log('LogMeal API 호출 시작:', nutritionApiUrl);
         const nutritionFormData = await createFormDataFromFile(capturedImage || '', base64Image);
         const nutritionResponse = await fetch(nutritionApiUrl, {
@@ -311,7 +311,8 @@ export default function FoodVisionScreen() {
       
       // 영양소 분석 기록 서버에도 저장
       try {
-        const historyResponse = await fetch(`${getAPIUrl('NUTRITION_HISTORY')}/api/save-nutrition`, {
+        const nutritionSaveUrl = getRuntimeApiUrl(5004, '/api/save-nutrition');
+        const historyResponse = await fetch(nutritionSaveUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -388,27 +389,23 @@ export default function FoodVisionScreen() {
       return (
         <View style={styles.container}>
           <View style={styles.webContainer}>
-            <Ionicons name="camera" size={80} color="#007AFF" />
+            <Ionicons name="camera" size={80} color="#FFBF00" />
             <Text style={styles.webTitle}>음식 사진 분석</Text>
             <Text style={styles.webSubtitle}>
               갤러리에서 음식 사진을 선택하거나 카메라로 직접 촬영하세요
             </Text>
             
-            <TouchableOpacity style={styles.uploadButton} onPress={pickImageFromGallery}>
-              <Ionicons name="images" size={24} color="white" />
-              <Text style={styles.uploadButtonText}>갤러리에서 선택</Text>
-            </TouchableOpacity>
-            
-            <Text style={styles.alternativeText}>또는</Text>
-            
-            <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={requestPermission}>
-              <Ionicons name="camera-outline" size={24} color="white" />
-              <Text style={styles.buttonText}>카메라 사용</Text>
-            </TouchableOpacity>
-            
-            <Text style={styles.supportedText}>
-              지원 형식: JPG, PNG, WEBP
-            </Text>
+            <View style={styles.buttonRow}>
+              <TouchableOpacity style={styles.uploadButton} onPress={pickImageFromGallery}>
+                <Ionicons name="images" size={24} color="#000" />
+                <Text style={styles.uploadButtonText}>갤러리에서 선택</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={requestPermission}>
+                <Ionicons name="camera-outline" size={24} color="#000" />
+                <Text style={styles.buttonText}>카메라 사용</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       );
@@ -428,21 +425,22 @@ export default function FoodVisionScreen() {
       return (
         <View style={styles.container}>
           <View style={styles.setupContainer}>
-            <Ionicons name="camera-off" size={64} color="#007AFF" />
+            <Ionicons name="camera-off" size={64} color="#FFBF00" />
             <Text style={styles.setupTitle}>카메라 권한이 필요합니다</Text>
             <Text style={styles.setupText}>
               음식 사진을 촬영하기 위해 카메라 접근 권한이 필요합니다.
             </Text>
-            <TouchableOpacity style={styles.button} onPress={requestPermission}>
-              <Text style={styles.buttonText}>권한 허용</Text>
-            </TouchableOpacity>
-            
-            <Text style={styles.alternativeText}>또는</Text>
-            
-            <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={pickImageFromGallery}>
-              <Ionicons name="images" size={20} color="white" />
-              <Text style={styles.buttonText}>갤러리에서 선택</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonRow}>
+              <TouchableOpacity style={styles.button} onPress={requestPermission}>
+                <Ionicons name="camera" size={20} color="#000" />
+                <Text style={styles.buttonText}>권한 허용</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={pickImageFromGallery}>
+                <Ionicons name="images" size={20} color="#000" />
+                <Text style={styles.buttonText}>갤러리에서 선택</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       );
@@ -659,12 +657,52 @@ export default function FoodVisionScreen() {
               {/* 날짜 선택 섹션 */}
               <View style={styles.dateSection}>
                 <Text style={styles.dateSectionTitle}>📅 날짜 선택</Text>
-                <DatePickerField
-                  value={selectedDate}
-                  onChange={setSelectedDate}
-                  showPicker={showDatePicker}
-                  setShowPicker={setShowDatePicker}
-                />
+                <TouchableOpacity 
+                  style={styles.datePickerButton}
+                  onPress={() => setShowDatePicker(!showDatePicker)}
+                >
+                  <Text style={styles.datePickerText}>
+                    {selectedDate.toLocaleDateString('ko-KR')}
+                  </Text>
+                  <Ionicons name="calendar" size={20} color="#666" />
+                </TouchableOpacity>
+                
+                {/* 간단한 날짜 선택 버튼들 */}
+                {showDatePicker && (
+                  <View style={styles.quickDateButtons}>
+                    <TouchableOpacity
+                      style={styles.quickDateButton}
+                      onPress={() => {
+                        setSelectedDate(new Date());
+                        setShowDatePicker(false);
+                      }}
+                    >
+                      <Text style={styles.quickDateText}>오늘</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.quickDateButton}
+                      onPress={() => {
+                        const yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        setSelectedDate(yesterday);
+                        setShowDatePicker(false);
+                      }}
+                    >
+                      <Text style={styles.quickDateText}>어제</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.quickDateButton}
+                      onPress={() => {
+                        const twoDaysAgo = new Date();
+                        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+                        setSelectedDate(twoDaysAgo);
+                        setShowDatePicker(false);
+                      }}
+                    >
+                      <Text style={styles.quickDateText}>그저께</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
               </View>
 
               {/* 식사 시간 선택 섹션 */}
@@ -857,7 +895,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: 'white',
     borderWidth: 2,
-    borderColor: '#007AFF',
+    borderColor: '#FFBF00',
   },
   placeholder: {
     width: 50,
@@ -925,8 +963,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   candidateButtonActive: {
-    backgroundColor: '#FF6B6B',
-    borderColor: '#FF6B6B',
+    backgroundColor: '#FFBF00',
+    borderColor: '#FFBF00',
   },
   candidateNumber: {
     fontSize: 12,
@@ -979,7 +1017,7 @@ const styles = StyleSheet.create({
   calorieText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#FF6B6B',
+    color: '#FFBF00',
   },
   resultTitle: {
     fontSize: 18,
@@ -994,7 +1032,7 @@ const styles = StyleSheet.create({
   },
   calories: {
     fontSize: 16,
-    color: '#007AFF',
+    color: '#FFBF00',
     fontWeight: '600',
   },
   otherPredictions: {
@@ -1121,7 +1159,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#28a745',
+    backgroundColor: '#FFBF00',
     paddingVertical: 15,
     borderRadius: 10,
     marginRight: 10,
@@ -1137,7 +1175,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#007AFF',
+    backgroundColor: '#666',
     paddingVertical: 15,
     borderRadius: 10,
   },
@@ -1224,7 +1262,7 @@ const styles = StyleSheet.create({
   },
   dateButtonText: {
     fontSize: 16,
-    color: '#007AFF',
+    color: '#FFBF00',
     fontWeight: '500',
   },
   mealSectionTitle: {
@@ -1263,19 +1301,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFBF00',
+    paddingHorizontal: 20,
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 25,
+    width: '100%',
   },
   buttonText: {
-    color: 'white',
-    fontSize: 16,
+    color: '#000',
+    fontSize: 14,
     fontWeight: '600',
+    marginLeft: 6,
   },
   secondaryButton: {
-    backgroundColor: '#28a745',
-    marginTop: 10,
+    backgroundColor: '#FFBF00',
   },
   alternativeText: {
     fontSize: 14,
@@ -1306,23 +1348,32 @@ const styles = StyleSheet.create({
   uploadButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 30,
-    marginBottom: 20,
+    justifyContent: 'center',
+    backgroundColor: '#FFBF00',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 25,
+    width: '100%',
   },
   uploadButtonText: {
-    color: 'white',
-    fontSize: 18,
+    color: '#000',
+    fontSize: 14,
     fontWeight: '600',
-    marginLeft: 10,
+    marginLeft: 6,
   },
   supportedText: {
     fontSize: 14,
     color: '#999',
     textAlign: 'center',
     marginTop: 10,
+  },
+  buttonRow: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginTop: 20,
+    paddingHorizontal: 20,
+    gap: 10,
   },
   nutriScoreContainer: {
     flexDirection: 'row',
@@ -1391,5 +1442,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     textAlign: 'center',
+  },
+  datePickerButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  datePickerText: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: '500',
+  },
+  quickDateButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 12,
+    paddingHorizontal: 10,
+  },
+  quickDateButton: {
+    backgroundColor: '#FFBF00',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    flex: 1,
+    marginHorizontal: 4,
+    alignItems: 'center',
+  },
+  quickDateText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '500',
   },
 });

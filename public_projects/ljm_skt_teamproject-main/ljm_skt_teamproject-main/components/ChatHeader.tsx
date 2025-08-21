@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isSmallScreen, styles } from '../styles/chatStyles';
 import { getUserProfile, refreshUserProfile, awardRicePul, clearProfileCache } from '../utils/ricePulManager';
 import { debugRicePulStorage, checkStorageSync } from '../utils/debugRicePul';
+import { globalEventEmitter, EVENTS } from '../utils/eventEmitter';
 
 export const ChatHeader = () => {
   const router = useRouter();
@@ -98,6 +99,23 @@ export const ChatHeader = () => {
   // 컴포넌트가 마운트되거나 포커스될 때 밥풀 정보 로드
   useEffect(() => {
     loadRicePul();
+    
+    // 밥풀 업데이트 이벤트 리스너
+    const handleRicePulUpdated = (data: any) => {
+      console.log('💰 ChatHeader: 밥풀 업데이트 이벤트 수신', data);
+      if (data?.ricePul !== undefined) {
+        setRicePul(data.ricePul);
+      } else {
+        // 데이터가 없으면 다시 로드
+        loadRicePul();
+      }
+    };
+    
+    globalEventEmitter.on(EVENTS.RICE_PUL_UPDATED, handleRicePulUpdated);
+    
+    return () => {
+      globalEventEmitter.off(EVENTS.RICE_PUL_UPDATED, handleRicePulUpdated);
+    };
   }, []);
 
   useFocusEffect(
@@ -134,7 +152,13 @@ export const ChatHeader = () => {
             <Text style={styles.ricePulText}>{ricePul.toLocaleString()}</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={() => router.back()} style={styles.closeButtonContainer}>
+          <TouchableOpacity 
+            onPress={() => {
+              console.log('X 버튼 클릭 - 메인 화면으로 이동');
+              router.replace('/(tabs)');
+            }} 
+            style={styles.closeButtonContainer}
+          >
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>
         </View>
