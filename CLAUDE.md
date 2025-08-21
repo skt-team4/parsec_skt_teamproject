@@ -345,3 +345,134 @@ When migrating from `chat_bot` to `chatbot_v0`:
 - **AI Character**: 그르시 (Geursi)
 - **Target Users**: Children and youth
 - **Primary Function**: Food recommendation with dietary considerations
+
+## External Access with Cloudflare Tunnel
+
+### Overview
+To enable external device access (e.g., testing on mobile devices), the system uses Cloudflare Tunnel as a secure alternative to ngrok. This allows accessing the local development environment from external devices without complex network configuration.
+
+### Architecture
+```
+External Device → Cloudflare Tunnel → Local Services
+├── App Tunnel (19000) → Expo Web App
+└── Proxy Tunnel (3001) → Backend Services
+    ├── /api/5001/* → Korean Food Recognition
+    ├── /api/5003/* → LogMeal Nutrition Analysis
+    ├── /api/5004/* → Nutrition History
+    ├── /api/8000/* → Standard Chat API
+    ├── /api/8080/* → Persona Chat API
+    └── /map → T-Map HTML Display
+```
+
+### Setup Instructions
+
+#### 1. Install Cloudflare Tunnel
+```bash
+# Windows (using winget)
+winget install --id Cloudflare.cloudflared
+
+# Or download from: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/
+```
+
+#### 2. Start Backend Services
+```bash
+# Terminal 1: Food Recognition API
+cd public_projects/food_korean/food_korean
+python app_korean.py
+
+# Terminal 2: Nutrition History API
+cd public_projects/food_korean
+python nutrition_history_server.py
+
+# Terminal 3: Proxy Server (MUST use port 3001)
+cd public_projects/ljm_skt_teamproject-main/ljm_skt_teamproject-main
+python proxy_server.py
+```
+
+#### 3. Create Cloudflare Tunnels
+```bash
+# Terminal 4: Tunnel for Expo App (port 19000)
+cloudflared tunnel --url http://localhost:19000
+# Copy the generated URL (e.g., https://example-app.trycloudflare.com)
+
+# Terminal 5: Tunnel for Proxy Server (port 3001)
+cloudflared tunnel --url http://localhost:3001
+# Copy the generated URL (e.g., https://example-proxy.trycloudflare.com)
+```
+
+#### 4. Update Runtime Configuration
+Edit `public_projects/ljm_skt_teamproject-main/ljm_skt_teamproject-main/config/runtime.config.ts`:
+```typescript
+export const RUNTIME_CONFIG = {
+  APP_URL: 'https://your-app-tunnel.trycloudflare.com',    // From Terminal 4
+  PROXY_URL: 'https://your-proxy-tunnel.trycloudflare.com', // From Terminal 5
+  USE_REMOTE_API: true,
+};
+```
+
+#### 5. Start Expo Web App
+```bash
+# Terminal 6: Expo Web App
+cd public_projects/ljm_skt_teamproject-main/ljm_skt_teamproject-main
+npm run web
+# Runs on http://localhost:19000
+```
+
+#### 6. Access from External Device
+Open browser on external device and navigate to the APP_URL from step 4.
+
+### Key Files Modified for External Access
+
+1. **proxy_server.py** - Unified proxy server for all backend services
+   - Moved from port 19001 to 3001 to avoid Expo port conflicts
+   - Enhanced CORS handling for Cloudflare Tunnel
+   - Serves map HTML directly via `/map` endpoint
+
+2. **runtime.config.ts** - Dynamic URL configuration
+   - Bypasses Expo's environment variable caching
+   - Allows runtime URL updates without rebuild
+   - Used by all API calls in the app
+
+3. **api.config.ts** - API endpoint configuration
+   - Imports runtime config for dynamic URLs
+   - Routes all API calls through proxy when USE_REMOTE_API is true
+
+4. **app/(tabs)/index.tsx** - Home screen map handling
+   - Changed from API call to direct file opening
+   - Map file served directly from public/maps/ folder
+
+### Common Issues and Solutions
+
+#### CORS Errors
+**Problem**: "Access blocked by CORS policy" when calling APIs
+**Solution**: Proxy server includes comprehensive CORS headers. Ensure proxy_server.py is running on port 3001.
+
+#### Port Conflicts
+**Problem**: Port 19001 showing Expo app instead of proxy
+**Solution**: Proxy server moved to port 3001. Always use port 3001 for proxy.
+
+#### Map Not Opening
+**Problem**: Clicking "가맹점 찾아보기" opens main page
+**Solution**: Map now opens directly from `/maps/tmap_folium_map.html` in public folder
+
+#### Photo Upload Fails
+**Problem**: Food photo analysis returns CORS error
+**Solution**: Ensure proxy server is running and Cloudflare tunnel for port 3001 is active
+
+#### Cloudflare Tunnel Dies
+**Problem**: "Error 1033" or tunnel disconnects
+**Solution**: Restart the cloudflared command. URLs change each time, so update runtime.config.ts
+
+### Testing Checklist
+- [ ] Expo app loads on external device
+- [ ] Chat functionality works
+- [ ] Food photo can be captured and analyzed
+- [ ] Map opens when clicking "가맹점 찾아보기"
+- [ ] Settings persist and apply to chat context
+- [ ] Persona changes work correctly
+
+### Important Notes
+- Cloudflare tunnel URLs are temporary and change on each restart
+- Always update runtime.config.ts with new URLs after restarting tunnels
+- Proxy server MUST run on port 3001 (not 19001) to avoid conflicts
+- Map HTML file must exist in `assets/maps/tmap_folium_map.html`

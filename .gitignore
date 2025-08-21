@@ -91,3 +91,7 @@ outputs/user_profiles/
 outputs/learning_data/
 server.log
 ax_debug.log
+
+# Chatbot directories with hardcoded API keys
+public_projects/chatbot_v0/
+public_projects/chatbot_v3/
